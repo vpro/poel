@@ -2,7 +2,8 @@ import Stapes from 'stapes';
 
 /**
  * @constructor
- * @param {string} title
+ * @param {string} id
+ * @param {Array} contestants=[]
  * @param {Array} result=[]
  * @param {Array} gamble=[]
  * @param {../util/FormatDate} dueDate
@@ -11,9 +12,10 @@ import Stapes from 'stapes';
  */
 var FormEntry = Stapes.subclass({
 
-    constructor : function ( title, result, gamble, dueDate, joker, score ) {
-        
-        this.title = title;
+    constructor : function ( id, contestants, result, gamble, dueDate, joker, score ) {
+
+        this.id = id;
+        this.contestants = contestants;
         this.result = result;
         this.gamble = gamble;
         this.dueDate = dueDate;
@@ -21,17 +23,28 @@ var FormEntry = Stapes.subclass({
         this.score = score;
     },
 
-    toJSON: function () {
-        
-        return {
+    toViewModel: function () {
+
+        var viewModel =  {
             type: 'entry',
-            title : this.title,
+            id: this.id,
             result : this.result,
             gamble : this.gamble,
             dueDate : this.dueDate,
             joker : this.joker,
-            score : this.score
+            score : this.score,
+            definitive : false
         };
+
+        this.contestants.forEach( function ( contestant, idx ) {
+            viewModel[ 'contestant'+ idx ] = contestant;
+        });
+
+        if ( this.dueDate.getTime() < Date.now() ) {
+            viewModel.definitive = true;
+        }
+
+        return viewModel;
     }
 });
 

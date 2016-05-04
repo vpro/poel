@@ -1,7 +1,36 @@
 <tr>
     <td>
+    {{#definitive}}
+        Definitief
+    {{/definitive}}
+    {{^definitive}}
         <h6>Aan te passen tot</h6>
         <span>{{formatDate dueDate 'd MMMM hh:mm' }} uur</span>
+    {{/definitive}}
     </td>
-    <td><h2>{{title}}</h2></td>
+    <td>
+
+        {{contestant0}}
+
+        {{#definitive}}
+            {{formatResult gamble}}
+        {{/definitive}}
+        {{^definitive}}
+            {{{gambleEntry gamble id 0}}} - {{{gambleEntry gamble id 1}}}
+        {{/definitive}}
+
+        {{contestant1}}
+    </td>
+    <td>
+        <label for="joker-{{id}}">Joker </label>
+        {{^definitive}}<input type="checkbox"
+                              {{#joker}}checked="checked"{{/joker}}
+                              name="joker-{{id}}" id="joker-{{id}}" />{{/definitive}}
+
+        {{#definitive}}{{#joker}}♥{{/joker}}{{/definitive}}
+    </td>
+    <td>
+        {{#definitive}}{{formatResult result}}{{/definitive}}
+    </td>
+    <td>{{#definitive}}Score: {{score}}{{/definitive}}</td>
 </tr>

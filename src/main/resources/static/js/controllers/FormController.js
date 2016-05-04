@@ -15,6 +15,18 @@ HandlebarsRuntime.registerHelper('formatDate', function( date, format ) {
     return date.toLocaleString( format );
 });
 
+HandlebarsRuntime.registerHelper('formatResult', function( result ) {
+    return result.join(' - ');
+});
+
+
+HandlebarsRuntime.registerHelper('gambleEntry', function( gamble, id, index ) {
+    return ''.concat(
+            '<input type="text" class="gamble" value="',
+            ( ( gamble[ index ] !== -1 ) ? gamble[ index ] : '' ),
+                '" name="gamble-'+ id +'-'+ index +'" id="gamble-'+ id +'-'+ index +'" />');
+});
+
 var FormController = Stapes.subclass({
 
     /**
@@ -23,12 +35,18 @@ var FormController = Stapes.subclass({
     constructor : function ( container ) {
         this.$container = $( container );
 
+        this.bindViewHandlers();
+
         this.fetchForm().then( function ( form ) {
 
             this.form = form;
             this.render();
 
         }.bind( this ) );
+    },
+
+    bindViewHandlers: function () {
+
     },
 
     /**
@@ -72,7 +90,8 @@ var FormController = Stapes.subclass({
                 case 'entry':
                     parsed.elements.push(
                         new FormEntry(
-                            element.title,
+                            element.id,
+                            element.contestants,
                             element.result,
                             element.gamble,
                             new FormatDate( element.dueDate ),
@@ -90,7 +109,7 @@ var FormController = Stapes.subclass({
     render: function () {
         this.$container.html( formTemplate({
             elements: this.form.elements.map( function ( elm ) {
-                return elm.toJSON();
+                return elm.toViewModel();
             })
         }) );
     }

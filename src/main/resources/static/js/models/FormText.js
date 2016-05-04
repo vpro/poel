@@ -15,7 +15,7 @@ var FormText = Stapes.subclass({
         this.title = title;
     },
 
-    toJSON: function () {
+    toViewModel: function () {
         return {
             title: this.title || false,
             text: this.text || false
