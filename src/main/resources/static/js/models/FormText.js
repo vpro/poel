@@ -20,7 +20,7 @@ var FormText = Stapes.subclass({
             type: 'text',
             title: this.title || false,
             text: this.text || false
-        }
+        };
     }
 });
 
