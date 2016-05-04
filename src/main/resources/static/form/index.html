@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+    <link rel="stylesheet" href="http://files.vpro.nl/frontend/bootstrap/dist/style.css">
+</head>
+<body>
+
+<div class="grid">
+    <div class="form"></div>
+</div>
+
+
+<script src="/vendor/system.js"></script>
+<script src="/systemjs.config.js"></script>
+<script>
+
+    System.import( '/js/controllers/FormController.js' ).then( function ( formControllerModule ) {
+
+        new formControllerModule.default( document.querySelector('.form') );
+
+    } );
+
+</script>
+
+</body>
+</html>

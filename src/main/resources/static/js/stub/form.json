@@ -1,0 +1,22 @@
+{
+    "elements": [
+        {
+            "title": "Italië vs Spanje",
+            "result": [-1,-1],
+            "gamble": [-1,-1],
+            "dueDate": "2016-06-22T15:12:22.872+01:00",
+            "joker": false,
+            "score": -1,
+            "type": "entry"
+        },
+        {
+            "title": "Duitsland vs België",
+            "result": [-1,-1],
+            "gamble": [-1,-1],
+            "dueDate": "2016-06-22T15:12:22.872+01:00",
+            "joker": false,
+            "score": -1,
+            "type": "entry"
+        }
+    ]
+}

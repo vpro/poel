@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+        <link rel="stylesheet" href="http://files.vpro.nl/frontend/bootstrap/dist/style.css">
+    </head>
+    <body>
+
+    <div class="grid">
+        <h1>Hello World dan met reload</h1>
+    </div>
+
+
+    <script src="/vendor/system.js"></script>
+    <script src="/systemjs.config.js"></script>
+    <script>
+
+        System.import( '/js/controllers/TestController.js' ).then( function ( testControllerModule ) {
+
+            new testControllerModule.default( );
+
+        } );
+
+    </script>
+
+    </body>
+</html>
