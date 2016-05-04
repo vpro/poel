@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService { // AuthenticationUserDetailsService<CasAssertionAuthenticationToken> {
