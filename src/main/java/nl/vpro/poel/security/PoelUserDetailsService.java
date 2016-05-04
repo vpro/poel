@@ -8,12 +8,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService {
 
-    private static final String NO_PASSWORD = "NO_PASSWORD";
+    private static final String UNKNOWN_PASSWORD = "UNKNOWN_PASSWORD";
 
     @Override
     protected UserDetails loadUserDetails(Assertion assertion) {
@@ -22,7 +22,7 @@ class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService {
 
         // TODO: Check if user has an account for this application in this application's database
 
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        Collection<GrantedAuthority> authorities = new HashSet<>();
 
         // Everybody is a user!
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -32,6 +32,6 @@ class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-        return new User(username, NO_PASSWORD, authorities); // TODO: Create own extension of User with extra fields?
+        return new User(username, UNKNOWN_PASSWORD, authorities); // TODO: Create own extension of User with extra fields?
     }
 }
