@@ -11,6 +11,9 @@ import formEntryTemplate from '../views/form-entry.hbs!';
 
 HandlebarsRuntime.registerPartial( 'entry', formEntryTemplate );
 
+HandlebarsRuntime.registerHelper('formatDate', function( date, format ) {
+    return date.toLocaleString( format );
+});
 
 var FormController = Stapes.subclass({
 

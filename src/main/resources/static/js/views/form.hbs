@@ -1,5 +1,9 @@
 <form>
-    {{#elements}}
-        {{> (lookup . 'type') }}
-    {{/elements}}
+    <table>
+        <tbody>
+            {{#elements}}
+                {{> (lookup . 'type') }}
+            {{/elements}}
+        </tbody>
+    </table>
 </form>
