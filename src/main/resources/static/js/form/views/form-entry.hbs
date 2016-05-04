@@ -1,4 +1,4 @@
-<tr>
+<tr data-id="{{id}}" class="form-entry">
     <td>
     {{#definitive}}
         Definitief
@@ -13,10 +13,10 @@
         {{contestant0}}
 
         {{#definitive}}
-            {{formatResult gamble}}
+            {{formatResult prediction}}
         {{/definitive}}
         {{^definitive}}
-            {{{gambleEntry gamble id 0}}} - {{{gambleEntry gamble id 1}}}
+            {{{predictionEntry prediction id 0}}} - {{{predictionEntry prediction id 1}}}
         {{/definitive}}
 
         {{contestant1}}
@@ -33,4 +33,8 @@
         {{#definitive}}{{formatResult result}}{{/definitive}}
     </td>
     <td>{{#definitive}}Score: {{score}}{{/definitive}}</td>
+    <td>
+        <button data-action="save" class="form-entry__button form-entry__save-button">Save</button>
+        <button data-action ="cancel" class="form-entry__button form-entry__cancel-button">Cancel</button>
+    </td>
 </tr>

@@ -1,3 +1,20 @@
-.gamble {
+.prediction {
     width: 20px;
 }
+
+.form-entry {
+
+}
+
+.form-entry__button {
+    visibility: hidden;
+}
+
+.form-entry_dirty {
+    background-color: #eee;
+}
+
+.form-entry_dirty .form-entry__button {
+    visibility: visible;
+}
+

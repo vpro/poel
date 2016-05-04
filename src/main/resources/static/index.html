@@ -6,7 +6,7 @@
     </head>
     <body>
 
-    <div class="grid">
+    <div class="grid grid-gutter">
         <h1>Hello World dan met reload</h1>
     </div>
 
@@ -14,6 +14,8 @@
     <script src="/vendor/system.js"></script>
     <script src="/systemjs.config.js"></script>
     <script>
+
+        // TODO: create a self executing bundle for production use
 
         System.import( '/js/controllers/TestController.js' ).then( function ( testControllerModule ) {
 

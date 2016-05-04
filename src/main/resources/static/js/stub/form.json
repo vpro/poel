@@ -3,8 +3,8 @@
         {
             "id": "1",
             "contestants": ["Polen", "Ierland"],
+            "prediction": [1,0],
             "result": [2,1],
-            "gamble": [1,0],
             "dueDate": "2016-04-07T15:12:22+01:00",
             "joker": false,
             "score": 1,
@@ -13,8 +13,8 @@
         {
             "id": "2",
             "contestants": ["Portugal", "Oostenrijk"],
+            "prediction": [2,1],
             "result": [2,1],
-            "gamble": [2,1],
             "dueDate": "2016-05-01T15:12:22+01:00",
             "joker": true,
             "score": 6,
@@ -23,8 +23,8 @@
         {
             "id": "3",
             "contestants": ["Italië", "Spanje"],
+            "prediction": [-1,-1],
             "result": [-1,-1],
-            "gamble": [-1,-1],
             "dueDate": "2016-06-22T15:12:22+01:00",
             "joker": false,
             "score": -1,
@@ -33,8 +33,8 @@
         {
             "id": "4",
             "contestants": ["Duitsland", "België"],
+            "prediction": [-1,-1],
             "result": [-1,-1],
-            "gamble": [-1,-1],
             "dueDate": "2016-06-22T15:12:22+01:00",
             "joker": false,
             "score": -1,

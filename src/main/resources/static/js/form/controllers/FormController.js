@@ -23,15 +23,15 @@ HandlebarsRuntime.registerHelper('formatResult', function( result ) {
     return result.join(' - ');
 });
 
-
-HandlebarsRuntime.registerHelper('gambleEntry', function( gamble, id, index ) {
+HandlebarsRuntime.registerHelper('predictionEntry', function( prediction, id, index ) {
     return ''.concat(
-            '<input type="text" class="gamble" value="',
-            ( ( gamble[ index ] !== -1 ) ? gamble[ index ] : '' ),
-                '" name="gamble-'+ id +'-'+ index +'" id="gamble-'+ id +'-'+ index +'" />');
+            '<input type="text" class="prediction" value="',
+            ( ( prediction[ index ] !== -1 ) ? prediction[ index ] : '' ),
+                '" name="prediction-'+ id +'-'+ index +'" id="prediction-'+ id +'-'+ index +'" />');
 });
 
-/*** ***/
+/** ****************************/
+/** ****************************/
 
 
 var FormController = Stapes.subclass({
@@ -54,6 +54,10 @@ var FormController = Stapes.subclass({
 
     bindViewHandlers: function () {
 
+        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
+        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
+
+        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
     },
 
     /**
@@ -84,6 +88,47 @@ var FormController = Stapes.subclass({
         return deferred.promise();
     },
 
+    handleButtonClick: function ( e ) {
+        var $button = $( e.currentTarget );
+        var $formEntry = $button.parents('[data-id]').first();
+        var id = $formEntry.data('id');
+
+        e.preventDefault();
+
+        if ( $button.is('[data-action="save"]') ) {
+
+        }
+
+        if ( $button.is('[data-action="cancel"]') ) {
+
+            $formEntry.replaceWith( formEntryTemplate(
+                this.form.elements.filter( function ( elm ) {
+                    return parseFloat( elm.id ) === id;
+                }).pop()
+            ) );
+        }
+    },
+
+    handleJokerChange: function ( e ) {
+
+        var $input = $( e.currentTarget );
+        var $field = $input.parents('[data-id]').first();
+
+        var id = $field.data('id');
+
+        $field.addClass('form-entry_dirty');
+    },
+
+    handlePredictionChange: function ( e ) {
+
+        var $input = $( e.currentTarget );
+        var $field = $input.parents('[data-id]').first();
+
+        var id = $field.data('id');
+
+        $field.addClass('form-entry_dirty');
+    },
+
     parseForm: function ( data ) {
 
         var parsed = {
@@ -100,7 +145,7 @@ var FormController = Stapes.subclass({
                             element.id,
                             element.contestants,
                             element.result,
-                            element.gamble,
+                            element.prediction,
                             new FormatDate( element.dueDate ),
                             element.joker,
                             element.score

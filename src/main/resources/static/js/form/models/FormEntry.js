@@ -5,22 +5,26 @@ import Stapes from 'stapes';
  * @param {string} id
  * @param {Array} contestants=[]
  * @param {Array} result=[]
- * @param {Array} gamble=[]
+ * @param {Array} prediction=[]
  * @param {../util/FormatDate} dueDate
  * @param {boolean} joker
  * @param {number} score
  */
 var FormEntry = Stapes.subclass({
 
-    constructor : function ( id, contestants, result, gamble, dueDate, joker, score ) {
+    constructor : function ( id, contestants, result, prediction, dueDate, joker, score ) {
 
         this.id = id;
         this.contestants = contestants;
         this.result = result;
-        this.gamble = gamble;
+        this.prediction = prediction;
         this.dueDate = dueDate;
         this.joker = joker;
         this.score = score;
+    },
+
+    getId: function () {
+        return this.id;
     },
 
     toViewModel: function () {
@@ -29,7 +33,7 @@ var FormEntry = Stapes.subclass({
             type: 'entry',
             id: this.id,
             result : this.result,
-            gamble : this.gamble,
+            prediction : this.prediction,
             dueDate : this.dueDate,
             joker : this.joker,
             score : this.score,
