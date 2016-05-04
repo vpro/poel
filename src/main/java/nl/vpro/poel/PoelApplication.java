@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(CasAuthentication.class)
-public class PoelBackendApplication {
+public class PoelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PoelBackendApplication.class, args);
+		SpringApplication.run(PoelApplication.class, args);
 	}
 }
