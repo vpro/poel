@@ -1,6 +1,6 @@
-![Travis CI build status](https://travis-ci.org/vpro/poel-backend.svg?branch=master)
+![Travis CI build status](https://travis-ci.org/vpro/poel.svg?branch=master)
 
-# poel-backend
+# poel
 
 The famous VPRO Poel!
 

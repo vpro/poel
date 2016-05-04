@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>nl.vpro.poel</groupId>
-	<artifactId>poel-backend</artifactId>
+	<artifactId>poel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>poel-backend</name>
-	<description>VPRO Poel Backend API</description>
+	<name>poel</name>
+	<description>VPRO Poel</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
