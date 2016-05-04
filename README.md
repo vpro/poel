@@ -1,14 +1,18 @@
 ![Travis CI build status](https://travis-ci.org/vpro/poel.svg?branch=master)
 
-# poel
+# VPRO Poel
 
-The famous VPRO Poel!
+The software for the famous VPRO Poel!
 
-## running
-Doing `mvn spring-boot:run` in a terminal should do the trick!
-You should be able to see the poel at [localhost:8080](http://localhost:8080/)
+## Running
 
-## adding front end (vendor) resources
+Make sure you have Oracle JDK 8 installed.
+
+Running `./mvnw spring-boot:run` should do the trick! If you have a local installation of Apache Maven 3.x, you can also use `mvn` instead of the supplied `mvnw` script.
+
+After starting up the poel should at live at [localhost:8080](http://localhost:8080/)
+
+## Adding front end (vendor) resources
 
 For now this means installing them through the `package.json` and NPM and creating
 a vendor script in `package.json` that after running `npm run vendor` copies the
