@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService { // AuthenticationUserDetailsService<CasAssertionAuthenticationToken> {
+class PoelUserDetailsService extends AbstractCasAssertionUserDetailsService {
 
     private static final String NO_PASSWORD = "NO_PASSWORD";
 
