@@ -39,6 +39,12 @@
             "joker": false,
             "score": -1,
             "type": "entry"
+        },
+        {
+            "id": "5",
+            "title": "Een titel",
+            "text": "Een <strong>rich text</strong> stukje voor tussen de stand door.",
+            "type": "text"
         }
     ]
 }
