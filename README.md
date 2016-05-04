@@ -4,6 +4,10 @@
 
 The famous VPRO Poel!
 
+## running
+Doing `mvn spring-boot:run` in a terminal should do the trick!
+You should be able to see the poel at [localhost:8080](http://localhost:8080/)
+
 ## adding front end (vendor) resources
 
 For now this means installing them through the `package.json` and NPM and creating
