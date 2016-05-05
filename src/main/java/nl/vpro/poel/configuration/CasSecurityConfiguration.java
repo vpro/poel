@@ -1,4 +1,4 @@
-package nl.vpro.poel.security;
+package nl.vpro.poel.configuration;
 
 import nl.vpro.poel.service.CurrentUserDetailsService;
 import nl.vpro.poel.service.UserService;
@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(securedEnabled = true)
-public class CasAuthentication extends WebSecurityConfigurerAdapter {
+public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String CAS_BASE_URL = "https://signon.vpro.nl";
 
