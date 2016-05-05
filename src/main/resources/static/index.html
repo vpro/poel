@@ -10,24 +10,14 @@
         <h1>Hello World dan met reload</h1>
     </div>
 
-    <ul>
-        <li><a href="/user">Een fijne pagina voor een gebruiker</a></li>
-        <li><a href="/admin">Een fijne pagina voor admins</a></li>
-    </ul>
-
-    <script src="/vendor/system.js"></script>
-    <script src="/systemjs.config.js"></script>
-    <script>
-
-        // TODO: create a self executing bundle for production use
-
-        System.import( '/js/controllers/TestController.js' ).then( function ( testControllerModule ) {
-
-            new testControllerModule.default( );
-
-        } );
-
-    </script>
+    <div class="text">
+        <ul>
+            <li><a href="/user">Een fijne pagina voor een gebruiker</a></li>
+            <li><a href="/form">Het invulformulier voor een gebruiker</a></li>
+            <li><a href="/ranking">De ranking pagina voor een gebruiker</a></li>
+            <li><a href="/admin">Een fijne pagina voor admins</a></li>
+        </ul>
+    </div>
 
     </body>
 </html>
