@@ -1,6 +1,6 @@
 package nl.vpro.poel;
 
-import nl.vpro.poel.security.CasSecurityConfiguration;
+import nl.vpro.poel.configuration.CasSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.velocity.VelocityAutoConfiguration;
