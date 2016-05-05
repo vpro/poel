@@ -4,7 +4,6 @@ import nl.vpro.poel.domain.Role;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -40,13 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByUsername(String email) {
-         return userRepository.findOneByUsernameIgnoreCase(email);
+    public Optional<User> getUserByUsername(String username) {
+         return userRepository.findOneByUsernameIgnoreCase(username);
     }
 
     @Override
     public Collection<User> getAllUsers() {
-        return userRepository.findAll(new Sort("email"));
+        return userRepository.findAll();
     }
 
 //    @Override
