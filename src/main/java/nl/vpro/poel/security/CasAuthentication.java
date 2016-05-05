@@ -1,6 +1,9 @@
 package nl.vpro.poel.security;
 
+import nl.vpro.poel.service.CurrentUserDetailsService;
+import nl.vpro.poel.service.UserService;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
@@ -21,6 +24,9 @@ public class CasAuthentication extends WebSecurityConfigurerAdapter {
 
     private static final String CAS_BASE_URL = "https://signon.vpro.nl";
 
+    @Autowired
+    private UserService userService;
+
     @Bean
     public ServiceProperties serviceProperties() {
         ServiceProperties serviceProperties = new ServiceProperties();
@@ -40,7 +46,7 @@ public class CasAuthentication extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationUserDetailsService<CasAssertionAuthenticationToken> authenticationUserDetailsService() {
-        return new PoelUserDetailsService();
+        return new CurrentUserDetailsService(userService);
     }
 
     @Bean
@@ -70,8 +76,14 @@ public class CasAuthentication extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").hasRole("USER")
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/admin/**").hasAuthority("ADMIN")
+                    .anyRequest().authenticated()
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint());
     }
