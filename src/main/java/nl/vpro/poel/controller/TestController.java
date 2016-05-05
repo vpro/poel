@@ -3,30 +3,31 @@ package nl.vpro.poel.controller;
 import org.springframework.security.cas.authentication.CasAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
-@RestController
+@Controller
 public class TestController {
 
     @RequestMapping("/user")
     String user() {
-        return "Hallo, " + getUsername().orElse("onbekende vreemdeling");
+        return "user";
     }
 
     @RequestMapping("/admin")
     String admin() {
-        return "Alleen voor admins!";
+        return "admin";
     }
 
-    private Optional<String> getUsername() {
+    @ModelAttribute("username")
+    public String username() {
+        // TODO: Is dit gedoe allemaal nodig om in een template te weten wie er ingelogd is? Kan dat niet makkelijker?
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof CasAuthenticationToken) {
             CasAuthenticationToken casAuthenticationToken = (CasAuthenticationToken) authentication;
-            return Optional.of(casAuthenticationToken.getUserDetails().getUsername());
+            return casAuthenticationToken.getUserDetails().getUsername();
         }
-        return Optional.empty();
+        return "";
     }
 }
