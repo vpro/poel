@@ -10,7 +10,7 @@ Make sure you have Oracle JDK 8 installed.
 
 Running `./mvnw spring-boot:run` should do the trick! If you have a local installation of Apache Maven 3.x, you can also use `mvn` instead of the supplied `mvnw` script.
 
-After starting up the poel should at live at [localhost:8080](http://localhost:8080/)
+After starting up the poel should be live at [localhost:8080](http://localhost:8080/)
 
 ## Adding front end (vendor) resources
 
