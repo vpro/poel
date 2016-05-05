@@ -20,6 +20,16 @@ public class UserController {
         return "admin";
     }
 
+    @RequestMapping("/form")
+    String form() {
+        return "form";
+    }
+
+    @RequestMapping("/ranking")
+    String ranking() {
+        return "ranking";
+    }
+
     @ModelAttribute("user")
     public User user(Authentication authentication) {
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
