@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-class UserController {
+class IndexController {
 
-    @RequestMapping("/user")
-    String user() {
-        return "user";
+    @RequestMapping("/")
+    String index() {
+        return "index";
     }
 }
