@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Hello Sign up</title>
-    <link rel="stylesheet" href="http://files.vpro.nl/frontend/bootstrap/dist/style.css">
+    <link rel="stylesheet" href="https://files.vpro.nl/frontend/bootstrap/dist/style.css">
 </head>
 <body>
 <div class="grid">
