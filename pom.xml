@@ -14,8 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>1.3.4.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -109,12 +108,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<!-- Spring Boot Devtools / LiveReload doesn't seem to work very well, so we use this workaround for now -->
-					<addResources>true</addResources>
+					<fork>true</fork><!-- Added for DevTools, see https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-restart -->
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
-
 </project>
