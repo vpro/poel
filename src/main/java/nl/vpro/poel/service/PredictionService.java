@@ -3,9 +3,9 @@ package nl.vpro.poel.service;
 import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface PredictionService {
 
-    Collection<Prediction> getPredictions(User user);
+    List<Prediction> getPredictions(User user);
 }

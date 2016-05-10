@@ -6,7 +6,7 @@ import nl.vpro.poel.repository.PredictionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class PredictionServiceImpl implements PredictionService {
@@ -19,7 +19,7 @@ public class PredictionServiceImpl implements PredictionService {
     }
 
     @Override
-    public Collection<Prediction> getPredictions(User user) {
+    public List<Prediction> getPredictions(User user) {
         return predictionRepository.findAllByUser(user);
     }
 }

@@ -2,7 +2,7 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.User;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -11,7 +11,7 @@ public interface UserService {
 
     Optional<User> getUserByUsername(String username);
 
-    Collection<User> getAllUsers();
+    List<User> getAllUsers();
 
 //    User create(UserCreateForm form);
 }

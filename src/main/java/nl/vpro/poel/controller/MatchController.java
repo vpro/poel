@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.Instant;
-import java.util.Collection;
+import java.util.List;
 
 @Controller
 public class MatchController {
@@ -22,7 +22,7 @@ public class MatchController {
 
     @RequestMapping("/matches")
     String currentMatches(Model model) {
-        Collection<Match> currentMatches = matchService.getValidMatches(Instant.now());
+        List<Match> currentMatches = matchService.getValidMatches(Instant.now());
         model.addAttribute("matches", currentMatches);
         return "matches";
     }

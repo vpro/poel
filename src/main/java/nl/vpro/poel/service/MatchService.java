@@ -4,10 +4,10 @@ import nl.vpro.poel.domain.Match;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public interface MatchService {
 
-    Collection<Match> getValidMatches(Instant instant);
+    List<Match> getValidMatches(Instant instant);
 }

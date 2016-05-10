@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Collection<Match> getValidMatches(Instant instant) {
+    public List<Match> getValidMatches(Instant instant) {
         return matchRepository.findAll().stream()
                 .filter(match -> match.canBePredicatedAt(instant))
                 .collect(Collectors.toList());
