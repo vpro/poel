@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false)
     private String displayName;
 
-    User() {} // For JPA
+    private User() {} // For Hibernate
 
     public User(String username, Role role, String displayName) {
         this.username = username;

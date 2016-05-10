@@ -8,7 +8,7 @@ class RankingController {
 
     /**
      * TODO: We'll probably want to cache the ranking to avoid calculating
-     * every score for every question for every user for every request...
+     * every score for every prediction for every user for every request...
      */
 
     @RequestMapping("/ranking")
