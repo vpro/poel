@@ -4,8 +4,8 @@ import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -21,8 +21,9 @@ public class MatchController {
     }
 
     @RequestMapping("/matches")
-    ModelAndView currentMatches() {
+    String currentMatches(Model model) {
         Collection<Match> currentMatches = matchService.getValidMatches(Instant.now());
-        return new ModelAndView("matches", "matches", currentMatches);
+        model.addAttribute("matches", currentMatches);
+        return "matches";
     }
 }
