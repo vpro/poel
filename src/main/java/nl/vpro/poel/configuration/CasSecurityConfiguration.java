@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(securedEnabled = true)
 public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String CAS_BASE_URL = "https://signon.vpro.nl";
