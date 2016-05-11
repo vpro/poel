@@ -49,7 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getOrCreate(String username) {
-        return getUserByUsername(username)
-                .orElse(userRepository.save(new User(username, Role.USER, username)));
+        Optional<User> existingUser = getUserByUsername(username);
+        if (existingUser.isPresent()) {
+            return existingUser.get();
+        }
+        User newUser = new User(username, Role.USER, username);
+        return userRepository.save(newUser);
     }
 }
