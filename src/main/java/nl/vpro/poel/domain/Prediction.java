@@ -3,7 +3,7 @@ package nl.vpro.poel.domain;
 import javax.persistence.*;
 
 /**
- * A user's predicted outcome for a match.
+ * A user's predicted match result.
  */
 @Entity
 public class Prediction {
@@ -13,20 +13,20 @@ public class Prediction {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @OneToOne
-    private Match match;
-
-    @OneToOne
+    @OneToOne(optional = false)
     private User user;
 
-    @Column(nullable = false)
-    private String value;
+    @OneToOne(optional = false)
+    private Match match;
+
+    @Embedded
+    private MatchResult matchResult;
 
     public Match getMatch() {
         return match;
     }
 
-    public String getValue() {
-        return value;
+    public MatchResult getMatchResult() {
+        return matchResult;
     }
 }

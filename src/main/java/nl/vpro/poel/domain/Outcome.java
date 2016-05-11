@@ -3,7 +3,7 @@ package nl.vpro.poel.domain;
 import javax.persistence.*;
 
 /**
- * The actual outcome of a match.
+ * The actual result of a played match.
  */
 @Entity
 public class Outcome {
@@ -13,15 +13,15 @@ public class Outcome {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Match match;
 
-    @Column(nullable = false)
-    private String value;
+    @Embedded
+    private MatchResult matchResult;
 
     private Outcome() {} // For Hibernate
 
-    public String getValue() {
-        return value;
+    public MatchResult getMatchResult() {
+        return matchResult;
     }
 }

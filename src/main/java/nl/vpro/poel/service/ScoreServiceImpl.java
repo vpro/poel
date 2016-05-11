@@ -1,9 +1,6 @@
 package nl.vpro.poel.service;
 
-import nl.vpro.poel.domain.Match;
-import nl.vpro.poel.domain.Outcome;
-import nl.vpro.poel.domain.Prediction;
-import nl.vpro.poel.domain.User;
+import nl.vpro.poel.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +28,13 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public int getScore(Prediction prediction) {
-        String predictedValue = prediction.getValue();
+        MatchResult predictedMatchResult = prediction.getMatchResult();
 
         Match match = prediction.getMatch();
         Optional<Outcome> outcome = outcomeService.getOutcome(match);
         if (outcome.isPresent()) {
-            String outcomeValue = outcome.get().getValue();
-            return outcomeValue.equals(predictedValue) ? 3 : 0; // TODO: Implement more sophisticated scoring algorithm
+            MatchResult outcomeMatchResult = outcome.get().getMatchResult();
+            return outcomeMatchResult.equals(predictedMatchResult) ? 3 : 0; // TODO: Implement more sophisticated scoring algorithm
         }
         return 0;
     }
