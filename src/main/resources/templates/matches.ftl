@@ -9,7 +9,7 @@
 <#list matches>
     <ul>
         <#items as match>
-            <li>${match.text}</li>
+            <li>${match.homeTeam.name} - ${match.awayTeam.name}</li>
         </#items>
     </ul>
 <#else>

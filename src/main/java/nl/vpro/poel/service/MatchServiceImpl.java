@@ -16,14 +16,15 @@ public class MatchServiceImpl implements MatchService {
     private final MatchRepository matchRepository;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository) {
+    public MatchServiceImpl(MatchRepository matchRepository, TeamService teamService) {
         this.matchRepository = matchRepository;
 
         // Initialize default matches
         if (matchRepository.count() == 0) {
             List<Match> defaultMatches = Arrays.asList(
-                    new Match("Nederland - Engeland", null, Instant.now()),
-                    new Match("België - Griekenland", Instant.now(), null)
+                    new Match(teamService.getTeamById(1L).get(), teamService.getTeamById(2L).get(), null, Instant.now()),
+                    new Match(teamService.getTeamById(3L).get(), teamService.getTeamById(4L).get(), null, Instant.now()),
+                    new Match(teamService.getTeamById(5L).get(), teamService.getTeamById(6L).get(), Instant.now(), null)
             );
             matchRepository.save(defaultMatches);
         }

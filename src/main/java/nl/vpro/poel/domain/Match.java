@@ -14,8 +14,11 @@ public class Match {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String text;
+    @OneToOne
+    private Team homeTeam;
+
+    @OneToOne
+    private Team awayTeam;
 
     @Column
     private Instant invalidAfter = null;
@@ -25,18 +28,23 @@ public class Match {
 
     private Match() {} // For Hibernate
 
-    public Match(String text) {
-        this.text = text;
+    public Match(Team homeTeam, Team awayTeam) {
+        this(homeTeam, awayTeam, null, null);
     }
 
-    public Match(String text, Instant invalidAfter, Instant invalidBefore) {
-        this.text = text;
+    public Match(Team homeTeam, Team awayTeam, Instant invalidAfter, Instant invalidBefore) {
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
         this.invalidAfter = invalidAfter;
         this.invalidBefore = invalidBefore;
     }
 
-    public String getText() {
-        return text;
+    public Team getHomeTeam() {
+        return homeTeam;
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
     }
 
     public boolean canBePredicatedAt(Instant instant) {
