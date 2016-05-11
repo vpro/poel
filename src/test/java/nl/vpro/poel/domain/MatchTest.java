@@ -12,7 +12,7 @@ public class MatchTest {
     public void withoutTimeConstraintsIsValid() {
         Match match = new Match(new Team("Thuis"), new Team("Uit"));
 
-        boolean validNow = match.canBePredicatedAt(Instant.now());
+        boolean validNow = match.canBePredictedAt(Instant.now());
 
         assertThat(validNow).isTrue();
     }
@@ -21,10 +21,10 @@ public class MatchTest {
     public void onlyInvalidAfterConstraint() {
         Match match = new Match(new Team("Thuis"), new Team("Uit"), Instant.ofEpochSecond(200L), null);
 
-        boolean validBefore = match.canBePredicatedAt(Instant.ofEpochSecond(100L));
+        boolean validBefore = match.canBePredictedAt(Instant.ofEpochSecond(100L));
         assertThat(validBefore).isTrue();
 
-        boolean validAfter = match.canBePredicatedAt(Instant.ofEpochSecond(300L));
+        boolean validAfter = match.canBePredictedAt(Instant.ofEpochSecond(300L));
         assertThat(validAfter).isFalse();
     }
 
@@ -32,10 +32,10 @@ public class MatchTest {
     public void onlyInvalidBeforeConstraint() {
         Match match = new Match(new Team("Thuis"), new Team("Uit"), null, Instant.ofEpochSecond(200L));
 
-        boolean validBefore = match.canBePredicatedAt(Instant.ofEpochSecond(100L));
+        boolean validBefore = match.canBePredictedAt(Instant.ofEpochSecond(100L));
         assertThat(validBefore).isFalse();
 
-        boolean validAfter = match.canBePredicatedAt(Instant.ofEpochSecond(300L));
+        boolean validAfter = match.canBePredictedAt(Instant.ofEpochSecond(300L));
         assertThat(validAfter).isTrue();
     }
 
@@ -43,13 +43,13 @@ public class MatchTest {
     public void BothBeforeAndAfterConstraints() {
         Match match = new Match(new Team("Thuis"), new Team("Uit"), Instant.ofEpochSecond(400L), Instant.ofEpochSecond(200L));
 
-        boolean validBefore = match.canBePredicatedAt(Instant.ofEpochSecond(100L));
+        boolean validBefore = match.canBePredictedAt(Instant.ofEpochSecond(100L));
         assertThat(validBefore).isFalse();
 
-        boolean validDuring = match.canBePredicatedAt(Instant.ofEpochSecond(300L));
+        boolean validDuring = match.canBePredictedAt(Instant.ofEpochSecond(300L));
         assertThat(validDuring).isTrue();
 
-        boolean validAfter = match.canBePredicatedAt(Instant.ofEpochSecond(500L));
+        boolean validAfter = match.canBePredictedAt(Instant.ofEpochSecond(500L));
         assertThat(validAfter).isFalse();
     }
 }

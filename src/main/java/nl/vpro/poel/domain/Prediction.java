@@ -1,6 +1,7 @@
 package nl.vpro.poel.domain;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 /**
  * A user's predicted match result.
@@ -13,10 +14,10 @@ public class Prediction {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private User user;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Match match;
 
     @Embedded
@@ -28,5 +29,14 @@ public class Prediction {
 
     public MatchResult getMatchResult() {
         return matchResult;
+    }
+
+    public Integer getScore() {
+        // TODO: Implement desired scoring algorithm
+        Optional<MatchResult> actualMatchResult = match.getMatchResult();
+        if (actualMatchResult.isPresent() && matchResult != null) {
+            return actualMatchResult.get().equals(matchResult) ? 3 : 0;
+        }
+        return 0;
     }
 }

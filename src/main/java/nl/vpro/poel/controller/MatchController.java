@@ -23,7 +23,7 @@ public class MatchController {
 
     @RequestMapping(value = "/matches", method = RequestMethod.GET)
     String currentMatches(Model model) {
-        List<Match> currentMatches = matchService.getValidMatches(Instant.now());
+        List<Match> currentMatches = matchService.getMatchesToPredict(Instant.now());
         model.addAttribute("matches", currentMatches);
         return "matches";
     }

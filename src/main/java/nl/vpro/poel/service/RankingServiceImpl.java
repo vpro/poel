@@ -1,5 +1,6 @@
 package nl.vpro.poel.service;
 
+import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,12 @@ public class RankingServiceImpl implements RankingService {
 
     private final UserService userService;
 
-    private final ScoreService scoreService;
+    private final PredictionService predictionService;
 
     @Autowired
-    RankingServiceImpl(UserService userService, ScoreService scoreService) {
+    RankingServiceImpl(UserService userService, PredictionService predictionService) {
         this.userService = userService;
-        this.scoreService = scoreService;
+        this.predictionService = predictionService;
     }
 
     @Override
@@ -42,7 +43,8 @@ public class RankingServiceImpl implements RankingService {
     public SortedMap<Integer, User> getOverallRanking() {
         return userService.getAllUsers().stream()
                 .collect(Collectors.toMap(
-                        scoreService::getScore,
+                        user -> predictionService.getPredictions(user).stream()
+                            .collect(Collectors.summingInt(Prediction::getScore)),
                         Function.identity(),
                         (k, v) -> { throw new RuntimeException(String.format("Duplicate key %s", k)); },
                         TreeMap::new));

@@ -1,5 +1,6 @@
 package nl.vpro.poel.controller;
 
+import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.CurrentUser;
 import org.springframework.security.cas.authentication.CasAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,12 +14,6 @@ public class PoelControllerAdvice {
 
     @ModelAttribute("user")
     public CurrentUser getCurrentUser(Principal principal) {
-        if (principal instanceof CasAuthenticationToken) {
-            UserDetails userDetails = ((CasAuthenticationToken)principal).getUserDetails();
-            if (userDetails instanceof CurrentUser) {
-                return (CurrentUser) userDetails;
-            }
-        }
-        return null;
+        return UserUtil.getCurrentUser(principal).orElse(null);
     }
 }
