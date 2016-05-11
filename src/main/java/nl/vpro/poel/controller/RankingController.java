@@ -2,6 +2,7 @@ package nl.vpro.poel.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 class RankingController {
@@ -11,7 +12,7 @@ class RankingController {
      * every score for every prediction for every user for every request...
      */
 
-    @RequestMapping("/ranking")
+    @RequestMapping(value = "/ranking", method = RequestMethod.GET)
     String ranking() {
         return "ranking";
     }
