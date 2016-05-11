@@ -14,10 +14,10 @@ public class Match {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Team homeTeam;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Team awayTeam;
 
     @Column
