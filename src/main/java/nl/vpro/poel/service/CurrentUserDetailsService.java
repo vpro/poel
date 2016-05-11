@@ -20,6 +20,7 @@ public class CurrentUserDetailsService extends AbstractCasAssertionUserDetailsSe
 
     @Override
     protected UserDetails loadUserDetails(Assertion assertion) {
+        // TODO: Also get first and last name from CAS
         String username = assertion.getPrincipal().getName();
         User user = userService.getOrCreate(username);
         return new CurrentUser(user);
