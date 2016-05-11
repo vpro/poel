@@ -9,5 +9,7 @@ public interface TeamService {
 
     Optional<Team> getTeamById(Long id);
 
+    Optional<Team> getTeamByName(String name);
+
     List<Team> getAllTeams();
 }

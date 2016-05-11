@@ -22,9 +22,9 @@ public class MatchServiceImpl implements MatchService {
         // Initialize default matches
         if (matchRepository.count() == 0) {
             List<Match> defaultMatches = Arrays.asList(
-                    new Match(teamService.getTeamById(1L).get(), teamService.getTeamById(2L).get(), null, Instant.now()),
-                    new Match(teamService.getTeamById(3L).get(), teamService.getTeamById(4L).get(), null, Instant.now()),
-                    new Match(teamService.getTeamById(5L).get(), teamService.getTeamById(6L).get(), Instant.now(), null)
+                    new Match(teamService.getTeamByName("Frankrijk").get(), teamService.getTeamByName("Duitsland").get(), null, Instant.now()),
+                    new Match(teamService.getTeamByName("Spanje").get(), teamService.getTeamByName("Engeland").get(), null, Instant.now()),
+                    new Match(teamService.getTeamByName("Portugal").get(), teamService.getTeamByName("België").get(), Instant.now(), null)
             );
             matchRepository.save(defaultMatches);
         }
