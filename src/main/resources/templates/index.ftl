@@ -7,7 +7,17 @@
 <body>
 
 <div class="grid grid-gutter">
-    <h1>Hello World dan met reload</h1>
+    <h1>Hello World</h1>
+
+    <p>
+        Todo:  <br />
+        Logo  <br />
+        Korte uitleg  <br />
+        Link naar de gebruikerspagina, zodat je een account kan maken en inloggen  <br />
+        Link naar het invulformulier  <br />
+        Link naar de ranking  <br />
+        Link naar de admin indien je ingelogd bent?<br />
+    </p>
 </div>
 
 <div class="text">
