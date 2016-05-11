@@ -8,17 +8,17 @@
 
 <div class="grid grid-gutter">
     <h1>Current Matches</h1>
-<#list matches>
+[#list matches]
 <form>
 <ul>
-    <#items as match>
+    [#items as match]
     <li>${match.homeTeam.name} - ${match.awayTeam.name}</li>
-    </#items>
+    [/#items]
 </ul>
 </form>
-<#else>
+[#else]
     No matches at this time, sorry!
-</#list>
+[/#list]
 </div>
 
 </body>

@@ -9,16 +9,16 @@
 
     Alleen admins zoals ${user.displayName} (${user.username}/${user.role}) kunnen dit zien!
 
-    <#list users>
+    [#list users]
         <h2>Alle deelnemers</h2>
         <ul>
-            <#items as u>
+            [#items as u]
                 <li>${u.displayName} (${u.username})</li>
-            </#items>
+            [/#items]
         </ul>
-    <#else>
+    [#else]
         Er zijn geen deelnemers. :o(
-    </#list>
+    [/#list]
 
     <p>
         Todo: <br />
