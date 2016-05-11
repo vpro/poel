@@ -47,12 +47,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-//    @Override
-//    public User create(UserCreateForm form) {
-//        User user = new User();
-//        user.setEmail(form.getEmail());
-//        user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
-//        user.setRole(form.getRole());
-//        return userRepository.save(user);
-//    }
+    @Override
+    public User getOrCreate(String username) {
+        return getUserByUsername(username)
+                .orElse(userRepository.save(new User(username, Role.USER, username)));
+    }
 }

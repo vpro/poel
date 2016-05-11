@@ -8,8 +8,6 @@ import org.springframework.security.cas.userdetails.AbstractCasAssertionUserDeta
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class CurrentUserDetailsService extends AbstractCasAssertionUserDetailsService {
 
@@ -23,10 +21,7 @@ public class CurrentUserDetailsService extends AbstractCasAssertionUserDetailsSe
     @Override
     protected UserDetails loadUserDetails(Assertion assertion) {
         String username = assertion.getPrincipal().getName();
-        Optional<User> user = userService.getUserByUsername(username);
-        if (user.isPresent()) {
-            return new CurrentUser(user.get());
-        }
-        return null;
+        User user = userService.getOrCreate(username);
+        return new CurrentUser(user);
     }
 }
