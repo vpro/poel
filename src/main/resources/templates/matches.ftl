@@ -3,6 +3,7 @@
 <head>
     <title>Current Matches</title>
     <link rel="stylesheet" href="https://files.vpro.nl/frontend/bootstrap/dist/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 

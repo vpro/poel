@@ -18,5 +18,7 @@ hs_err_pid*
 # Maven
 target
 
-# Node
+# Node / Front end maven plugin
 node_modules/
+node/
+etc/

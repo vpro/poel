@@ -2,6 +2,9 @@
   "name": "poel-frontend",
   "description": "vpro poel front end scripts",
   "scripts": {
+    "build:css": "node-sass src/main/resources/static/css/sass/style.scss --output target/classes/static/css",
+    "build:prod": "npm run build:css",
+    "postinstall": "npm run vendor",
     "vendor:handlebars": "cp node_modules/handlebars/dist/handlebars.min.js src/main/resources/static/vendor",
     "postvendor:handlebars": "cp node_modules/handlebars/dist/handlebars.runtime.min.js src/main/resources/static/vendor",
     "vendor:jquery": "cp node_modules/jquery/dist/jquery.min.js src/main/resources/static/vendor",
@@ -9,7 +12,8 @@
     "vendor:stapes": "cp node_modules/stapes/stapes.min.js src/main/resources/static/vendor",
     "vendor:systemjs": "cp node_modules/systemjs/dist/system.js src/main/resources/static/vendor",
     "vendor:traceur": "cp node_modules/traceur/bin/traceur.js src/main/resources/static/vendor",
-    "vendor": "npm run vendor:handlebars && npm run vendor:jquery && npm run vendor:stapes && npm run vendor:systemjs && npm run vendor:traceur && npm run vendor:plugin-hbs"
+    "vendor": "npm run vendor:handlebars && npm run vendor:jquery && npm run vendor:stapes && npm run vendor:systemjs && npm run vendor:traceur && npm run vendor:plugin-hbs",
+    "watch:css": "nodemon --ext scss --exec npm run build:css --watch src/main/resources/static/css/sass"
   },
   "dependencies": {
     "handlebars": "^4.0.5",
@@ -19,5 +23,9 @@
     "systemjs": "^0.19.27",
     "systemjs-builder": "^0.15.16",
     "traceur": "0.0.108"
+  },
+  "devDependencies": {
+    "node-sass": "^3.7.0",
+    "nodemon": "^1.9.2"
   }
 }

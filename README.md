@@ -48,8 +48,18 @@ the `target` directory, but this will currently trigger a restart of the
 application (although the [documentation on automatic restarts](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-restart-exclude)
 suggests this shouldn't happen).
 
-### Adding front end (vendor) resources
+### Front end developing
 
+#### Vendor resources
 For now this means installing them through the `package.json` and NPM and creating
 a vendor script in `package.json` that after running `npm run vendor` copies the
-vendor script to `src/main/resources/static/vendor`.
+vendor script to `src/main/resources/static/vendor`. This script is automatically called
+through the front end Maven plugin during startup of the application.
+
+#### CSS
+We're using SASS to generate CSS. The CSS is automatically generated during
+startup of the application.
+
+There is a `npm run watch:css` script to regenerate the CSS on any changes.
+Be sure to follow the instructions of [DevTools and LiveReload](#DevTools and LiveReload)
+to refresh the CSS for the browser through your IDE.
