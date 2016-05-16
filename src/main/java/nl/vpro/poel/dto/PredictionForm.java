@@ -21,32 +21,32 @@ public class PredictionForm {
         return matchId;
     }
 
+    public void setMatchId(Long matchId) {
+        this.matchId = matchId;
+    }
+
     public int getHomeTeamGoals() {
         return homeTeamGoals;
+    }
+
+    public void setHomeTeamGoals(int homeTeamGoals) {
+        this.homeTeamGoals = homeTeamGoals;
     }
 
     public int getAwayTeamGoals() {
         return awayTeamGoals;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PredictionForm that = (PredictionForm) o;
-
-        if (homeTeamGoals != that.homeTeamGoals) return false;
-        if (awayTeamGoals != that.awayTeamGoals) return false;
-        return matchId.equals(that.matchId);
-
+    public void setAwayTeamGoals(int awayTeamGoals) {
+        this.awayTeamGoals = awayTeamGoals;
     }
 
     @Override
-    public int hashCode() {
-        int result = matchId.hashCode();
-        result = 31 * result + homeTeamGoals;
-        result = 31 * result + awayTeamGoals;
-        return result;
+    public String toString() {
+        return "PredictionForm{" +
+                "matchId=" + matchId +
+                ", homeTeamGoals=" + homeTeamGoals +
+                ", awayTeamGoals=" + awayTeamGoals +
+                '}';
     }
 }
