@@ -54,10 +54,10 @@
                     [/#list]
                 </div>
 
-                <div class="section">
-                    <h1>Unfinished</h1>
+                <div class="section collapsible-section open">
+                    <h1 class="collapsible-section-title">Unfinished</h1>
                     [#list unfinished]
-                        <ul>
+                        <ul class="collapsible-section-content">
                             [#items as unfinishedEntry]
                                 [#assign match = unfinishedEntry.match]
                                 [#assign prediction = unfinishedEntry.prediction ! ]
@@ -71,11 +71,11 @@
 
                 </div>
 
-                <div class="section">
+                <div class="section collapsible-section">
 
-                    <h1>Future</h1>
+                    <h1 class="collapsible-section-title">Future</h1>
                     [#list future]
-                        <ul>
+                        <ul class="collapsible-section-content">
                             [#items as futureEntry]
                                 [#assign match = futureEntry.match]
                                 [#assign prediction = futureEntry.prediction ! ]
@@ -97,7 +97,7 @@
 
             System.import( '/js/form/CollapseController.js' ).then( function ( collapseControllerModule ) {
 
-                new collapseControllerModule.default( document.querySelector( '.collapsible-section') );
+                new collapseControllerModule.default( document.querySelectorAll( '.collapsible-section') );
 
             } );
 

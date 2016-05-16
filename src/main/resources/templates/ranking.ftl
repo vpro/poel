@@ -4,34 +4,36 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='De Stand' /]
+    [@headUtil.head title='Poelstand' /]
+
     <body>
+
     [@navigationUtil.navigation title='Poelstand' back='/' /]
 
-<div class="grid grid-gutter">
-    Todo:<br/>
-    Standaard ranking van alle spelers met highlight van current user <br/>
-    Ranking van de afdelingenen / gebruikersgroepen<br/>
-</div>
 
 <section>
-    <div class="grid grid-gutter">
-        <h1 class="h5">Individueel Klassement</h1>
-    </div>
-    <div class="grid grid-gutter">
+    <div class="grid bg-darkgreen">
+
+        Todo:<br/>
+        Standaard ranking van alle spelers met highlight van current user <br/>
+        Ranking van de afdelingenen / gebruikersgroepen<br/>
+
+        <h1 class="h5 component-gutter">spelers</h1>
 
     [#list users]
         <table class="ranking">
-            <thead>
-            <tr>
-                <th>Naam</th>
-                <th>Score</th>
-            </tr>
-            </thead>
             <tbody>
             [#items as u]
-                <tr [#if u.getId() == user.getId() ]class="ranking__current-user"[/#if]>
-                    <td>${ u.displayName }</td><td>0</td>
+                <tr class="ranking__row ranking__row-${ u ? item_parity } [#if u.getId() == user.getId() ]ranking__current-user[/#if]">
+                    <td class="ranking__rank">${ u ? index + 1 }</td>
+                    <td class="ranking__name">
+                        <h2 class="h6 ranking__display-name">${ u.displayName }</h2>
+                        <span class="ranking__full-name">${ u.username }</span>
+                    </td>
+                    <td class="ranking__department">
+                        <span class="ranking__department-display-name">afdeling</span>
+                    </td>
+                    <td class="ranking__score">0</td>
                 </tr>
             [/#items]
             </tbody>
