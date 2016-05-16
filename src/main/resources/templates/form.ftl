@@ -2,6 +2,7 @@
 [#import "macros/navigation.ftl" as navigationUtil]
 
 [#import "macros/form.ftl" as formUtil]
+[#import "macros/layout.ftl" as layout]
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -38,8 +39,8 @@
                     [#----]
                 [#--[/#list]--]
 
-                <div class="section collapsible-section">
-                    <h1 class="collapsible-section-title">Finished</h1>
+
+                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='Finished' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
                     [#list finished]
                         <ul class="collapsible-section-content">
                             [#items as finishedEntry]
@@ -54,10 +55,10 @@
                     [#else]
                         Niks. :o(
                     [/#list]
-                </div>
+                [/@layout.sectionWithLayout]
 
-                <div class="section collapsible-section open">
-                    <h1 class="collapsible-section-title">Unfinished</h1>
+
+                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='unfinished' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
                     [#list unfinished]
                         <ul class="collapsible-section-content">
                             [#items as unfinishedEntry]
@@ -70,12 +71,10 @@
                     [#else]
                         Niks. :o(
                     [/#list]
+                [/@layout.sectionWithLayout]
 
-                </div>
 
-                <div class="section collapsible-section">
-
-                    <h1 class="collapsible-section-title">Future</h1>
+                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='future' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
                     [#list future]
                         <ul class="collapsible-section-content">
                             [#items as futureEntry]
@@ -88,7 +87,7 @@
                     [#else]
                         Niks. :o(
                     [/#list]
-                </div>
+                [/@layout.sectionWithLayout]
 
                 <button type="submit" value="Gaan!">Gaan!</button>
 
@@ -102,6 +101,7 @@
 
             System.import( '/js/form/CollapseController.js' ).then( function ( collapseControllerModule ) {
 
+console.log('controller');
                 new collapseControllerModule.default( document.querySelectorAll( '.collapsible-section') );
 
             } );
@@ -110,3 +110,4 @@
 
     </body>
 </html>
+
