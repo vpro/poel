@@ -29,7 +29,7 @@
                 Score tonen wanneer de outcome bekend is <br />
             </p>
 
-            <form action="#" class="form" method="POST" enctype="multipart/form-data">
+            <form action="#" class="form" method="POST">
 
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 
@@ -82,6 +82,11 @@
                                 [#assign prediction = futureEntry.prediction ! ]
                                 <h3>${match.homeTeam} - ${match.awayTeam}</h3>
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
+
+                                [#assign match = futureEntry.match]
+                                <input type="text" name="awayTeamGoals" value="11"/>
+                                <input type="text" name="homeTeamGoals" value="13"/>
+
                             [/#items]
                         </ul>
                     [#else]
