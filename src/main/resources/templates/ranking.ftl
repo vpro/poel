@@ -9,7 +9,6 @@
 [@navigationUtil.navigation /]
 
 <div class="grid">
-    <h1 class="h4">Ranking with the overall position for ${ user.displayName }</h1>
     Todo:<br/>
     Standaard ranking van alle spelers met highlight van current user <br/>
     Ranking van de afdelingenen / gebruikersgroepen<br/>
@@ -31,7 +30,7 @@
             </thead>
             <tbody>
             [#items as u]
-                <tr [#if u.equals( user ) ]class="ranking__current-user"[/#if]>
+                <tr [#if u.getId() == user.getId() ]class="ranking__current-user"[/#if]>
                     <td>${ u.displayName }</td><td>0</td>
                 </tr>
             [/#items]
