@@ -5,12 +5,25 @@ var CollapseController = Stapes.subclass( {
 
     constructor : function ( sections ) {
         this.$sections = $( sections );
-        this.bindViewHandlers();
+
+        $.each( this.$sections, function ( i, section ) {
+
+            this.bindClickHandlers( $( section ) );
+
+        }.bind( this ) );
+
     },
 
-    bindViewHandlers: function () {
+    bindClickHandlers: function ( $section ) {
 
-        //console.log( this.$sections );
+        var $title = $section.find( '.collapsible-section-title' );
+        var $content = $section.find( '.collapsible-section-content' );
+
+        $title.on( 'click', function () {
+
+            $section.toggleClass( 'open' );
+
+        } );
 
     }
 

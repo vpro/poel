@@ -11,7 +11,7 @@
         max-height: 0;
         overflow: hidden;
 
-        @include vendor-prefix(transition, max-height .3s ease-in-out);
+        @include vendor-prefix(transition, max-height .5s ease-in-out);
     }
 
     &.open {
