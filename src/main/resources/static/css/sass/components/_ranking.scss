@@ -24,7 +24,7 @@
   td {
     position: relative;
     vertical-align: baseline;
-    padding-top: 4px;
+    padding-top: 8px;
     padding-bottom: 4px;
   }
 }
@@ -38,7 +38,7 @@
 }
 
 .ranking__current-user {
-
+  background-color: $blue;
 }
 
 .ranking__rank {

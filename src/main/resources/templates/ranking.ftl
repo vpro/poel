@@ -24,10 +24,6 @@
             addContainerCss='bg-darkgreen'
             backGroundColor='darkgreen' ]
 
-        Todo:<br/>
-        Standaard ranking van alle spelers met highlight van current user <br/>
-        Ranking van de afdelingenen / gebruikersgroepen<br/>
-
             [#list users]
             <table class="ranking">
             <tbody>
