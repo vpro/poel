@@ -16,7 +16,8 @@ var CollapseController = Stapes.subclass( {
     bindClickHandlers: function ( $section ) {
 
         $section.on( 'click', function () {
-            $section.toggleClass( 'collapsible-section-opened' );
+
+            $section.toggleClass('collapsible-section-opened');
 
             if ( $section.hasClass('collapsible-section-opened') ) {
                 $section.removeClass( $section.data( 'closedcolor' ) );
@@ -24,9 +25,8 @@ var CollapseController = Stapes.subclass( {
             } else {
                 $section.removeClass( $section.data( 'opencolor' ) );
                 $section.addClass( $section.data( 'closedcolor' ) );
-
             }
-        } );
+        }.bind( this ) );
 
     }
 

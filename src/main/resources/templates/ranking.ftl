@@ -1,4 +1,6 @@
 [#import "macros/head.ftl" as headUtil]
+[#import "macros/footer.ftl" as footerUtil]
+
 [#import "macros/navigation.ftl" as navigationUtil]
 [#import "macros/layout.ftl" as layout]
 
@@ -50,6 +52,7 @@
         [/@layout.sectionWithLayout]
     </div>
 
+    [@footerUtil.footer /]
     </body>
 
 </html>

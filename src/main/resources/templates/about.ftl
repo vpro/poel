@@ -1,4 +1,5 @@
 [#import "macros/head.ftl" as headUtil]
+[#import "macros/footer.ftl" as footerUtil]
 [#import "macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
@@ -23,6 +24,6 @@
             </p>
         </div>
     </div>
-
+    [@footerUtil.footer /]
 </body>
 </html>
