@@ -27,6 +27,16 @@ public class MatchResult {
         this.awayTeamGoals = awayTeamGoals;
     }
 
+    public Winner getWinner() {
+        if (homeTeamGoals > awayTeamGoals) {
+            return Winner.HOME;
+        }
+        if (homeTeamGoals < awayTeamGoals) {
+            return Winner.AWAY;
+        }
+        return Winner.AWAY;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

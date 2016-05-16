@@ -23,6 +23,14 @@ public class Prediction {
     @Embedded
     private MatchResult matchResult;
 
+    private Prediction() {} // For Hibernate
+
+    public Prediction(User user, Match match, MatchResult matchResult) {
+        this.user = user;
+        this.match = match;
+        this.matchResult = matchResult;
+    }
+
     public Match getMatch() {
         return match;
     }
@@ -32,11 +40,22 @@ public class Prediction {
     }
 
     public Integer getScore() {
-        // TODO: Implement desired scoring algorithm
-        Optional<MatchResult> actualMatchResult = match.getMatchResult();
-        if (actualMatchResult.isPresent() && matchResult != null) {
-            return actualMatchResult.get().equals(matchResult) ? 3 : 0;
+        if (match.getMatchResult().isPresent() && matchResult != null) {
+            MatchResult actualMatchResult = match.getMatchResult().get();
+            Integer scoreForWinner = getScoreForWinner(actualMatchResult);
+            Integer scoreForResult = getScoreForResult(actualMatchResult);
+            return scoreForWinner + scoreForResult;
         }
         return 0;
+    }
+
+    private Integer getScoreForWinner(MatchResult actualResult) {
+        Winner actualWinner = actualResult.getWinner();
+        Winner predictedWinner = matchResult.getWinner();
+        return actualWinner.equals(predictedWinner) ? 2 : 0;
+    }
+
+    private Integer getScoreForResult(MatchResult actualResult) {
+        return actualResult.equals(matchResult) ? 1 : 0;
     }
 }
