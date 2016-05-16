@@ -15,17 +15,15 @@ var CollapseController = Stapes.subclass( {
 
     bindClickHandlers: function ( $section ) {
 
-        $section.on( 'click', function () {
+        var $sectionHeader = $section.find('.collapsible-section-header');
+        var $sectionFooter = $section.find('.collapsible-section-footer');
+
+        $.merge( $sectionFooter, $sectionHeader ).on( 'click', function () {
 
             $section.toggleClass('collapsible-section-opened');
+            $section.toggleClass( $section.data( 'closedcolor' ) );
+            $section.toggleClass( $section.data( 'opencolor' ) );
 
-            if ( $section.hasClass('collapsible-section-opened') ) {
-                $section.removeClass( $section.data( 'closedcolor' ) );
-                $section.addClass( $section.data( 'opencolor' ) );
-            } else {
-                $section.removeClass( $section.data( 'opencolor' ) );
-                $section.addClass( $section.data( 'closedcolor' ) );
-            }
         }.bind( this ) );
 
     }
