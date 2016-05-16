@@ -42,9 +42,9 @@ class FormController {
 
         Instant now = Instant.now();
 
-        List<MatchAndPrediction> finished = addUserPredictions(matchService.getAllCompletedMatches());
-        List<MatchAndPrediction> unfinished = addUserPredictions(matchService.getAllUnfinishedMatches(now);
-        List<MatchAndPrediction> future = addUserPredictions(matchService.getMatchesToPredict(now));
+        List<MatchAndPrediction> finished = addUserPredictions(matchService.getAllCompletedMatches(), user);
+        List<MatchAndPrediction> unfinished = addUserPredictions(matchService.getAllUnfinishedMatches(now), user);
+        List<MatchAndPrediction> future = addUserPredictions(matchService.getMatchesToPredict(now), user);
 
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
@@ -53,7 +53,7 @@ class FormController {
     }
 
     // TODO: Move this logic out to a service?
-    private List<MatchAndPrediction> addUserPredictions(List<Match> matches) {
+    private List<MatchAndPrediction> addUserPredictions(List<Match> matches, Optional<CurrentUser> user) {
         return matches.stream()
                 .map(match -> toMatchAndPrediction(user.get().getUser(), match))
                 .collect(Collectors.toList());
