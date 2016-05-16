@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <link rel="stylesheet" href="https://files.vpro.nl/frontend/bootstrap/dist/style.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+[#import "macros/head.ftl" as headUtil]
+
+[@headUtil.head /]
 <body>
 
 <div class="grid grid-gutter">
