@@ -42,23 +42,21 @@ class FormController {
 
         Instant now = Instant.now();
 
-        // TODO: Move this logic out to matchService?
-        List<MatchAndPrediction> finished = matchService.getAllCompletedMatches().stream()
-                .map(match -> toMatchAndPrediction(user.get().getUser(), match))
-                .collect(Collectors.toList());
-
-        List<MatchAndPrediction> unfinished = matchService.getAllUnfinishedMatches(now).stream()
-                .map(match -> toMatchAndPrediction(user.get().getUser(), match))
-                .collect(Collectors.toList());
-
-        List<MatchAndPrediction> future = matchService.getMatchesToPredict(now).stream()
-                .map(match -> toMatchAndPrediction(user.get().getUser(), match))
-                .collect(Collectors.toList());
+        List<MatchAndPrediction> finished = addUserPredictions(matchService.getAllCompletedMatches());
+        List<MatchAndPrediction> unfinished = addUserPredictions(matchService.getAllUnfinishedMatches(now);
+        List<MatchAndPrediction> future = addUserPredictions(matchService.getMatchesToPredict(now));
 
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
         model.addAttribute("future", future);
         return "form";
+    }
+
+    // TODO: Move this logic out to a service?
+    private List<MatchAndPrediction> addUserPredictions(List<Match> matches) {
+        return matches.stream()
+                .map(match -> toMatchAndPrediction(user.get().getUser(), match))
+                .collect(Collectors.toList());
     }
 
     private MatchAndPrediction toMatchAndPrediction(User user, Match match) {
