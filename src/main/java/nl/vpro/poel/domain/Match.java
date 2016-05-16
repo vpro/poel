@@ -43,6 +43,10 @@ public class Match {
         this.matchResult = matchResult;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getHomeTeam() {
         return homeTeam;
     }

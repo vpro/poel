@@ -28,7 +28,9 @@
                 Score tonen wanneer de outcome bekend is <br />
             </p>
 
-            <div class="form">
+            <form action="#" class="form" method="POST" enctype="multipart/form-data">
+
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 
                 [#--[#list deadlinePassed as matchData]--]
                     [#----]
@@ -87,7 +89,10 @@
                         Niks. :o(
                     [/#list]
                 </div>
-            </div>
+
+                <button type="submit" value="Gaan!">Gaan!</button>
+
+            </form>
         </div>
 
 
