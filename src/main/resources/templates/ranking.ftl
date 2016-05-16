@@ -18,7 +18,7 @@
         collapsible=true
         addCss='ranking-section'
         addContainerCss='bg-darkgreen'
-        backGroundColor='bg-darkgreen' ]
+        backGroundColor='darkgreen' ]
 
     Todo:<br/>
     Standaard ranking van alle spelers met highlight van current user <br/>
