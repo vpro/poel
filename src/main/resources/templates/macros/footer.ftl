@@ -3,7 +3,7 @@
 <script src="/systemjs.config.js"></script>
 <script>
 
-    System.import( '/js/form/CollapseController.js' ).then( function ( collapseControllerModule ) {
+    System.import( '/js/util/CollapseController.js' ).then( function ( collapseControllerModule ) {
 
         new collapseControllerModule.default( document.querySelectorAll( '.collapsible-section') );
 
