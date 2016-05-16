@@ -17,7 +17,7 @@
 
         <div class="grid">
 
-            <form action="#" class="form" method="POST">
+            <form action="#" class="form" method="POST" enctype="application/x-www-form-urlencoded">
 
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 
@@ -100,9 +100,9 @@
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
 
                                 [#assign match = futureEntry.match]
-                                <input type="hidden" name="matchId[${futureEntry?index}]" value="${match.id}"/>
-                                <input type="text" name="awayTeamGoals[${futureEntry?index}]" value="11"/>
-                                <input type="text" name="homeTeamGoals[${futureEntry?index}]" value="13"/>
+                                <input type="hidden" name="prediction${futureEntry?index}.matchId" value="${match.id}"/>
+                                <input type="text" name="prediction${futureEntry?index}.awayTeamGoals" value="11"/>
+                                <input type="text" name="prediction${futureEntry?index}.homeTeamGoals" value="13"/>
 
                             [/#items]
                         </ul>
