@@ -59,8 +59,4 @@ public class Match {
     public Instant getStart() {
         return start;
     }
-
-    public boolean canBePredictedAt(Instant instant) {
-        return instant != null && instant.isBefore(start);
-    }
 }

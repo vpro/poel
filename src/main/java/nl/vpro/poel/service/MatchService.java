@@ -17,5 +17,5 @@ public interface MatchService {
 
     List<Match> getMatchesToPredict(Instant instant);
 
-    List<Match> getInvalidMatches(Instant instant);
+    //List<Match> getInvalidMatches(Instant instant);
 }

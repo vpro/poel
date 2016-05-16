@@ -48,7 +48,6 @@ class FormController {
                 .collect(Collectors.toList());
 
         List<MatchAndPrediction> unfinished = matchService.getAllUnfinishedMatches().stream()
-                .filter(match -> !match.canBePredictedAt(now))
                 .map(match -> toMatchAndPrediction(user.get().getUser(), match))
                 .collect(Collectors.toList());
 

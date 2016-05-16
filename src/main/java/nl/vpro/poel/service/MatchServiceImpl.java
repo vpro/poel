@@ -27,10 +27,18 @@ public class MatchServiceImpl implements MatchService {
         // Initialize default matches
         if (matchRepository.count() == 0) {
             List<Match> defaultMatches = Arrays.asList(
+
+                    // Finished
+                    new Match("Zwitserland", "Frankrijk", Instant.now().minus(7, ChronoUnit.DAYS), new MatchResult(3, 1)),
+                    new Match("België", "Engeland", Instant.now().minus(7, ChronoUnit.DAYS), new MatchResult(5, 4)),
+
+                    // Unfinished
                     new Match("Frankrijk", "Duitsland", Instant.now()),
                     new Match("Spanje", "Engeland", Instant.now()),
+
+                    // Future
                     new Match("Portugal", "België", Instant.now().plus(7, ChronoUnit.DAYS)),
-                    new Match("België", "Engeland", Instant.now(), new MatchResult(5, 4))
+                    new Match("Engeland", "Oostenrijk", Instant.now().plus(7, ChronoUnit.DAYS))
             );
             matchRepository.save(defaultMatches);
         }
@@ -48,20 +56,18 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public List<Match> getAllUnfinishedMatches() {
-        return matchRepository.findByMatchResultIsNull();
+        return matchRepository.findByMatchResultIsNullAndStartIsBefore(Instant.now());
     }
 
     @Override
     public List<Match> getMatchesToPredict(Instant instant) {
-        return matchRepository.findAll().stream()
-                .filter(match -> match.getStart().isAfter(instant))
-                .collect(Collectors.toList());
+        return matchRepository.findByMatchResultIsNullAndStartIsAfter(Instant.now());
     }
 
-    @Override
-    public List<Match> getInvalidMatches(Instant instant) {
-        return matchRepository.findAll().stream()
-                .filter(match -> match.getStart().isBefore(instant))
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<Match> getInvalidMatches(Instant instant) {
+//        return matchRepository.findAll().stream()
+//                .filter(match -> match.getStart().isBefore(instant))
+//                .collect(Collectors.toList());
+//    }
 }
