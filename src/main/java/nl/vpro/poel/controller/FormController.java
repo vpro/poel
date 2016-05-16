@@ -35,10 +35,10 @@ class FormController {
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     String showForm(Principal principal, Model model) {
 
-        Optional<CurrentUser> user = UserUtil.getCurrentUser(principal);
-        if (!user.isPresent()) {
-            throw new RuntimeException("No user?!");
-        }
+        CurrentUser currentUser = UserUtil.getCurrentUser(principal)
+                .orElseThrow(() -> new RuntimeException("No user?!"));
+
+        User user = currentUser.getUser();
 
         Instant now = Instant.now();
 
@@ -53,9 +53,9 @@ class FormController {
     }
 
     // TODO: Move this logic out to a service?
-    private List<MatchAndPrediction> addUserPredictions(List<Match> matches, Optional<CurrentUser> user) {
+    private List<MatchAndPrediction> addUserPredictions(List<Match> matches, User user) {
         return matches.stream()
-                .map(match -> toMatchAndPrediction(user.get().getUser(), match))
+                .map(match -> toMatchAndPrediction(user, match))
                 .collect(Collectors.toList());
     }
 
