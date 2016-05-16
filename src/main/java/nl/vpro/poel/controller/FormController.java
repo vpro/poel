@@ -66,7 +66,7 @@ class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(@ModelAttribute PredictionForm form, BindingResult bindingResult) {
+    String handleFormSubmit(@ModelAttribute("prediction") PredictionForm form, BindingResult bindingResult) {
         System.out.println("Form: " + form);
         if (bindingResult.hasErrors()) {
             return "form";
