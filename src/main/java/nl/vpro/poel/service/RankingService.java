@@ -5,7 +5,7 @@ import nl.vpro.poel.domain.User;
 import java.util.Optional;
 import java.util.SortedMap;
 
-interface RankingService {
+public interface RankingService {
 
     Optional<Integer> getRank(User user);
 
