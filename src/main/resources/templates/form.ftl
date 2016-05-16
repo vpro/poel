@@ -84,9 +84,9 @@
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
 
                                 [#assign match = futureEntry.match]
-                                <input type="hidden" name="matchId" value="${match.id}"/>
-                                <input type="text" name="awayTeamGoals" value="11"/>
-                                <input type="text" name="homeTeamGoals" value="13"/>
+                                <input type="hidden" name="matchId[${futureEntry?index}]" value="${match.id}"/>
+                                <input type="text" name="awayTeamGoals[${futureEntry?index}]" value="11"/>
+                                <input type="text" name="homeTeamGoals[${futureEntry?index}]" value="13"/>
 
                             [/#items]
                         </ul>
