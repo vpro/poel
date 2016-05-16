@@ -1,0 +1,20 @@
+.about {
+  padding-top: 2*$gu;
+  padding-bottom: 2*$gu;
+}
+
+@include media-med-screen-width () {
+
+  .about {
+    padding-top: 3*$gu;
+    padding-bottom: 3*$gu;
+  }
+}
+
+.about__title {
+  margin-bottom: 2*$gu;
+}
+
+.about__text {
+  @include title-font();
+}
