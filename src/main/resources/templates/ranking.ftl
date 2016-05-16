@@ -9,11 +9,16 @@
 
     <body>
 
-    [@navigationUtil.navigation title='De Stand' back='/' /]
+    [@navigationUtil.navigation title='De Stand' back='/' bgColor='bg-darkgreen' /]
 
 
-    [@layout.sectionWithLayout content={"layout":"100"} title='spelers' collapsible=true backGroundColor='bg-green' ]
-
+    [@layout.sectionWithLayout
+        content={"layout":"100"}
+        title='spelers'
+        collapsible=true
+        addCss='ranking-section'
+        addContainerCss='bg-darkgreen'
+        backGroundColor='bg-darkgreen' ]
 
     Todo:<br/>
     Standaard ranking van alle spelers met highlight van current user <br/>
