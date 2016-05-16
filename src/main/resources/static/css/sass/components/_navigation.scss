@@ -69,7 +69,7 @@
 }
 
 .home-navigation-link{
-  height: calc(100vh / 3) ;
+  height: calc(100vh / 4) ;
   width: 100%;
 
   display: table;
@@ -88,5 +88,11 @@
 
   text-decoration: none;
 
+    line-height: 32px;
+}
+
+.home-navigation-link-subtitle{
+
+    opacity: 0.5;
 }
 /* end home */
