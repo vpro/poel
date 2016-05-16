@@ -7,7 +7,7 @@
     [@headUtil.head title='Error' /]
     <body class="bg-orange c-white">
 
-    [@navigationUtil.navigation /]
+    [@navigationUtil.navigation title='Error' back='/' /]
 
     <div class="grid grid-gutter">
 

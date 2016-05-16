@@ -6,7 +6,7 @@
 
     [@headUtil.head title='De Stand' /]
     <body>
-    [@navigationUtil.navigation /]
+    [@navigationUtil.navigation title='De Stand' back='/' /]
 
     <div class="grid">
             <h1 class="h4">Ranking with the overall position for ${ user.displayName }</h1>

@@ -8,7 +8,7 @@
 
     <body>
 
-    [@navigationUtil.navigation /]
+    [@navigationUtil.navigation title='Profiel' back='/' /]
 
         <div class="grid grid-gutter">
             <h1 class="h4">Hallo gebruiker ${user.displayName} (${user.username}/${user.role})!</h1>
@@ -22,9 +22,7 @@
 
                 Een gebruiker kan hier z'n voetbalnaam invullen en opslaan  <br />
                 Een gebruiker ziet hier eventueel in welke afdeling hij geplaatst is? <br />
-                Er is een link naar de admin pagina indien de gebruiker admin is  <br />
-                Er is een link naar het formulier  <br />
-                Er is een link naar de ranking  <br />
+
             </p>
 
         </div>
