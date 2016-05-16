@@ -8,12 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -26,19 +23,24 @@ public class MatchServiceImpl implements MatchService {
 
         // Initialize default matches
         if (matchRepository.count() == 0) {
+
+            Date now = new Date();
+            Date lastWeek = Date.from(now.toInstant().minus(7, ChronoUnit.DAYS));
+            Date nextWeek = Date.from(now.toInstant().plus(7, ChronoUnit.DAYS));
+
             List<Match> defaultMatches = Arrays.asList(
 
                     // Finished
-                    new Match("Zwitserland", "Frankrijk", Instant.now().minus(7, ChronoUnit.DAYS), new MatchResult(3, 1)),
-                    new Match("België", "Engeland", Instant.now().minus(7, ChronoUnit.DAYS), new MatchResult(5, 4)),
+                    new Match("Zwitserland", "Frankrijk", lastWeek, new MatchResult(3, 1)),
+                    new Match("België", "Engeland", lastWeek, new MatchResult(5, 4)),
 
                     // Unfinished
-                    new Match("Frankrijk", "Duitsland", Instant.now()),
-                    new Match("Spanje", "Engeland", Instant.now()),
+                    new Match("Frankrijk", "Duitsland", now),
+                    new Match("Spanje", "Engeland", now),
 
                     // Future
-                    new Match("Portugal", "België", Instant.now().plus(7, ChronoUnit.DAYS)),
-                    new Match("Engeland", "Oostenrijk", Instant.now().plus(7, ChronoUnit.DAYS))
+                    new Match("Portugal", "België", nextWeek),
+                    new Match("Engeland", "Oostenrijk", nextWeek)
             );
             matchRepository.save(defaultMatches);
         }
@@ -55,19 +57,12 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public List<Match> getAllUnfinishedMatches() {
-        return matchRepository.findByMatchResultIsNullAndStartIsBefore(Instant.now());
+    public List<Match> getAllUnfinishedMatches(Instant instant) {
+        return matchRepository.findByMatchResultIsNullAndStartIsBefore(Date.from(instant));
     }
 
     @Override
     public List<Match> getMatchesToPredict(Instant instant) {
-        return matchRepository.findByMatchResultIsNullAndStartIsAfter(Instant.now());
+        return matchRepository.findByMatchResultIsNullAndStartIsAfter(Date.from(instant));
     }
-
-//    @Override
-//    public List<Match> getInvalidMatches(Instant instant) {
-//        return matchRepository.findAll().stream()
-//                .filter(match -> match.getStart().isBefore(instant))
-//                .collect(Collectors.toList());
-//    }
 }

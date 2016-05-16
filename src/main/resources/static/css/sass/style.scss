@@ -1,17 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-
-  /* Border-box FTW! */
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-
-  // THANKS!
-  // http://stackoverflow.com/questions/8889490/ios-safari-prevent-input-field-from-highlighting-when-selected
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
+@import 'generic/styleguide';
+@import 'components/ranking';
 
 
 /* start navigation */
