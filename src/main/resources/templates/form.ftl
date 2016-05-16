@@ -13,7 +13,7 @@
 
     <body>
 
-    [@navigationUtil.navigation title='Poel invullen' back='/' /]
+    [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
         <div class="grid">
 
@@ -114,23 +114,6 @@
                 <button type="submit" value="Gaan!">Gaan!</button>
 
             </form>
-
-
-            <h1 class="h4">Form for: ${ user.displayName }</h1>
-
-            <ul>
-                <li><a href="/user">Profiel</a></li>
-            </ul>
-
-            <p>
-                Todo:  <br />
-                Matches tonen <br />
-                Wel/niet ingevulde prediction tonen <br />
-                Disabled status wanneer uiterste invuldatum bereikt is <br />
-                Outcome tonen indien aanwezig <br />
-                Score tonen wanneer de outcome bekend is <br />
-            </p>
-
 
         </div>
 

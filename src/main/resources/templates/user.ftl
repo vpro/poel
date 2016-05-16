@@ -12,7 +12,7 @@
 
     [@navigationUtil.navigation title='Profiel' back='/' /]
 
-        <div class="grid grid-gutter">
+        <div class="grid grid-gutter bg-white">
             <h1 class="h4">Hallo gebruiker ${user.displayName} (${user.username}/${user.role})!</h1>
 
             <ul>
