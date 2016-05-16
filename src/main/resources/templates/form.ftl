@@ -13,21 +13,7 @@
 
     [@navigationUtil.navigation title='Poel invullen' back='/' /]
 
-        <div class="grid grid-gutter bg-white">
-            <h1 class="h4">Form for: ${ user.displayName }</h1>
-
-            <ul>
-                <li><a href="/user">Profiel</a></li>
-            </ul>
-
-            <p>
-                Todo:  <br />
-                Matches tonen <br />
-                Wel/niet ingevulde prediction tonen <br />
-                Disabled status wanneer uiterste invuldatum bereikt is <br />
-                Outcome tonen indien aanwezig <br />
-                Score tonen wanneer de outcome bekend is <br />
-            </p>
+        <div class="grid">
 
             <form action="#" class="form" method="POST">
 
@@ -40,7 +26,17 @@
                 [#--[/#list]--]
 
 
-                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='Finished' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
+                [@layout.sectionWithLayout
+                    content={'layout': '100'}
+                    collapsible=true
+                    title='Finished'
+                    backGroundColor="greybat"
+                    addContainerCss=''
+                    closeColorClass='bg-greybat'
+                    openColorClass='bg-green'
+                    opened=true
+                    ]
+
                     [#list finished]
                         <ul class="collapsible-section-content">
                             [#items as finishedEntry]
@@ -58,7 +54,16 @@
                 [/@layout.sectionWithLayout]
 
 
-                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='unfinished' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
+                [@layout.sectionWithLayout
+                    content={'layout': '100'}
+                    collapsible=true
+                    title='unfinished'
+                    backGroundColor="greybat"
+                    addContainerCss=''
+                    closeColorClass='bg-greybat'
+                    openColorClass='bg-green'
+                ]
+
                     [#list unfinished]
                         <ul class="collapsible-section-content">
                             [#items as unfinishedEntry]
@@ -74,7 +79,16 @@
                 [/@layout.sectionWithLayout]
 
 
-                [@layout.sectionWithLayout content={'layout': '100'} collapsible=true title='future' backGroundColor="greymouse" addContainerCss="bg-greymouse"]
+                [@layout.sectionWithLayout
+                    content={'layout': '100'}
+                    collapsible=true
+                    title='future'
+                    backGroundColor="greybat"
+                    addContainerCss=''
+                    closeColorClass='bg-greybat'
+                    openColorClass='bg-green'
+                ]
+
                     [#list future]
                         <ul class="collapsible-section-content">
                             [#items as futureEntry]
@@ -98,6 +112,24 @@
                 <button type="submit" value="Gaan!">Gaan!</button>
 
             </form>
+
+
+            <h1 class="h4">Form for: ${ user.displayName }</h1>
+
+            <ul>
+                <li><a href="/user">Profiel</a></li>
+            </ul>
+
+            <p>
+                Todo:  <br />
+                Matches tonen <br />
+                Wel/niet ingevulde prediction tonen <br />
+                Disabled status wanneer uiterste invuldatum bereikt is <br />
+                Outcome tonen indien aanwezig <br />
+                Score tonen wanneer de outcome bekend is <br />
+            </p>
+
+
         </div>
 
 

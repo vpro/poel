@@ -11,11 +11,22 @@
 [#assign FIFTY = '50']
 [#assign HUNDRED = '100']
 
-[#macro sectionWithLayout content title='' addCss='' addContainerCss='' titleFollowsTheme=false collapsible=false backGroundColor=""]
+[#macro sectionWithLayout
+    content
+    title=''
+    addCss=''
+    addContainerCss=''
+    titleFollowsTheme=false
+    collapsible=false
+    backGroundColor=""
+    openColorClass=''
+    closeColorClass=''
+    opened=false ]
 
     [#local layout = content.layout ! TWO_COLUMNS]
 
-<section class="section-with-layout ${ addCss } [#if collapsible]collapsible-section[/#if]">
+<section class="section-with-layout ${ addCss } [#if collapsible]collapsible-section[/#if] [#if opened]collapsible-section-opened ${ openColorClass} [#else] ${ closeColorClass} [/#if]"
+        data-opencolor="${openColorClass}" data-closedcolor="${closeColorClass}">
 
     [#if collapsible]
         <div class="collapsible-section-header"></div>
