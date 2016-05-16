@@ -12,7 +12,7 @@
 
     [@navigationUtil.navigation title='Het formulier' back='/' /]
 
-        <div class="grid grid-gutter">
+        <div class="grid grid-gutter bg-white">
             <h1 class="h4">Form for: ${ user.displayName }</h1>
 
             <ul>
