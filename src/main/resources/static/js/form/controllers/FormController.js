@@ -15,15 +15,15 @@ import formTextTemplate from '../views/form-text.hbs!';
 HandlebarsRuntime.registerPartial( 'entry', formEntryTemplate );
 HandlebarsRuntime.registerPartial( 'text', formTextTemplate );
 
-HandlebarsRuntime.registerHelper('formatDate', function( date, format ) {
+HandlebarsRuntime.registerHelper('formatDate', function ( date, format ) {
     return date.toLocaleString( format );
 });
 
-HandlebarsRuntime.registerHelper('formatResult', function( result ) {
+HandlebarsRuntime.registerHelper('formatResult', function ( result ) {
     return result.join(' - ');
 });
 
-HandlebarsRuntime.registerHelper('predictionEntry', function( prediction, id, index ) {
+HandlebarsRuntime.registerHelper('predictionEntry', function ( prediction, id, index ) {
     return ''.concat(
             '<input type="text" class="prediction" value="',
             ( ( prediction[ index ] !== -1 ) ? prediction[ index ] : '' ),

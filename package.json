@@ -5,6 +5,7 @@
     "build:css": "node-sass src/main/resources/static/css/sass/style.scss --output target/classes/static/css",
     "build:prod": "npm run build:css",
     "postinstall": "npm run vendor",
+    "lint": "jscs src/main/resources/static/js --esnext --config=.jscsrc",
     "vendor:handlebars": "cp node_modules/handlebars/dist/handlebars.min.js src/main/resources/static/vendor",
     "postvendor:handlebars": "cp node_modules/handlebars/dist/handlebars.runtime.min.js src/main/resources/static/vendor",
     "vendor:jquery": "cp node_modules/jquery/dist/jquery.min.js src/main/resources/static/vendor",
@@ -13,6 +14,8 @@
     "vendor:systemjs": "cp node_modules/systemjs/dist/system.js src/main/resources/static/vendor",
     "vendor:traceur": "cp node_modules/traceur/bin/traceur.js src/main/resources/static/vendor",
     "vendor": "npm run vendor:handlebars && npm run vendor:jquery && npm run vendor:stapes && npm run vendor:systemjs && npm run vendor:traceur && npm run vendor:plugin-hbs",
+    "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
+    "watch:js": "nodemon --ext js --exec npm run lint",
     "watch:css": "nodemon --ext scss --exec npm run build:css --watch src/main/resources/static/css/sass"
   },
   "dependencies": {
@@ -25,7 +28,9 @@
     "traceur": "0.0.108"
   },
   "devDependencies": {
+    "jscs": "^3.0.3",
     "node-sass": "^3.7.0",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "parallelshell": "^2.0.0"
   }
 }
