@@ -259,6 +259,7 @@
   border-bottom: 1px solid #fff;
   opacity: 1;
 
+  margin-left: -21px; // cos(45) * width || height when squared
   @include vendor-prefix( transform, rotate(45deg) translateY(-29px) translateX(8px) );
 
   &.no-bg {
