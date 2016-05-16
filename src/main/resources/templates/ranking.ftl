@@ -12,8 +12,13 @@
     [@navigationUtil.navigation title='Poelstand' back='/' /]
 
 
-    [@layout.sectionWithLayout content={"layout":"100"} title='spelers' collapsible=true backGroundColor='bg-green' ]
-
+    [@layout.sectionWithLayout
+        content={"layout":"100"}
+        title='spelers'
+        collapsible=true
+        addCss='ranking-section'
+        addContainerCss='bg-darkgreen'
+        backGroundColor='darkgreen' ]
 
     Todo:<br/>
     Standaard ranking van alle spelers met highlight van current user <br/>

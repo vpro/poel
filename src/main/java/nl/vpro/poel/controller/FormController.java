@@ -3,6 +3,7 @@ package nl.vpro.poel.controller;
 import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.*;
 import nl.vpro.poel.dto.MatchAndPrediction;
+import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.PredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(@ModelAttribute("form") String form, BindingResult bindingResult) {
+    String handleFormSubmit(@ModelAttribute PredictionForm form, BindingResult bindingResult) {
         System.out.println("Form: " + form);
         if (bindingResult.hasErrors()) {
             return "form";
