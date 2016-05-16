@@ -6,7 +6,7 @@
 
     [@headUtil.head title='De Stand' /]
     <body>
-    [@navigationUtil.navigation title='De Stand' back='/' /]
+    [@navigationUtil.navigation title='Poelstand' back='/' /]
 
 <div class="grid grid-gutter">
     Todo:<br/>

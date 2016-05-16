@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='Het formulier' /]
+    [@headUtil.head title='Poel invullen' /]
 
     <body>
 
-    [@navigationUtil.navigation title='Het formulier' back='/' /]
+    [@navigationUtil.navigation title='Poel invullen' back='/' /]
 
         <div class="grid grid-gutter bg-white">
             <h1 class="h4">Form for: ${ user.displayName }</h1>

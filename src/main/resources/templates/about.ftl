@@ -8,7 +8,7 @@
 
 <body>
 
-    [@navigationUtil.navigation title='het spel' back='/' /]
+    [@navigationUtil.navigation title='poelspel' back='/' /]
 
     <div class="grid grid-gutter bg-white">
         <h1 class="h4">About</h1>
