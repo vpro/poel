@@ -107,7 +107,6 @@
 
             System.import( '/js/form/CollapseController.js' ).then( function ( collapseControllerModule ) {
 
-console.log('controller');
                 new collapseControllerModule.default( document.querySelectorAll( '.collapsible-section') );
 
             } );
