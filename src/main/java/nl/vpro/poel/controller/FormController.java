@@ -8,6 +8,8 @@ import nl.vpro.poel.service.PredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -65,12 +67,12 @@ class FormController {
         return new MatchAndPrediction(match, prediction.orElse(null));
     }
 
-//    @RequestMapping(value = "/form", method = RequestMethod.POST)
-//    String handleFormSubmit(@Valid @ModelAttribute("form") Form form, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "form";
-//        }
-//        // TODO
-//        return "redirect:/";
-//    }
+    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    String handleFormSubmit(@ModelAttribute("form") List<Prediction> form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form";
+        }
+        // TODO
+        return "redirect:/";
+    }
 }

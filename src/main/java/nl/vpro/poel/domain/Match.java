@@ -15,48 +15,36 @@ public class Match {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @ManyToOne(optional = false)
-    private Team homeTeam;
+    @Column(nullable = false)
+    private String homeTeam;
 
-    @ManyToOne(optional = false)
-    private Team awayTeam;
+    @Column(nullable = false)
+    private String awayTeam;
+
+    @Column(nullable = false)
+    private Instant start = null;
 
     @Embedded
     private MatchResult matchResult = null;
 
-    @Column
-    private Instant invalidAfter = null;
-
-    @Column
-    private Instant invalidBefore = null;
-
     private Match() {} // For Hibernate
 
-    public Match(Team homeTeam, Team awayTeam) {
-        this(homeTeam, awayTeam, null);
+    public Match(String homeTeam, String awayTeam, Instant start) {
+        this(homeTeam, awayTeam, start, null);
     }
 
-    public Match(Team homeTeam, Team awayTeam, MatchResult matchResult) {
-        this(homeTeam, awayTeam, matchResult, null, null);
-    }
-
-    public Match(Team homeTeam, Team awayTeam, Instant invalidAfter, Instant invalidBefore) {
-        this(homeTeam, awayTeam, null, invalidAfter, invalidBefore);
-    }
-
-    public Match(Team homeTeam, Team awayTeam, MatchResult matchResult, Instant invalidAfter, Instant invalidBefore) {
+    public Match(String homeTeam, String awayTeam, Instant start, MatchResult matchResult) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.start = start;
         this.matchResult = matchResult;
-        this.invalidAfter = invalidAfter;
-        this.invalidBefore = invalidBefore;
     }
 
-    public Team getHomeTeam() {
+    public String getHomeTeam() {
         return homeTeam;
     }
 
-    public Team getAwayTeam() {
+    public String getAwayTeam() {
         return awayTeam;
     }
 
@@ -68,15 +56,11 @@ public class Match {
         return matchResult;
     }
 
+    public Instant getStart() {
+        return start;
+    }
+
     public boolean canBePredictedAt(Instant instant) {
-        return instant != null && checkAfter(instant) && checkBefore(instant);
-    }
-
-    private boolean checkAfter(Instant instant) {
-        return invalidAfter == null || instant.isBefore(invalidAfter);
-    }
-
-    private boolean checkBefore(Instant instant) {
-        return invalidBefore == null || instant.isAfter(invalidBefore);
+        return instant != null && instant.isBefore(start);
     }
 }

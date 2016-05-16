@@ -34,7 +34,7 @@
                 [#items as finishedEntry]
                     [#assign match = finishedEntry.match]
                     [#assign prediction = finishedEntry.prediction ! ]
-                    <h3>${match.homeTeam.name} - ${match.awayTeam.name}</h3>
+                    <h3>${match.homeTeam} - ${match.awayTeam}</h3>
                     <li>Eindstand: ${match.matchResultOrNull.toString()}
                     <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
                     <li>Score: [#if prediction?has_content]${prediction.score}[#else]0[/#if]</li>
@@ -50,7 +50,7 @@
                 [#items as unfinishedEntry]
                     [#assign match = unfinishedEntry.match]
                     [#assign prediction = unfinishedEntry.prediction ! ]
-                    <h3>${match.homeTeam.name} - ${match.awayTeam.name}</h3>
+                    <h3>${match.homeTeam} - ${match.awayTeam}</h3>
                     <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
                 [/#items]
             </ul>
@@ -64,7 +64,7 @@
                 [#items as futureEntry]
                     [#assign match = futureEntry.match]
                     [#assign prediction = futureEntry.prediction ! ]
-                    <h3>${match.homeTeam.name} - ${match.awayTeam.name}</h3>
+                    <h3>${match.homeTeam} - ${match.awayTeam}</h3>
                     <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
                 [/#items]
             </ul>
