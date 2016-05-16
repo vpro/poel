@@ -8,7 +8,6 @@
         </span>
 
         <a class="top-navigation-back" href="${ back }"> <i class="glyph glyph-navigation c-white"></i></a>
-        <!--<a class="top-navigation-menu" href=""> <i class="glyph glyph-navigation c-white"></i></a>-->
     </nav>
 </div>
 [/#macro]
