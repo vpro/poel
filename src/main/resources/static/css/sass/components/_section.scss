@@ -1,0 +1,345 @@
+.section {
+  @extend .clearfix;
+  padding-top: 2*$gu;
+}
+
+@include media-med-screen-width() {
+  .section {
+    padding-top: 3*$gu;
+  }
+}
+
+
+/* @start section-with-shade */
+.section-with-shade {
+  border-bottom: $gu solid $default-color-support-shades;
+}
+.section-with-shade-spacer {
+  border-bottom-color: transparent;
+}
+.section-shade {
+  display: none;
+}
+
+.section-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.section-container:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+
+.section-title {
+  margin-left: $gu;
+  margin-right: $gu;
+  margin-bottom: $gu;
+
+  @include component-heading-primary-colored;
+}
+
+@include media-med-screen-width() {
+  .section-title {
+    margin-left:  1.5 * $gu;
+    margin-right: 1.5 * $gu;
+  }
+}
+
+@include media-max-screen-width {
+
+  .section-with-shade {
+    position: relative;
+    border-bottom: 0;
+    margin-bottom: 3 * $gu;
+  }
+
+  .section-shade {
+    display: block;
+    position: absolute;
+    bottom: - 67 * $gu;
+    right: 0px;
+    left: 0px;
+    height: 67 * $gu;
+    width: 100%;
+    overflow: hidden;
+
+    &.section-shade-bar {
+      background-color: $default-color-support-shades;
+    }
+
+    .section-with-shade-spacer &.section-shade-bar {
+      background-color: transparent;
+    }
+  }
+
+  .section-shade-angle {
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    border-right: 2 * 67 * $gu solid transparent;
+    border-top: 67 * $gu solid $default-color-support-shades;
+  }
+
+}
+
+.home-footer .section-shade {
+  display: block;
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  height: 67 * $gu;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-footer .section-shade-angle {
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  border-right: 2 * 67 * $gu solid transparent;
+  border-top: 67 * $gu solid $default-color-support-shades;
+}
+/* @end section-with-shade */
+
+
+
+/* @start section with layout */
+.section-with-layout {
+  overflow: hidden;
+}
+
+.section-with-layout .grid {
+  position: relative;
+  z-index: 40;
+}
+
+.section-with-layout.component-theme .grid {
+  background-color: transparent;
+}
+
+/* section */
+.section-with-layout.component-theme.theme-white .grid {
+  background-color: #fff;
+}
+
+.section-with-layout-content {
+
+  position: relative;
+
+  padding: 8px;
+  margin: 0;
+
+}
+
+.section-with-layout-content:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+
+@include media-med-screen-width {
+  .section-with-layout-content {
+    padding: 12px;
+  }
+}
+
+.section-with-layout-title {
+
+  margin-bottom: $gu;
+
+  @include component-heading-primary-colored;
+}
+
+.section-with-layout-content .sliding-teaser-group,
+.section-with-layout-content .magnified-sliding-teaser-group {
+  margin-right: -1.5*$gu;
+  margin-left: -1.5*$gu;
+}
+
+
+@include media-med-screen-width() {
+  .section-with-layout-content .sliding-teaser-group,
+  .section-with-layout-content .magnified-sliding-teaser-group {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.section-with-layout-content-stretch {
+  margin: 0 -8px;
+}
+
+@include media-med-screen-width {
+
+  .section-with-layout-content-stretch {
+    margin: 0 -12px;
+  }
+}
+
+.section-with-layout-content-padded {
+  margin: 0 8px;
+}
+
+
+@include media-med-screen-width {
+  .section-with-layout-content-padded {
+    margin: 0 12px;
+  }
+
+}
+
+/* @end section with layout */
+
+
+
+/* @start collapsible-section */
+/* film-finder uses these classes too */
+
+.collapsible-section {
+
+  position: relative;
+  max-height: 64px;
+  overflow: visible;
+
+  @include vendor-prefix( transition, max-height 0.45s );
+
+  .collapsible-section-body {
+    max-height: 64px;
+    overflow: hidden;
+    padding-bottom: 0;
+    @include vendor-prefix( transition, padding-bottom 0.45s, max-height 0.45s );
+  }
+
+  &.collapsible-section-opened {
+
+    max-height: 2000px;
+
+    .collapsible-section-with-layout-title {
+      white-space: normal;
+      overflow: visible;
+      line-height: 24px;
+    }
+
+    .full-width-collapsible-section-with-layout-title {
+      padding-top: 20px;
+    }
+
+    .collapsible-section-body {
+      max-height: 20000px;
+      overflow: visible;
+      padding-bottom: 88px;
+
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+    }
+
+    .collapsible-section-footer {
+      bottom: 0;
+      cursor: pointer;
+
+      .glyph-down {
+        @include vendor-prefix( transform, rotate(180deg) );
+        top: -12px;
+      }
+    }
+
+    .collapsible-section-footer-lip {
+      opacity: 0;
+    }
+  }
+
+}
+
+.collapsible-section-with-layout-title {
+  margin-bottom: 16px;
+  line-height: 36px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  @include vendor-prefix( transition, padding-top 0.45s );
+}
+
+.full-width-collapsible-section-with-layout-title {
+  height: 64px;
+  line-height: 64px;
+}
+
+@include media-med-screen-width {
+
+  .collapsible-section-with-layout-title {
+    line-height: 24px;
+  }
+
+  .full-width-collapsible-section-with-layout-title {
+    line-height: 64px;
+  }
+}
+
+.collapsible-section-header {
+  position: absolute;
+  width: 100%;
+  height: 64px;
+  top: 0;
+  cursor: pointer;
+  z-index: 42;
+}
+
+.collapsible-section-body {
+  // border-bottom-color is handled by the .theme-border class
+  border-bottom: 1px solid #fff;
+}
+
+.collapsible-section-footer {
+  position: absolute;
+  bottom: -22px;
+
+  width: 100%;
+  height: 22px;
+  z-index: 108;
+  text-align: center;
+  color: #fff;
+
+  .glyph-down {
+    position: absolute;
+    display: inline-block;
+    color: #fff;
+    top: -24px;
+    cursor: pointer;
+  }
+
+}
+
+.collapsible-section-footer-lip {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  cursor: pointer;
+
+  // border-bottom-color is handled by the .theme-border class
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  opacity: 1;
+
+  @include vendor-prefix( transform, rotate(45deg) translateY(-29px) translateX(8px) );
+
+  &.no-bg {
+    background-color: $default-color-background;
+  }
+}
+
+/* @end collapsible-section */

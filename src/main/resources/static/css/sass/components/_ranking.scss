@@ -1,13 +1,34 @@
 .ranking {
   border-spacing: 0;
   border-collapse: collapse;
+  width: 100%;
+  padding: 0 $gu;
 
   td {
+    vertical-align: top;
     padding: 4px;
   }
 }
 
-.ranking__current-user {
-  background-color: $orange;
+@include media-med-screen-width () {
+
+  .ranking {
+    padding: 0 1.5 * $gu;
+  }
+}
+
+.ranking__row {
   color: $white;
+}
+
+.ranking__row-odd {
+  background-color: rgba( $green, 0.5 );
+}
+
+.ranking__current-user {
+
+}
+
+.ranking__department-display-name {
+  color: $lightgreen;
 }

@@ -1,17 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-
-  /* Border-box FTW! */
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-
-  // THANKS!
-  // http://stackoverflow.com/questions/8889490/ios-safari-prevent-input-field-from-highlighting-when-selected
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 // Colors
 $white: #fff !default;
 $black: #000 !default;
@@ -76,6 +62,32 @@ $med-screen-width: 768px !default;
 $max-screen-width: 1072px !default;
 $xl-screen-width: 1200px !default;
 
+
+// Font Families, are rendered through mixins, defined in generic/mixins
+$title-font: 'simplistic_sans', 'SimplisticSans', Arial,Helvetica,Sans,FreeSans,'Nimbus Sans L', Garuda,sans-serif !default;
+$data-font: 'vpro_vesta_big', Verdana, Arial, Helvetica, Sans, FreeSans, 'Nimbus Sans L', Garuda, sans-serif !default;
+$search-font: 'vpro_vesta_big', Verdana, Arial, Helvetica, Sans, FreeSans, 'Nimbus Sans L', Garuda, sans-serif !default;
+$default-font: 'vpro_vesta', Verdana, Arial, Helvetica, Sans, FreeSans, 'Nimbus Sans L', Garuda, sans-serif !default;
+
+$verdana-font: Verdana, Arial, sans-serif;
+$monospace-font: Courier New, Courier, monospace !default;
+
+
+// Typography Settings
+$title-font-force-case: lowercase !default; // uppercase/lowercase to force that casing
+// the title font is always lowercased in VPRO.nl
+$title-font-letter-spacing: false !default; // value or false
+
+$data-font-force-case: lowercase !default; // the data font is always lowercase; in the VPRO data font
+// the font glyphs themselves are already uppercased
+
+$search-font-force-case: lowercase !default; // the data font is always lowercase; in the VPRO data font
+// the font glyphs themselves are already uppercased
+
+$headings-force-weight: bold !default; // forces a font weight on h1-h4, @see styleguide
+$headings-force-case: none !default; // set to uppercase/lowercase to force that casing
+
+/*******************************/
 
 body{
     background-color: $greygrizzly;
