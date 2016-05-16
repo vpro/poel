@@ -7,11 +7,9 @@
     [@headUtil.head title='Admin'/]
     <body>
 
-    [@navigationUtil.navigation /]
+    [@navigationUtil.navigation title='Admin' back='user' /]
 
     <div class="grid grid-gutter">
-
-
 
             <h1 class="h4">Form for: ${ user.displayName }</h1>
 

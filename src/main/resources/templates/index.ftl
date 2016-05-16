@@ -6,9 +6,9 @@
 
     [@headUtil.head title='hello' /]
 
-    <body>
+    <body class="home">
 
-        <div class="grid grid-gutter">
+        <!--<div class="grid grid-gutter">-->
 
             <!--<p>-->
                 <!--Todo:  <br />-->
@@ -16,13 +16,19 @@
                 <!--Korte uitleg  <br />-->
             <!--</p>-->
 
-            <ul>
-                <li><a href="/about">Het Spel</a></li>
-                <li><a href="/form">Spelen</a></li>
-                <li><a href="/ranking">De Spelers</a></li>
-            </ul>
+            <div class="home-navigation">
+                <a href="/about" class="home-navigation-link bg-green">
+                    <span class='h2 c-white home-navigation-link-title' href="/about">Het Spel</span>
+                </a>
+                <a href="/form" class="home-navigation-link bg-darkgreen">
+                    <span class='h2 c-white home-navigation-link-title' >Spelen</span>
+                </a>
+                <a href="/ranking" class="home-navigation-link bg-lightgreen">
+                    <span class='h2 c-white home-navigation-link-title' >De Spelers</span>
+                </a>
+            </div>
 
-        </div>
+        <!--</div>-->
 
     </body>
 </html>

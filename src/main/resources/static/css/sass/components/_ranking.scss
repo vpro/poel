@@ -1,0 +1,13 @@
+.ranking {
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  td {
+    padding: 4px;
+  }
+}
+
+.ranking__current-user {
+  background-color: $orange;
+  color: $white;
+}
