@@ -5,7 +5,7 @@
     "build:css": "node-sass src/main/resources/static/css/sass/style.scss --output target/classes/static/css",
     "build:prod": "npm run build:css",
     "postinstall": "npm run vendor",
-    "lint": "jscs src/main/resources/static/js --esnext --fix --config=.jscsrc",
+    "lint": "jscs src/main/resources/static/js --esnext --config=.jscsrc",
     "vendor:handlebars": "cp node_modules/handlebars/dist/handlebars.min.js src/main/resources/static/vendor",
     "postvendor:handlebars": "cp node_modules/handlebars/dist/handlebars.runtime.min.js src/main/resources/static/vendor",
     "vendor:jquery": "cp node_modules/jquery/dist/jquery.min.js src/main/resources/static/vendor",

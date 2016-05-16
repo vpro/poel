@@ -8,17 +8,17 @@
     <body>
     [@navigationUtil.navigation title='De Stand' back='/' /]
 
-<div class="grid">
+<div class="grid grid-gutter">
     Todo:<br/>
     Standaard ranking van alle spelers met highlight van current user <br/>
     Ranking van de afdelingenen / gebruikersgroepen<br/>
 </div>
 
 <section>
-    <div class="grid">
+    <div class="grid grid-gutter">
         <h1 class="h5">Individueel Klassement</h1>
     </div>
-    <div class="grid">
+    <div class="grid grid-gutter">
 
     [#list users]
         <table class="ranking">
