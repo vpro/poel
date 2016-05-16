@@ -19,6 +19,7 @@
             content={"layout":"100"}
             title='spelers'
             collapsible=true
+            opened=true
             addCss='ranking-section'
             addContainerCss='bg-darkgreen'
             backGroundColor='darkgreen' ]
