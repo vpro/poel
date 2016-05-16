@@ -10,17 +10,6 @@
 }
 
 
-/* @start section-with-shade */
-.section-with-shade {
-  border-bottom: $gu solid $default-color-support-shades;
-}
-.section-with-shade-spacer {
-  border-bottom-color: transparent;
-}
-.section-shade {
-  display: none;
-}
-
 .section-container {
   display: inline-block;
   width: 100%;
@@ -38,77 +27,14 @@
   margin-left: $gu;
   margin-right: $gu;
   margin-bottom: $gu;
-
-  @include component-heading-primary-colored;
 }
 
 @include media-med-screen-width() {
   .section-title {
-    margin-left:  1.5 * $gu;
+    margin-left: 1.5 * $gu;
     margin-right: 1.5 * $gu;
   }
 }
-
-@include media-max-screen-width {
-
-  .section-with-shade {
-    position: relative;
-    border-bottom: 0;
-    margin-bottom: 3 * $gu;
-  }
-
-  .section-shade {
-    display: block;
-    position: absolute;
-    bottom: - 67 * $gu;
-    right: 0px;
-    left: 0px;
-    height: 67 * $gu;
-    width: 100%;
-    overflow: hidden;
-
-    &.section-shade-bar {
-      background-color: $default-color-support-shades;
-    }
-
-    .section-with-shade-spacer &.section-shade-bar {
-      background-color: transparent;
-    }
-  }
-
-  .section-shade-angle {
-    display: block;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 0;
-    border-right: 2 * 67 * $gu solid transparent;
-    border-top: 67 * $gu solid $default-color-support-shades;
-  }
-
-}
-
-.home-footer .section-shade {
-  display: block;
-  position: absolute;
-  right: 0px;
-  left: 0px;
-  height: 67 * $gu;
-  width: 100%;
-  overflow: hidden;
-}
-
-.home-footer .section-shade-angle {
-  display: block;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  border-right: 2 * 67 * $gu solid transparent;
-  border-top: 67 * $gu solid $default-color-support-shades;
-}
-/* @end section-with-shade */
-
 
 
 /* @start section with layout */
@@ -156,8 +82,6 @@
 .section-with-layout-title {
 
   margin-bottom: $gu;
-
-  @include component-heading-primary-colored;
 }
 
 .section-with-layout-content .sliding-teaser-group,
@@ -338,7 +262,7 @@
   @include vendor-prefix( transform, rotate(45deg) translateY(-29px) translateX(8px) );
 
   &.no-bg {
-    background-color: $default-color-background;
+    background-color: $blue;
   }
 }
 
