@@ -89,8 +89,16 @@ $headings-force-case: none !default; // set to uppercase/lowercase to force that
 
 /*******************************/
 
-body{
+html {
+    height: 100%;
+}
+
+body {
     background-color: $greygrizzly;
+    background-image: url('../img/footer-640.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 /* Override vpro bootstrap */

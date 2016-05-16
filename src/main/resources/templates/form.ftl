@@ -9,17 +9,17 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='Poel invullen' /]
+    [@headUtil.head title='Poel invullen: ${ user.displayName }' /]
 
     <body>
 
     [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
-        <div class="grid">
+    <form action="#" class="form" method="POST" enctype="application/x-www-form-urlencoded">
 
-            <form action="#" class="form" method="POST" enctype="application/x-www-form-urlencoded">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 
-                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+        <div class="grid prediction-form-container">
 
                 [#--[#list deadlinePassed as matchData]--]
                     [#----]
@@ -31,7 +31,7 @@
                 [@layout.sectionWithLayout
                     content={'layout': '100'}
                     collapsible=true
-                    title='Finished'
+                    title='wedstrijden: eerder gespeeld'
                     backGroundColor="greybat"
                     addContainerCss=''
                     closeColorClass='bg-greybat'
@@ -39,11 +39,11 @@
                     ]
 
                     [#list finished]
-                        <ul class="collapsible-section-content">
+                        <ul class="col-gutter collapsible-section-content">
                             [#items as finishedEntry]
                                 [#assign match = finishedEntry.match]
                                 [#assign prediction = finishedEntry.prediction ! ]
-                                <h3>${match.homeTeam} - ${match.awayTeam}</h3>
+                                <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
                                 <li>Eindstand: ${match.matchResultOrNull.toString()}
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
                                 <li>Score: [#if prediction?has_content]${prediction.score}[#else]0[/#if]</li>
@@ -58,7 +58,7 @@
                 [@layout.sectionWithLayout
                     content={'layout': '100'}
                     collapsible=true
-                    title='unfinished'
+                    title='wedstrijden: nu'
                     backGroundColor="greybat"
                     addContainerCss=''
                     closeColorClass='bg-greybat'
@@ -67,11 +67,11 @@
                 ]
 
                     [#list unfinished]
-                        <ul class="collapsible-section-content">
+                        <ul class="col-gutter collapsible-section-content">
                             [#items as unfinishedEntry]
                                 [#assign match = unfinishedEntry.match]
                                 [#assign prediction = unfinishedEntry.prediction ! ]
-                                <h3>${match.homeTeam} - ${match.awayTeam}</h3>
+                                <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
                             [/#items]
                         </ul>
@@ -84,7 +84,7 @@
                 [@layout.sectionWithLayout
                     content={'layout': '100'}
                     collapsible=true
-                    title='future'
+                    title='wedstrijden: later'
                     backGroundColor="greybat"
                     addContainerCss=''
                     closeColorClass='bg-greybat'
@@ -92,11 +92,11 @@
                 ]
 
                     [#list future]
-                        <ul class="collapsible-section-content">
+                        <ul class="col-gutter collapsible-section-content">
                             [#items as futureEntry]
                                 [#assign match = futureEntry.match]
                                 [#assign prediction = futureEntry.prediction ! ]
-                                <h3>${match.homeTeam} - ${match.awayTeam}</h3>
+                                <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
                                 <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
 
                                 [#assign match = futureEntry.match]
@@ -111,16 +111,16 @@
                     [/#list]
                 [/@layout.sectionWithLayout]
 
-                <button type="submit" value="Gaan!">Gaan!</button>
-
-            </form>
-
         </div>
 
+        <div class="prediction-form-button-container">
+            <button class="button submit-button" type="submit">Opslaan</button>
+            <button class="button reset-button" type="reset">Annuleren</button>
+        </div>
+
+    </form>
 
     [@footerUtil.footer /]
 
-
     </body>
 </html>
-
