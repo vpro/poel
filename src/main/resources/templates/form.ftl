@@ -36,7 +36,6 @@
                     addContainerCss=''
                     closeColorClass='bg-greybat'
                     openColorClass='bg-green'
-                    opened=true
                     ]
 
                     [#list finished]
@@ -64,6 +63,7 @@
                     addContainerCss=''
                     closeColorClass='bg-greybat'
                     openColorClass='bg-darkgreen'
+                    opened=true
                 ]
 
                     [#list unfinished]
