@@ -1,9 +1,26 @@
-button {
+.button {
     padding: 0 16px;
     font-size: 15px;
     cursor: pointer;
     text-transform: lowercase;
-    color: #fff;
+    color: #000;
     height: 46px;
     line-height: 46px;
+    background: #fff;
+    width: 50%;
+    float: left;
+    font-size: 24px;
+    font-family: "simplistic_sans", "SimplisticSans", Arial, Helvetica, Sans, FreeSans, "Nimbus Sans L", Garuda, sans-serif;
+}
+
+.prediction-form-container {
+    padding: 0 0 80px;
+}
+
+.prediction-form-button-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    border-top: 1px solid #000;
 }
