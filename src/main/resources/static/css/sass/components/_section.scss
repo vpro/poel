@@ -188,8 +188,11 @@
 }
 
 .collapsible-section-with-layout-title {
+  padding-top: $gu;
   margin-bottom: 16px;
   line-height: 36px;
+
+  min-height: 64px;
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -259,6 +262,7 @@
   border-bottom: 1px solid #fff;
   opacity: 1;
 
+  margin-left: -42px; // width || height / cos( 45deg )
   @include vendor-prefix( transform, rotate(45deg) translateY(-29px) translateX(8px) );
 
   &.no-bg {

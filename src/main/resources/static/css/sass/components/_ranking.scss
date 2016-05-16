@@ -3,6 +3,19 @@
   padding-right: 0;
 }
 
+.ranking-section .section-with-layout-title {
+  padding-left: $gu;
+  padding-right: $gu;
+}
+
+@include media-med-screen-width () {
+
+  .ranking-section .section-with-layout-title {
+    padding-left: 1.5*$gu;
+    padding-right: 1.5*$gu;
+  }
+}
+
 .ranking {
   border-spacing: 0;
   border-collapse: collapse;
