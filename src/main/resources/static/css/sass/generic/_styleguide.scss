@@ -53,3 +53,11 @@ $darkgreymouse: $greyelephant !default;
 $darkgreyelephant: $greygrizzly !default;
 $darkgreygrizzly: $greybat !default;
 $darkgreybat: $black !default;
+
+// layout units
+$gu: 8px !default;
+
+$min-screen-width: 320px !default;
+$med-screen-width: 768px !default;
+$max-screen-width: 1072px !default;
+$xl-screen-width: 1200px !default;

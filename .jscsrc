@@ -1,0 +1,58 @@
+{
+  "disallowKeywordsOnNewLine":  ["else","catch"],
+  "disallowMixedSpacesAndTabs": true,
+  "disallowMultipleLineStrings": true,
+  "disallowMultipleVarDecl": "exceptUndefined",
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowOperatorBeforeLineBreak": ["."],
+  "disallowQuotedKeysInObjects": true,
+  "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
+  "disallowSpacesInCallExpression": true,
+  "disallowTrailingComma": true,
+  "disallowYodaConditions": true,
+  "requireBlocksOnNewline": 1,
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "requireCapitalizedConstructors": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireCurlyBraces": [ "if", "else", "for", "while", "do", "try", "catch", "switch" ],
+  "requireDollarBeforejQueryAssignment": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requirePaddingNewlinesBeforeKeywords": ["return"],
+  "requireSemicolons": true,
+  "requireSpaceAfterBinaryOperators": ["==", "===", "!=", "!==", "<=", ">="],
+  "requireSpaceAfterKeywords": false,
+  "requireSpaceBeforeBinaryOperators": ["==", "===", "!=", "!==", "<=", ">="],
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeKeywords": true,
+  "requireSpaceBeforeObjectValues": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpacesInAnonymousFunctionExpression": {
+      "beforeOpeningRoundBrace": true,
+      "beforeOpeningCurlyBrace": true
+  },
+  "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpacesInFunction": {
+      "beforeOpeningRoundBrace": true,
+      "beforeOpeningCurlyBrace": true
+  },
+  "requireSpacesInsideArrayBrackets": {
+      "allExcept": [ "[", "]", "{", "}", "'" ]
+  },
+  "requireSpacesInsideBrackets": {
+      "allExcept": [ "[", "]", "{", "}", "'" ]
+  },
+  "requireSpacesInsideObjectBrackets": {
+        "allExcept": [ "}", ")", "]", "'" ]
+    },
+  "requireSpacesInsideParentheses": {
+      "all": true,
+      "except": [ "{", "}", "'" ]
+  },
+  "validateIndentation": 4,
+  "validateParameterSeparator": ", ",
+  "validateQuoteMarks": {
+    "mark" : "'",
+    "escape" : true
+  }
+}

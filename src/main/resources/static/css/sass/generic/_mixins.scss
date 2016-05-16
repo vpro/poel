@@ -1,0 +1,448 @@
+// Dimensions
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin rect($left, $top, $width, $height) {
+    top: $top;
+    left: $left;
+    width: $width;
+    height: $height;
+}
+
+@mixin rectabsolute( $left, $top, $width, $height ) {
+    position: absolute;
+    @include rect( $left, $top, $width, $height );
+}
+
+// End Dimensions
+
+// Layout
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin center-element( $w, $h ) {
+
+	position:absolute;
+    left: 50%;
+    top: 50%;
+
+    margin-left: -$w/2;
+    margin-top: -$h/2;
+
+    height: $h;
+    width: $w;
+
+}
+
+@mixin alignbottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+@mixin media-med-screen-width () {
+
+    @media screen and ( min-width: $med-screen-width ) {
+        @content;
+    }
+}
+
+@mixin media-header-breakpoint-space () {
+    @media screen and ( min-width: $header-breakpoint-space ) {
+        @content;
+    }
+}
+
+@mixin media-header-breakpoint-bold () {
+    @media screen and ( min-width: $header-breakpoint-bold ) {
+        @content;
+    }
+}
+
+@mixin media-max-screen-width () {
+    @media screen and ( min-width: $max-screen-width ) {
+        @content;
+    }
+}
+
+@mixin media-xl-screen-width () {
+    @media screen and ( min-width: $xl-screen-width ) {
+        @content;
+    }
+}
+
+@mixin grid() {
+
+	max-width: $max-screen-width;
+	min-width: $min-screen-width;
+
+	margin: 0 auto;
+	display: block;
+
+	clear: both;
+}
+
+@mixin grid-gutter() {
+
+    & {
+        padding-left: $gu;
+        padding-right: $gu;
+    }
+
+    @include media-med-screen-width {
+        & {
+            padding-left: 1.5 * $gu;
+            padding-right: 1.5 * $gu;
+        }
+    }
+}
+
+@mixin component-gutter(){
+
+    & {
+        margin-left: $gu;
+        margin-right: $gu;
+        margin-bottom: 2 * $gu;
+    }
+
+    @include media-med-screen-width {
+        & {
+            margin-left: 1.5 * $gu;
+            margin-right: 1.5 * $gu;
+            margin-bottom: 3 * $gu;
+        }
+    }
+}
+
+// end Layout
+
+// Fonts / Typography
+@mixin title-font {
+    font-family: $title-font;
+
+    @if $title-font-ie-smoothing {
+        filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader('src=https://files.vpro.nl/fontface/iefix.png,sizingMethod=crop')";
+        zoom: 1;
+    }
+
+    @if $title-font-force-case != none {
+        text-transform: $title-font-force-case;
+    }
+
+    @if $title-font-letter-spacing {
+        letter-spacing: $title-font-letter-spacing;
+    }
+}
+
+@mixin data-font(){
+    font-family: $data-font;
+    @if $data-font-force-case != none {
+        text-transform: $data-font-force-case;
+    }
+}
+
+@mixin search-font(){
+    font-family: $search-font;
+    @if $search-font-force-case != none {
+        text-transform: $search-font-force-case;
+    }
+}
+
+@mixin default-font(){
+    font-family: $default-font;
+}
+
+@mixin monospace-font(){
+    font-family: $monospace-font;
+}
+
+@mixin verdana-font(){
+    font-family: $verdana-font, sans-serif;
+}
+
+@mixin font-def($factor) {
+    font-size: $factor * $gu;
+    line-height: $factor * $gu;
+}
+
+@mixin font-def-rel( $factor ) {
+    font-size: $factor * $gu;
+    line-height: $factor * $gu * 1.428571429; // 20/14
+}
+
+@mixin base-font-style() {
+    @include default-font;
+    font-size: 15px;
+    line-height: 3 * $gu;
+    color: $default-color-text;
+}
+
+@mixin heading-case() {
+    @if $headings-force-case != none {
+        text-transform: $headings-force-case;
+    }
+}
+@mixin heading-weight() {
+    @if $headings-force-weight {
+        font-weight: $headings-force-weight;
+    }
+}
+
+@mixin footer-title-shadow() {
+    @if $footer-title-shadow {
+        text-shadow: 1px 1px 1px rgba( 0, 0, 0, 0.4 );
+    }
+}
+
+@mixin component-hyperlinks() {
+    @include component-hyperlinks-primary-colored;
+
+    @if ( $component-hyperlinks-force-underline ) {
+        text-decoration: underline;
+    }
+}
+
+// End Fonts
+
+/**
+* start general icon-font
+*
+*/
+
+@mixin icon-glyph( $name, $color: $default-color-icons, $size : 'medium',  $type: "",  $psuedo : false) {
+    @extend .glyph;
+    @include glyph-color( $color );
+    @include glyph-char( $name, $psuedo);
+    @include glyph-size( $size , $type );
+}
+
+
+@mixin glyph-color( $color ){
+    $cindex: last-index( $default-color-names, $color );
+    $color-value : '';
+    @if $cindex  {
+        $color-value: nth( $default-color-values, $cindex );
+    }
+    color: $color-value;
+ }
+
+
+@mixin glyph-char( $name, $psuedo : false ){
+    $char: '';
+    $index: last-index( $icon-font-names, $name );
+    @if $index{
+        $char:  nth( $icon-font-characters, $index );
+    }
+
+    @if $psuedo {
+        content: $char;
+    }@else{
+        &:before{
+            content: $char;
+        }
+    }
+}
+
+@mixin glyph-size( $size : 'medium', $type: "" ){
+
+    $icon-size:     24px;
+
+    @if ( $size == 'small' ){
+        font-size:     20px;
+        line-height:   0.85;
+        $icon-size:     16px;
+    }@else if ( $size == 'large' ){
+        font-size:     54px;
+        line-height:   0.85;
+        $icon-size:     48px;
+    }
+
+    // is icon centered in box?
+    @if ( $type == "centered" ) {
+        @include center-element( $icon-size, $icon-size );
+    } @else if ( $type == "no-dimensions" ) {
+
+    } @else {
+        height: $icon-size;
+        width: $icon-size;
+    }
+}
+
+/**
+* end general icon font
+*
+*/
+
+@mixin opacity( $opacity ) {
+  opacity: $opacity;
+}
+
+@mixin vendor-prefix( $property, $values... ) {
+    -webkit-#{$property}: $values;
+    -moz-#{$property}: $values;
+    -ms-#{$property}: $values;
+    -o-#{$property}: $values;
+    #{$property}: $values;
+}
+
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// Header
+
+@mixin reflected-header-image {
+
+    .header-image {
+
+        height: 320px;
+        width: 100%;
+
+        background-size: cover;
+        background-position: center center;
+
+        position: relative;
+    }
+
+    @media screen and ( min-width: $med-screen-width ) {
+        .header-image {
+            height: 432px;
+        }
+    }
+
+    @include media-max-screen-width {
+        .header-image {
+            height: 603px;
+        }
+    }
+
+    .reflect {
+        position: absolute;
+        display: none;
+        top: 0px;
+        @include vendor-prefix(transform, scaleX( -1 ));
+        -ms-filter: "FlipH";
+    }
+
+    @include media-max-screen-width {
+        .reflect {
+            display: block;
+        }
+    }
+
+    .ielt10 & .reflect {
+        -ms-transform: none; //UNDO -ms-transform scaleX, which blocks the filter: FlipH in IE8 and IE9
+    }
+
+    .reflect.left {
+        left: -1070px;
+    }
+
+    .reflect.right {
+        right: -1070px;
+    }
+
+    & .darken{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: 0;
+    }
+
+    .header-images-bottom {
+        position: relative;
+    }
+
+    @include reflected-header-image-top();
+}
+
+@mixin reflected-header-image-top {
+
+    .header-images-top {
+
+        position: relative;
+
+        height: 6 * $gu;
+
+        .reflect {
+            top: auto;
+            bottom: 0;
+
+            @include vendor-prefix(transform, scale(-1,-1));
+            -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=-0, M22=-1, SizingMethod='auto expand'))";
+        }
+
+        .center {
+            position: absolute;
+            bottom: 0;
+
+            @include vendor-prefix(transform, scaleY( -1 ));
+            -ms-filter: "FlipV";
+        }
+
+        .ielt10 & .center,
+        .ielt10 & .reflect {
+            -ms-transform: none; //UNDO -ms-transform scaleX, which blocks the filter: FlipH in IE8 and IE9
+        }
+    }
+
+    @include media-med-screen-width {
+
+        .header-images-top {
+            height: 58px;
+        }
+    }
+
+    @include media-max-screen-width {
+        .header-images-top {
+            height: 11 * $gu;
+        }
+    }
+}
+
+// End Header
+
+// Start Utility
+
+
+@mixin keyframes( $animationName )
+{
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+// End Utility
