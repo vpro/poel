@@ -6,11 +6,10 @@
 
     [@headUtil.head /]
     <body>
+    [@navigationUtil.navigation /]
 
         <div class="grid grid-gutter">
             <h1 class="h4">Current Matches</h1>
-
-            [@navigationUtil.navigation /]
 
         [#list matches]
         <form>

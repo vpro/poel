@@ -9,19 +9,19 @@
     <body>
 
         <div class="grid grid-gutter">
-            <h1 class="h4">Hello World</h1>
 
-            [@navigationUtil.navigation /]
+            <!--<p>-->
+                <!--Todo:  <br />-->
+                <!--Logo  <br />-->
+                <!--Korte uitleg  <br />-->
+            <!--</p>-->
 
-            <p>
-                Todo:  <br />
-                Logo  <br />
-                Korte uitleg  <br />
-                Link naar de gebruikerspagina, zodat je een account kan maken en inloggen  <br />
-                Link naar het invulformulier  <br />
-                Link naar de ranking  <br />
-                Link naar de admin indien je ingelogd bent?<br />
-            </p>
+            <ul>
+                <li><a href="/about">Het Spel</a></li>
+                <li><a href="/form">Spelen</a></li>
+                <li><a href="/ranking">De Spelers</a></li>
+            </ul>
+
         </div>
 
     </body>

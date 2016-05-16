@@ -4,13 +4,18 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head /]
+    [@headUtil.head title='Profiel' /]
+
     <body>
+
+    [@navigationUtil.navigation /]
 
         <div class="grid grid-gutter">
             <h1 class="h4">Hallo gebruiker ${user.displayName} (${user.username}/${user.role})!</h1>
 
-            [@navigationUtil.navigation /]
+            <ul>
+                <li><a href="/form">the form</a></li>
+            </ul>
 
             <p>
                 Todo: <br />

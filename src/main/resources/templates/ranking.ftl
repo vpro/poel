@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head /]
+    [@headUtil.head title='De Stand' /]
     <body>
-        <div class="grid">
+    [@navigationUtil.navigation /]
+
+    <div class="grid">
             <h1 class="h4">Ranking with the overall position for ${ user.displayName }</h1>
 
-            [@navigationUtil.navigation /]
 
             Todo:<br />
             Standaard ranking van alle spelers met highlight van current user <br />

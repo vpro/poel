@@ -4,14 +4,14 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head /]
+    [@headUtil.head title='Error' /]
     <body class="bg-orange c-white">
 
-        <div class="grid grid-gutter">
+    [@navigationUtil.navigation /]
+
+    <div class="grid grid-gutter">
 
             <h1 class="h4">Er is iets fout gegaan</h1>
-
-            [@navigationUtil.navigation /]
 
         </div>
 

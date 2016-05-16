@@ -4,14 +4,16 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head /]
+    [@headUtil.head title='Admin'/]
     <body>
 
-        <div class="grid grid-gutter">
+    [@navigationUtil.navigation /]
+
+    <div class="grid grid-gutter">
+
+
 
             <h1 class="h4">Form for: ${ user.displayName }</h1>
-
-            [@navigationUtil.navigation /]
 
             Alleen admins zoals ${user.displayName} (${user.username}/${user.role}) kunnen dit zien!
 

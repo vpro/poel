@@ -10,10 +10,14 @@
 
     <body>
 
+    [@navigationUtil.navigation /]
+
         <div class="grid grid-gutter">
             <h1 class="h4">Form for: ${ user.displayName }</h1>
 
-            [@navigationUtil.navigation /]
+            <ul>
+                <li><a href="/user">Profiel</a></li>
+            </ul>
 
             <p>
                 Todo:  <br />
