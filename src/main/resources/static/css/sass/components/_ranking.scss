@@ -2,18 +2,12 @@
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
-  padding: 0 $gu;
 
   td {
-    vertical-align: top;
-    padding: 4px;
-  }
-}
-
-@include media-med-screen-width () {
-
-  .ranking {
-    padding: 0 1.5 * $gu;
+    position: relative;
+    vertical-align: baseline;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 }
 
@@ -29,6 +23,41 @@
 
 }
 
-.ranking__department-display-name {
+.ranking__rank {
+  padding-left: 2*$gu;
+  width: 5*$gu;
+
+  @include title-font();
+}
+
+@include media-med-screen-width () {
+
+  .ranking__rank {
+    padding-left: 6 * $gu;
+    width: 9*$gu;
+  }
+}
+
+.ranking__display-name {
+  color: $white;
+}
+
+.ranking__department,
+.ranking__full-name {
+  display: inline-block;
+  width: 50%;
+  float: left;
   color: $lightgreen;
+  font-size: 10px;
+}
+
+.ranking__score {
+  padding-right: 2*$gu;
+}
+
+@include media-med-screen-width () {
+
+  .ranking__score {
+    padding-right: 6 * $gu;
+  }
 }

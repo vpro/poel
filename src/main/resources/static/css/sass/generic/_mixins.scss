@@ -131,10 +131,6 @@
 @mixin title-font {
     font-family: $title-font;
 
-    @if $title-font-ie-smoothing {
-        filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader('src=https://files.vpro.nl/fontface/iefix.png,sizingMethod=crop')";
-        zoom: 1;
-    }
 
     @if $title-font-force-case != none {
         text-transform: $title-font-force-case;
@@ -202,14 +198,6 @@
 @mixin footer-title-shadow() {
     @if $footer-title-shadow {
         text-shadow: 1px 1px 1px rgba( 0, 0, 0, 0.4 );
-    }
-}
-
-@mixin component-hyperlinks() {
-    @include component-hyperlinks-primary-colored;
-
-    @if ( $component-hyperlinks-force-underline ) {
-        text-decoration: underline;
     }
 }
 
@@ -310,118 +298,6 @@
   }
 
   @return $string;
-}
-
-// Header
-
-@mixin reflected-header-image {
-
-    .header-image {
-
-        height: 320px;
-        width: 100%;
-
-        background-size: cover;
-        background-position: center center;
-
-        position: relative;
-    }
-
-    @media screen and ( min-width: $med-screen-width ) {
-        .header-image {
-            height: 432px;
-        }
-    }
-
-    @include media-max-screen-width {
-        .header-image {
-            height: 603px;
-        }
-    }
-
-    .reflect {
-        position: absolute;
-        display: none;
-        top: 0px;
-        @include vendor-prefix(transform, scaleX( -1 ));
-        -ms-filter: "FlipH";
-    }
-
-    @include media-max-screen-width {
-        .reflect {
-            display: block;
-        }
-    }
-
-    .ielt10 & .reflect {
-        -ms-transform: none; //UNDO -ms-transform scaleX, which blocks the filter: FlipH in IE8 and IE9
-    }
-
-    .reflect.left {
-        left: -1070px;
-    }
-
-    .reflect.right {
-        right: -1070px;
-    }
-
-    & .darken{
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-    }
-
-    .header-images-bottom {
-        position: relative;
-    }
-
-    @include reflected-header-image-top();
-}
-
-@mixin reflected-header-image-top {
-
-    .header-images-top {
-
-        position: relative;
-
-        height: 6 * $gu;
-
-        .reflect {
-            top: auto;
-            bottom: 0;
-
-            @include vendor-prefix(transform, scale(-1,-1));
-            -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=-0, M22=-1, SizingMethod='auto expand'))";
-        }
-
-        .center {
-            position: absolute;
-            bottom: 0;
-
-            @include vendor-prefix(transform, scaleY( -1 ));
-            -ms-filter: "FlipV";
-        }
-
-        .ielt10 & .center,
-        .ielt10 & .reflect {
-            -ms-transform: none; //UNDO -ms-transform scaleX, which blocks the filter: FlipH in IE8 and IE9
-        }
-    }
-
-    @include media-med-screen-width {
-
-        .header-images-top {
-            height: 58px;
-        }
-    }
-
-    @include media-max-screen-width {
-        .header-images-top {
-            height: 11 * $gu;
-        }
-    }
 }
 
 // End Header
