@@ -47,18 +47,28 @@
 
   position: absolute;
   display: block;
+
 }
 
 .home-navigation-link{
   height: 33%;
   width: 100%;
 
-  text-align: center;
-  display: block;
+  display: table;
+
+  &:hover{
+    text-decoration: none;
+  }
+
 }
 
 .home-navigation-link-title {
   display: table-cell;
+  text-align: center;
+
   vertical-align: middle;
+
+  text-decoration: none;
+
 }
 /* end home */
