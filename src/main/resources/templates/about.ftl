@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[@headUtil.head title='about' back='/' /]
+[@headUtil.head title='about' /]
 
 <body>
 
-    [@navigationUtil.navigation title='het spel' /]
+    [@navigationUtil.navigation title='het spel' back='/' /]
 
     <div class="grid grid-gutter">
         <h1 class="h4">About</h1>
