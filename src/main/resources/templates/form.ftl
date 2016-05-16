@@ -13,7 +13,7 @@
 
     <body>
 
-    [@navigationUtil.navigation title='Poel invullen: ${ user.displayName }' back='/' /]
+    [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
     <form action="#" class="form" method="POST" enctype="application/x-www-form-urlencoded">
 
@@ -124,14 +124,3 @@
 
     </body>
 </html>
-
-
-
-<!--<p>-->
-<!--Todo:  <br />-->
-<!--Matches tonen <br />-->
-<!--Wel/niet ingevulde prediction tonen <br />-->
-<!--Disabled status wanneer uiterste invuldatum bereikt is <br />-->
-<!--Outcome tonen indien aanwezig <br />-->
-<!--Score tonen wanneer de outcome bekend is <br />-->
-<!--</p>-->
