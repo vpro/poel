@@ -1,5 +1,6 @@
 [#import "macros/head.ftl" as headUtil]
 [#import "macros/navigation.ftl" as navigationUtil]
+[#import "macros/layout.ftl" as layout]
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -11,41 +12,38 @@
     [@navigationUtil.navigation title='De Stand' back='/' /]
 
 
-<section>
-    <div class="grid bg-darkgreen">
+    [@layout.sectionWithLayout content={"layout":"100"} title='spelers' collapsible=true backGroundColor='bg-green' ]
 
-        Todo:<br/>
-        Standaard ranking van alle spelers met highlight van current user <br/>
-        Ranking van de afdelingenen / gebruikersgroepen<br/>
 
-        <h1 class="h5 component-gutter">spelers</h1>
+    Todo:<br/>
+    Standaard ranking van alle spelers met highlight van current user <br/>
+    Ranking van de afdelingenen / gebruikersgroepen<br/>
 
-    [#list users]
+        [#list users]
         <table class="ranking">
-            <tbody>
+        <tbody>
             [#items as u]
-                <tr class="ranking__row ranking__row-${ u ? item_parity } [#if u.getId() == user.getId() ]ranking__current-user[/#if]">
-                    <td class="ranking__rank"><span>${ u ? index + 1 }</span></td>
-                    <td class="ranking__name">
-                        <h2 class="h6 ranking__display-name">${ u.displayName }</h2>
-                        <div class="ranking__meta">
-                            <span class="ranking__full-name">${ u.username }</span>
-                            <span class="ranking__department">afdeling</span>
-                        </div>
-                    </td>
-                    <td class="ranking__score">0</td>
-                </tr>
+            <tr class="ranking__row ranking__row-${ u ? item_parity } [#if u.getId() == user.getId() ]ranking__current-user[/#if]">
+                <td class="ranking__rank"><span>${ u ? index + 1 }</span></td>
+                <td class="ranking__name">
+                    <h2 class="h6 ranking__display-name">${ u.displayName }</h2>
+                    <div class="ranking__meta">
+                        <span class="ranking__full-name">${ u.username }</span>
+                        <span class="ranking__department">afdeling</span>
+                    </div>
+                </td>
+                <td class="ranking__score">0</td>
+            </tr>
             [/#items]
-            </tbody>
+        </tbody>
         </table>
-    [#else]
+        [#else]
         Er zijn geen deelnemers. :o(
-    [/#list]
+        [/#list]
 
-            Todo:<br />
-            Standaard ranking van alle spelers met highlight van current user <br />
-            Ranking van de afdelingenen / gebruikersgroepen<br />
-        </div>
+    [/@layout.sectionWithLayout]
+
+
     </body>
 
 </html>

@@ -53,6 +53,7 @@
 
 .ranking__score {
   padding-right: 2*$gu;
+  @include title-font();
 }
 
 @include media-med-screen-width () {
