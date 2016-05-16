@@ -1,5 +1,5 @@
 .section {
-  @extend .clearfix;
+  @include clearfix();
   padding-top: 2*$gu;
 }
 
