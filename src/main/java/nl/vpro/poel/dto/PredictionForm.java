@@ -9,6 +9,8 @@ public class PredictionForm {
 
     private int awayTeamGoals;
 
+    private PredictionForm() {}
+
     public PredictionForm(Long matchId, int homeTeamGoals, int awayTeamGoals) {
         this.matchId = matchId;
         this.homeTeamGoals = homeTeamGoals;
