@@ -1,7 +1,8 @@
 package nl.vpro.poel.domain;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -21,19 +22,21 @@ public class Match {
     @Column(nullable = false)
     private String awayTeam;
 
+    // Both Hibernate 4.x and Freemarker 2.3.x are not ready for use with java.time.Instant yet, so let's use this old skool type
     @Column(nullable = false)
-    private Instant start = null;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date start = null;
 
     @Embedded
     private MatchResult matchResult = null;
 
     private Match() {} // For Hibernate
 
-    public Match(String homeTeam, String awayTeam, Instant start) {
+    public Match(String homeTeam, String awayTeam, Date start) {
         this(homeTeam, awayTeam, start, null);
     }
 
-    public Match(String homeTeam, String awayTeam, Instant start, MatchResult matchResult) {
+    public Match(String homeTeam, String awayTeam, Date start, MatchResult matchResult) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.start = start;
@@ -56,7 +59,7 @@ public class Match {
         return matchResult;
     }
 
-    public Instant getStart() {
+    public Date getStart() {
         return start;
     }
 }

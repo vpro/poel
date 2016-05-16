@@ -13,9 +13,7 @@ public interface MatchService {
 
     List<Match> getAllCompletedMatches();
 
-    List<Match> getAllUnfinishedMatches();
+    List<Match> getAllUnfinishedMatches(Instant instant);
 
     List<Match> getMatchesToPredict(Instant instant);
-
-    //List<Match> getInvalidMatches(Instant instant);
 }

@@ -4,7 +4,7 @@ import nl.vpro.poel.domain.Match;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -14,7 +14,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     List<Match> findByMatchResultNotNull();
 
-    List<Match> findByMatchResultIsNullAndStartIsAfter(Instant instant);
+    List<Match> findByMatchResultIsNullAndStartIsAfter(Date instant);
 
-    List<Match> findByMatchResultIsNullAndStartIsBefore(Instant instant);
+    List<Match> findByMatchResultIsNullAndStartIsBefore(Date instant);
 }
