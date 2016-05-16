@@ -114,8 +114,8 @@
         </div>
 
         <div class="prediction-form-button-container">
-            <button class="button submit-button" type="submit">Opslaan</button>
-            <button class="button reset-button" type="reset">Annuleren</button>
+            <button class="h5 button submit-button" type="submit">Opslaan</button>
+            <button class="h5 button reset-button" type="reset">Annuleren</button>
         </div>
 
     </form>
