@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hello Ranking</title>
-    <link rel="stylesheet" href="https://files.vpro.nl/frontend/bootstrap/dist/style.css">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+[#import "macros/head.ftl" as headUtil]
+
+[@headUtil.head /]
 <body>
     <div class="grid">
         <h1>Ranking with the overall position for ${ user.displayName }</h1>
