@@ -6,7 +6,7 @@
 
     [@headUtil.head title='De Stand' /]
 
-    <body class="bg-greygrizzly">
+    <body>
 
     [@navigationUtil.navigation title='De Stand' back='/' /]
 
