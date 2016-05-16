@@ -4,18 +4,48 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='De Stand' /]
-    <body>
-    [@navigationUtil.navigation /]
+[@headUtil.head title='De Stand' /]
+<body>
+[@navigationUtil.navigation /]
 
+<div class="grid">
+    <h1 class="h4">Ranking with the overall position for ${ user.displayName }</h1>
+    Todo:<br/>
+    Standaard ranking van alle spelers met highlight van current user <br/>
+    Ranking van de afdelingenen / gebruikersgroepen<br/>
+</div>
+
+<section>
     <div class="grid">
-            <h1 class="h4">Ranking with the overall position for ${ user.displayName }</h1>
+        <h1 class="h5">Individueel Klassement</h1>
+    </div>
+    <div class="grid">
+
+    [#list users]
+        <table class="ranking">
+            <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            [#items as u]
+                <tr [#if u.equals( user ) ]class="ranking__current-user"[/#if]>
+                    <td>${ u.displayName }</td><td>0</td>
+                </tr>
+            [/#items]
+            </tbody>
+        </table>
+    [#else]
+        Er zijn geen deelnemers. :o(
+    [/#list]
 
 
-            Todo:<br />
-            Standaard ranking van alle spelers met highlight van current user <br />
-            Ranking van de afdelingenen / gebruikersgroepen<br />
-        </div>
-    </body>
+    </div>
+</section>
+
+
+</body>
 
 </html>
