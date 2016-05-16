@@ -4,13 +4,13 @@
 }
 
 .ranking-section .section-with-layout-title {
-  padding: 0 $gu;
+  padding: $gu $gu 0;
 }
 
 @include media-med-screen-width () {
 
   .ranking-section .section-with-layout-title {
-    padding: 0 1.5*$gu;
+    padding: $gu 1.5*$gu 0;
   }
 }
 
