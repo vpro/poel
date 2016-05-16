@@ -188,8 +188,11 @@
 }
 
 .collapsible-section-with-layout-title {
+  padding-top: $gu;
   margin-bottom: 16px;
   line-height: 36px;
+
+  min-height: 64px;
 
   text-overflow: ellipsis;
   white-space: nowrap;
