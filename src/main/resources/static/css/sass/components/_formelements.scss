@@ -21,3 +21,8 @@
     z-index: 1000;
     border-top: 1px solid #000;
 }
+
+input:disabled{
+    background: #666;
+    color: #fff;
+}
