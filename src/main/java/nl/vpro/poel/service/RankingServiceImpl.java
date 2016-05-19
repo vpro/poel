@@ -23,10 +23,10 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Optional<Integer> getRank(User user) {
+    public Optional<RankingEntry> getRankingEntry(User user) {
         for (RankingEntry rankingEntry : getRanking()) {
             if (rankingEntry.getUser().equals(user)) {
-                return Optional.of(rankingEntry.getRank());
+                return Optional.of(rankingEntry);
             }
         }
         return Optional.empty();
@@ -35,7 +35,7 @@ public class RankingServiceImpl implements RankingService {
     @Override
     public List<RankingEntry> getRanking() {
         // TODO: Which genius is going to transform this method to code using the Stream API?
-        Map<Integer, List<User>> usersByScore = new TreeMap<>();
+        NavigableMap<Integer, List<User>> usersByScore = new TreeMap<>();
         for (User user : userService.getAllUsers()) {
             Integer score = getScore(user);
             List<User> users = usersByScore.getOrDefault(score, new ArrayList<>());
@@ -45,12 +45,13 @@ public class RankingServiceImpl implements RankingService {
 
         List<RankingEntry> ranking = new ArrayList<>();
         int rank = 1;
-        for (Map.Entry<Integer, List<User>> entry : usersByScore.entrySet()) {
-            for (User user : entry.getValue()) {
+        for (Map.Entry<Integer, List<User>> entry : usersByScore.descendingMap().entrySet()) {
+            List<User> users = entry.getValue();
+            for (User user : users) {
                 Integer score = entry.getKey();
                 ranking.add(new RankingEntry(rank, user, score));
             }
-            rank++;
+            rank += users.size();
         }
 
         return ranking;

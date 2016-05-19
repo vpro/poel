@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface RankingService {
 
-    Optional<Integer> getRank(User user);
+    Optional<RankingEntry> getRankingEntry(User user);
 
     List<RankingEntry> getRanking();
 }
