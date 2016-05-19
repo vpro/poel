@@ -2,17 +2,13 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
+import nl.vpro.poel.dto.RankingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.function.Function;
+import java.util.*;
 import java.util.stream.Collectors;
 
-// TODO: Cache this stuff?
 @Service
 public class RankingServiceImpl implements RankingService {
 
@@ -28,10 +24,9 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Optional<Integer> getRank(User user) {
-        // TODO: Find an easier way to find the rank in the overall ranking
         int rank = 1;
-        for (Map.Entry<Integer, User> rankingEntry : getOverallRanking().entrySet()) {
-            if (rankingEntry.getValue().equals(user)) {
+        for (RankingEntry rankingEntry : getRanking()) {
+            if (rankingEntry.getUser().equals(user)) {
                 return Optional.of(rank);
             }
             rank++;
@@ -40,13 +35,11 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public SortedMap<Integer, User> getOverallRanking() {
+    public List<RankingEntry> getRanking() {
         return userService.getAllUsers().stream()
-                .collect(Collectors.toMap(
-                        user -> predictionService.getPredictions(user).stream()
-                            .collect(Collectors.summingInt(Prediction::getScore)),
-                        Function.identity(),
-                        (k, v) -> { throw new RuntimeException(String.format("Duplicate key %s", k)); },
-                        TreeMap::new));
+                .map(user -> new RankingEntry(user, predictionService.getPredictions(user).stream()
+                        .collect(Collectors.summingInt(Prediction::getScore))))
+                .sorted(Comparator.comparingInt(RankingEntry::getScore))
+                .collect(Collectors.toList());
     }
 }

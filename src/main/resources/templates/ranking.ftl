@@ -24,20 +24,22 @@
             addContainerCss='bg-darkgreen'
             backGroundColor='darkgreen' ]
 
-            [#list users]
+            [#list ranking]
             <table class="ranking">
             <tbody>
-                [#items as u]
-                <tr class="ranking__row ranking__row-${ u ? item_parity } [#if u.getId() == user.getId() ]ranking__current-user[/#if]">
-                    <td class="ranking__rank"><span>${ u ? index + 1 }</span></td>
+                [#items as rankingEntry]
+                [#assign entryUser = rankingEntry.user]
+                [#assign score = rankingEntry.score]
+                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if entryUser.getId() == user.getId() ]ranking__current-user[/#if]">
+                    <td class="ranking__rank"><span>${ rankingEntry ? index + 1 }</span></td>
                     <td class="ranking__name">
-                        <h2 class="h6 ranking__display-name">${ u.displayName }</h2>
+                        <h2 class="h6 ranking__display-name">${ entryUser.displayName }</h2>
                         <div class="ranking__meta">
-                            <span class="ranking__full-name">${ u.username }</span>
+                            <span class="ranking__full-name">${ entryUser.username }</span>
                             <span class="ranking__department">afdeling</span>
                         </div>
                     </td>
-                    <td class="ranking__score">0</td>
+                    <td class="ranking__score">${score}</td>
                 </tr>
                 [/#items]
             </tbody>
