@@ -24,22 +24,40 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     public Optional<Integer> getRank(User user) {
-        int rank = 1;
         for (RankingEntry rankingEntry : getRanking()) {
             if (rankingEntry.getUser().equals(user)) {
-                return Optional.of(rank);
+                return Optional.of(rankingEntry.getRank());
             }
-            rank++;
         }
         return Optional.empty();
     }
 
     @Override
     public List<RankingEntry> getRanking() {
-        return userService.getAllUsers().stream()
-                .map(user -> new RankingEntry(user, predictionService.getPredictions(user).stream()
-                        .collect(Collectors.summingInt(Prediction::getScore))))
-                .sorted(Comparator.comparingInt(RankingEntry::getScore))
-                .collect(Collectors.toList());
+        // TODO: Which genius is going to transform this method to code using the Stream API?
+        Map<Integer, List<User>> usersByScore = new TreeMap<>();
+        for (User user : userService.getAllUsers()) {
+            Integer score = getScore(user);
+            List<User> users = usersByScore.getOrDefault(score, new ArrayList<>());
+            users.add(user);
+            usersByScore.put(score, users);
+        }
+
+        List<RankingEntry> ranking = new ArrayList<>();
+        int rank = 1;
+        for (Map.Entry<Integer, List<User>> entry : usersByScore.entrySet()) {
+            for (User user : entry.getValue()) {
+                Integer score = entry.getKey();
+                ranking.add(new RankingEntry(rank, user, score));
+            }
+            rank++;
+        }
+
+        return ranking;
+    }
+
+    private Integer getScore(User user) {
+        return predictionService.getPredictions(user).stream()
+                .collect(Collectors.summingInt(Prediction::getScore));
     }
 }

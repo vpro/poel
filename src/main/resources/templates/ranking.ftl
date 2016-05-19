@@ -31,7 +31,7 @@
                 [#assign entryUser = rankingEntry.user]
                 [#assign score = rankingEntry.score]
                 <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if entryUser.getId() == user.getId() ]ranking__current-user[/#if]">
-                    <td class="ranking__rank"><span>${ rankingEntry ? index + 1 }</span></td>
+                    <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">${ entryUser.displayName }</h2>
                         <div class="ranking__meta">
