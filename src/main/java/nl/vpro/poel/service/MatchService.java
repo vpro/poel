@@ -5,15 +5,18 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface MatchService {
 
-    List<Match> getAllMatches();
+    Optional<Match> findById(Long id);
 
-    List<Match> getAllCompletedMatches();
+    List<Match> findAll();
 
-    List<Match> getAllUnfinishedMatches(Instant instant);
+    List<Match> findAllCompleted();
 
-    List<Match> getMatchesToPredict(Instant instant);
+    List<Match> findAllUnfinished(Instant instant);
+
+    List<Match> findMatchesToPredict(Instant instant);
 }

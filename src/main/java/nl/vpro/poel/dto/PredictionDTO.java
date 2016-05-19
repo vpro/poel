@@ -1,6 +1,6 @@
 package nl.vpro.poel.dto;
 
-public class Prediction {
+public class PredictionDTO {
 
     private Long matchId;
 
@@ -34,7 +34,7 @@ public class Prediction {
 
     @Override
     public String toString() {
-        return "Prediction{" +
+        return "PredictionDTO{" +
                 "matchId=" + matchId +
                 ", homeTeamGoals=" + homeTeamGoals +
                 ", awayTeamGoals=" + awayTeamGoals +

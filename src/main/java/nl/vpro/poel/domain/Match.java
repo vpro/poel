@@ -28,7 +28,7 @@ public class Match {
     private Date start = null;
 
     @Embedded
-    private MatchResult matchResult = null;
+    private MatchResult matchResult;
 
     private Match() {} // For Hibernate
 
@@ -55,11 +55,7 @@ public class Match {
         return awayTeam;
     }
 
-    public Optional<MatchResult> getMatchResult() {
-        return Optional.ofNullable(matchResult);
-    }
-
-    public MatchResult getMatchResultOrNull() {
+    public MatchResult getMatchResult() {
         return matchResult;
     }
 

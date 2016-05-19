@@ -5,13 +5,20 @@ import java.util.List;
 // TODO: Validator
 public class PredictionForm {
 
-    private List<Prediction> predictions;
+    private List<PredictionDTO> predictions;
 
-    public List<Prediction> getPredictions() {
+    public List<PredictionDTO> getPredictions() {
         return predictions;
     }
 
-    public void setPredictions(List<Prediction> predictions) {
+    public void setPredictions(List<PredictionDTO> predictions) {
         this.predictions = predictions;
+    }
+
+    @Override
+    public String toString() {
+        return "PredictionForm{" +
+                "predictions=" + predictions +
+                '}';
     }
 }

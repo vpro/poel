@@ -2,7 +2,7 @@ package nl.vpro.poel.controller;
 
 import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.*;
-import nl.vpro.poel.dto.MatchAndPrediction;
+import nl.vpro.poel.dto.MatchEntry;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.PredictionService;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,9 +42,9 @@ class FormController {
 
         Instant now = Instant.now();
 
-        List<MatchAndPrediction> finished = addUserPredictions(matchService.getAllCompletedMatches(), user);
-        List<MatchAndPrediction> unfinished = addUserPredictions(matchService.getAllUnfinishedMatches(now), user);
-        List<MatchAndPrediction> future = addUserPredictions(matchService.getMatchesToPredict(now), user);
+        List<MatchEntry> finished = addUserPredictions(matchService.findAllCompleted(), user);
+        List<MatchEntry> unfinished = addUserPredictions(matchService.findAllUnfinished(now), user);
+        List<MatchEntry> future = addUserPredictions(matchService.findMatchesToPredict(now), user);
 
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
@@ -54,24 +53,30 @@ class FormController {
     }
 
     // TODO: Move this logic out to a service?
-    private List<MatchAndPrediction> addUserPredictions(List<Match> matches, User user) {
+    private List<MatchEntry> addUserPredictions(List<Match> matches, User user) {
         return matches.stream()
-                .map(match -> toMatchAndPrediction(user, match))
+                .map(match -> toMatchEntry(match, user))
                 .collect(Collectors.toList());
     }
 
-    private MatchAndPrediction toMatchAndPrediction(User user, Match match) {
-        Optional<Prediction> prediction = predictionService.getPredictionForMatch(user, match);
-        return new MatchAndPrediction(match, prediction.orElse(null));
+    private MatchEntry toMatchEntry(Match match, User user) {
+        MatchResult predictedResult = null;
+        int score = 0;
+        Prediction prediction = predictionService.getPredictionForMatch(user, match).orElse(null);
+        if (prediction != null) {
+            predictedResult = prediction.getMatchResult();
+            score = prediction.getScore();
+        }
+        return new MatchEntry(match, predictedResult, score);
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(@ModelAttribute("prediction") PredictionForm form, BindingResult bindingResult) {
-        System.out.println("Form: " + form);
+    String handleFormSubmit(@ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
+        // TODO: Data binding doesn't seem to work here yet
+        System.out.println("Predictions: " + predictions);
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        // TODO
-        return "redirect:/";
+        return "redirect:/form";
     }
 }

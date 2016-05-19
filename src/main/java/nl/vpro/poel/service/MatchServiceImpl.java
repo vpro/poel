@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -47,22 +48,27 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public List<Match> getAllMatches() {
+    public Optional<Match> findById(Long id) {
+        return Optional.ofNullable(matchRepository.getOne(id));
+    }
+
+    @Override
+    public List<Match> findAll() {
         return matchRepository.findAll();
     }
 
     @Override
-    public List<Match> getAllCompletedMatches() {
+    public List<Match> findAllCompleted() {
         return matchRepository.findByMatchResultNotNull();
     }
 
     @Override
-    public List<Match> getAllUnfinishedMatches(Instant instant) {
+    public List<Match> findAllUnfinished(Instant instant) {
         return matchRepository.findByMatchResultIsNullAndStartIsBefore(Date.from(instant));
     }
 
     @Override
-    public List<Match> getMatchesToPredict(Instant instant) {
+    public List<Match> findMatchesToPredict(Instant instant) {
         return matchRepository.findByMatchResultIsNullAndStartIsAfter(Date.from(instant));
     }
 }

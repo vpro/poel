@@ -1,7 +1,7 @@
 package nl.vpro.poel.domain;
 
 import javax.persistence.*;
-import java.util.Optional;
+import java.util.Objects;
 
 /**
  * A user's predicted match result.
@@ -39,23 +39,37 @@ public class Prediction {
         return matchResult;
     }
 
-    public Integer getScore() {
-        if (match.getMatchResult().isPresent() && matchResult != null) {
-            MatchResult actualMatchResult = match.getMatchResult().get();
-            Integer scoreForWinner = getScoreForWinner(actualMatchResult);
-            Integer scoreForResult = getScoreForResult(actualMatchResult);
-            return scoreForWinner + scoreForResult;
+    public int getScore() {
+        MatchResult predictedResult = getMatchResult();
+
+        if (predictedResult == null) {
+            return 0;
         }
-        return 0;
+
+        Match match = getMatch();
+
+        if (match == null) {
+            return 0;
+        }
+
+        MatchResult actualResult = match.getMatchResult();
+
+        if (actualResult == null) {
+            return 0;
+        }
+
+        int scoreForWinner = getScoreForWinner(predictedResult, actualResult);
+        int scoreForResult = getScoreForResult(predictedResult, actualResult);
+        return scoreForWinner + scoreForResult;
     }
 
-    private Integer getScoreForWinner(MatchResult actualResult) {
+    private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
         Winner actualWinner = actualResult.getWinner();
-        Winner predictedWinner = matchResult.getWinner();
-        return actualWinner.equals(predictedWinner) ? 2 : 0;
+        Winner predictedWinner = predictedResult.getWinner();
+        return Objects.equals(actualWinner, predictedWinner) ? 2 : 0;
     }
 
-    private Integer getScoreForResult(MatchResult actualResult) {
-        return actualResult.equals(matchResult) ? 1 : 0;
+    private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
+        return Objects.equals(actualResult, predictedResult) ? 1 : 0;
     }
 }

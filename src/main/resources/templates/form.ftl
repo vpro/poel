@@ -15,7 +15,7 @@
 
     [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
-    <form action="#" class="form" method="POST" enctype="application/x-www-form-urlencoded">
+    <form action="#" class="form" method="post">
 
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
 
@@ -40,13 +40,15 @@
 
                     [#list finished]
                         <ul class="col-gutter collapsible-section-content">
-                            [#items as finishedEntry]
-                                [#assign match = finishedEntry.match]
-                                [#assign prediction = finishedEntry.prediction ! ]
+                            [#items as matchEntry]
+                                [#assign match = matchEntry.match]
+                                [#assign result = match.matchResult]
+                                [#assign prediction = matchEntry.prediction ! ]
+                                [#assign score = matchEntry.score]
                                 <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
-                                <li>Eindstand: ${match.matchResultOrNull.toString()}
-                                <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
-                                <li>Score: [#if prediction?has_content]${prediction.score}[#else]0[/#if]</li>
+                                <li>Eindstand: ${result.homeTeamGoals} - ${result.awayTeamGoals}
+                                <li>Voorspelling: [#if prediction?has_content]${prediction.homeTeamGoals} - ${prediction.awayTeamGoals}[#else]geen[/#if]</li>
+                                <li>Score: ${score}</li>
                             [/#items]
                         </ul>
                     [#else]
@@ -68,11 +70,11 @@
 
                     [#list unfinished]
                         <ul class="col-gutter collapsible-section-content">
-                            [#items as unfinishedEntry]
-                                [#assign match = unfinishedEntry.match]
-                                [#assign prediction = unfinishedEntry.prediction ! ]
+                            [#items as matchEntry]
+                                [#assign match = matchEntry.match]
+                                [#assign prediction = matchEntry.prediction ! ]
                                 <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
-                                <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
+                                <li>Voorspelling: [#if prediction?has_content]${prediction.homeTeamGoals} - ${prediction.awayTeamGoals}[#else]geen[/#if]</li>
                             [/#items]
                         </ul>
                     [#else]
@@ -93,17 +95,15 @@
 
                     [#list future]
                         <ul class="col-gutter collapsible-section-content">
-                            [#items as futureEntry]
-                                [#assign match = futureEntry.match]
-                                [#assign prediction = futureEntry.prediction ! ]
+                            [#items as matchEntry]
+                                [#assign match = matchEntry.match]
+                                [#assign prediction = matchEntry.prediction ! ]
                                 <h2 class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</h2>
-                                <li>Voorspelling: [#if prediction?has_content]${prediction.matchResultOrNull.toString()}[#else]geen[/#if]</li>
+                                <li>Voorspelling: [#if prediction?has_content]${prediction.homeTeamGoals} - ${prediction.awayTeamGoals}[#else]geen[/#if]</li>
 
-                                [#assign match = futureEntry.match]
-                                <input type="hidden" name="prediction${futureEntry?index}.matchId" value="${match.id}"/>
-                                <input type="text" name="prediction${futureEntry?index}.awayTeamGoals" value="11"/>
-                                <input type="text" name="prediction${futureEntry?index}.homeTeamGoals" value="13"/>
-
+                                <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
+                                <input type="text" name="predictions[${matchEntry?index}].awayTeamGoals" value="11"/>
+                                <input type="text" name="predictions[${matchEntry?index}].homeTeamGoals" value="13"/>
                             [/#items]
                         </ul>
                     [#else]
