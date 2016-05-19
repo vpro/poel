@@ -11,6 +11,8 @@
 
     [@navigationUtil.navigation title='poelspel' back='/' bgColor='bg-greybat' /]
 
+    ${mailings}
+
     <div class="grid grid-gutter bg-white about">
         <div class="component">
             <h1 class="h4 about__title"><span class="c-greybat">Het spel</span></h1>
