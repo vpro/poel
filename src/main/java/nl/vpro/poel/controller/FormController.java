@@ -6,14 +6,18 @@ import nl.vpro.poel.dto.MatchEntry;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.PredictionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
@@ -21,6 +25,8 @@ import java.util.stream.Collectors;
 
 @Controller
 class FormController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FormController.class);
 
     private final MatchService matchService;
 
@@ -71,12 +77,18 @@ class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(@ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
-        // TODO: Data binding doesn't seem to work here yet
-        System.out.println("Predictions: " + predictions);
+    String handleFormSubmit(Principal principal, @Valid @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
+        Instant submittedAt = Instant.now();
+        User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
         if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                // TODO: Put errors in FlashMap to show to user?
+                logger.warn("{} submitted a form with an error: {}", user, error);
+            }
             return "form";
         }
+
+        predictionService.save(user, predictions, submittedAt);
         return "redirect:/form";
     }
 }

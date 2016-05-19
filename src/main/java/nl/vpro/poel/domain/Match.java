@@ -30,7 +30,7 @@ public class Match {
     @Embedded
     private MatchResult matchResult;
 
-    private Match() {} // For Hibernate
+    Match() {} // For Hibernate
 
     public Match(String homeTeam, String awayTeam, Date start) {
         this(homeTeam, awayTeam, start, null);

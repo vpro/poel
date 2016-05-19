@@ -39,6 +39,10 @@ public class Prediction {
         return matchResult;
     }
 
+    public void setMatchResult(MatchResult matchResult) {
+        this.matchResult = matchResult;
+    }
+
     public int getScore() {
         MatchResult predictedResult = getMatchResult();
 

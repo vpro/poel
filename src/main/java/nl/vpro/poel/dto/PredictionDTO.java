@@ -1,12 +1,17 @@
 package nl.vpro.poel.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class PredictionDTO {
 
+    @NotNull
     private Long matchId;
 
-    private int homeTeamGoals;
+    @NotNull
+    private Integer homeTeamGoals;
 
-    private int awayTeamGoals;
+    @NotNull
+    private Integer awayTeamGoals;
 
     public Long getMatchId() {
         return matchId;
@@ -16,7 +21,7 @@ public class PredictionDTO {
         this.matchId = matchId;
     }
 
-    public int getHomeTeamGoals() {
+    public Integer getHomeTeamGoals() {
         return homeTeamGoals;
     }
 
@@ -24,7 +29,7 @@ public class PredictionDTO {
         this.homeTeamGoals = homeTeamGoals;
     }
 
-    public int getAwayTeamGoals() {
+    public Integer getAwayTeamGoals() {
         return awayTeamGoals;
     }
 
