@@ -28,18 +28,16 @@
             <table class="ranking">
             <tbody>
                 [#items as rankingEntry]
-                [#assign entryUser = rankingEntry.user]
-                [#assign score = rankingEntry.score]
-                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if entryUser.getId() == user.getId() ]ranking__current-user[/#if]">
+                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if rankingEntry.user.getId() == user.getId() ]ranking__current-user[/#if]">
                     <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
                     <td class="ranking__name">
-                        <h2 class="h6 ranking__display-name">${ entryUser.displayName }</h2>
+                        <h2 class="h6 ranking__display-name">${ rankingEntry.user.displayName }</h2>
                         <div class="ranking__meta">
-                            <span class="ranking__full-name">${ entryUser.username }</span>
+                            <span class="ranking__full-name">${ rankingEntry.user.username }</span>
                             <span class="ranking__department">afdeling</span>
                         </div>
                     </td>
-                    <td class="ranking__score">${score}</td>
+                    <td class="ranking__score">${ rankingEntry.score }</td>
                 </tr>
                 [/#items]
             </tbody>
