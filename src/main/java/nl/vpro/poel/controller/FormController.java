@@ -82,8 +82,7 @@ class FormController {
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
-                // TODO: Put errors in FlashMap to show to user?
-                logger.warn("{} submitted a form with an error: {}", user, error);
+                logger.debug("{} submitted a form with an error: {}", user, error);
             }
             return "redirect:/form";
         }
