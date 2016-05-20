@@ -7,10 +7,8 @@ public class PredictionDTO {
     @NotNull
     private Long matchId;
 
-    @NotNull
     private Integer homeTeamGoals;
 
-    @NotNull
     private Integer awayTeamGoals;
 
     public Long getMatchId() {

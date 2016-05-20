@@ -34,20 +34,29 @@ public class PredictionServiceImpl implements PredictionService {
     @Override
     public void save(User user, PredictionForm predictionForm, Instant submittedAt) {
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
+            Integer homeTeamGoals = predictionDTO.getHomeTeamGoals();
+            Integer awayTeamGoals = predictionDTO.getAwayTeamGoals();
+
+            if (homeTeamGoals == null || awayTeamGoals == null) {
+                logger.debug("Ignoring incomplete prediction {} from {}", predictionDTO, user);
+                continue;
+            }
+
             Long matchId = predictionDTO.getMatchId();
             Match match = matchService.findById(matchId).orElseThrow(() -> new RuntimeException("Ignoring " + predictionDTO + ", unable to find match for id " + matchId));
 
             Instant matchStart = match.getStart().toInstant();
-            if (submittedAt.isBefore(matchStart)) {
-                MatchResult predictedResult = new MatchResult(predictionDTO.getHomeTeamGoals(), predictionDTO.getAwayTeamGoals());
-                Prediction prediction = predictionRepository.findOneByUserAndMatch(user, match)
-                        .orElseGet(() -> new Prediction(user, match, null));
-
-                prediction.setMatchResult(predictedResult);
-                predictionRepository.save(prediction);
-            } else {
-                logger.warn("{} submitted {} for ", user, predictionDTO);
+            if (submittedAt.isAfter(matchStart)) {
+                logger.info("Ignore prediction {} from {}, submitted after match start", predictionDTO, user);
+                continue;
             }
+
+            Prediction prediction = predictionRepository.findOneByUserAndMatch(user, match)
+                    .orElseGet(() -> new Prediction(user, match, null));
+
+            MatchResult predictedResult = new MatchResult(homeTeamGoals, awayTeamGoals);
+            prediction.setMatchResult(predictedResult);
+            predictionRepository.save(prediction);
         }
     }
 
