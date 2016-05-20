@@ -85,7 +85,7 @@ class FormController {
                 // TODO: Put errors in FlashMap to show to user?
                 logger.warn("{} submitted a form with an error: {}", user, error);
             }
-            return "form";
+            return "redirect:/form";
         }
 
         predictionService.save(user, predictions, submittedAt);
