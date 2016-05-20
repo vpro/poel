@@ -15,10 +15,6 @@
 
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
-        <form action="#" class="form" method="post">
-
-            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-
             <div class="grid prediction-form-container">
 
                 [#if finished?has_content]
@@ -133,37 +129,44 @@
 
                         [#list future]
 
-                            <div class="col-gutter collapsible-section-content">
-                                [#items as matchEntry]
-                                    [#assign match = matchEntry.match]
-                                    [#assign prediction = matchEntry.prediction ! ]
-                                    [#assign hasPrediction = prediction ? has_content]
+                            <form action="#" class="form" method="post">
 
-                                    <div>
-                                        <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
-                                        <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
+                                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-                                        <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
-                                        <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+                                <div class="col-gutter collapsible-section-content">
+                                    [#items as matchEntry]
+                                        [#assign match = matchEntry.match]
+                                        [#assign prediction = matchEntry.prediction ! ]
+                                        [#assign hasPrediction = prediction ? has_content]
 
-                                    </div>
+                                        <div>
+                                            <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
+                                            <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
 
-                                [/#items]
-                            </div>
+                                            <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
+                                            <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+
+                                        </div>
+
+                                    [/#items]
+                                </div>
+
+                                <div class="prediction-form-button-container">
+                                    <button class="h5 button submit-button" type="submit">Opslaan</button>
+                                    <button class="h5 button reset-button" type="reset">Annuleren</button>
+                                </div>
+
+                            </form>
+
                         [#else]
                             <div>Geen wedstrijden beschikbaar</div>
                         [/#list]
+
                     [/@layout.sectionWithLayout]
+
                 [/#if]
 
             </div>
-
-            <div class="prediction-form-button-container">
-                <button class="h5 button submit-button" type="submit">Opslaan</button>
-                <button class="h5 button reset-button" type="reset">Annuleren</button>
-            </div>
-
-        </form>
 
         [@footerUtil.footer /]
 
