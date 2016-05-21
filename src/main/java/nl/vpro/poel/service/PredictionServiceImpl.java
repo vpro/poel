@@ -34,15 +34,15 @@ public class PredictionServiceImpl implements PredictionService {
     @Override
     public void save(User user, PredictionForm predictionForm, Instant submittedAt) {
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
+            Long matchId = predictionDTO.getMatchId();
             Integer homeTeamGoals = predictionDTO.getHomeTeamGoals();
             Integer awayTeamGoals = predictionDTO.getAwayTeamGoals();
 
-            if (homeTeamGoals == null || awayTeamGoals == null) {
+            if (matchId == null || homeTeamGoals == null || awayTeamGoals == null) {
                 logger.debug("Ignoring incomplete prediction {} from {}", predictionDTO, user);
                 continue;
             }
 
-            Long matchId = predictionDTO.getMatchId();
             Match match = matchService.findById(matchId).orElseThrow(() -> new RuntimeException("Ignoring " + predictionDTO + ", unable to find match for id " + matchId));
 
             Instant matchStart = match.getStart().toInstant();

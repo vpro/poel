@@ -1,10 +1,9 @@
 package nl.vpro.poel.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 public class PredictionDTO {
 
-    @NotNull
     private Long matchId;
 
     private Integer homeTeamGoals;

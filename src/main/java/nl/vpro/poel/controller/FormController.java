@@ -12,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
@@ -77,16 +75,9 @@ class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(Principal principal, @Valid @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
+    String handleFormSubmit(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
         Instant submittedAt = Instant.now();
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
-        if (bindingResult.hasErrors()) {
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                logger.debug("{} submitted a form with an error: {}", user, error);
-            }
-            return "redirect:/form";
-        }
-
         predictionService.save(user, predictions, submittedAt);
         return "redirect:/form";
     }

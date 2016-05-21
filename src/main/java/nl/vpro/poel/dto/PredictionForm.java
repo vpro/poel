@@ -2,7 +2,6 @@ package nl.vpro.poel.dto;
 
 import java.util.List;
 
-// TODO: Validator
 public class PredictionForm {
 
     private List<PredictionDTO> predictions;
