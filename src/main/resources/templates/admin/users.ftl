@@ -1,7 +1,7 @@
-[#import "macros/head.ftl" as headUtil]
-[#import "macros/footer.ftl" as footerUtil]
+[#import "../macros/head.ftl" as headUtil]
+[#import "../macros/footer.ftl" as footerUtil]
 
-[#import "macros/navigation.ftl" as navigationUtil]
+[#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -30,7 +30,6 @@
 
             <p>
                 Todo: <br />
-                Matches beheer (aanmaken en score)<br />
                 Een melding beheren die op de invulpagina's te zien is<br />
                 Een export van emailadressen kunnen doen<br />
                 Gebruikersgroepen kunnen aanmaken<br />

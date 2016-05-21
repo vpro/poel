@@ -1,7 +1,7 @@
-[#import "macros/head.ftl" as headUtil]
-[#import "macros/footer.ftl" as footerUtil]
+[#import "../macros/head.ftl" as headUtil]
+[#import "../macros/footer.ftl" as footerUtil]
 
-[#import "macros/navigation.ftl" as navigationUtil]
+[#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -17,7 +17,7 @@
         <form>
         <ul>
             [#items as match]
-            <li>${match.homeTeam.name} - ${match.awayTeam.name}</li>
+            <li>${match.homeTeam} - ${match.awayTeam}</li>
             [/#items]
         </ul>
         </form>
@@ -25,6 +25,8 @@
             No matches at this time, sorry!
         [/#list]
         </div>
+
+        TODO: Matches beheer (aanmaken en score)<br />
 
     [@footerUtil.footer /]
     </body>
