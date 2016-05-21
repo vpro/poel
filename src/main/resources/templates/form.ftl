@@ -139,12 +139,12 @@
                                         [#assign prediction = matchEntry.prediction ! ]
                                         [#assign hasPrediction = prediction ? has_content]
 
-                                        <div>
+                                        <div class="match-prediction">
                                             <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
                                             <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
 
-                                            <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
-                                            <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+                                            <input class="home-prediction" type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
+                                            <input class="away-prediction" type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
 
                                         </div>
 
@@ -169,6 +169,14 @@
             </div>
 
         [@footerUtil.footer /]
+
+        <script>
+            System.import( '/js/form/controllers/FormController.js' ).then( function ( formControllerModule ) {
+
+                new formControllerModule.default( document.querySelectorAll( 'form' ) );
+
+            } );
+        </script>
 
     </body>
 </html>

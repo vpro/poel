@@ -27,3 +27,8 @@ input:disabled{
     background: #666;
     color: #fff;
 }
+
+.not-valid input {
+    background: #f00;
+    color: #fff;
+}

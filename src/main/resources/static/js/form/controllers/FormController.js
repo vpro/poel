@@ -1,34 +1,34 @@
 import Stapes from 'stapes';
 import $ from 'jquery';
 
-import FormEntry from '../models/FormEntry.js';
-import FormText from '../models/FormText.js';
-import FormatDate from '../../util/FormatDate.js';
+//import FormEntry from '../models/FormEntry.js';
+//import FormText from '../models/FormText.js';
+//import FormatDate from '../../util/FormatDate.js';
 
 
-/** HANDLEBARS + HELPERS */
-import HandlebarsRuntime from 'handlebars-runtime';
-import formTemplate from '../views/form.hbs!';
-import formEntryTemplate from '../views/form-entry.hbs!';
-import formTextTemplate from '../views/form-text.hbs!';
+///** HANDLEBARS + HELPERS */
+//import HandlebarsRuntime from 'handlebars-runtime';
+//import formTemplate from '../views/form.hbs!';
+//import formEntryTemplate from '../views/form-entry.hbs!';
+//import formTextTemplate from '../views/form-text.hbs!';
 
-HandlebarsRuntime.registerPartial( 'entry', formEntryTemplate );
-HandlebarsRuntime.registerPartial( 'text', formTextTemplate );
+//HandlebarsRuntime.registerPartial( 'entry', formEntryTemplate );
+//HandlebarsRuntime.registerPartial( 'text', formTextTemplate );
 
-HandlebarsRuntime.registerHelper('formatDate', function ( date, format ) {
-    return date.toLocaleString( format );
-});
+//HandlebarsRuntime.registerHelper('formatDate', function ( date, format ) {
+//    return date.toLocaleString( format );
+//});
 
-HandlebarsRuntime.registerHelper('formatResult', function ( result ) {
-    return result.join(' - ');
-});
+//HandlebarsRuntime.registerHelper('formatResult', function ( result ) {
+//    return result.join(' - ');
+//});
 
-HandlebarsRuntime.registerHelper('predictionEntry', function ( prediction, id, index ) {
-    return ''.concat(
-            '<input type="text" class="prediction" value="',
-            ( ( prediction[ index ] !== -1 ) ? prediction[ index ] : '' ),
-                '" name="prediction-'+ id +'-'+ index +'" id="prediction-'+ id +'-'+ index +'" />');
-});
+//HandlebarsRuntime.registerHelper('predictionEntry', function ( prediction, id, index ) {
+//    return ''.concat(
+//            '<input type="text" class="prediction" value="',
+//            ( ( prediction[ index ] !== -1 ) ? prediction[ index ] : '' ),
+//                '" name="prediction-'+ id +'-'+ index +'" id="prediction-'+ id +'-'+ index +'" />');
+//});
 
 /** ****************************/
 /** ****************************/
@@ -39,25 +39,86 @@ var FormController = Stapes.subclass({
     /**
      * @param {HTMLElement} container
      */
-    constructor : function ( container ) {
-        this.$container = $( container );
+    constructor : function ( form ) {
+
+        this.$form = $( form );
+
+        this.$matchPredictions = this.$form.find( '.match-prediction' );
 
         this.bindViewHandlers();
 
-        this.fetchForm().then( function ( form ) {
+//        this.fetchForm().then( function ( form ) {
 
-            this.form = form;
-            this.render();
+//            this.form = form;
+//            this.render();
 
-        }.bind( this ) );
+//        }.bind( this ) );
     },
+
+
+/*
+    onChange
+        validate
+            loop over each future match
+                home > -1 && away > -1
+                    show submit
+                else
+                    show warning
+*/
+
 
     bindViewHandlers: function () {
 
-        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
-        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
+        this.$form.change( function( ) {
 
-        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
+            this.validateMatchPredictions();
+
+        }.bind( this ));
+
+//        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
+//        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
+
+//        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
+    },
+
+    validateMatchPredictions: function(){
+
+        this.$matchPredictions.each( function( i, matchPrediction ){
+
+            var $matchPrediction = $( matchPrediction );
+
+            var homePrediction = $matchPrediction.find( '.home-prediction' ).val();
+            var awayPrediction = $matchPrediction.find( '.away-prediction' ).val();
+
+            if( homePrediction.length < 1 && awayPrediction.length < 1) {
+
+                $matchPrediction.removeClass( 'not-valid' );
+
+                // both fields are empty so there's no need to validate
+
+                // show how much time the user has left to predict the outcome
+                // before the match takes place
+                // matchTime - currentTime
+
+            } else {
+
+                if(
+                   ( homePrediction.length > 0 && awayPrediction.length > 0 )
+                    && ( isNumeric( homePrediction ) && isNumeric( awayPrediction ) )
+                    && ( homePrediction > -1 && awayPrediction > -1 )
+                    && ( ( homePrediction.length > 1 && homePrediction.indexOf( 0 ) === 0 ) !== true )
+                    && ( ( awayPrediction.length > 1 && awayPrediction.indexOf( 0 ) === 0 ) !== true )
+                ){
+                    // All is well
+                    $matchPrediction.removeClass( 'not-valid' );
+                } else {
+                    $matchPrediction.addClass( 'not-valid' );
+                }
+
+            }
+
+        }.bind( this ));
+
     },
 
     /**
@@ -181,5 +242,8 @@ var FormController = Stapes.subclass({
     }
 });
 
+function isNumeric(n) {
+    return ! isNaN( parseFloat( n ) ) && isFinite( n );
+}
 
 export default FormController;
