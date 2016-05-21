@@ -39,7 +39,7 @@ public class PredictionServiceImpl implements PredictionService {
             Integer awayTeamGoals = predictionDTO.getAwayTeamGoals();
 
             if (matchId == null || homeTeamGoals == null || awayTeamGoals == null) {
-                logger.debug("Ignoring incomplete prediction {} from {}", predictionDTO, user);
+                logger.info("Ignoring incomplete prediction {} from {}", predictionDTO, user);
                 continue;
             }
 
@@ -47,7 +47,7 @@ public class PredictionServiceImpl implements PredictionService {
 
             Instant matchStart = match.getStart().toInstant();
             if (submittedAt.isAfter(matchStart)) {
-                logger.info("Ignore prediction {} from {}, submitted after match start", predictionDTO, user);
+                logger.info("Ignoring prediction {} from {}, submitted after match start", predictionDTO, user);
                 continue;
             }
 
