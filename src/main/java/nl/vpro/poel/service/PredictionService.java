@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface PredictionService {
 
-    void save(User user, PredictionForm predictionForm, Instant submittedAt);
+    int save(User user, PredictionForm predictionForm, Instant submittedAt);
 
     List<Prediction> getPredictions(User user);
 

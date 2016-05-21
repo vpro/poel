@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.Instant;
@@ -75,10 +76,11 @@ class FormController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    String handleFormSubmit(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult) {
+    String handleFormSubmit(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Instant submittedAt = Instant.now();
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
-        predictionService.save(user, predictions, submittedAt);
+        int updates = predictionService.save(user, predictions, submittedAt);
+        redirectAttributes.addFlashAttribute("flash", updates + " voorspelling(en) opgeslagen");
         return "redirect:/form";
     }
 }

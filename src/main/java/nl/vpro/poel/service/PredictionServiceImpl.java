@@ -31,8 +31,17 @@ public class PredictionServiceImpl implements PredictionService {
         this.matchService = matchService;
     }
 
+    /**
+     * Save the predictions from a form submission.
+     *
+     * @param user The user that submitted the predictions
+     * @param predictionForm The form containing the submitted predictions
+     * @param submittedAt The moment the predictions were submitted
+     * @return The number of updated predictions
+     */
     @Override
-    public void save(User user, PredictionForm predictionForm, Instant submittedAt) {
+    public int save(User user, PredictionForm predictionForm, Instant submittedAt) {
+        int updates = 0;
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
             Long matchId = predictionDTO.getMatchId();
             Integer homeTeamGoals = predictionDTO.getHomeTeamGoals();
@@ -57,7 +66,9 @@ public class PredictionServiceImpl implements PredictionService {
             MatchResult predictedResult = new MatchResult(homeTeamGoals, awayTeamGoals);
             prediction.setMatchResult(predictedResult);
             predictionRepository.save(prediction);
+            updates++;
         }
+        return updates;
     }
 
     @Override

@@ -13,6 +13,13 @@
 
     <body>
 
+        [#-- TODO: Make this less intrusive and prettier --]
+        [#if flash ? has_content]
+            <script type="application/javascript">
+                window.alert("${flash}");
+            </script>
+        [/#if]
+
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
 
             <div class="grid prediction-form-container">
