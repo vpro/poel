@@ -2,12 +2,12 @@
 <html lang="nl">
 
 [#import "macros/head.ftl" as headUtil]
-    [#import "macros/footer.ftl" as footerUtil]
+[#import "macros/footer.ftl" as footerUtil]
 
-    [#import "macros/navigation.ftl" as navigationUtil]
+[#import "macros/navigation.ftl" as navigationUtil]
 
-    [#import "macros/form.ftl" as formUtil]
-    [#import "macros/layout.ftl" as layout]
+[#import "macros/form.ftl" as formUtil]
+[#import "macros/layout.ftl" as layout]
 
     [@headUtil.head title='Poel invullen: ${ user.displayName }' /]
 
@@ -32,13 +32,14 @@
                         title='wedstrijden: eerder gespeeld'
                         backGroundColor="greybat"
                         addContainerCss=''
+                        addCss='prediction-section'
                         closeColorClass='bg-greybat'
-                        openColorClass='bg-green'
+                        openColorClass='bg-darkgreen'
                     ]
 
                         [#list finished]
 
-                            <div class="col-gutter collapsible-section-content">
+                            <div class="collapsible-section-content">
                                 [#items as matchEntry]
 
                                     [#assign match = matchEntry.match]
@@ -47,23 +48,34 @@
                                     [#assign hasPrediction = prediction ? has_content]
                                     [#assign score = matchEntry.score ! ]
 
-                                    <div>
-                                        <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
+                                <table class="predictions">
+                                    <tbody>
+                                    <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                        <td class="prediction__game">
+                                            <span class=" ">${match.homeTeam} - ${match.awayTeam}</span>
+                                        </td>
+                                        <td class="prediction__predicted">
+                                            <input type="number" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
+                                            -
+                                            <input type="number" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
+                                        </td>
+                                        <td class="prediction__score">
+                                            <span class='prediction__points prediction__points-${score} '>${score}</span>
+                                        </td>
 
-                                        <input type="number" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                        -
-                                        <input type="number" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
-
-                                        <span>Score: ${score}</span>
-
-                                    </div>
-
-                                    <div>
-                                        Uitslag:
-                                        <input type="number" value="${result.homeTeamGoals}" disabled />
-                                        -
-                                        <input type="number" value="${result.awayTeamGoals}" disabled />
-                                    </div>
+                                    </tr>
+                                    <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                        <td class="prediction__result-title" >Uitslag:</td>
+                                        <td class="prediction__result">
+                                            <input type="number" value="${result.homeTeamGoals}" disabled />
+                                            -
+                                            <input type="number" value="${result.awayTeamGoals}" disabled />
+                                        </td>
+                                        <td class="prediction__score">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
 
                                 [/#items]
                             </div>
@@ -83,34 +95,54 @@
                         title='wedstrijden: nu'
                         backGroundColor="greybat"
                         addContainerCss=''
+                        addCss='prediction-section'
                         closeColorClass='bg-greybat'
                         openColorClass='bg-darkgreen'
                         opened=false
                     ]
 
                         [#list unfinished]
-                            <div class="col-gutter collapsible-section-content">
+                            <div class="collapsible-section-content">
                                 [#items as matchEntry]
                                     [#assign match = matchEntry.match]
                                     [#assign prediction = matchEntry.prediction ! ]
                                     [#assign hasPrediction = prediction ? has_content]
                                     [#assign score = matchEntry.score ! ]
-                                    <div>
-                                        <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
 
-                                        <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                        -
-                                        <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
-                                        <span>Score: ${score}</span>
-                                    </div>
+                                <table class="predictions">
+                                    <tbody>
+                                    <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                        <td class="prediction__game">
+                                            <span class=" ">${match.homeTeam} - ${match.awayTeam}</span>
 
-                                    <div>
-                                        Uitslag:
-                                        <input type="number" value="${result.homeTeamGoals}" disabled />
-                                        -
-                                        <input type="number" value="${result.awayTeamGoals}" disabled />
-                                    </div>
+                                        </td>
 
+                                        <td class="prediction__predicted">
+                                            <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
+                                            -
+                                            <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
+                                        </td>
+
+                                        <td class="prediction__score">
+                                            <span class='prediction__points prediction__points-${score} '>${score}</span>
+                                        </td>
+
+
+                                    </tr>
+
+                                    <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                        <td class="prediction__result-title" >Uitslag:</td>
+                                        <td class="prediction__result" >
+
+                                            <input type="number" value="${result.homeTeamGoals}" disabled />
+                                            -
+                                            <input type="number" value="${result.awayTeamGoals}" disabled />
+                                        </td>
+                                        <td class="prediction__score">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
                                 [/#items]
                             </div>
                         [#else]
@@ -129,8 +161,9 @@
                         title='wedstrijden: later'
                         backGroundColor="greybat"
                         addContainerCss=''
+                        addCss='prediction-section'
                         closeColorClass='bg-greybat'
-                        openColorClass='bg-green'
+                        openColorClass='bg-darkgreen'
                         opened=true
                     ]
 
@@ -140,20 +173,32 @@
 
                                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-                                <div class="col-gutter collapsible-section-content">
+                                <div class="collapsible-section-content">
                                     [#items as matchEntry]
                                         [#assign match = matchEntry.match]
                                         [#assign prediction = matchEntry.prediction ! ]
                                         [#assign hasPrediction = prediction ? has_content]
 
-                                        <div class="match-prediction">
-                                            <span class="section-with-layout-title h5">${match.homeTeam} - ${match.awayTeam}</span>
-                                            <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
 
-                                            <input class="home-prediction" type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
-                                            <input class="away-prediction" type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+                                    <table class="predictions">
+                                        <tbody>
+                                        <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                            <td class="prediction__game">
+                                                <span class=" ">${match.homeTeam} - ${match.awayTeam}</span>
+                                                <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
+                                            </td>
 
-                                        </div>
+                                            <td class="prediction__predicted">
+                                                <input class="home-prediction" type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
+                                                <input class="away-prediction" type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
 
                                     [/#items]
                                 </div>

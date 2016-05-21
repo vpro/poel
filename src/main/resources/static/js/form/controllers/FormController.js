@@ -47,50 +47,50 @@ var FormController = Stapes.subclass({
 
         this.bindViewHandlers();
 
-//        this.fetchForm().then( function ( form ) {
+        //        this.fetchForm().then( function ( form ) {
 
-//            this.form = form;
-//            this.render();
+        //            this.form = form;
+        //            this.render();
 
-//        }.bind( this ) );
+        //        }.bind( this ) );
     },
 
 
-/*
-    onChange
-        validate
-            loop over each future match
-                home > -1 && away > -1
-                    show submit
-                else
-                    show warning
-*/
+    /*
+        onChange
+            validate
+                loop over each future match
+                    home > -1 && away > -1
+                        show submit
+                    else
+                        show warning
+    */
 
 
     bindViewHandlers: function () {
 
-        this.$form.change( function( ) {
+        this.$form.change( function ( ) {
 
             this.validateMatchPredictions();
 
-        }.bind( this ));
+        }.bind( this ) );
 
-//        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
-//        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
+        //        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
+        //        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
 
-//        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
+        //        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
     },
 
-    validateMatchPredictions: function(){
+    validateMatchPredictions: function () {
 
-        this.$matchPredictions.each( function( i, matchPrediction ){
+        this.$matchPredictions.each( function ( i, matchPrediction ) {
 
             var $matchPrediction = $( matchPrediction );
 
             var homePrediction = $matchPrediction.find( '.home-prediction' ).val();
             var awayPrediction = $matchPrediction.find( '.away-prediction' ).val();
 
-            if( homePrediction.length < 1 && awayPrediction.length < 1) {
+            if( homePrediction.length < 1 && awayPrediction.length < 1 ) {
 
                 $matchPrediction.removeClass( 'not-valid' );
 
@@ -108,7 +108,7 @@ var FormController = Stapes.subclass({
                     && ( homePrediction > -1 && awayPrediction > -1 )
                     && ( ( homePrediction.length > 1 && homePrediction.indexOf( 0 ) === 0 ) !== true )
                     && ( ( awayPrediction.length > 1 && awayPrediction.indexOf( 0 ) === 0 ) !== true )
-                ){
+                ) {
                     // All is well
                     $matchPrediction.removeClass( 'not-valid' );
                 } else {
@@ -117,7 +117,7 @@ var FormController = Stapes.subclass({
 
             }
 
-        }.bind( this ));
+        }.bind( this ) );
 
     },
 
@@ -242,7 +242,7 @@ var FormController = Stapes.subclass({
     }
 });
 
-function isNumeric(n) {
+function isNumeric ( n ) {
     return ! isNaN( parseFloat( n ) ) && isFinite( n );
 }
 
