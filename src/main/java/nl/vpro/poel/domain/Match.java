@@ -22,7 +22,7 @@ public class Match {
     @Column(nullable = false)
     private String awayTeam;
 
-    // Both Hibernate 4.x and Freemarker 2.3.x are not ready for use with java.time.Instant yet, so let's use this old skool type
+    // Both Hibernate 4.x and Freemarker 2.3.x are not ready for use with java.time.* yet, so let's use this old skool type
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date start = null;
