@@ -1,14 +1,14 @@
 package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.dto.MatchForm;
 import nl.vpro.poel.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -43,5 +43,21 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public List<Match> findMatchesToPredict(Instant instant) {
         return matchRepository.findByMatchResultIsNullAndStartIsAfter(Date.from(instant));
+    }
+
+    @Override
+    public void setMatches(MatchForm matchForm) {
+        Set<Long> idsToRemove = findAll().stream().map(Match::getId).collect(Collectors.toSet());
+
+        for (Match match : matchForm.getMatches()) {
+            Long id = match.getId();
+            if (id != null) {
+                idsToRemove.remove(id);
+            }
+            matchRepository.save(match);
+        }
+
+        // Matches not included in the form are deleted from the repository
+        idsToRemove.stream().forEach(matchRepository::delete);
     }
 }

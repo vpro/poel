@@ -1,6 +1,7 @@
 package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.dto.MatchForm;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,4 +20,6 @@ public interface MatchService {
     List<Match> findAllUnfinished(Instant instant);
 
     List<Match> findMatchesToPredict(Instant instant);
+
+    void setMatches(MatchForm matchForm);
 }
