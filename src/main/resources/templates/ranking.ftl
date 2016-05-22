@@ -24,7 +24,7 @@
         [@layout.sectionWithLayout
             content={"layout":"100"}
             title='spelers'
-            collapsible=true
+            collapsible=false
             opened=true
             addCss='ranking-section'
             addContainerCss='bg-darkgreen'
