@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+/**
+ * This class adds model attributes that are common to all controllers.
+ */
 @ControllerAdvice
 public class PoelControllerAdvice {
 
