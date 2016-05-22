@@ -15,13 +15,13 @@ public class Message {
     private String key;
 
     @Column(nullable = false)
-    private String value;
+    private String text;
 
     Message() {} // For Hibernate
 
-    public Message(String key, String value) {
+    public Message(String key, String text) {
         this.key = key;
-        this.value = value;
+        this.text = text;
     }
 
     public Long getId() {
@@ -32,11 +32,41 @@ public class Message {
         return key;
     }
 
-    public String getValue() {
-        return value;
+    public String getText() {
+        return text;
     }
 
     public void setValue(String value) {
-        this.value = value;
+        this.text = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message = (Message) o;
+
+        if (id != null ? !id.equals(message.id) : message.id != null) return false;
+        if (key != null ? !key.equals(message.key) : message.key != null) return false;
+        return text != null ? text.equals(message.text) : message.text == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (key != null ? key.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", key='" + key + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

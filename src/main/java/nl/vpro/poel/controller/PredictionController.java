@@ -47,7 +47,7 @@ class PredictionController {
 
         Instant now = Instant.now();
 
-        String message = messageService.getValue("/predictions").orElse("");
+        String message = messageService.getText("/predictions").orElse("");
         List<Prediction> finished = toPredictions(matchService.findAllCompleted(), user);
         List<Prediction> unfinished = toPredictions(matchService.findAllUnfinished(now), user);
         List<Prediction> future = toPredictions(matchService.findMatchesToPredict(now), user);

@@ -13,7 +13,7 @@ public interface MessageService {
 
     Optional<Message> findByKey(String key);
 
-    Optional<String> getValue(String key);
+    Optional<String> getText(String key);
 
     List<Message> findAll();
 }
