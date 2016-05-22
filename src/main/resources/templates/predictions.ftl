@@ -201,8 +201,8 @@
                                             </td>
 
                                             <td class="prediction__predicted">
-                                                <input class="prediction home-prediction" type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
-                                                <input class="prediction away-prediction" type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+                                                <input class="prediction home-prediction" type="number" min="0" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
+                                                <input class="prediction away-prediction" type="number" min="0" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
                                             </td>
 
                                         </tr>

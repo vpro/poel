@@ -62,4 +62,40 @@ public class Match {
     public Date getStart() {
         return start;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Match match = (Match) o;
+
+        if (id != null ? !id.equals(match.id) : match.id != null) return false;
+        if (homeTeam != null ? !homeTeam.equals(match.homeTeam) : match.homeTeam != null) return false;
+        if (awayTeam != null ? !awayTeam.equals(match.awayTeam) : match.awayTeam != null) return false;
+        if (start != null ? !start.equals(match.start) : match.start != null) return false;
+        return matchResult != null ? matchResult.equals(match.matchResult) : match.matchResult == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (homeTeam != null ? homeTeam.hashCode() : 0);
+        result = 31 * result + (awayTeam != null ? awayTeam.hashCode() : 0);
+        result = 31 * result + (start != null ? start.hashCode() : 0);
+        result = 31 * result + (matchResult != null ? matchResult.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", homeTeam='" + homeTeam + '\'' +
+                ", awayTeam='" + awayTeam + '\'' +
+                ", start=" + start +
+                ", matchResult=" + matchResult +
+                '}';
+    }
 }
