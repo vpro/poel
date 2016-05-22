@@ -11,19 +11,19 @@
     "watch:css": "nodemon --ext scss --exec npm run build:css --watch src/main/resources/static/css/sass"
   },
   "dependencies": {
-    "flag-icon-css": "^2.3.0",
-    "handlebars": "^4.0.5",
-    "jquery": "^2.2.3",
+    "flag-icon-css": "2.3.0",
+    "handlebars": "4.0.5",
+    "jquery": "2.2.3",
     "plugin-hbs": "github:vpro/plugin-hbs",
-    "stapes": "^0.8.1",
-    "systemjs": "^0.19.27",
-    "systemjs-builder": "^0.15.16",
+    "stapes": "0.8.1",
+    "systemjs": "0.19.27",
+    "systemjs-builder": "0.15.16",
     "traceur": "0.0.108"
   },
   "devDependencies": {
-    "jscs": "^3.0.3",
-    "node-sass": "^3.7.0",
-    "nodemon": "^1.9.2",
-    "parallelshell": "^2.0.0"
+    "jscs": "3.0.3",
+    "node-sass": "3.7.0",
+    "nodemon": "1.9.2",
+    "parallelshell": "2.0.0"
   }
 }
