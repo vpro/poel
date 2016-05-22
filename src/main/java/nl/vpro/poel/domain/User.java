@@ -18,14 +18,18 @@ public class User {
     private Role role;
 
     @Column(nullable = false)
-    private String displayName;
+    private String realName;
+
+    @Column(nullable = false)
+    private String gameName;
 
     private User() {} // For Hibernate
 
-    public User(String username, Role role, String displayName) {
+    public User(String username, Role role, String realName, String gameName) {
         this.username = username;
         this.role = role;
-        this.displayName = displayName;
+        this.realName = realName;
+        this.gameName = gameName;
     }
 
     public Long getId() {
@@ -40,8 +44,12 @@ public class User {
         return role;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getRealName() {
+        return realName;
+    }
+
+    public String getGameName() {
+        return gameName;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class User {
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (role != user.role) return false;
-        return displayName != null ? displayName.equals(user.displayName) : user.displayName == null;
+        return realName != null ? realName.equals(user.realName) : user.realName == null;
 
     }
 
@@ -63,7 +71,7 @@ public class User {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (realName != null ? realName.hashCode() : 0);
         return result;
     }
 
@@ -73,7 +81,8 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", role=" + role +
-                ", displayName='" + displayName + '\'' +
+                ", realName='" + realName + '\'' +
+                ", gameName='" + gameName + '\'' +
                 '}';
     }
 }

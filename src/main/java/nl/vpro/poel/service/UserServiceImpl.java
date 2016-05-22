@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
-        User newUser = new User(username, Role.USER, username);
+        User newUser = new User(username, Role.USER, username, username);
         return userRepository.save(newUser);
     }
 }

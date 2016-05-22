@@ -23,7 +23,11 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user.getRole();
     }
 
-    public String getDisplayName() {
-        return user.getDisplayName();
+    public String getRealName() {
+        return user.getRealName();
+    }
+
+    public String getGameName() {
+        return user.getGameName();
     }
 }

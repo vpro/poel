@@ -17,10 +17,10 @@ public class RankingServiceImplTest {
 
         // TODO: If the score for a user was mockable, this could get a whole lot shorter
 
-        User jan = new User("Jan", Role.USER, "Jan");
-        User piet = new User("Piet", Role.ADMIN, "Piet");
-        User klaas = new User("Klaas", Role.USER, "Klaas");
-        User henk = new User("Henk", Role.ADMIN, "Henk");
+        User jan = new User("Jan", Role.USER, "Jan", "voetbalJan");
+        User piet = new User("Piet", Role.ADMIN, "Piet", "voetbalPiet");
+        User klaas = new User("Klaas", Role.USER, "Klaas", "voetbalKlaas");
+        User henk = new User("Henk", Role.ADMIN, "Henk", "voetbalHenk");
 
         Match A_B = new Match("A", "B", new Date(), new MatchResult(1, 0));
         Match A_C = new Match("A", "C", new Date(), new MatchResult(2, 2));

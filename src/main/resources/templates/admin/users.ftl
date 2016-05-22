@@ -13,15 +13,15 @@
 
     <div class="grid grid-gutter">
 
-            <h1 class="h4">Form for: ${ user.displayName }</h1>
+            <h1 class="h4">Form for: ${ user.realName }</h1>
 
-            Alleen admins zoals ${user.displayName} (${user.username}/${user.role}) kunnen dit zien!
+            Alleen admins zoals ${user.realName} (${user.username}/${user.role}) kunnen dit zien!
 
             [#list users]
                 <h2>Alle deelnemers</h2>
                 <ul>
                     [#items as u]
-                        <li>${u.displayName} (${u.username})</li>
+                        <li>${u.realName} (${u.username})</li>
                     [/#items]
                 </ul>
             [#else]
