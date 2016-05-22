@@ -50,17 +50,17 @@
                         [#list finished]
 
                             <div class="collapsible-section-content">
-                                [#items as matchEntry]
+                                [#items as prediction]
 
-                                    [#assign match = matchEntry.match]
+                                    [#assign match = prediction.match]
                                     [#assign result = match.matchResult]
-                                    [#assign prediction = matchEntry.prediction ! ]
-                                    [#assign hasPrediction = prediction ? has_content]
-                                    [#assign score = matchEntry.score ! ]
+                                    [#assign predictedResult = prediction.matchResult !]
+                                    [#assign hasPrediction = predictedResult ? has_content]
+                                    [#assign score = prediction.score]
 
                                 <table class="predictions">
                                     <tbody>
-                                    <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                    <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
                                         <td class="prediction__game">
                                             <span class="prediction__game-home">
                                                 <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
@@ -75,15 +75,15 @@
                                             </span>
                                         </td>
                                         <td class="prediction__predicted">
-                                            <input type="number" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                            <input type="number" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
+                                            <input type="number" [#if hasPrediction]value="${predictedResult.homeTeamGoals}"[/#if] disabled />
+                                            <input type="number" [#if hasPrediction]value="${predictedResult.awayTeamGoals}"[/#if] disabled />
                                         </td>
                                         <td class="prediction__score">
                                             <span class='prediction__points prediction__points-${score} '>${score}</span>
                                         </td>
 
                                     </tr>
-                                    <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                    <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
                                         <td class="prediction__result-title" >Uitslag:</td>
                                         <td class="prediction__result">
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
@@ -121,15 +121,14 @@
 
                         [#list unfinished]
                             <div class="collapsible-section-content">
-                                [#items as matchEntry]
-                                    [#assign match = matchEntry.match]
-                                    [#assign prediction = matchEntry.prediction ! ]
-                                    [#assign hasPrediction = prediction ? has_content]
-                                    [#assign score = matchEntry.score ! ]
+                                [#items as prediction]
+                                    [#assign match = prediction.match]
+                                    [#assign predictedResult = prediction.matchResult !]
+                                    [#assign hasPrediction = predictedResult ? has_content]
 
                                 <table class="predictions match-prediction">
                                     <tbody>
-                                    <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                    <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
                                         <td class="prediction__game">
                                             <span class="prediction__game-home">
                                                 <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
@@ -145,23 +144,16 @@
                                         </td>
 
                                         <td class="prediction__predicted">
-                                            <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                            <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
+                                            <input type="number" name="predictions[${prediction?index}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}"[/#if] disabled />
+                                            <input type="number" name="predictions[${prediction?index}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}"[/#if] disabled />
                                         </td>
-
-                                        <!--<td class="prediction__score">-->
-                                            <!--<span class='prediction__points prediction__points-${score} '>${score}</span>-->
-                                        <!--</td>-->
-
-
                                     </tr>
 
-                                    <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                    <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
                                         <td class="prediction__result-title" >
                                             Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
                                         </td>
                                         <td class="prediction__result" >
-
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
                                             <input type="number" value="${result.awayTeamGoals}" disabled />
                                         </td>
@@ -202,15 +194,16 @@
                                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                                 <div class="collapsible-section-content">
-                                    [#items as matchEntry]
-                                        [#assign match = matchEntry.match]
-                                        [#assign prediction = matchEntry.prediction ! ]
-                                        [#assign hasPrediction = prediction ? has_content]
+                                    [#items as prediction]
+                                        [#assign predictionId = prediction.id !]
+                                        [#assign match = prediction.match]
+                                        [#assign predictedResult = prediction.matchResult !]
+                                        [#assign hasPrediction = predictedResult ? has_content]
 
 
                                     <table class="predictions match-prediction">
                                         <tbody>
-                                        <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
+                                        <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
                                             <td class="prediction__game">
                                                 <span class="prediction__game-home">
                                                     <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
@@ -223,18 +216,19 @@
                                                     <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
                                                     ${ match.awayTeam }
                                                 </span>
-                                                <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
+                                                <input type="hidden" name="predictions[${prediction?index}].matchId" value="${match.id}"/>
+                                                [#if predictionId?has_content]
+                                                    <input type="hidden" name="predictions[${prediction?index}].predictionId" value="${predictionId}"/>
+                                                [/#if]
                                             </td>
 
                                             <td class="prediction__predicted">
-                                                <input class="prediction home-prediction" type="number" min="0" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}" [/#if] />
-                                                <input class="prediction away-prediction" type="number" min="0" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
+                                                <input class="prediction home-prediction" type="number" min="0" name="predictions[${prediction?index}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}" [/#if] />
+                                                <input class="prediction away-prediction" type="number" min="0" name="predictions[${prediction?index}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}" [/#if] />
                                             </td>
-
                                         </tr>
 
-
-                                        <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                        <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
                                             <td class="prediction__result-title" >
                                                 Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
 

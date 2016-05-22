@@ -2,7 +2,6 @@ package nl.vpro.poel.controller;
 
 import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.*;
-import nl.vpro.poel.dto.MatchEntry;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.MessageService;
@@ -48,9 +47,9 @@ class PredictionController {
 
         Instant now = Instant.now();
 
-        List<MatchEntry> finished = addUserPredictions(matchService.findAllCompleted(), user);
-        List<MatchEntry> unfinished = addUserPredictions(matchService.findAllUnfinished(now), user);
-        List<MatchEntry> future = addUserPredictions(matchService.findMatchesToPredict(now), user);
+        List<Prediction> finished = toPredictions(matchService.findAllCompleted(), user);
+        List<Prediction> unfinished = toPredictions(matchService.findAllUnfinished(now), user);
+        List<Prediction> future = toPredictions(matchService.findMatchesToPredict(now), user);
 
         Message predictionMessage = messageService.findByKey("/predictions").orElse(null);
 
@@ -65,21 +64,10 @@ class PredictionController {
     }
 
     // TODO: Move this logic out to a service?
-    private List<MatchEntry> addUserPredictions(List<Match> matches, User user) {
+    private List<Prediction> toPredictions(List<Match> matches, User user) {
         return matches.stream()
-                .map(match -> toMatchEntry(match, user))
+                .map(match -> predictionService.getPredictionForMatch(user, match).orElseGet(() -> new Prediction(user, match, null)))
                 .collect(Collectors.toList());
-    }
-
-    private MatchEntry toMatchEntry(Match match, User user) {
-        MatchResult predictedResult = null;
-        int score = 0;
-        Prediction prediction = predictionService.getPredictionForMatch(user, match).orElse(null);
-        if (prediction != null) {
-            predictedResult = prediction.getMatchResult();
-            score = prediction.getScore();
-        }
-        return new MatchEntry(match, predictedResult, score);
     }
 
     @RequestMapping(method = RequestMethod.POST)

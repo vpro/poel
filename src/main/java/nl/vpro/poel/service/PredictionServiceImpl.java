@@ -43,6 +43,9 @@ public class PredictionServiceImpl implements PredictionService {
     public int save(User user, PredictionForm predictionForm, Instant submittedAt) {
         int updates = 0;
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
+
+
+
             Long matchId = predictionDTO.getMatchId();
             Integer homeTeamGoals = predictionDTO.getHomeTeamGoals();
             Integer awayTeamGoals = predictionDTO.getAwayTeamGoals();
@@ -60,8 +63,16 @@ public class PredictionServiceImpl implements PredictionService {
                 continue;
             }
 
-            Prediction prediction = predictionRepository.findOneByUserAndMatch(user, match)
-                    .orElseGet(() -> new Prediction(user, match, null));
+            Prediction prediction = null;
+
+            Long predictionId = predictionDTO.getPredictionId();
+            if (predictionId != null) {
+                prediction = predictionRepository.findOne(predictionId);
+            }
+
+            if (prediction == null) {
+                prediction = new Prediction(user, match, null);
+            }
 
             MatchResult predictedResult = new MatchResult(homeTeamGoals, awayTeamGoals);
             prediction.setMatchResult(predictedResult);

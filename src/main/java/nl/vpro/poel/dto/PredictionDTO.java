@@ -2,11 +2,21 @@ package nl.vpro.poel.dto;
 
 public class PredictionDTO {
 
+    private Long predictionId;
+
     private Long matchId;
 
     private Integer homeTeamGoals;
 
     private Integer awayTeamGoals;
+
+    public Long getPredictionId() {
+        return predictionId;
+    }
+
+    public void setPredictionId(Long predictionId) {
+        this.predictionId = predictionId;
+    }
 
     public Long getMatchId() {
         return matchId;
@@ -35,7 +45,8 @@ public class PredictionDTO {
     @Override
     public String toString() {
         return "PredictionDTO{" +
-                "matchId=" + matchId +
+                "predictionId=" + predictionId +
+                ", matchId=" + matchId +
                 ", homeTeamGoals=" + homeTeamGoals +
                 ", awayTeamGoals=" + awayTeamGoals +
                 '}';

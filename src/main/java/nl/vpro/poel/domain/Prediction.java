@@ -31,6 +31,10 @@ public class Prediction {
         this.matchResult = matchResult;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Match getMatch() {
         return match;
     }
