@@ -50,16 +50,16 @@ public class DummyDataLoader {
         List<Match> defaultMatches = Arrays.asList(
 
                 // Finished
-                new Match("Zwitserland", "Frankrijk", lastWeek, new MatchResult(3, 1)),
-                new Match("België", "Engeland", lastWeek, new MatchResult(5, 4)),
+                new Match("ch", "fr", lastWeek, new MatchResult(3, 1)),
+                new Match("be", "gb-eng", lastWeek, new MatchResult(5, 4)),
 
                 // Unfinished
-                new Match("Frankrijk", "Duitsland", now),
-                new Match("Spanje", "Engeland", now),
+                new Match("fr", "de", now),
+                new Match("es", "gb-eng", now),
 
                 // Future
-                new Match("Portugal", "België", nextWeek),
-                new Match("Engeland", "Oostenrijk", nextWeek)
+                new Match("pt", "be", nextWeek),
+                new Match("gb-eng", "au", nextWeek)
         );
         matchRepository.save(defaultMatches);
     }

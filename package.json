@@ -13,12 +13,14 @@
     "vendor:stapes": "cp node_modules/stapes/stapes.min.js src/main/resources/static/vendor",
     "vendor:systemjs": "cp node_modules/systemjs/dist/system.js src/main/resources/static/vendor",
     "vendor:traceur": "cp node_modules/traceur/bin/traceur.js src/main/resources/static/vendor",
-    "vendor": "npm run vendor:handlebars && npm run vendor:jquery && npm run vendor:stapes && npm run vendor:systemjs && npm run vendor:traceur && npm run vendor:plugin-hbs",
+    "vendor:flag-icon-css": "cp -r node_modules/flag-icon-css/css src/main/resources/static/vendor && cp -r node_modules/flag-icon-css/flags src/main/resources/static/vendor",
+    "vendor": "npm run vendor:flag-icon-css && npm run vendor:handlebars && npm run vendor:jquery && npm run vendor:stapes && npm run vendor:systemjs && npm run vendor:traceur && npm run vendor:plugin-hbs",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "watch:js": "nodemon --ext js --exec npm run lint",
     "watch:css": "nodemon --ext scss --exec npm run build:css --watch src/main/resources/static/css/sass"
   },
   "dependencies": {
+    "flag-icon-css": "^2.3.0",
     "handlebars": "^4.0.5",
     "jquery": "^2.2.3",
     "plugin-hbs": "github:vpro/plugin-hbs",
