@@ -213,7 +213,7 @@
                                                 Wedstrijd op: ${match.start?string.medium}
 
                                                 [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
-                                                    <span class="prediction-deadline c-red bg-white"><i class="glyph glyph-alert c-red"></i> Let op: wedstrijd begint bijna! </span>
+                                                    <span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
                                                 [/#if]
 
                                             </td>
