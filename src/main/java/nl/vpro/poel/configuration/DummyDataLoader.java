@@ -59,7 +59,7 @@ public class DummyDataLoader {
 
                 // Future
                 new Match("pt", "be", nextWeek),
-                new Match("gb-eng", "au", nextWeek)
+                new Match("gb-eng", "at", nextWeek)
         );
         matchRepository.save(defaultMatches);
     }
