@@ -38,7 +38,7 @@ class AdminController {
     String showMatches(Model model) {
         List<Match> matches = matchService.findAll();
         model.addAttribute("matches", matches);
-        return "admin/matchForm";
+        return "admin/matches";
     }
 
     @RequestMapping(value = "/matches", method = RequestMethod.POST)
