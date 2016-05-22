@@ -12,16 +12,15 @@
 
     [@navigationUtil.navigation title='Profiel' back='/' /]
 
-        <div class="grid grid-gutter bg-white">
-            <h1 class="h4">Hallo gebruiker ${user.displayName} (${user.username}/${user.role})!</h1>
+        <div class="grid grid-gutter bg-blue">
+            <h1 class="h4">Hallo ${user.realName}!
+                (${user.username} / ${user.role} )!
+            </h1>
 
-            <p>
-                Todo: <br />
-
-                Een gebruiker kan hier z'n voetbalnaam invullen en opslaan  <br />
-                Een gebruiker ziet hier eventueel in welke afdeling hij geplaatst is? <br />
-
-            </p>
+            <form>
+                <input type="text" value="${user.gameName}"/>
+                <button type="submit">sla op</button>
+            </form>
 
         </div>
 

@@ -12,7 +12,7 @@
 
 [#include "macros/countries.ftl"]
 
-    [@headUtil.head title='Poel invullen: ${ user.displayName }' /]
+    [@headUtil.head title='Poel invullen: ${ user.realName }' /]
 
     <body>
 
@@ -26,7 +26,7 @@
         [/#if]
 
 
-        [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
+        [@navigationUtil.navigation title='Poel invullen' subtitle=user.realName back='/' /]
 
             [#if message ? has_content]
                 [@messageUtil.outputMessage message=message ! /]

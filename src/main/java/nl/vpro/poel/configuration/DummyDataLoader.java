@@ -36,10 +36,10 @@ public class DummyDataLoader {
 
     private void adminUsers() {
         List<User> admins = Arrays.asList(
-                new User("n.breunese@vpro.nl", Role.ADMIN, "Van Breunhorst"),
-                new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma"),
-                new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok"),
-                new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk")
+                new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst"),
+                new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic"),
+                new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich"),
+                new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst")
         );
         userRepository.save(admins);
     }
