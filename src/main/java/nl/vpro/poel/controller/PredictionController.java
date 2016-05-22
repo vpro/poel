@@ -5,6 +5,7 @@ import nl.vpro.poel.domain.*;
 import nl.vpro.poel.dto.MatchEntry;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
+import nl.vpro.poel.service.MessageService;
 import nl.vpro.poel.service.PredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,11 +27,14 @@ class PredictionController {
 
     private final MatchService matchService;
 
+    private final MessageService messageService;
+
     private final PredictionService predictionService;
 
     @Autowired
-    public PredictionController(MatchService matchService, PredictionService predictionService) {
+    public PredictionController(MatchService matchService, MessageService messageService, PredictionService predictionService) {
         this.matchService = matchService;
+        this.messageService = messageService;
         this.predictionService = predictionService;
     }
 
@@ -47,6 +51,12 @@ class PredictionController {
         List<MatchEntry> finished = addUserPredictions(matchService.findAllCompleted(), user);
         List<MatchEntry> unfinished = addUserPredictions(matchService.findAllUnfinished(now), user);
         List<MatchEntry> future = addUserPredictions(matchService.findMatchesToPredict(now), user);
+
+        Message predictionMessage = messageService.findByKey("/predictions").orElse(null);
+
+        if ( predictionMessage != null ) {
+            model.addAttribute("message", predictionMessage);
+        }
 
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
