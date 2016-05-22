@@ -13,23 +13,29 @@ var FormController = Stapes.subclass({
         this.$formReset = this.$form.find( 'button[type=reset]' );
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
+        this.$predictionInputs = this.$form.find( 'input.prediction' );
 
         this.initialFormState = this.$form.serialize();
 
-        this.bindViewHandlers();
+        this.bindHandlers();
 
     },
 
-    bindViewHandlers: function () {
+    bindHandlers: function () {
 
-        // a value in the form has changed
-        this.$form.change( function () {
+        this.$predictionInputs.each( function( i, el ){
 
-            this.checkFormChanges();
+            $( el ).on( 'keyup mouseup', function(){
+                this.checkFormChanges();
+                this.validateMatchPredictions();
+            }.bind( this ));
 
-            this.validateMatchPredictions();
+            el.addEventListener( 'mousewheel', function(){
+                this.checkFormChanges();
+                this.validateMatchPredictions();
+            }.bind( this ));
 
-        }.bind( this ) );
+        }.bind( this ));
 
         this.$formReset.on( 'click', function () {
 
