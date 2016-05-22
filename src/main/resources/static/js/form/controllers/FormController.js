@@ -70,9 +70,11 @@ var FormController = Stapes.subclass({
             } else {
 
                 if(
-                   ( homePrediction.length > 0 && awayPrediction.length > 0 )
-                    && ( isNumeric( homePrediction ) && isNumeric( awayPrediction ) )
-                    && ( homePrediction > -1 && awayPrediction > -1 )
+                    ( homePrediction.length > 0 && awayPrediction.length > 0 )
+                    && isNumeric( homePrediction )
+                    && isNumeric( awayPrediction )
+                    && homePrediction > -1
+                    && awayPrediction > -1
                     && ( ( homePrediction.length > 1 && homePrediction.indexOf( 0 ) === 0 ) !== true )
                     && ( ( awayPrediction.length > 1 && awayPrediction.indexOf( 0 ) === 0 ) !== true )
                 ) {
