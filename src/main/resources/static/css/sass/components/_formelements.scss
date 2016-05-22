@@ -30,6 +30,7 @@ input:disabled{
 
 .not-valid input {
     border-bottom: 2px solid red !important;
+    margin-bottom: -2px;
     box-sizing: content-box;
 }
 
