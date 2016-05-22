@@ -29,6 +29,9 @@
   }
 
   input {
+
+    font-family: $title-font;
+
     height: 3*$gu;
     width: 6*$gu;
 
@@ -106,7 +109,7 @@
 }
 
 .prediction__points-1 {
-    background-color: $greygrizzly;
+    background-color: $lightroyal;
 }
 
 .prediction__points-2 {
@@ -114,9 +117,9 @@
 }
 
 .prediction__points-3 {
-    background-color: $red;
+    background-color: $plum;
 }
 
 .prediction__points-6 {
-    background-color: $gold;
+    background-color: $red;
 }

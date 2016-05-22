@@ -109,7 +109,7 @@
                                     [#assign hasPrediction = prediction ? has_content]
                                     [#assign score = matchEntry.score ! ]
 
-                                <table class="predictions">
+                                <table class="predictions match-prediction">
                                     <tbody>
                                     <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__game">
@@ -180,7 +180,7 @@
                                         [#assign hasPrediction = prediction ? has_content]
 
 
-                                    <table class="predictions">
+                                    <table class="predictions match-prediction">
                                         <tbody>
                                         <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                             <td class="prediction__game">
