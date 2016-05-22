@@ -26,14 +26,11 @@ class PredictionController {
 
     private final MatchService matchService;
 
-    private final MessageService messageService;
-
     private final PredictionService predictionService;
 
     @Autowired
-    public PredictionController(MatchService matchService, MessageService messageService, PredictionService predictionService) {
+    public PredictionController(MatchService matchService, PredictionService predictionService) {
         this.matchService = matchService;
-        this.messageService = messageService;
         this.predictionService = predictionService;
     }
 
@@ -47,12 +44,10 @@ class PredictionController {
 
         Instant now = Instant.now();
 
-        String message = messageService.getText("/predictions").orElse("");
         List<Prediction> finished = toPredictions(matchService.findAllCompleted(), user);
         List<Prediction> unfinished = toPredictions(matchService.findAllUnfinished(now), user);
         List<Prediction> future = toPredictions(matchService.findMatchesToPredict(now), user);
 
-        model.addAttribute("message", message);
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
         model.addAttribute("future", future);
