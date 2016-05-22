@@ -29,8 +29,8 @@ input:disabled{
 }
 
 .not-valid input {
-    background: #f00;
-    color: #fff;
+    border-bottom: 2px solid red !important;
+    box-sizing: content-box;
 }
 
 button[type=reset]:disabled,

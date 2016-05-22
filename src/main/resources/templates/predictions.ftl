@@ -130,13 +130,13 @@
                                             <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
                                         </td>
 
-                                        <td class="prediction__score">
-                                            <span class='prediction__points prediction__points-${score} '>${score}</span>
-                                        </td>
+                                        <!--<td class="prediction__score">-->
+                                            <!--<span class='prediction__points prediction__points-${score} '>${score}</span>-->
+                                        <!--</td>-->
 
 
                                     </tr>
-
+<!--
                                     <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__result-title" >Uitslag:</td>
                                         <td class="prediction__result" >
@@ -148,6 +148,7 @@
                                         <td class="prediction__score">
                                         </td>
                                     </tr>
+-->
                                     </tbody>
                                     </table>
                                 [/#items]
