@@ -47,16 +47,12 @@ class PredictionController {
 
         Instant now = Instant.now();
 
+        String message = messageService.getValue("/predictions").orElse("");
         List<Prediction> finished = toPredictions(matchService.findAllCompleted(), user);
         List<Prediction> unfinished = toPredictions(matchService.findAllUnfinished(now), user);
         List<Prediction> future = toPredictions(matchService.findMatchesToPredict(now), user);
 
-        Message predictionMessage = messageService.findByKey("/predictions").orElse(null);
-
-        if ( predictionMessage != null ) {
-            model.addAttribute("message", predictionMessage);
-        }
-
+        model.addAttribute("message", message);
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
         model.addAttribute("future", future);

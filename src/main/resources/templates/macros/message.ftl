@@ -8,7 +8,7 @@
         title=''
         addCss='message'
         ]
-            <p class="message-text">${ message.value }</p>
+            <p class="message-text">${ message }</p>
         [/@layout.sectionWithLayout]
     </div>
 [/#macro]

@@ -27,5 +27,14 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public Optional<String> getValue(String key) {
+        Message message = messageRepository.findByKey(key);
+        if (message == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(message.getValue());
+    }
+
+    @Override
     public List<Message> findAll() { return messageRepository.findAll(); }
 }
