@@ -136,9 +136,9 @@
 
 
                                     </tr>
-<!--
+
                                     <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
-                                        <td class="prediction__result-title" >Uitslag:</td>
+                                        <td class="prediction__result-title" >Wedstrijd op: </td>
                                         <td class="prediction__result" >
 
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
@@ -148,7 +148,7 @@
                                         <td class="prediction__score">
                                         </td>
                                     </tr>
--->
+
                                     </tbody>
                                     </table>
                                 [/#items]
