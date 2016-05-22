@@ -179,7 +179,7 @@
 
 @mixin base-font-style() {
     @include default-font;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 3 * $gu;
     color: $default-color-text;
 }

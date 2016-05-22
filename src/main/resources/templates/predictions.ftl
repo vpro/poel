@@ -54,15 +54,20 @@
                                     <tbody>
                                     <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__game">
-                                            <span class=" ">
+                                            <span class="prediction__game-home">
                                                 <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
-                                                ${ match.homeTeam } - ${ match.awayTeam }
+                                                ${ match.homeTeam }
+                                            </span>
+                                            <span class="prediction__game-divider">
+                                                -
+                                            </span>
+                                            <span class="prediction__game-away">
                                                 <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                                                ${ match.awayTeam }
                                             </span>
                                         </td>
                                         <td class="prediction__predicted">
                                             <input type="number" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                            -
                                             <input type="number" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
                                         </td>
                                         <td class="prediction__score">
@@ -74,7 +79,6 @@
                                         <td class="prediction__result-title" >Uitslag:</td>
                                         <td class="prediction__result">
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
-                                            -
                                             <input type="number" value="${result.awayTeamGoals}" disabled />
                                         </td>
                                         <td class="prediction__score">
@@ -119,14 +123,21 @@
                                     <tbody>
                                     <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__game">
-                                            <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] ! }"></span>
-                                            ${ match.homeTeam } - ${ match.awayTeam }
-                                            <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                                            <span class="prediction__game-home">
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                                                ${ match.homeTeam }
+                                            </span>
+                                            <span class="prediction__game-divider">
+                                                -
+                                            </span>
+                                            <span class="prediction__game-away">
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                                                ${ match.awayTeam }
+                                            </span>
                                         </td>
 
                                         <td class="prediction__predicted">
                                             <input type="number" name="predictions[${matchEntry?index}].homeTeamGoals" [#if hasPrediction]value="${prediction.homeTeamGoals}"[/#if] disabled />
-                                            -
                                             <input type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}"[/#if] disabled />
                                         </td>
 
@@ -144,7 +155,6 @@
                                         <td class="prediction__result" >
 
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
-                                            -
                                             <input type="number" value="${result.awayTeamGoals}" disabled />
                                         </td>
                                         <td class="prediction__score">
@@ -194,9 +204,17 @@
                                         <tbody>
                                         <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                             <td class="prediction__game">
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
-                                                ${ match.homeTeam } - ${ match.awayTeam }
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                                                <span class="prediction__game-home">
+                                                    <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                                                    ${ match.homeTeam }
+                                                </span>
+                                                <span class="prediction__game-divider">
+                                                    -
+                                                </span>
+                                                <span class="prediction__game-away">
+                                                    <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                                                    ${ match.awayTeam }
+                                                </span>
                                                 <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
                                             </td>
 
@@ -213,7 +231,7 @@
                                                 Wedstrijd op: ${match.start?string.medium}
 
                                                 [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
-                                                    <span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
+                                                    <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
                                                 [/#if]
 
                                             </td>
