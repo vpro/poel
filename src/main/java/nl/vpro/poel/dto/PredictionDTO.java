@@ -1,7 +1,5 @@
 package nl.vpro.poel.dto;
 
-import javax.validation.constraints.Null;
-
 public class PredictionDTO {
 
     private Long matchId;
