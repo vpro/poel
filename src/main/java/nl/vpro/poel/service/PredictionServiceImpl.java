@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
@@ -40,6 +41,7 @@ public class PredictionServiceImpl implements PredictionService {
      * @return The number of updated predictions
      */
     @Override
+    @Transactional
     public int save(User user, PredictionForm predictionForm, Instant submittedAt) {
         int updates = 0;
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
