@@ -19,14 +19,14 @@
     titleFollowsTheme=false
     collapsible=false
     backGroundColor=""
-    openColorClass=''
-    closeColorClass=''
+    openColorClass=""
+    closeColorClass=""
     opened=false ]
 
     [#local layout = content.layout ! TWO_COLUMNS]
 
-<section class="section-with-layout ${ addCss } [#if collapsible]collapsible-section[/#if] [#if opened]collapsible-section-opened ${ openColorClass} [#else] ${ closeColorClass} [/#if]"
-        data-opencolor="${openColorClass}" data-closedcolor="${closeColorClass}">
+<section class="section-with-layout ${ addCss } [#if collapsible]collapsible-section [#if opened]collapsible-section-opened ${ openColorClass} [#else] ${ closeColorClass} [/#if][#else]${backGroundColor}[/#if]"
+         [#if collapsible]data-opencolor="${openColorClass}" data-closedcolor="${closeColorClass}"[/#if]>
 
     [#if collapsible]
         <div class="collapsible-section-header"></div>
