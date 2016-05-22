@@ -44,8 +44,6 @@ public class PredictionServiceImpl implements PredictionService {
         int updates = 0;
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
 
-
-
             Long matchId = predictionDTO.getMatchId();
             Integer homeTeamGoals = predictionDTO.getHomeTeamGoals();
             Integer awayTeamGoals = predictionDTO.getAwayTeamGoals();
@@ -68,9 +66,12 @@ public class PredictionServiceImpl implements PredictionService {
             Long predictionId = predictionDTO.getPredictionId();
             if (predictionId != null) {
                 prediction = predictionRepository.findOne(predictionId);
-            }
 
-            if (prediction == null) {
+                if (prediction == null) {
+                    logger.info("Ignore prediction {} from {}, because no prediction exists for this id", predictionDTO, user);
+                    continue;
+                }
+            } else {
                 prediction = new Prediction(user, match, null);
             }
 

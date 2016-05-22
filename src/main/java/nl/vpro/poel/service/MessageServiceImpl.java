@@ -18,7 +18,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Optional<Message> findById(Long id) {
-        return Optional.ofNullable(messageRepository.getOne(id));
+        return Optional.ofNullable(messageRepository.findOne(id));
     }
 
     @Override
