@@ -55,9 +55,9 @@
                                     <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__game">
                                             <span class=" ">
-                                                <span class="flag-icon flag-icon-${match.homeTeam}"></span>
-                                                ${countryCodes[match.homeTeam] ! } - ${countryCodes[match.awayTeam] !}
-                                                <span class="flag-icon flag-icon-${match.awayTeam}"></span>
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                                                ${ match.homeTeam } - ${ match.awayTeam }
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
                                             </span>
                                         </td>
                                         <td class="prediction__predicted">
@@ -119,9 +119,9 @@
                                     <tbody>
                                     <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__game">
-                                            <span class="flag-icon flag-icon-${match.homeTeam}"></span>
-                                            ${countryCodes[match.homeTeam] ! } - ${countryCodes[match.awayTeam] !}
-                                            <span class="flag-icon flag-icon-${match.awayTeam}"></span>
+                                            <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] ! }"></span>
+                                            ${ match.homeTeam } - ${ match.awayTeam }
+                                            <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
                                         </td>
 
                                         <td class="prediction__predicted">
@@ -192,9 +192,9 @@
                                         <tbody>
                                         <tr class="prediction__row prediction__row-${ matchEntry ? item_parity }">
                                             <td class="prediction__game">
-                                                <span class="flag-icon flag-icon-${match.homeTeam}"></span>
-                                                ${countryCodes[match.homeTeam] ! } - ${countryCodes[match.awayTeam] !}
-                                                <span class="flag-icon flag-icon-${match.awayTeam}"></span>
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                                                ${ match.homeTeam } - ${ match.awayTeam }
+                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
                                                 <input type="hidden" name="predictions[${matchEntry?index}].matchId" value="${match.id}"/>
                                             </td>
 

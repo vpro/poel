@@ -33,7 +33,7 @@ var FormController = Stapes.subclass({
 
         this.$formReset.on( 'click', function () {
 
-            setTimeout( function(){
+            setTimeout( function () {
 
                 this.checkFormChanges();
 
@@ -108,7 +108,7 @@ var FormController = Stapes.subclass({
     hasFormChangedSincePageLoad: function () {
 
         return this.$form.serialize() !== this.initialFormState;
-    },
+    }
 });
 
 function isNumeric ( n ) {
