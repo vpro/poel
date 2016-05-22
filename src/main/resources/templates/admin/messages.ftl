@@ -6,28 +6,41 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[@headUtil.head /]
-<body>
-[@navigationUtil.navigation /]
+    [@headUtil.head title='Berichten beheren' /]
+    <body>
+        [@navigationUtil.navigation title='Berichten beheren' /]
 
-<div class="grid grid-gutter">
-    <h1 class="h4">Messages</h1>
+        <div class="grid bg-green">
+            <div class="grid-gutter">
+                [#list messages]
+                <form action="/admin/messages" class="form" method="post">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-[#list messages]
-<form>
-<ul>
-    [#items as message]
-    <li>${message.key} - ${message.value}</li>
-    [/#items]
-</ul>
-</form>
-[#else]
-    No messages at this time, sorry!
-[/#list]
-</div>
+                    [#items as message]
+                    <input type="hidden" id="messages[${ message ? index }].id" value="${message.id}"/>
+                    <input type="hidden" id="messages[${ message ? index }].key" value="${message.key}"/>
+                    <div class="grid">
 
-TODO: Message beheer (aanpassen teksten)<br/>
+                        <div class="col col-3-1">
+                            <h2 class="h5 message-admin__key">${ message.key }</h2>
+                        </div>
+                        <div class="col col-3-2">
+                            <textarea id="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
+                        </div>
+                    </div>
+                    [/#items]
 
-[@footerUtil.footer /]
-</body>
+                    <div class="message-admin__form-buttons bg-green">
+                        <button class="h5 button submit-button" type="submit">Opslaan</button>
+                        <div class=""
+                    </div>
+                </form>
+                [#else]
+                    No messages at this time, sorry!
+                [/#list]
+            </div>
+        </div>
+
+        [@footerUtil.footer /]
+    </body>
 </html>

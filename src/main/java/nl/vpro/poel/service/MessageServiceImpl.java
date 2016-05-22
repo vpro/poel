@@ -1,12 +1,15 @@
 package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Message;
+import nl.vpro.poel.dto.MessageForm;
 import nl.vpro.poel.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -37,4 +40,20 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> findAll() { return messageRepository.findAll(); }
+
+    @Override
+    public void setMessages(MessageForm messageForm) {
+        Set<Long> idsToRemove = findAll().stream().map(Message::getId).collect(Collectors.toSet());
+
+        for (Message message : messageForm.getMessages()) {
+            Long id = message.getId();
+            if (id != null) {
+                idsToRemove.remove(id);
+            }
+            messageRepository.save(message);
+        }
+
+        // Messages not included in the form are deleted from the repository
+        idsToRemove.stream().forEach(messageRepository::delete);
+    }
 }

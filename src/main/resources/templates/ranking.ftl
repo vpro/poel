@@ -15,16 +15,13 @@
 
     [@navigationUtil.navigation title='Poelstand' back='/' /]
 
-    [#if message ? has_content]
-        [@messageUtil.outputMessage message=message ! /]
-    [/#if]
-
+    [@messageUtil.outputMessage message=message ! /]
 
     <div class="grid bg-darkgreen">
         [@layout.sectionWithLayout
             content={"layout":"100"}
             title='spelers'
-            collapsible=true
+            collapsible=false
             opened=true
             addCss='ranking-section'
             addContainerCss='bg-darkgreen'

@@ -28,9 +28,7 @@
 
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.realName back='/' /]
 
-            [#if message ? has_content]
-                [@messageUtil.outputMessage message=message ! /]
-            [/#if]
+            [@messageUtil.outputMessage message=message ! /]
 
             <div class="grid prediction-form-container">
 
