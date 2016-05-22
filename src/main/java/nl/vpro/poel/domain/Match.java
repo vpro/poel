@@ -30,7 +30,7 @@ public class Match {
     @Embedded
     private MatchResult matchResult;
 
-    Match() {} // For Hibernate
+    public Match() {}
 
     public Match(String homeTeam, String awayTeam, Date start) {
         this(homeTeam, awayTeam, start, null);
@@ -51,16 +51,32 @@ public class Match {
         return homeTeam;
     }
 
+    public void setHomeTeam(String homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
     public String getAwayTeam() {
         return awayTeam;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
     }
 
     public MatchResult getMatchResult() {
         return matchResult;
     }
 
-    public Date getStart() {
-        return start;
+    public void setMatchResult(MatchResult matchResult) {
+        this.matchResult = matchResult;
     }
 
     @Override

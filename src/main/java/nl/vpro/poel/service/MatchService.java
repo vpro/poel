@@ -21,5 +21,5 @@ public interface MatchService {
 
     List<Match> findMatchesToPredict(Instant instant);
 
-    void setMatches(MatchForm matchForm);
+    void save(MatchForm matchForm);
 }

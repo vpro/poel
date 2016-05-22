@@ -49,7 +49,7 @@ class AdminController {
 
     @RequestMapping(value = "/matches", method = RequestMethod.POST)
     String handleFormSubmit(@ModelAttribute("matches") MatchForm matchForm, BindingResult bindingResult) {
-        matchService.setMatches(matchForm);
+        matchService.save(matchForm);
         return "redirect:/admin/matches";
     }
 

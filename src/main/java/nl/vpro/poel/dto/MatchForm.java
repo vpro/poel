@@ -1,18 +1,16 @@
 package nl.vpro.poel.dto;
 
-import nl.vpro.poel.domain.Match;
-
 import java.util.List;
 
 public class MatchForm {
 
-    private List<Match> matches;
+    private List<MatchDTO> matches;
 
-    public List<Match> getMatches() {
+    public List<MatchDTO> getMatches() {
         return matches;
     }
 
-    public void setMatches(List<Match> matches) {
+    public void setMatches(List<MatchDTO> matches) {
         this.matches = matches;
     }
 
