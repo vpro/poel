@@ -152,7 +152,7 @@
 
                                     <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__result-title" >
-                                            Wedstrijd gestart op: ${match.start?string.medium}
+                                            Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
                                         </td>
                                         <td class="prediction__result" >
 
@@ -230,7 +230,7 @@
 
                                         <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
                                             <td class="prediction__result-title" >
-                                                Wedstrijd op: ${match.start?string.medium}
+                                                Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
 
                                                 [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
                                                     <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
