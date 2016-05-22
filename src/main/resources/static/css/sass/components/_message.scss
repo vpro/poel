@@ -1,0 +1,13 @@
+.message {
+  border-bottom: 1px solid #fff;
+}
+
+.message-text {
+  margin: 0 $gu;
+}
+
+@include media-med-screen-width () {
+  .message-text {
+    margin: 0 1.5*$gu;
+  }
+}

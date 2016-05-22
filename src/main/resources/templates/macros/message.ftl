@@ -6,8 +6,9 @@
         [@layout.sectionWithLayout
         content={'layout': '100'}
         title=''
+        addCss='message'
         ]
-            <p>${ message.value }</p>
+            <p class="message-text">${ message.value }</p>
         [/@layout.sectionWithLayout]
     </div>
 [/#macro]
