@@ -17,15 +17,15 @@
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                     [#items as message]
-                    <input type="hidden" id="messages[${ message ? index }].id" value="${message.id}"/>
-                    <input type="hidden" id="messages[${ message ? index }].key" value="${message.key}"/>
+                    <input type="hidden" name="messages[${ message ? index }].id" value="${message.id}"/>
+                    <input type="hidden" name="messages[${ message ? index }].key" value="${message.key}"/>
                     <div class="grid">
 
                         <div class="col col-3-1">
                             <h2 class="h5 message-admin__key">${ message.key }</h2>
                         </div>
                         <div class="col col-3-2">
-                            <textarea id="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
+                            <textarea name="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
                         </div>
                     </div>
                     [/#items]

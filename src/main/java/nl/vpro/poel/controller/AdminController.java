@@ -63,7 +63,7 @@ class AdminController {
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
     String saveMessages(@ModelAttribute("messages") MessageForm messageForm, BindingResult bindingResult) {
 
-        // TODO: spring binding doesn't work, form fields id and key are not received, value is ...
+        // TODO: spring binding doesn't work, form fields id and key are not received, text is ...
 
         //messageService.setMessages(messageForm);
         return "redirect:/admin/messages";
