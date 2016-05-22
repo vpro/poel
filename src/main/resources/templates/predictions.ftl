@@ -138,7 +138,9 @@
                                     </tr>
 
                                     <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
-                                        <td class="prediction__result-title" >Wedstrijd op: </td>
+                                        <td class="prediction__result-title" >
+                                            Wedstrijd gestart op: ${match.start?string.medium}
+                                        </td>
                                         <td class="prediction__result" >
 
                                             <input type="number" value="${result.homeTeamGoals}" disabled />
@@ -203,6 +205,22 @@
                                                 <input class="prediction away-prediction" type="number" name="predictions[${matchEntry?index}].awayTeamGoals" [#if hasPrediction]value="${prediction.awayTeamGoals}" [/#if] />
                                             </td>
 
+                                        </tr>
+
+
+                                        <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
+                                            <td class="prediction__result-title" >
+                                                Wedstrijd op: ${match.start?string.medium}
+
+                                                [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
+                                                    <span class="prediction-deadline c-red bg-white"><i class="glyph glyph-alert c-red"></i> Let op: wedstrijd begint bijna! </span>
+                                                [/#if]
+
+                                            </td>
+                                            <td class="prediction__result" >
+                                            </td>
+                                            <td class="prediction__score">
+                                            </td>
                                         </tr>
 
                                         </tbody>

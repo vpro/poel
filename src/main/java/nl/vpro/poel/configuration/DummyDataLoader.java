@@ -46,6 +46,7 @@ public class DummyDataLoader {
         Date now = new Date();
         Date lastWeek = Date.from(now.toInstant().minus(7, ChronoUnit.DAYS));
         Date nextWeek = Date.from(now.toInstant().plus(7, ChronoUnit.DAYS));
+        Date almost = Date.from(now.toInstant().plus(2, ChronoUnit.HOURS));
 
         List<Match> defaultMatches = Arrays.asList(
 
@@ -58,7 +59,7 @@ public class DummyDataLoader {
                 new Match("Spanje", "Engeland", now),
 
                 // Future
-                new Match("Portugal", "België", nextWeek),
+                new Match("Portugal", "België", almost),
                 new Match("Engeland", "Oostenrijk", nextWeek)
         );
         matchRepository.save(defaultMatches);

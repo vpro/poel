@@ -123,3 +123,17 @@
 .prediction__points-6 {
     background-color: $red;
 }
+
+
+.prediction-deadline{
+
+    padding: 4px;
+
+   .glyph{
+        font-size: 20px;
+        overflow: initial;
+        display: inline-block;
+        top: 3px;
+        position: relative;
+   }
+}
