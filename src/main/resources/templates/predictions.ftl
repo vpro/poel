@@ -5,6 +5,7 @@
 [#import "macros/footer.ftl" as footerUtil]
 
 [#import "macros/navigation.ftl" as navigationUtil]
+[#import "macros/message.ftl" as messageUtil]
 
 [#import "macros/form.ftl" as formUtil]
 [#import "macros/layout.ftl" as layout]
@@ -22,7 +23,12 @@
             </script>
         [/#if]
 
+
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
+
+            [#if message ? has_content]
+                [@messageUtil.outputMessage message=message ! /]
+            [/#if]
 
             <div class="grid prediction-form-container">
 

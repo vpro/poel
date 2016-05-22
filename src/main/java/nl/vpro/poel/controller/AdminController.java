@@ -1,8 +1,10 @@
 package nl.vpro.poel.controller;
 
 import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.service.MatchService;
+import nl.vpro.poel.service.MessageService;
 import nl.vpro.poel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,14 @@ class AdminController {
 
     private final MatchService matchService;
 
+    private final MessageService messageService;
+
     private final UserService userService;
 
     @Autowired
-    public AdminController(MatchService matchService, UserService userService) {
+    public AdminController(MatchService matchService, MessageService messageService, UserService userService) {
         this.matchService = matchService;
+        this.messageService = messageService;
         this.userService = userService;
     }
 
@@ -36,6 +41,13 @@ class AdminController {
         List<Match> matches = matchService.findAll();
         model.addAttribute("matches", matches);
         return "admin/matches";
+    }
+
+    @RequestMapping(value = "/messages", method = RequestMethod.GET)
+    String showMessages(Model model) {
+        List<Message> messages = messageService.findAll();
+        model.addAttribute("messages", messages);
+        return "admin/messages";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
