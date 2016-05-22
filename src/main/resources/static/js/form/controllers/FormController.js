@@ -37,13 +37,17 @@ import $ from 'jquery';
 var FormController = Stapes.subclass({
 
     /**
-     * @param {HTMLElement} container
+     * @param {HTMLElement} form
      */
     constructor : function ( form ) {
 
         this.$form = $( form );
+        this.$formSubmit = this.$form.find( 'button[type=submit]' );
+        this.$formReset = this.$form.find( 'button[type=reset]' );
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
+
+        this.initialFormState = this.$form.serialize();
 
         this.bindViewHandlers();
 
@@ -55,30 +59,29 @@ var FormController = Stapes.subclass({
         //        }.bind( this ) );
     },
 
-
-    /*
-        onChange
-            validate
-                loop over each future match
-                    home > -1 && away > -1
-                        show submit
-                    else
-                        show warning
-    */
-
-
     bindViewHandlers: function () {
 
-        this.$form.change( function ( ) {
+        // a value in the form has changed
+        this.$form.change( function () {
+
+            this.checkFormChanges();
 
             this.validateMatchPredictions();
 
         }.bind( this ) );
 
-        //        this.$container.on( 'change', 'input[id^="prediction"]', this.handlePredictionChange.bind( this ) );
-        //        this.$container.on( 'change', 'input[id^="joker"]', this.handleJokerChange.bind( this ) );
+        this.$formReset.on( 'click', function () {
 
-        //        this.$container.on( 'click', 'button', this.handleButtonClick.bind( this ) );
+            setTimeout( function(){
+
+                this.checkFormChanges();
+
+                this.validateMatchPredictions();
+
+            }.bind( this ), 1 );
+
+        }.bind( this ) );
+
     },
 
     validateMatchPredictions: function () {
@@ -92,13 +95,10 @@ var FormController = Stapes.subclass({
 
             if( homePrediction.length < 1 && awayPrediction.length < 1 ) {
 
+                // both fields are empty so there's no need to validate
                 $matchPrediction.removeClass( 'not-valid' );
 
-                // both fields are empty so there's no need to validate
-
-                // show how much time the user has left to predict the outcome
-                // before the match takes place
-                // matchTime - currentTime
+                // TODO: show how much time the user has left to predict the outcome before the match takes place (matchTime minus currentTime)
 
             } else {
 
@@ -111,8 +111,10 @@ var FormController = Stapes.subclass({
                 ) {
                     // All is well
                     $matchPrediction.removeClass( 'not-valid' );
+                    //this.enableSubmit();
                 } else {
                     $matchPrediction.addClass( 'not-valid' );
+                    this.disableSubmit();
                 }
 
             }
@@ -121,125 +123,147 @@ var FormController = Stapes.subclass({
 
     },
 
-    /**
-     * Fetches the complete form from the API and parses it's entries
-     */
-    fetchForm: function () {
-
-        var deferred = new $.Deferred();
-
-        $.ajax({
-            url: '/js/stub/form.json',
-            dataType: 'json'
-        }).then(
-            function ( data ) {
-
-                if ( data && data.elements ) {
-
-                    deferred.resolve( this.parseForm( data ) );
-
-                } else {
-                    deferred.reject();
-                }
-
-            }.bind( this ),
-            deferred.reject
-        );
-
-        return deferred.promise();
-    },
-
-    handleButtonClick: function ( e ) {
-        var $button = $( e.currentTarget );
-        var $formEntry = $button.parents('[data-id]').first();
-        var id = $formEntry.data('id');
-
-        e.preventDefault();
-
-        if ( $button.is('[data-action="save"]') ) {
-            // TODO: make it possible to save one piece of this form
-        }
-
-        if ( $button.is('[data-action="cancel"]') ) {
-
-            $formEntry.replaceWith( formEntryTemplate(
-                this.form.elements.filter( function ( elm ) {
-                    return parseFloat( elm.id ) === id;
-                }).pop()
-            ) );
+    checkFormChanges: function () {
+        // check if form has changed relative to page load
+        if( this.hasFormChangedSincePageLoad() ) {
+            this.enableSubmit();
+        } else {
+            this.disableSubmit();
         }
     },
 
-    handleJokerChange: function ( e ) {
-
-        var $input = $( e.currentTarget );
-        var $field = $input.parents('[data-id]').first();
-
-        var id = $field.data('id');
-
-        $field.addClass('form-entry_dirty');
+    enableSubmit: function () {
+        this.$formSubmit.prop( 'disabled', false );
     },
 
-    handlePredictionChange: function ( e ) {
-
-        var $input = $( e.currentTarget );
-        var $field = $input.parents('[data-id]').first();
-
-        var id = $field.data('id');
-
-        $field.addClass('form-entry_dirty');
+    disableSubmit: function () {
+        this.$formSubmit.prop( 'disabled', true );
     },
 
-    parseForm: function ( data ) {
+    hasFormChangedSincePageLoad: function () {
 
-        var parsed = {
-            elements: []
-        };
-
-        data.elements.forEach( function ( element ) {
-
-            switch ( element.type ) {
-
-                case 'entry':
-                    parsed.elements.push(
-                        new FormEntry(
-                            element.id,
-                            element.contestants,
-                            element.result,
-                            element.prediction,
-                            new FormatDate( element.dueDate ),
-                            element.joker,
-                            element.score
-                        )
-                    );
-                    break;
-
-                case 'text':
-                    var text = new FormText();
-
-                    if ( element.title ) {
-                        text.setTitle( element.title );
-                    }
-
-                    if ( element.text ) {
-                        text.setText( element.text );
-                    }
-
-                    parsed.elements.push( text );
-                    break;
-            }
-        });
-
-        return parsed;
+        return this.$form.serialize() !== this.initialFormState;
     },
 
-    render: function () {
-        this.$container.html( formTemplate({
-            elements: this.form.elements.map( function ( elm ) {
-                return elm.toViewModel();
-            })
-        }) );
-    }
+//    /**
+//     * Fetches the complete form from the API and parses it's entries
+//     */
+//    fetchForm: function () {
+//
+//        var deferred = new $.Deferred();
+//
+//        $.ajax({
+//            url: '/js/stub/form.json',
+//            dataType: 'json'
+//        }).then(
+//            function ( data ) {
+//
+//                if ( data && data.elements ) {
+//
+//                    deferred.resolve( this.parseForm( data ) );
+//
+//                } else {
+//                    deferred.reject();
+//                }
+//
+//            }.bind( this ),
+//            deferred.reject
+//        );
+//
+//        return deferred.promise();
+//    },
+//
+//    handleButtonClick: function ( e ) {
+//        var $button = $( e.currentTarget );
+//        var $formEntry = $button.parents('[data-id]').first();
+//        var id = $formEntry.data('id');
+//
+//        e.preventDefault();
+//
+//        if ( $button.is('[data-action="save"]') ) {
+//            // TODO: make it possible to save one piece of this form
+//        }
+//
+//        if ( $button.is('[data-action="cancel"]') ) {
+//
+//            $formEntry.replaceWith( formEntryTemplate(
+//                this.form.elements.filter( function ( elm ) {
+//                    return parseFloat( elm.id ) === id;
+//                }).pop()
+//            ) );
+//        }
+//    },
+//
+//    handleJokerChange: function ( e ) {
+//
+//        var $input = $( e.currentTarget );
+//        var $field = $input.parents('[data-id]').first();
+//
+//        var id = $field.data('id');
+//
+//        $field.addClass('form-entry_dirty');
+//    },
+//
+//    handlePredictionChange: function ( e ) {
+//
+//        var $input = $( e.currentTarget );
+//        var $field = $input.parents('[data-id]').first();
+//
+//        var id = $field.data('id');
+//
+//        $field.addClass('form-entry_dirty');
+//    },
+//
+//    parseForm: function ( data ) {
+//
+//        var parsed = {
+//            elements: []
+//        };
+//
+//        data.elements.forEach( function ( element ) {
+//
+//            switch ( element.type ) {
+//
+//                case 'entry':
+//                    parsed.elements.push(
+//                        new FormEntry(
+//                            element.id,
+//                            element.contestants,
+//                            element.result,
+//                            element.prediction,
+//                            new FormatDate( element.dueDate ),
+//                            element.joker,
+//                            element.score
+//                        )
+//                    );
+//                    break;
+//
+//                case 'text':
+//                    var text = new FormText();
+//
+//                    if ( element.title ) {
+//                        text.setTitle( element.title );
+//                    }
+//
+//                    if ( element.text ) {
+//                        text.setText( element.text );
+//                    }
+//
+//                    parsed.elements.push( text );
+//                    break;
+//            }
+//        });
+//
+//        return parsed;
+//    },
+//
+//    render: function () {
+//        this.$container.html( formTemplate({
+//            elements: this.form.elements.map( function ( elm ) {
+//                return elm.toViewModel();
+//            })
+//        }) );
+//    }
 });
 
 function isNumeric ( n ) {
