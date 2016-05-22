@@ -51,10 +51,8 @@ suggests this shouldn't happen).
 ### Front end developing
 
 #### Vendor resources
-For now this means installing them through the `package.json` and NPM and creating
-a vendor script in `package.json` that after running `npm run vendor` copies the
-vendor script to `src/main/resources/static/vendor`. This script is automatically called
-through the front end Maven plugin during startup of the application.
+For now this means installing them through the `package.json` and NPM and copying everything
+you need to the `src/main/resources/static/vendor` folder.
 
 #### CSS
 We're using SASS to generate CSS. The CSS is automatically generated during
