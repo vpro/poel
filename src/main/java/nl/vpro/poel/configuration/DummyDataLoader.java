@@ -72,7 +72,8 @@ public class DummyDataLoader {
         List<Message> defaultMessages = Arrays.asList(
 
                 new Message("/predictions", "Hier een melding voor invullers"),
-                new Message("/user", "Hier een melding voor je profiel")
+                new Message("/user", "Hier een melding voor je profiel"),
+                new Message("/ranking", "Hier een melding voor de ranking")
         );
         messageRepository.save(defaultMessages);
     }

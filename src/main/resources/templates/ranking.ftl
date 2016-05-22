@@ -4,6 +4,8 @@
 [#import "macros/navigation.ftl" as navigationUtil]
 [#import "macros/layout.ftl" as layout]
 
+[#import "macros/message.ftl" as messageUtil]
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -12,6 +14,10 @@
     <body>
 
     [@navigationUtil.navigation title='Poelstand' back='/' /]
+
+    [#if message ? has_content]
+        [@messageUtil.outputMessage message=message ! /]
+    [/#if]
 
 
     <div class="grid bg-darkgreen">

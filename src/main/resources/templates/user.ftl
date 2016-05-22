@@ -3,6 +3,8 @@
 
 [#import "macros/navigation.ftl" as navigationUtil]
 
+[#import "macros/message.ftl" as messageUtil]
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -11,6 +13,10 @@
     <body>
 
     [@navigationUtil.navigation title='Profiel' back='/' /]
+
+    [#if message ? has_content]
+        [@messageUtil.outputMessage message=message ! /]
+    [/#if]
 
         <div class="grid grid-gutter bg-blue">
             <h1 class="h4">Hallo ${user.realName}!
