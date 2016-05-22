@@ -6,8 +6,6 @@ import nl.vpro.poel.dto.MatchEntry;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.PredictionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,21 +21,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-class FormController {
-
-    private static final Logger logger = LoggerFactory.getLogger(FormController.class);
+@RequestMapping(value = "/predictions")
+class PredictionController {
 
     private final MatchService matchService;
 
     private final PredictionService predictionService;
 
     @Autowired
-    public FormController(MatchService matchService, PredictionService predictionService) {
+    public PredictionController(MatchService matchService, PredictionService predictionService) {
         this.matchService = matchService;
         this.predictionService = predictionService;
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     String showForm(Principal principal, Model model) {
 
         CurrentUser currentUser = UserUtil.getCurrentUser(principal)
@@ -54,7 +51,7 @@ class FormController {
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
         model.addAttribute("future", future);
-        return "form";
+        return "predictions";
     }
 
     // TODO: Move this logic out to a service?
@@ -75,12 +72,12 @@ class FormController {
         return new MatchEntry(match, predictedResult, score);
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     String handleFormSubmit(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Instant submittedAt = Instant.now();
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
         int updates = predictionService.save(user, predictions, submittedAt);
-        redirectAttributes.addFlashAttribute("flash", updates + " voorspelling(en) opgeslagen");
-        return "redirect:/form";
+        redirectAttributes.addFlashAttribute("flash", updates + " voorspelling" + (updates != 1 ? "en" : "") + " opgeslagen");
+        return "redirect:/predictions";
     }
 }

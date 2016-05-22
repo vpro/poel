@@ -23,7 +23,7 @@
                     <span class="h6 c-white home-navigation-link-subtitle">voetbalnaam en email</span>
                 </span>
             </a>
-            <a href="/form" class="home-navigation-link bg-green">
+            <a href="/predictions" class="home-navigation-link bg-green">
                 <span class='h2 c-white home-navigation-link-title' >
                     poel invullen<br/>
                     <span class="h6 c-white home-navigation-link-subtitle">je hebt xxxx punten</span>
