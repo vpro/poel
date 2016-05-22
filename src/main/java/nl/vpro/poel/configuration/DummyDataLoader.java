@@ -1,10 +1,8 @@
 package nl.vpro.poel.configuration;
 
-import nl.vpro.poel.domain.Match;
-import nl.vpro.poel.domain.MatchResult;
-import nl.vpro.poel.domain.Role;
-import nl.vpro.poel.domain.User;
+import nl.vpro.poel.domain.*;
 import nl.vpro.poel.repository.MatchRepository;
+import nl.vpro.poel.repository.MessageRepository;
 import nl.vpro.poel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -21,15 +19,19 @@ public class DummyDataLoader {
 
     private final MatchRepository matchRepository;
 
+    private final MessageRepository messageRepository;
+
     private final UserRepository userRepository;
 
     @Autowired
-    DummyDataLoader(MatchRepository matchRepository, UserRepository userRepository) {
+    DummyDataLoader(MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
         this.matchRepository = matchRepository;
+        this.messageRepository = messageRepository;
         this.userRepository = userRepository;
 
         adminUsers();
         matches();
+        messages();
     }
 
     private void adminUsers() {
@@ -63,5 +65,15 @@ public class DummyDataLoader {
                 new Match("Engeland", "Oostenrijk", nextWeek)
         );
         matchRepository.save(defaultMatches);
+    }
+
+    private void messages() {
+
+        List<Message> defaultMessages = Arrays.asList(
+
+                new Message("/predictions", "Hier een melding voor invullers"),
+                new Message("/user", "Hier een melding voor je profiel")
+        );
+        messageRepository.save(defaultMessages);
     }
 }

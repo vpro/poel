@@ -1,33 +1,66 @@
 [#import "../macros/head.ftl" as headUtil]
 [#import "../macros/footer.ftl" as footerUtil]
+[#import "../macros/layout.ftl" as layout]
 
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
+
 <html lang="nl">
 
-    [@headUtil.head /]
+    [@headUtil.head title="wedstrijden beheren" /]
     <body>
-    [@navigationUtil.navigation /]
 
-        <div class="grid grid-gutter">
-            <h1 class="h4">Current Matches</h1>
+    [@navigationUtil.navigation title='Admin' subtitle='wedstrijden' back='/' /]
 
-        [#list matches]
-        <form>
-        <ul>
-            [#items as match]
-            <li>${match.homeTeam} - ${match.awayTeam}</li>
-            [/#items]
-        </ul>
-        </form>
-        [#else]
-            No matches at this time, sorry!
-        [/#list]
+        <div class="grid">
+
+            [@layout.sectionWithLayout
+                content={'layout': '100'}
+                title='wedstrijden'
+                backGroundColor="bg-darkgreen"
+            ]
+
+                [#list matches]
+
+                <form action="#" class="form" method="post">
+
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                    <ul class="matches">
+
+                        [#items as match]
+                            <li class="match">
+
+                                <input type="hidden" name="matches[${match?index}].id" value="${match.id}" />
+
+                                <input type="text" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
+                                <input type="text" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
+                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string['yyyy-MM-dd']}T${match.start?string['hh:mm']}" dataformatas=""/>
+
+                                <input type="button" value="Verwijderen" class="delete-match" />
+
+                            </li>
+                        [/#items]
+
+                    </ul>
+
+                    <input type="button" class="add-match" value="Toevoegen"/>
+
+                    <input type="submit" value="Opslaan" />
+
+                </form>
+
+                [#else]
+                    Hier is (nog) niets
+                [/#list]
+
+            [/@layout.sectionWithLayout]
+
         </div>
 
-        TODO: Matches beheer (aanmaken en score)<br />
-
     [@footerUtil.footer /]
+
     </body>
+
 </html>

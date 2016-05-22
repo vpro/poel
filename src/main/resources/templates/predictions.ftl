@@ -5,6 +5,7 @@
 [#import "macros/footer.ftl" as footerUtil]
 
 [#import "macros/navigation.ftl" as navigationUtil]
+[#import "macros/message.ftl" as messageUtil]
 
 [#import "macros/form.ftl" as formUtil]
 [#import "macros/layout.ftl" as layout]
@@ -15,14 +16,21 @@
 
     <body>
 
-        [#-- TODO: Make this less intrusive and prettier --]
         [#if flash ? has_content]
-            <script type="application/javascript">
-                window.alert("${flash}");
-            </script>
+        <div class="alert-overlay">
+            <div class="alert-overlay__content">
+                ${flash} <br/> <br/>
+                <button class="h5 button alert-overlay__close-button">Ok!</button>
+            </div>
+        </div>
         [/#if]
 
+
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
+
+            [#if message ? has_content]
+                [@messageUtil.outputMessage message=message ! /]
+            [/#if]
 
             <div class="grid prediction-form-container">
 
@@ -150,7 +158,7 @@
 
                                     <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
                                         <td class="prediction__result-title" >
-                                            Wedstrijd gestart op: ${match.start?string.medium}
+                                            Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
                                         </td>
                                         <td class="prediction__result" >
 
@@ -228,7 +236,7 @@
 
                                         <tr class="prediction__row prediction__row-result prediction__row-${ matchEntry ? item_parity }">
                                             <td class="prediction__result-title" >
-                                                Wedstrijd op: ${match.start?string.medium}
+                                                Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
 
                                                 [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
                                                     <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
@@ -270,7 +278,7 @@
         <script>
             System.import( '/js/form/controllers/FormController.js' ).then( function ( formControllerModule ) {
 
-                new formControllerModule.default( document.querySelectorAll( 'form' ) );
+                new formControllerModule.default( document.querySelectorAll( 'form' ), '.alert-overlay' );
 
             } );
         </script>

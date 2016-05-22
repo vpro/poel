@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='hello' /]
+    [@headUtil.head title='VPRO Poel' /]
 
     <body class="home">
 
