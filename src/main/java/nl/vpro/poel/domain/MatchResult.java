@@ -34,7 +34,7 @@ public class MatchResult {
         if (homeTeamGoals < awayTeamGoals) {
             return Winner.AWAY;
         }
-        return Winner.AWAY;
+        return Winner.NEITHER;
     }
 
     @Override
