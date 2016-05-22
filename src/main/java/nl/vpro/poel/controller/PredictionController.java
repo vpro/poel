@@ -4,7 +4,6 @@ import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.*;
 import nl.vpro.poel.dto.PredictionForm;
 import nl.vpro.poel.service.MatchService;
-import nl.vpro.poel.service.MessageService;
 import nl.vpro.poel.service.PredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,19 +53,19 @@ class PredictionController {
         return "predictions";
     }
 
-    // TODO: Move this logic out to a service?
-    private List<Prediction> toPredictions(List<Match> matches, User user) {
-        return matches.stream()
-                .map(match -> predictionService.getPredictionForMatch(user, match).orElseGet(() -> new Prediction(user, match, null)))
-                .collect(Collectors.toList());
-    }
-
     @RequestMapping(method = RequestMethod.POST)
-    String handleFormSubmit(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    String savePredictions(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Instant submittedAt = Instant.now();
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
         int updates = predictionService.save(user, predictions, submittedAt);
         redirectAttributes.addFlashAttribute("flash", updates + " voorspelling" + (updates != 1 ? "en" : "") + " opgeslagen");
         return "redirect:/predictions";
+    }
+
+    // TODO: Move this logic out to a service?
+    private List<Prediction> toPredictions(List<Match> matches, User user) {
+        return matches.stream()
+                .map(match -> predictionService.getPredictionForMatch(user, match).orElseGet(() -> new Prediction(user, match, null)))
+                .collect(Collectors.toList());
     }
 }

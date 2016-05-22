@@ -24,12 +24,12 @@ public class PoelControllerAdvice {
     }
 
     @ModelAttribute("user")
-    public CurrentUser getCurrentUser(Principal principal) {
+    public CurrentUser user(Principal principal) {
         return UserUtil.getCurrentUser(principal).orElse(null);
     }
 
     @ModelAttribute("message")
-    public String getPageMessage(HttpServletRequest request) {
+    public String message(HttpServletRequest request) {
         String key = request.getRequestURI();
         return messageService.getText(key).orElse("");
     }

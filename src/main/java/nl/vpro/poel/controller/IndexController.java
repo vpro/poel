@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    String index() {
+    String showIndex() {
         return "index";
     }
 }

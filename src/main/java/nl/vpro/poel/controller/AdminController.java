@@ -36,7 +36,7 @@ class AdminController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    String adminIndex() {
+    String showIndex() {
         return "admin/index";
     }
 
@@ -48,7 +48,7 @@ class AdminController {
     }
 
     @RequestMapping(value = "/matches", method = RequestMethod.POST)
-    String handleFormSubmit(@ModelAttribute("matches") MatchForm matchForm, BindingResult bindingResult) {
+    String saveMatches(@ModelAttribute("matches") MatchForm matchForm, BindingResult bindingResult) {
         matchService.save(matchForm);
         return "redirect:/admin/matches";
     }
@@ -61,7 +61,7 @@ class AdminController {
     }
 
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
-    String handleMessageFormSubmit(@ModelAttribute("messages") MessageForm messageForm, BindingResult bindingResult) {
+    String saveMessages(@ModelAttribute("messages") MessageForm messageForm, BindingResult bindingResult) {
 
         // TODO: spring binding doesn't work, form fields id and key are not received, value is ...
 
@@ -70,7 +70,7 @@ class AdminController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    String admin(Model model) {
+    String showUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("users", allUsers);
         return "admin/users";
