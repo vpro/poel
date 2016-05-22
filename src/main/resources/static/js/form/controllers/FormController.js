@@ -6,7 +6,7 @@ var FormController = Stapes.subclass({
     /**
      * @param {HTMLElement} form
      */
-    constructor : function ( form ) {
+    constructor : function ( form, overlay ) {
 
         this.$form = $( form );
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
@@ -14,6 +14,9 @@ var FormController = Stapes.subclass({
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
         this.$predictionInputs = this.$form.find( 'input.prediction' );
+
+        this.$alertOverlay = $( overlay );
+        this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
         this.initialFormState = this.$form.serialize();
 
@@ -23,19 +26,19 @@ var FormController = Stapes.subclass({
 
     bindHandlers: function () {
 
-        this.$predictionInputs.each( function( i, el ){
+        this.$predictionInputs.each( function ( i, el ) {
 
-            $( el ).on( 'keyup mouseup', function(){
+            $( el ).on( 'keyup mouseup', function () {
                 this.checkFormChanges();
                 this.validateMatchPredictions();
-            }.bind( this ));
+            }.bind( this ) );
 
-            el.addEventListener( 'mousewheel', function(){
+            el.addEventListener( 'mousewheel', function () {
                 this.checkFormChanges();
                 this.validateMatchPredictions();
-            }.bind( this ));
+            }.bind( this ) );
 
-        }.bind( this ));
+        }.bind( this ) );
 
         this.$formReset.on( 'click', function () {
 
@@ -46,6 +49,12 @@ var FormController = Stapes.subclass({
                 this.validateMatchPredictions();
 
             }.bind( this ), 1 );
+
+        }.bind( this ) );
+
+        this.$alertOverlayButton.on( 'click', function () {
+
+            this.$alertOverlay.hide();
 
         }.bind( this ) );
 
@@ -64,8 +73,6 @@ var FormController = Stapes.subclass({
 
                 // both fields are empty so there's no need to validate
                 $matchPrediction.removeClass( 'not-valid' );
-
-                // TODO: show how much time the user has left to predict the outcome before the match takes place (matchTime minus currentTime)
 
             } else {
 

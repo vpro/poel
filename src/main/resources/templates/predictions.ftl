@@ -15,11 +15,13 @@
 
     <body>
 
-        [#-- TODO: Make this less intrusive and prettier --]
         [#if flash ? has_content]
-            <script type="application/javascript">
-                window.alert("${flash}");
-            </script>
+        <div class="alert-overlay">
+            <div class="alert-overlay__content">
+                ${flash} <br/> <br/>
+                <button class="h5 button alert-overlay__close-button">Ok!</button>
+            </div>
+        </div>
         [/#if]
 
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.displayName back='/' /]
@@ -270,7 +272,7 @@
         <script>
             System.import( '/js/form/controllers/FormController.js' ).then( function ( formControllerModule ) {
 
-                new formControllerModule.default( document.querySelectorAll( 'form' ) );
+                new formControllerModule.default( document.querySelectorAll( 'form' ), '.alert-overlay' );
 
             } );
         </script>
