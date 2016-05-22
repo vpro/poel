@@ -15,10 +15,7 @@
 
     [@navigationUtil.navigation title='Poelstand' back='/' /]
 
-    [#if message ? has_content]
-        [@messageUtil.outputMessage message=message ! /]
-    [/#if]
-
+    [@messageUtil.outputMessage message=message ! /]
 
     <div class="grid bg-darkgreen">
         [@layout.sectionWithLayout

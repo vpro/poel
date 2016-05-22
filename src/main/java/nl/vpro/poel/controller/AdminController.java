@@ -4,6 +4,7 @@ import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.dto.MatchForm;
+import nl.vpro.poel.dto.MessageForm;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.MessageService;
 import nl.vpro.poel.service.UserService;
@@ -51,13 +52,20 @@ class AdminController {
         matchService.setMatches(matchForm);
         return "redirect:/admin/matches";
     }
+
     @RequestMapping(value = "/messages", method = RequestMethod.GET)
     String showMessages(Model model) {
         List<Message> messages = messageService.findAll();
         model.addAttribute("messages", messages);
         return "admin/messages";
-    }    
-    
+    }
+
+    @RequestMapping(value = "/messages", method = RequestMethod.POST)
+    String handleMessageFormSubmit(@ModelAttribute("messages") MessageForm messageForm, BindingResult bindingResult) {
+        messageService.setMessages(messageForm);
+        return "redirect:/admin/messages";
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     String admin(Model model) {
         List<User> allUsers = userService.getAllUsers();

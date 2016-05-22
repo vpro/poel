@@ -17,7 +17,7 @@ public class Message {
     @Column(nullable = false)
     private String text;
 
-    Message() {} // For Hibernate
+    public Message() {}
 
     public Message(String key, String text) {
         this.key = key;
@@ -36,8 +36,8 @@ public class Message {
         return text;
     }
 
-    public void setValue(String value) {
-        this.text = value;
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override

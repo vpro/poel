@@ -1,6 +1,7 @@
 package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Message;
+import nl.vpro.poel.dto.MessageForm;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface MessageService {
     Optional<String> getText(String key);
 
     List<Message> findAll();
+
+    void setMessages(MessageForm messageForm);
 }
