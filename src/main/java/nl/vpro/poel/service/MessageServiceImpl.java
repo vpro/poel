@@ -23,7 +23,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Optional<Message> findByKey(String key) {
-        return Optional.of(messageRepository.findByKey(key));
+        return Optional.ofNullable(messageRepository.findByKey(key));
     }
 
     @Override
