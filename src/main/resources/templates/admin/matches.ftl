@@ -36,7 +36,7 @@
 
                                 <input type="text" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
                                 <input type="text" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
-                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string['yyyy-MM-dd']}T${match.start?string['hh:mm']}" dataformatas=""/>
+                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string['yyyy-MM-dd']}T${match.start?string['hh:mm:ss']}" />
 
                                 <input type="button" value="Verwijderen" class="delete-match" />
 
