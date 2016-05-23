@@ -25,9 +25,7 @@ var MatchController = Stapes.subclass({
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
         this.$formAdd = this.$form.find( '.add-match' );
-
-//        this.$matchPredictions = this.$form.find( '.match-prediction' );
-//        this.$predictionInputs = this.$form.find( 'input.prediction' );
+        this.$formSort = this.$form.find( '.sort-matches' );
 
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
@@ -36,6 +34,7 @@ var MatchController = Stapes.subclass({
 
         this.bindHandlers();
 
+        this.sortMatches();
     },
 
     bindHandlers: function () {
@@ -64,6 +63,42 @@ var MatchController = Stapes.subclass({
             this.deleteMatch( match );
 
         }.bind( this ) );
+
+        this.$formSort.on( 'click', function(){
+            this.sortMatches();
+        }.bind( this ) );
+
+    },
+
+    sortMatches: function(){
+
+        // get all matches
+        var matches = this.$matchesContainer.find( '.match' );
+
+        // create an array with objects containing match + date
+        var newMatches = matches.map( function( index, match, array ){
+
+            var date = $( match ).find( 'input[type=datetime-local]' ).val()
+            return {
+                date: date,
+                match: match
+            }
+        });
+
+        // sort by date
+        newMatches.sort( function( a, b ) {
+            a = new Date( a.date );
+            b = new Date( b.date );
+            return a < b ? -1 : a > b ? 1 : 0;
+        });
+
+        // remove matches from the DOM
+        this.$matchesContainer.empty();
+
+        // inject matches in the new order
+        newMatches.each( function( i, match ){
+            this.$matchesContainer.append( match.match );
+        }.bind( this ));
 
     },
 

@@ -45,6 +45,9 @@
 
                     </ul>
 
+
+                    <input type="button" class="sort-matches" value="Sorteren (datum)"/>
+
                     <input type="button" class="add-match" value="Toevoegen"/>
 
                     <input type="submit" value="Opslaan" />
