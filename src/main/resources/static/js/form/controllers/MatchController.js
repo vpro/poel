@@ -1,12 +1,3 @@
-/*
-
-    TODO:
-        - add match
-        - remove match
-        - save all matches
-
-*/
-
 import Stapes from 'stapes';
 import $ from 'jquery';
 
@@ -37,6 +28,16 @@ var MatchController = Stapes.subclass({
 
         this.bindHandlers();
 
+    },
+
+    addMatch: function () {
+
+        this.$matchesContainer.append(
+
+            matchTemplate({
+                index: $( '.match' ).length
+            })
+        )
     },
 
     bindHandlers: function () {
@@ -72,13 +73,19 @@ var MatchController = Stapes.subclass({
 
     },
 
+    deleteMatch: function( match ){
+
+        match.remove();
+
+    },
+
     sortMatches: function(){
 
         // get all matches
         var matches = this.$matchesContainer.find( '.match' );
 
         // create an array with objects containing match + date
-        var newMatches = matches.map( function( index, match, array ){
+        var matchObjects = matches.map( function( index, match, array ){
 
             var date = $( match ).find( 'input[type=datetime-local]' ).val()
             return {
@@ -87,65 +94,54 @@ var MatchController = Stapes.subclass({
             }
         });
 
-        // sort by date
-        newMatches.sort( function( a, b ) {
+        // sort matchObjects by date
+        matchObjects.sort( function( a, b ) {
             a = new Date( a.date );
             b = new Date( b.date );
             return a < b ? -1 : a > b ? 1 : 0;
         });
 
-        // remove matches from the DOM
+        // remove original matches from the DOM
         this.$matchesContainer.empty();
 
-        // inject matches in the new order
-        newMatches.each( function( i, match ){
+        // inject the ordered matchObjects
+        matchObjects.each( function( i, match ){
             this.$matchesContainer.append( match.match );
         }.bind( this ));
 
     },
 
-    addMatch: function () {
 
-        this.$matchesContainer.append(
+// TODO: implement this for matches as well
+// disabled submit button if nothing has changed or if the form validation fails
 
-            matchTemplate({
-                index: $( '.match' ).length
-            })
-        )
-    },
+//    /**
+//     *
+//     * Check if the form has changed since page load
+//     *
+//     */
+//
+//    checkFormChanges: function () {
+//        if( this.hasFormChangedSincePageLoad() ) {
+//            this.enableSubmit();
+//        } else {
+//            this.disableSubmit();
+//        }
+//    },
+//
+//    enableSubmit: function () {
+//        this.$formSubmit.prop( 'disabled', false );
+//    },
+//
+//    disableSubmit: function () {
+//        this.$formSubmit.prop( 'disabled', true );
+//    },
+//
+//    hasFormChangedSincePageLoad: function () {
+//
+//        return this.$form.serialize() !== this.initialFormState;
+//    }
 
-    deleteMatch: function( match ){
-
-        match.remove();
-
-    },
-
-    /**
-     *
-     * Check if the form has changed since page load
-     *
-     */
-
-    checkFormChanges: function () {
-        if( this.hasFormChangedSincePageLoad() ) {
-            this.enableSubmit();
-        } else {
-            this.disableSubmit();
-        }
-    },
-
-    enableSubmit: function () {
-        this.$formSubmit.prop( 'disabled', false );
-    },
-
-    disableSubmit: function () {
-        this.$formSubmit.prop( 'disabled', true );
-    },
-
-    hasFormChangedSincePageLoad: function () {
-
-        return this.$form.serialize() !== this.initialFormState;
-    }
 });
 
 export default MatchController;
