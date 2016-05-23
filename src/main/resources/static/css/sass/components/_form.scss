@@ -233,12 +233,12 @@
     input[type=number],
     input[type=datetime-local] {
         position: relative;
-        top: -3px;
         height: 24px;
-        border: 0px solid;
+        border: none;
         font-family: $title-font;
     }
 
+    input[type=datetime-local],
     input[type=text] {
         padding: 0 0 0 4px;
     }
@@ -248,9 +248,27 @@
     }
 }
 
+.matches-form-button-container {
+
+    padding: 20px 0;
+
+    input[type=button],
+    input[type=submit],
+    input[type=reset] {
+        height: 24px;
+        font-family: $title-font;
+        border: none;
+        background: #fff;
+        padding: 0 6px;
+        cursor: pointer;
+        margin: 0 8px 0 0;
+    }
+}
+
 .match {
     .delete-match {
         display: inline;
         cursor: pointer;
+        padding: 0 0 0 4px;
     }
 }

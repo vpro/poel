@@ -23,7 +23,7 @@
 
                 [#list matches]
 
-                <form action="#" class="form" method="post">
+                <form class="matches-form" action="#" class="form" method="post">
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -46,25 +46,28 @@
 
                                 <input type="text" class="col-12-3" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
                                 <input type="text" class="col-12-3" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
-                                <input type="datetime-local" class="col-12-3" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
+                                <input type="datetime-local" class="col-12-2" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
 
                                 <input type="number" class="col-12-1" name="matches[${match?index}].homeTeamGoals" [#if hasMatchResult]value="${match.matchResult.homeTeamGoals!}"[/#if] />
                                 <input type="number" class="col-12-1" name="matches[${match?index}].awayTeamGoals" [#if hasMatchResult]value="${match.matchResult.awayTeamGoals!}"[/#if] />
 
-                                <i class="glyph glyph-close c-greygrizzly delete-match col-12-1"></i>
+                                <i class="glyph glyph-close c-gold delete-match col-12-2"></i>
 
                             </div>
                         [/#items]
 
                     </div>
 
+                    <div class="matches-form-button-container">
 
-                    <input type="button" class="sort-matches" value="Sorteren (datum)"/>
+                        <input type="button" class="sort-matches" value="Sorteren (datum)"/>
 
-                    <input type="button" class="add-match" value="Toevoegen"/>
+                        <input type="button" class="add-match" value="Toevoegen"/>
 
-                    <input type="submit" value="Opslaan" />
-                    <input type="reset" value="Annuleren (-achtig)" />
+                        <input type="submit" value="Opslaan" />
+                        <input type="reset" value="Annuleren (-achtig)" />
+
+                    </div>
 
                 </form>
 
