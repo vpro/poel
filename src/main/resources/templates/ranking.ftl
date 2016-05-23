@@ -42,7 +42,13 @@
                             [/#if]
                         </h2>
                         <div class="ranking__meta">
-                            <span class="ranking__full-name">[#if rankingEntry.user.gameName ? has_content]${ rankingEntry.user.realName }[/#if]</span>
+                            <span class="ranking__full-name">
+                                [#if rankingEntry.user.gameName ? has_content]
+                                ${ rankingEntry.user.realName }
+                                [#elseif rankingEntry.user.getId() == user.getId() ]
+                                <a href="/user"><i> vul je voetbalnaam in op je profielpagina</i></a>
+                                [/#if]
+                            </span>
                             <span class="ranking__department">afdeling</span>
                         </div>
                     </td>
