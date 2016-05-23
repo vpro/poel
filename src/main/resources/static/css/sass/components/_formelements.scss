@@ -36,5 +36,5 @@ input:disabled{
 
 button[type=reset]:disabled,
 button[type=submit]:disabled {
-    background: rgba(255,255,255,.5);
+    background: $greymouse;
 }

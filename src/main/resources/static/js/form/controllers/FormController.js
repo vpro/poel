@@ -54,7 +54,7 @@ var FormController = Stapes.subclass({
 
         this.$alertOverlayButton.on( 'click', function () {
 
-            this.$alertOverlay.hide();
+            this.$alertOverlay.addClass( 'hidden' );
 
         }.bind( this ) );
 

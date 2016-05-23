@@ -53,7 +53,7 @@ public class DummyDataLoader {
         List<Match> defaultMatches = Arrays.asList(
 
                 // Finished
-                new Match("Zwitserland", "Frankrijk", lastWeek, new MatchResult(3, 1)),
+                new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1)),
                 new Match("België", "Engeland", lastWeek, new MatchResult(5, 4)),
 
                 // Unfinished
