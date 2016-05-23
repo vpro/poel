@@ -36,7 +36,7 @@
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">${ rankingEntry.user.realName }</h2>
                         <div class="ranking__meta">
-                            <span class="ranking__full-name">${ rankingEntry.user.username }</span>
+                            <span class="ranking__full-name">${ rankingEntry.user.gameName }</span>
                             <span class="ranking__department">afdeling</span>
                         </div>
                     </td>
