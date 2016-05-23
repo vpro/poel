@@ -3,6 +3,8 @@ package nl.vpro.poel.service;
 import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.dto.MessageForm;
 import nl.vpro.poel.repository.MessageRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class MessageServiceImpl implements MessageService {
+
+    private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 
     private final MessageRepository messageRepository;
 
@@ -45,11 +49,27 @@ public class MessageServiceImpl implements MessageService {
     public void setMessages(MessageForm messageForm) {
         Set<Long> idsToRemove = findAll().stream().map(Message::getId).collect(Collectors.toSet());
 
-        for (Message message : messageForm.getMessages()) {
-            Long id = message.getId();
-            if (id != null) {
-                idsToRemove.remove(id);
+        for (Message postedMessage : messageForm.getMessages()) {
+
+            String key = postedMessage.getKey();
+            String text = postedMessage.getText();
+
+            if ( key == null ) {
+                logger.warn("Ignoring message update {}, because it is incomplete");
+                continue;
             }
+
+            Message message = messageRepository.findByKey( key );
+
+            if ( message == null ) {
+                message = new Message();
+            } else {
+                idsToRemove.remove( message.getId() );
+            }
+
+            message.setKey( key );
+            message.setText( text );
+
             messageRepository.save(message);
         }
 

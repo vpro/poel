@@ -8,7 +8,7 @@
 
     [@headUtil.head title='Berichten beheren' /]
     <body>
-        [@navigationUtil.navigation title='Berichten beheren' /]
+        [@navigationUtil.navigation title='Berichten beheren' back='/admin' /]
 
         <div class="grid bg-green">
             <div class="grid-gutter">
