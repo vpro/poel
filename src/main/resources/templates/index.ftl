@@ -20,13 +20,17 @@
             <a href="/predictions" class="home-navigation-link bg-green">
                 <span class='h2 c-white home-navigation-link-title' >
                     poel invullen<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">je hebt xxxx punten</span>
+                    [#if ranking ? has_content]
+                        <span class="h6 c-white home-navigation-link-subtitle">Je hebt ${ ranking.score ! '?' } punten</span>
+                    [/#if]
                 </span>
             </a>
             <a href="/ranking" class="home-navigation-link bg-darkgreen">
                 <span class='h2 c-white home-navigation-link-title' >
                     poelstand<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">je staat op positie xxxxx</span>
+                    [#if ranking ? has_content]
+                        <span class="h6 c-white home-navigation-link-subtitle">je staat op positie ${ ranking.rank ! '?' }</span>
+                    [/#if]
                 </span>
             </a>
             <a href="/user" class="home-navigation-link bg-blue">
