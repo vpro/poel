@@ -36,7 +36,7 @@
 
                                 <input type="text" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
                                 <input type="text" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
-                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string['yyyy-MM-dd']}T${match.start?string['hh:mm:ss']}" />
+                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
 
                                 <input type="button" value="Verwijderen" class="delete-match" />
 
@@ -48,6 +48,7 @@
                     <input type="button" class="add-match" value="Toevoegen"/>
 
                     <input type="submit" value="Opslaan" />
+                    <input type="reset" value="Annuleren" />
 
                 </form>
 
@@ -60,6 +61,14 @@
         </div>
 
     [@footerUtil.footer /]
+
+    <script>
+        System.import( '/js/form/controllers/MatchController.js' ).then( function ( matchControllerModule ) {
+
+            new matchControllerModule.default( document.querySelectorAll( 'form' ) );
+
+        } );
+    </script>
 
     </body>
 
