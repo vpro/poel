@@ -225,3 +225,15 @@
 .alert-overlay__close-button{
     float: none;
 }
+
+
+.matches {
+    input[type=text],
+    input[type=datetime-local] {
+        position: relative;
+        top: -3px;
+        height: 24px;
+        border: 0px solid;
+        font-family: $title-font;
+    }
+}
