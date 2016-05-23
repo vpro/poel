@@ -227,7 +227,8 @@
 }
 
 
-.matches {
+.matches,
+.user-form {
 
     input[type=text],
     input[type=number],
@@ -254,14 +255,14 @@
     }
 }
 
-.matches-form-button-container {
+.matches-form-button-container{
 
     padding: 20px 0;
 
     input[type=button],
     input[type=submit],
     input[type=reset] {
-        height: 24px;
+        height: 3 * $gu;
         font-family: $title-font;
         font-size: 16px;
         line-height: 25px;
@@ -269,14 +270,14 @@
         background: #fff;
         padding: 0 6px;
         cursor: pointer;
-        margin: 0 8px 0 0;
+        margin: 0 $gu 0 0;
     }
 }
 
 .match {
 
     .delete-match {
-        height: 24px;
+        height: 3 * $gu;
         cursor: pointer;
         padding: 0 0 0 4px;
     }
@@ -288,9 +289,44 @@
 
         .delete-match {
             position: relative;
-            top: 8px;
+            top: $gu;
 
             display: inline-block;
+        }
+    }
+}
+
+
+
+.user-section {
+    .row{
+        margin-bottom: 8px;
+    }
+}
+
+.user-form {
+
+    button,
+    input[type=submit]{
+        height: 3 * $gu;
+        font-family: $title-font;
+        font-size: 16px;
+        line-height: 25px;
+        border: none;
+        background: #fff;
+        padding: 0 6px;
+        cursor: pointer;
+        margin: 0;
+    }
+
+}
+
+@include media-med-screen-width () {
+
+    .user-form {
+        button,
+        input[type=submit]{
+            margin: 0 $gu 0 $gu;
         }
     }
 }
