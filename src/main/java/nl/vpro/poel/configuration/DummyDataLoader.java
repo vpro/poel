@@ -40,7 +40,8 @@ public class DummyDataLoader {
                 new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic"),
                 new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich"),
                 new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst"),
-                new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator")
+                new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator"),
+                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest")
         );
         userRepository.save(admins);
     }
