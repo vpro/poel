@@ -2,10 +2,13 @@
 
     <input type="hidden" name="matches[{{index}}].id" value="" />
 
-    <input type="text" name="matches[{{index}}].homeTeam" value="" />
-    <input type="text" name="matches[{{index}}].awayTeam" value="" />
-    <input type="datetime-local" name="matches[{{index}}].start" value="" />
+    <input type="text" class="col-12-3" name="matches[{{index}}].homeTeam" />
+    <input type="text" class="col-12-3" name="matches[{{index}}].awayTeam" />
+    <input type="datetime-local" class="col-12-3" name="matches[{{index}}].start" />
 
-    <input type="button" value="Verwijderen" class="delete-match" />
+    <input type="number" class="col-12-1" name="matches[{{index}}].homeTeamGoals" />
+    <input type="number" class="col-12-1" name="matches[{{index}}].awayTeamGoals" />
+
+    <i class="glyph glyph-close c-greygrizzly delete-match col-12-1"></i>
 
 </li>

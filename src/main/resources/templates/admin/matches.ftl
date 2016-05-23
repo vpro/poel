@@ -27,23 +27,32 @@
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                    <ul class="matches">
+                    <div class="matches">
 
                         [#items as match]
-                            <li class="match">
+                            <div class="match row">
+
+                                [#if match.matchResult ? has_content]
+                                    [#assign hasMatchResult = true/]
+                                [#else]
+                                    [#assign hasMatchResult = false/]
+                                [/#if]
 
                                 <input type="hidden" name="matches[${match?index}].id" value="${match.id}" />
 
-                                <input type="text" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
-                                <input type="text" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
-                                <input type="datetime-local" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
+                                <input type="text" class="col-12-3" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
+                                <input type="text" class="col-12-3" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
+                                <input type="datetime-local" class="col-12-3" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
 
-                                <input type="button" value="Verwijderen" class="delete-match" />
+                                <input type="number" class="col-12-1" name="matches[${match?index}].homeTeamGoals" [#if hasMatchResult]value="${match.matchResult.homeTeamGoals!}"[/#if] />
+                                <input type="number" class="col-12-1" name="matches[${match?index}].awayTeamGoals" [#if hasMatchResult]value="${match.matchResult.awayTeamGoals!}"[/#if] />
 
-                            </li>
+                                <i class="glyph glyph-close c-greygrizzly delete-match col-12-1"></i>
+
+                            </div>
                         [/#items]
 
-                    </ul>
+                    </div>
 
 
                     <input type="button" class="sort-matches" value="Sorteren (datum)"/>
@@ -51,7 +60,7 @@
                     <input type="button" class="add-match" value="Toevoegen"/>
 
                     <input type="submit" value="Opslaan" />
-                    <input type="reset" value="Annuleren" />
+                    <input type="reset" value="Annuleren (-achtig)" />
 
                 </form>
 

@@ -30,11 +30,13 @@ var MatchController = Stapes.subclass({
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
+
+        this.sortMatches();
+
         this.initialFormState = this.$form.serialize();
 
         this.bindHandlers();
 
-        this.sortMatches();
     },
 
     bindHandlers: function () {
