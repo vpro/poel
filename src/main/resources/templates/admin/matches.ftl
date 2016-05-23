@@ -32,6 +32,10 @@
                         [#items as match]
                             <div class="match row">
 
+                                <!-- TODO: move this into a macro-->
+                                <!-- or (even better) render this through match.hbs as we do when adding new matches -->
+                                <!-- so this markup has a single source in stead of two -->
+
                                 [#if match.matchResult ? has_content]
                                     [#assign hasMatchResult = true/]
                                 [#else]
