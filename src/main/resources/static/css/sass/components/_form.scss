@@ -18,7 +18,7 @@
 
 .predictions {
 
-  font-size: 12px;
+  font-size: 14px;
 
   border-spacing: 0;
   border-collapse: collapse;
@@ -58,7 +58,6 @@
 
 @include media-med-screen-width () {
     .predictions {
-      font-size: 14px;
 
       input {
         top: -3px;
@@ -115,7 +114,7 @@
 
 .prediction__result-title,
 .prediction__game {
-  padding-left: 0.5*$gu;
+  padding-left: 1*$gu;
 
   @include title-font();
 }
@@ -172,7 +171,7 @@
 
 .prediction__game-home,
 .prediction__game-away{
-    width: 100px;
+    width: 115px;
     display: inline-block;
 
     .flag-icon{
@@ -181,24 +180,13 @@
     }
 }
 
-@include media-med-screen-width () {
-    .prediction__game-home,
-    .prediction__game-away{
-        width: 115px;
-    }
-}
 
 .prediction__game-divider{
-    width: 10px;
+    width: 20px;
     display: inline-block;
     text-align: center;
 }
 
-@include media-med-screen-width () {
-    .prediction__game-divider{
-        width: 20px;
-    }
-}
 
 
 .alert-overlay{
