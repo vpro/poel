@@ -29,7 +29,7 @@
     backGroundColor='blue' ]
 
         <div class="grid c-white grid-gutter">
-            <h1 class="h5"> Gegevens voor ${user.gameName ! user.realName !}: </h1>
+            <h1 class="h5"> Gegevens voor [#if user.gameName ? has_content]${ user.gameName }[#else]${ user.realName }[/#if]: </h1>
 
             <div class="grid row">
                 <span class="h6 col col-12-2">Naam:</span>
