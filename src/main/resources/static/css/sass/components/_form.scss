@@ -233,18 +233,20 @@
     input[type=number],
     input[type=datetime-local] {
         position: relative;
-        height: 24px;
         border: none;
         font-family: $title-font;
         font-size: 16px;
         line-height: 25px;
-        float: left;
-        margin: 0 8px 0 0;
+        margin-bottom: 4px;
     }
 
     input[type=datetime-local],
     input[type=text] {
         padding: 0 0 0 4px;
+    }
+
+    input[type=datetime-local]{
+        line-height: 23px;
     }
 
     input[type=number] {
@@ -274,9 +276,21 @@
 .match {
 
     .delete-match {
-        display: inline-block;
         height: 24px;
         cursor: pointer;
         padding: 0 0 0 4px;
+    }
+}
+
+@include media-med-screen-width () {
+
+    .match {
+
+        .delete-match {
+            position: relative;
+            top: 8px;
+
+            display: inline-block;
+        }
     }
 }
