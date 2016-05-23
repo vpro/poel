@@ -236,6 +236,10 @@
         height: 24px;
         border: none;
         font-family: $title-font;
+        font-size: 16px;
+        line-height: 25px;
+        float: left;
+        margin: 0 8px 0 0;
     }
 
     input[type=datetime-local],
@@ -257,6 +261,8 @@
     input[type=reset] {
         height: 24px;
         font-family: $title-font;
+        font-size: 16px;
+        line-height: 25px;
         border: none;
         background: #fff;
         padding: 0 6px;
@@ -266,8 +272,10 @@
 }
 
 .match {
+
     .delete-match {
-        display: inline;
+        display: inline-block;
+        height: 24px;
         cursor: pointer;
         padding: 0 0 0 4px;
     }

@@ -1,14 +1,16 @@
 <li class="match">
 
-    <input type="hidden" name="matches[{{index}}].id" value="" />
+    <input type="hidden" name="matches[{{index}}].id" />
 
     <input type="text" class="col-12-3" name="matches[{{index}}].homeTeam" placeholder="homeTeam" />
     <input type="text" class="col-12-3" name="matches[{{index}}].awayTeam" placeholder="awayTeam" />
-    <input type="datetime-local" class="col-12-2" name="matches[{{index}}].start" />
+    <input type="datetime-local" class="col-12-3" name="matches[{{index}}].start" />
 
-    <input type="number" class="col-12-1" name="matches[{{index}}].homeTeamGoals" placeholder="homeScore" />
-    <input type="number" class="col-12-1" name="matches[{{index}}].awayTeamGoals" placeholder="awayScore" />
+    <input type="number" class="col-12-1" name="matches[{{index}}].homeTeamGoals" placeholder="home" />
+    <input type="number" class="col-12-1" name="matches[{{index}}].awayTeamGoals" placeholder="away" />
 
-    <i class="glyph glyph-close c-gold delete-match col-12-2"></i>
+    <span class="delete-match">
+        <i class="glyph glyph-close c-gold col-12-1"></i>
+    </span>
 
 </li>
