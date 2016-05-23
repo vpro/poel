@@ -9,7 +9,7 @@
     [@headUtil.head title='Admin'/]
     <body>
 
-    [@navigationUtil.navigation title='Admin' back='user' /]
+    [@navigationUtil.navigation title='Admin' back='users' /]
     <div class="grid bg-blue">
         <div class="grid-gutter">
 
