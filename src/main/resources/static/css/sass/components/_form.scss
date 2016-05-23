@@ -18,8 +18,7 @@
 
 .predictions {
 
-  font-size: 14px;
-
+  font-size: 12px;
 
   border-spacing: 0;
   border-collapse: collapse;
@@ -33,10 +32,10 @@
   input {
 
     position: relative;
-    top: -3px;
+    top: -2px;
 
     height: 3*$gu;
-    width: 6*$gu;
+    width: 3*$gu;
 
     border: 0px solid;
 
@@ -57,9 +56,27 @@
 
 }
 
+@include media-med-screen-width () {
+    .predictions {
+      font-size: 14px;
+
+      input {
+        top: -3px;
+
+        width: 6*$gu;
+      }
+    }
+}
+
 
 .prediction__game{
-    width: 69%;
+    width: 76%;
+}
+
+@include media-med-screen-width () {
+    .prediction__game{
+        width: 69%;
+    }
 }
 
 .prediction__row {
@@ -71,7 +88,7 @@
 }
 
 .prediction__row-result {
-    color: rgba(255, 255, 255, 0.5 );
+    color: rgba(255, 255, 255, 0.8 );
 }
 
 .prediction__points{
@@ -91,14 +108,14 @@
 .prediction__result{
     input{
         font-family: $title-font;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.8);
     }
 
 }
 
 .prediction__result-title,
 .prediction__game {
-  padding-left: 2*$gu;
+  padding-left: 0.5*$gu;
 
   @include title-font();
 }
@@ -155,7 +172,7 @@
 
 .prediction__game-home,
 .prediction__game-away{
-    width: 115px;
+    width: 100px;
     display: inline-block;
 
     .flag-icon{
@@ -164,10 +181,23 @@
     }
 }
 
+@include media-med-screen-width () {
+    .prediction__game-home,
+    .prediction__game-away{
+        width: 115px;
+    }
+}
+
 .prediction__game-divider{
-    width: 20px;
+    width: 10px;
     display: inline-block;
     text-align: center;
+}
+
+@include media-med-screen-width () {
+    .prediction__game-divider{
+        width: 20px;
+    }
 }
 
 

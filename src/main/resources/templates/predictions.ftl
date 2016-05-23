@@ -94,6 +94,8 @@
 
                 [#if future ? has_content]
 
+                    <form action="#" class="form" method="post">
+
                     [@layout.sectionWithLayout
                         content={'layout': '100'}
                         collapsible=true
@@ -104,11 +106,10 @@
                         closeColorClass='bg-greybat'
                         openColorClass='bg-darkgreen'
                         opened=true
-                    ]
+                        ]
 
                         [#list future]
 
-                            <form action="#" class="form" method="post">
 
                                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
@@ -120,12 +121,6 @@
                                     [/#items]
                                 </div>
 
-                                <div class="prediction-form-button-container">
-                                    <button class="h5 button submit-button" type="submit" disabled>Opslaan</button>
-                                    <button class="h5 button reset-button" type="reset">Annuleren</button>
-                                </div>
-
-                            </form>
 
                         [#else]
                             <div>Geen wedstrijden beschikbaar</div>
@@ -133,6 +128,12 @@
 
                     [/@layout.sectionWithLayout]
 
+                        <div class="prediction-form-button-container">
+                            <button class="h5 button submit-button" type="submit" disabled>Opslaan</button>
+                            <button class="h5 button reset-button" type="reset">Annuleren</button>
+                        </div>
+
+                    </form>
                 [/#if]
 
             </div>
