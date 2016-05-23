@@ -10,8 +10,8 @@
     <body>
 
     [@navigationUtil.navigation title='Admin' back='user' /]
-
-    <div class="grid grid-gutter">
+    <div class="grid bg-blue">
+        <div class="grid-gutter">
 
             <h1 class="h4">Form for: ${ user.realName }</h1>
 
@@ -30,12 +30,12 @@
 
             <p>
                 Todo: <br />
-                Een melding beheren die op de invulpagina's te zien is<br />
                 Een export van emailadressen kunnen doen<br />
                 Gebruikersgroepen kunnen aanmaken<br />
                 Gebruikers in groepen kunnen toevoegen<br />
             </p>
         </div>
+     </div>
 
     [@footerUtil.footer /]
     </body>
