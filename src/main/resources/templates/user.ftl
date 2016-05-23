@@ -28,6 +28,10 @@
                 <button type="submit">sla op</button>
             </form>
 
+            [#if user.role == 'ADMIN']
+                <a href="/admin/"> Admin gedeelte </a>
+            [/#if]
+
         </div>
 
     [@footerUtil.footer /]
