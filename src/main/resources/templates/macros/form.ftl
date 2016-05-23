@@ -1,32 +1,82 @@
-[#macro formEntry match prediction="" outcome="" score=0]
+[#include "countries.ftl"]
 
-<div class="grid grid-gutter">
-    <h1 class="h5">${ match.homeTeam.name } - ${ match.awayTeam.name }</h1>
+[#macro showMatch status prediction parity index]
 
-    <h2 class="h6">Your prediction:</h2>
+    [#assign predictionId = prediction.id !]
+    [#assign match = prediction.match]
+    [#assign matchResult = prediction.match.matchResult ! ]
+    [#assign predictedResult = prediction.matchResult !]
+    [#assign hasPrediction = predictedResult ? has_content]
+    [#assign score = prediction.score !]
+    [#assign predictionIndex = index !]
 
-    <hr />
-    Indien een match voorspeld kan worden
-    [#-- [#if match.canBePredictedAt( ... )] --]
-    <input type="text" class="prediction" value="" name="prediction-{matchId}-home'" id="prediction-{matchId}-home" />
-    -
-    <input type="text" class="prediction" value="" name="prediction-{matchId}-away'" id="prediction-{matchId}-away" />
+<table class="predictions match-prediction">
+    <tbody>
 
-    [#-- [#else] --]
-    <hr />
-    Anders
+    <tr class="prediction__row prediction__row-${ parity }">
+        <td class="prediction__game">
 
-    [#--[#if prediction ? has_content]--]
-        {prediction.home} - {prediction.away} <br />
-    [#--[#else]--]
-        Of Non entered.
-    [#--[/#if]--]
+            <span class="prediction__game-home">
+                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                ${ match.homeTeam }
+            </span>
+            <span class="prediction__game-divider">
+                -
+            </span>
+            <span class="prediction__game-away">
+                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                ${ match.awayTeam }
+            </span>
+            [#if status == 'future']
+                <input type="hidden" name="predictions[${predictionIndex}].matchId" value="${match.id}"/>
+                [#if predictionId?has_content]
+                <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId}"/>
+                [/#if]
+            [/#if]
+        </td>
 
-    [#-- [/#if] --]
+        <td class="prediction__predicted">
+            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+        </td>
 
-</div>
-[/#macro]
+        <td class="prediction__score">
+            [#if score ? has_content]
+                <span class='prediction__points prediction__points-${score} '>${score}</span>
+            [/#if]
+        </td>
 
-[#macro predictionEntry matchId prediction=""]
+    </tr>
 
+
+    <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
+        <td class="prediction__result-title" >
+
+            [#if status == 'future']
+                Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
+
+                [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
+                <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
+                [/#if]
+            [#elseif status == 'finished']
+                Uitslag:
+            [#else]
+                Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
+            [/#if]
+
+
+
+        </td>
+        <td class="prediction__result" >
+            [#if matchResult ? has_content]
+                <input type="number" value="${matchResult.homeTeamGoals}" disabled />
+                <input type="number" value="${matchResult.awayTeamGoals}" disabled />
+            [/#if]
+        </td>
+        <td class="prediction__score">
+        </td>
+    </tr>
+
+    </tbody>
+</table>
 [/#macro]

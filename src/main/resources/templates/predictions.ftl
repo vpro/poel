@@ -50,48 +50,7 @@
                             <div class="collapsible-section-content">
                                 [#items as prediction]
 
-                                    [#assign match = prediction.match]
-                                    [#assign result = match.matchResult]
-                                    [#assign predictedResult = prediction.matchResult !]
-                                    [#assign hasPrediction = predictedResult ? has_content]
-                                    [#assign score = prediction.score]
-
-                                <table class="predictions">
-                                    <tbody>
-                                    <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
-                                        <td class="prediction__game">
-                                            <span class="prediction__game-home">
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
-                                                ${ match.homeTeam }
-                                            </span>
-                                            <span class="prediction__game-divider">
-                                                -
-                                            </span>
-                                            <span class="prediction__game-away">
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
-                                                ${ match.awayTeam }
-                                            </span>
-                                        </td>
-                                        <td class="prediction__predicted">
-                                            <input type="number" [#if hasPrediction]value="${predictedResult.homeTeamGoals}"[/#if] disabled />
-                                            <input type="number" [#if hasPrediction]value="${predictedResult.awayTeamGoals}"[/#if] disabled />
-                                        </td>
-                                        <td class="prediction__score">
-                                            <span class='prediction__points prediction__points-${score} '>${score}</span>
-                                        </td>
-
-                                    </tr>
-                                    <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
-                                        <td class="prediction__result-title" >Uitslag:</td>
-                                        <td class="prediction__result">
-                                            <input type="number" value="${result.homeTeamGoals}" disabled />
-                                            <input type="number" value="${result.awayTeamGoals}" disabled />
-                                        </td>
-                                        <td class="prediction__score">
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                    [@formUtil.showMatch status='finished' prediction=prediction parity=prediction?item_parity index=prediction?index /]
 
                                 [/#items]
                             </div>
@@ -120,47 +79,9 @@
                         [#list unfinished]
                             <div class="collapsible-section-content">
                                 [#items as prediction]
-                                    [#assign match = prediction.match]
-                                    [#assign predictedResult = prediction.matchResult !]
-                                    [#assign hasPrediction = predictedResult ? has_content]
 
-                                <table class="predictions match-prediction">
-                                    <tbody>
-                                    <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
-                                        <td class="prediction__game">
-                                            <span class="prediction__game-home">
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
-                                                ${ match.homeTeam }
-                                            </span>
-                                            <span class="prediction__game-divider">
-                                                -
-                                            </span>
-                                            <span class="prediction__game-away">
-                                                <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
-                                                ${ match.awayTeam }
-                                            </span>
-                                        </td>
+                                       [@formUtil.showMatch status='unfinished' prediction=prediction parity=prediction?item_parity index=prediction?index /]
 
-                                        <td class="prediction__predicted">
-                                            <input type="number" name="predictions[${prediction?index}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}"[/#if] disabled />
-                                            <input type="number" name="predictions[${prediction?index}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}"[/#if] disabled />
-                                        </td>
-                                    </tr>
-
-                                    <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
-                                        <td class="prediction__result-title" >
-                                            Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
-                                        </td>
-                                        <td class="prediction__result" >
-                                            <input type="number" value="${result.homeTeamGoals}" disabled />
-                                            <input type="number" value="${result.awayTeamGoals}" disabled />
-                                        </td>
-                                        <td class="prediction__score">
-                                        </td>
-                                    </tr>
-
-                                    </tbody>
-                                    </table>
                                 [/#items]
                             </div>
                         [#else]
@@ -193,57 +114,8 @@
 
                                 <div class="collapsible-section-content">
                                     [#items as prediction]
-                                        [#assign predictionId = prediction.id !]
-                                        [#assign match = prediction.match]
-                                        [#assign predictedResult = prediction.matchResult !]
-                                        [#assign hasPrediction = predictedResult ? has_content]
 
-
-                                    <table class="predictions match-prediction">
-                                        <tbody>
-                                        <tr class="prediction__row prediction__row-${ prediction ? item_parity }">
-                                            <td class="prediction__game">
-                                                <span class="prediction__game-home">
-                                                    <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
-                                                    ${ match.homeTeam }
-                                                </span>
-                                                <span class="prediction__game-divider">
-                                                    -
-                                                </span>
-                                                <span class="prediction__game-away">
-                                                    <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
-                                                    ${ match.awayTeam }
-                                                </span>
-                                                <input type="hidden" name="predictions[${prediction?index}].matchId" value="${match.id}"/>
-                                                [#if predictionId?has_content]
-                                                    <input type="hidden" name="predictions[${prediction?index}].predictionId" value="${predictionId}"/>
-                                                [/#if]
-                                            </td>
-
-                                            <td class="prediction__predicted">
-                                                <input class="prediction home-prediction" type="number" min="0" name="predictions[${prediction?index}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}" [/#if] />
-                                                <input class="prediction away-prediction" type="number" min="0" name="predictions[${prediction?index}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}" [/#if] />
-                                            </td>
-                                        </tr>
-
-                                        <tr class="prediction__row prediction__row-result prediction__row-${ prediction ? item_parity }">
-                                            <td class="prediction__result-title" >
-                                                Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
-
-                                                [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
-                                                    <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
-                                                [/#if]
-
-                                            </td>
-                                            <td class="prediction__result" >
-                                            </td>
-                                            <td class="prediction__score">
-                                            </td>
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
+                                        [@formUtil.showMatch prediction=prediction status='future' parity=prediction?item_parity index=prediction?index /]
 
                                     [/#items]
                                 </div>
