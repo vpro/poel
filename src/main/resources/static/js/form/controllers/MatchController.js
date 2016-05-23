@@ -37,7 +37,7 @@ var MatchController = Stapes.subclass({
             matchTemplate({
                 index: $( '.match' ).length
             })
-        )
+        );
     },
 
     bindHandlers: function () {
@@ -59,45 +59,49 @@ var MatchController = Stapes.subclass({
         }.bind( this ) );
 
 
-        this.$form.on( 'click', '.delete-match', function( e ){
+        this.$form.on( 'click', '.delete-match', function ( e ) {
 
-            var match = $( e.currentTarget ).parent();
-
-            this.deleteMatch( match );
+            var c = confirm( 'Wedstrijd verwijderen?' );
+            if ( c == true ) {
+                var match = $( e.currentTarget ).parent();
+                this.deleteMatch( match );
+            }
 
         }.bind( this ) );
 
-        this.$formSort.on( 'click', function(){
+        this.$formSort.on( 'click', function () {
             this.sortMatches();
         }.bind( this ) );
 
     },
 
-    deleteMatch: function( match ){
+    deleteMatch: function ( match ) {
 
         match.remove();
 
     },
 
-    sortMatches: function(){
+    sortMatches: function () {
 
         // get all matches
         var matches = this.$matchesContainer.find( '.match' );
 
         // create an array with objects containing match + date
-        var matchObjects = matches.map( function( index, match, array ){
+        var matchObjects = matches.map( function ( index, match, array ) {
 
-            var date = $( match ).find( 'input[type=datetime-local]' ).val()
+            var date = $( match ).find( 'input[type=datetime-local]' ).val();
+
             return {
                 date: date,
                 match: match
-            }
+            };
         });
 
         // sort matchObjects by date
-        matchObjects.sort( function( a, b ) {
+        matchObjects.sort( function ( a, b ) {
             a = new Date( a.date );
             b = new Date( b.date );
+
             return a < b ? -1 : a > b ? 1 : 0;
         });
 
@@ -105,42 +109,42 @@ var MatchController = Stapes.subclass({
         this.$matchesContainer.empty();
 
         // inject the ordered matchObjects
-        matchObjects.each( function( i, match ){
+        matchObjects.each( function ( i, match ) {
             this.$matchesContainer.append( match.match );
-        }.bind( this ));
+        }.bind( this ) );
 
-    },
+    }
 
 
-// TODO: implement this for matches as well
-// disabled submit button if nothing has changed or if the form validation fails
+    // TODO: implement this for matches as well
+    // disabled submit button if nothing has changed or if the form validation fails
 
-//    /**
-//     *
-//     * Check if the form has changed since page load
-//     *
-//     */
-//
-//    checkFormChanges: function () {
-//        if( this.hasFormChangedSincePageLoad() ) {
-//            this.enableSubmit();
-//        } else {
-//            this.disableSubmit();
-//        }
-//    },
-//
-//    enableSubmit: function () {
-//        this.$formSubmit.prop( 'disabled', false );
-//    },
-//
-//    disableSubmit: function () {
-//        this.$formSubmit.prop( 'disabled', true );
-//    },
-//
-//    hasFormChangedSincePageLoad: function () {
-//
-//        return this.$form.serialize() !== this.initialFormState;
-//    }
+    //    /**
+    //     *
+    //     * Check if the form has changed since page load
+    //     *
+    //     */
+    //
+    //    checkFormChanges: function () {
+    //        if( this.hasFormChangedSincePageLoad() ) {
+    //            this.enableSubmit();
+    //        } else {
+    //            this.disableSubmit();
+    //        }
+    //    },
+    //
+    //    enableSubmit: function () {
+    //        this.$formSubmit.prop( 'disabled', false );
+    //    },
+    //
+    //    disableSubmit: function () {
+    //        this.$formSubmit.prop( 'disabled', true );
+    //    },
+    //
+    //    hasFormChangedSincePageLoad: function () {
+    //
+    //        return this.$form.serialize() !== this.initialFormState;
+    //    }
 
 });
 
