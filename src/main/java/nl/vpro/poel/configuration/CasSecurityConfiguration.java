@@ -4,6 +4,7 @@ import nl.vpro.poel.service.CurrentUserDetailsService;
 import nl.vpro.poel.service.UserService;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
@@ -21,7 +22,11 @@ import org.springframework.security.core.userdetails.AuthenticationUserDetailsSe
 @EnableWebSecurity
 public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String CAS_BASE_URL = "https://signon.vpro.nl";
+    @Value("${poel.baseUrl}")
+    private String applicationBaseUrl;
+
+    @Value("${poel.casBaseUrl}")
+    private String casBaseUrl;
 
     @Autowired
     private UserService userService;
@@ -29,7 +34,7 @@ public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public ServiceProperties serviceProperties() {
         ServiceProperties serviceProperties = new ServiceProperties();
-        serviceProperties.setService("http://localhost:8080/login/cas"); // TODO: dynamisch bepalen of configureerbaar maken of zo
+        serviceProperties.setService(applicationBaseUrl + "/login/cas");
         return serviceProperties;
     }
 
@@ -50,7 +55,7 @@ public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public Cas20ServiceTicketValidator cas20ServiceTicketValidator() {
-        return new Cas20ServiceTicketValidator(CAS_BASE_URL + "/");
+        return new Cas20ServiceTicketValidator(casBaseUrl + "/");
     }
 
     @Bean
@@ -63,7 +68,7 @@ public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
         CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
-        casAuthenticationEntryPoint.setLoginUrl(CAS_BASE_URL + "/login");
+        casAuthenticationEntryPoint.setLoginUrl(casBaseUrl + "/login");
         casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
         return casAuthenticationEntryPoint;
     }
