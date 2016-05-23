@@ -14,4 +14,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getOrCreate(String username);
+
+    void updateUser(User user);
 }

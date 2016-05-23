@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false)
     private String gameName;
 
-    private User() {} // For Hibernate
+    public User() {} // For Hibernate
 
     public User(String username, Role role, String realName, String gameName) {
         this.username = username;
@@ -40,6 +40,8 @@ public class User {
         return username;
     }
 
+    public void setUsername( String username ) { this.username = username; }
+
     public Role getRole() {
         return role;
     }
@@ -51,6 +53,8 @@ public class User {
     public String getGameName() {
         return gameName;
     }
+
+    public void setGameName( String gameName ) { this.gameName = gameName; }
 
     @Override
     public boolean equals(Object o) {

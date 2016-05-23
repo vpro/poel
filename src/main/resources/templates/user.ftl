@@ -23,8 +23,10 @@
                 (${user.username} / ${user.role} )!
             </h1>
 
-            <form>
-                <input type="text" value="${user.gameName}"/>
+            <form action="/user" method="post">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                <input type="hidden" name="updateUser.username" value="${updateUser.username}"/>
+                <input type="text" name="updateUser.gameName" value="${updateUser.gameName}"/>
                 <button type="submit">sla op</button>
             </form>
 
