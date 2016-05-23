@@ -50,6 +50,7 @@ class UserController {
 
         if ( updateUser.getUsername().equals( user.getUsername() ) ) {
 
+            // TODO, instead of a Boolean return the real updated user?
             if ( userService.updateUser(updateUser) ){
 
                 Optional<User> freshUser = userService.getUserByUsername( updateUser.getUsername() );
