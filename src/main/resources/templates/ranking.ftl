@@ -34,9 +34,15 @@
                 <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if rankingEntry.user.getId() == user.getId() ]ranking__current-user[/#if]">
                     <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
                     <td class="ranking__name">
-                        <h2 class="h6 ranking__display-name">${ rankingEntry.user.realName }</h2>
+                        <h2 class="h6 ranking__display-name">
+                            [#if rankingEntry.user.gameName ? has_content]
+                            ${ rankingEntry.user.gameName }
+                            [#else]
+                            ${ rankingEntry.user.realName }
+                            [/#if]
+                        </h2>
                         <div class="ranking__meta">
-                            <span class="ranking__full-name">${ rankingEntry.user.gameName }</span>
+                            <span class="ranking__full-name">[#if rankingEntry.user.gameName ? has_content]${ rankingEntry.user.realName }[/#if]</span>
                             <span class="ranking__department">afdeling</span>
                         </div>
                     </td>
