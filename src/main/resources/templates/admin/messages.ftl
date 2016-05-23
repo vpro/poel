@@ -17,7 +17,6 @@
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                     [#items as message]
-                    <input type="hidden" name="messages[${ message ? index }].id" value="${message.id}"/>
                     <input type="hidden" name="messages[${ message ? index }].key" value="${message.key}"/>
                     <div class="grid">
 
