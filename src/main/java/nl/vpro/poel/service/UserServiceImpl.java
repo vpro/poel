@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser ( User updatedUser ) {
+    public Boolean updateUser ( User updatedUser ) {
         String username = updatedUser.getUsername();
         String gameName = updatedUser.getGameName();
 
@@ -58,7 +58,8 @@ public class UserServiceImpl implements UserService {
             if ( existingUser != null ) {
 
                 existingUser.setGameName(gameName);
-                userRepository.save(existingUser);
+                userRepository.saveAndFlush(existingUser);
+                return true;
 
             } else {
                 logger.warn("Ignoring user update {}, because no user exists for this username", updatedUser );
@@ -66,5 +67,7 @@ public class UserServiceImpl implements UserService {
         } else {
             logger.warn("Ignoring user update {}, because it is incomplete");
         }
+
+        return false;
     }
 }

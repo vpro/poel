@@ -9,7 +9,7 @@
         title=''
         addCss='message'
         ]
-            <p class="message__text">${ message }</p>
+            <p class="message__text theme-text">${ message }</p>
         [/@layout.sectionWithLayout]
     </div>
     [/#if]

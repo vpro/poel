@@ -13,8 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 class UserController {
@@ -38,7 +40,7 @@ class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    String updateUser(Principal principal, @ModelAttribute("updateUser") UserForm userForm, BindingResult bindingResult) {
+    String updateUser(Principal principal, @ModelAttribute("updateUser") UserForm userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         User updateUser = userForm.getUpdateUser();
 
@@ -47,7 +49,16 @@ class UserController {
         User user = currentUser.getUser();
 
         if ( updateUser.getUsername().equals( user.getUsername() ) ) {
-            userService.updateUser(updateUser);
+
+            if ( userService.updateUser(updateUser) ){
+
+                Optional<User> freshUser = userService.getUserByUsername( updateUser.getUsername() );
+
+                if ( freshUser.isPresent() ) {
+                    currentUser.setUser( freshUser.get() );
+                }
+                redirectAttributes.addFlashAttribute("flash", "Gebruikersnaam "+ updateUser.getGameName() +" opgeslagen");
+            }
         }
 
         return "redirect:/user";

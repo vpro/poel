@@ -15,5 +15,5 @@ public interface UserService {
 
     User getOrCreate(String username);
 
-    void updateUser(User user);
+    Boolean updateUser(User user);
 }
