@@ -2,6 +2,7 @@
 [#import "../macros/footer.ftl" as footerUtil]
 [#import "../macros/layout.ftl" as layout]
 [#import "../macros/navigation.ftl" as navigationUtil]
+[#import "../macros/usergroups.ftl" as usergroupUtil]
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -20,21 +21,38 @@
     ]
         <div class="grid-gutter theme-text">
             [#list users]
-                <ul>
-                    [#items as u]
-                        <li>${u.realName} (${u.username})</li>
-                    [/#items]
-                </ul>
+            <form class="form" action="/admin/users" method="post">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+
+                [#items as u]
+                <div class="grid row">
+                    <div class="col col-2-1">${u.realName} (${u.username})</div>
+                    <div class="col col-2-1">
+                        [#assign formPath = "users[${ u_index }]" ]
+                        <input type="hidden" name="${ formPath }.username" value="${u.username}"/>
+
+                        [#if u.userGroup ? has_content]
+                            [@usergroupUtil.usergroupSelection userGroups=userGroups formPath="${ formPath }.userGroupId" selectedUserGroupId=(u.userGroup.id) /]
+                        [#else]
+                            [@usergroupUtil.usergroupSelection userGroups=userGroups formPath="${ formPath }.userGroupId" /]
+                        [/#if]
+                    </div>
+                </div>
+                [/#items]
+
+                <p>
+                    Todo: <br />
+                    Een export van emailadressen kunnen doen<br />
+                    Gebruikers in groepen kunnen toevoegen<br />
+                </p>
+
+                <div class="form-footer bg-green">
+                    <button class="h5 button submit-button" type="submit">Opslaan</button>
+                </div>
+            </form>
             [#else]
                 Er zijn geen deelnemers. :o(
             [/#list]
-
-            <p>
-                Todo: <br />
-                Een export van emailadressen kunnen doen<br />
-                Gebruikersgroepen kunnen aanmaken<br />
-                Gebruikers in groepen kunnen toevoegen<br />
-            </p>
         </div>
     [/@layout.sectionWithLayout]
 

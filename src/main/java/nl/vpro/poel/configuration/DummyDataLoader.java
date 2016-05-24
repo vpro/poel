@@ -5,6 +5,7 @@ import nl.vpro.poel.repository.UserGroupRepository;
 import nl.vpro.poel.repository.MatchRepository;
 import nl.vpro.poel.repository.MessageRepository;
 import nl.vpro.poel.repository.UserRepository;
+import nl.vpro.poel.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ import java.util.List;
 public class DummyDataLoader {
 
     private final UserGroupRepository userGroupRepository;
+    private final UserGroupService userGroupService;
 
     private final MatchRepository matchRepository;
 
@@ -27,27 +29,31 @@ public class DummyDataLoader {
     private final UserRepository userRepository;
 
     @Autowired
-    DummyDataLoader(UserGroupRepository userGroupRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
+    DummyDataLoader(UserGroupRepository userGroupRepository, UserGroupService userGroupService, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
 
         this.userGroupRepository = userGroupRepository;
+        this.userGroupService = userGroupService;
         this.matchRepository = matchRepository;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
 
+        groups();
         adminUsers();
         matches();
         messages();
-        groups();
     }
 
     private void adminUsers() {
+
+        UserGroup userGroupDigitaal = userGroupService.findByName("Digitaal").orElse(null);
+
         List<User> admins = Arrays.asList(
-                new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst"),
-                new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic"),
-                new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich"),
-                new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst"),
-                new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator"),
-                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest")
+                new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst", userGroupDigitaal),
+                new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic", userGroupDigitaal),
+                new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich", userGroupDigitaal),
+                new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst", userGroupDigitaal),
+                new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator", userGroupDigitaal),
+                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest", userGroupDigitaal)
         );
         userRepository.save(admins);
     }

@@ -73,8 +73,13 @@ class AdminController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     String showUsers(Model model) {
+
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("users", allUsers);
+
+        List<UserGroup> userGroups = userGroupService.findAll();
+        model.addAttribute("userGroups", userGroups);
+
         return "admin/users";
     }
 

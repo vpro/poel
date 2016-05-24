@@ -23,13 +23,21 @@ public class User {
     @Column(nullable = false)
     private String gameName;
 
+    @ManyToOne(optional = true)
+    private UserGroup userGroup;
+
     public User() {} // For Hibernate
 
     public User(String username, Role role, String realName, String gameName) {
+        this(username, role, realName, gameName, null);
+    }
+
+    public User(String username, Role role, String realName, String gameName, UserGroup userGroup) {
         this.username = username;
         this.role = role;
         this.realName = realName;
         this.gameName = gameName;
+        this.userGroup = userGroup;
     }
 
     public Long getId() {
@@ -56,6 +64,10 @@ public class User {
 
     public void setGameName( String gameName ) { this.gameName = gameName; }
 
+    public UserGroup getUserGroup() { return userGroup; }
+
+    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +78,7 @@ public class User {
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (role != user.role) return false;
+        if ( userGroup != null ? !userGroup.equals(user.userGroup) : user.userGroup != null) return false;
         return realName != null ? realName.equals(user.realName) : user.realName == null;
 
     }
@@ -76,6 +89,7 @@ public class User {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (realName != null ? realName.hashCode() : 0);
+        result = 31 * result + (userGroup != null ? userGroup.hashCode() : 0);
         return result;
     }
 
@@ -87,6 +101,7 @@ public class User {
                 ", role=" + role +
                 ", realName='" + realName + '\'' +
                 ", gameName='" + gameName + '\'' +
+                ", userGroup='" + userGroup + '\'' +
                 '}';
     }
 }
