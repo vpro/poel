@@ -43,7 +43,6 @@
                 <p>
                     Todo: <br />
                     Een export van emailadressen kunnen doen<br />
-                    Gebruikers in groepen kunnen toevoegen<br />
                 </p>
 
                 <div class="form-footer bg-green">
