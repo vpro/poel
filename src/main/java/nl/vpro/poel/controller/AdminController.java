@@ -1,10 +1,13 @@
 package nl.vpro.poel.controller;
 
+import nl.vpro.poel.domain.Group;
 import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.dto.MatchForm;
 import nl.vpro.poel.dto.MessageForm;
+import nl.vpro.poel.dto.GroupForm;
+import nl.vpro.poel.service.GroupService;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.MessageService;
 import nl.vpro.poel.service.UserService;
@@ -22,6 +25,8 @@ import java.util.List;
 @RequestMapping("/admin")
 class AdminController {
 
+    private final GroupService groupService;
+
     private final MatchService matchService;
 
     private final MessageService messageService;
@@ -29,7 +34,8 @@ class AdminController {
     private final UserService userService;
 
     @Autowired
-    public AdminController(MatchService matchService, MessageService messageService, UserService userService) {
+    public AdminController(GroupService groupService, MatchService matchService, MessageService messageService, UserService userService) {
+        this.groupService = groupService;
         this.matchService = matchService;
         this.messageService = messageService;
         this.userService = userService;
@@ -75,7 +81,8 @@ class AdminController {
 
     @RequestMapping(value = "/groups", method = RequestMethod.GET)
     String showGroups(Model model) {
-
+        List<Group> groups = groupService.findAll();
+        model.addAttribute("groups", groups);
         return "admin/groups";
     }
 }
