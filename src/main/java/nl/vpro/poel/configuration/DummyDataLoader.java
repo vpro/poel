@@ -1,7 +1,7 @@
 package nl.vpro.poel.configuration;
 
 import nl.vpro.poel.domain.*;
-import nl.vpro.poel.repository.GroupRepository;
+import nl.vpro.poel.repository.UserGroupRepository;
 import nl.vpro.poel.repository.MatchRepository;
 import nl.vpro.poel.repository.MessageRepository;
 import nl.vpro.poel.repository.UserRepository;
@@ -18,7 +18,7 @@ import java.util.List;
 @Profile("development")
 public class DummyDataLoader {
 
-    private final GroupRepository groupRepository;
+    private final UserGroupRepository userGroupRepository;
 
     private final MatchRepository matchRepository;
 
@@ -27,9 +27,9 @@ public class DummyDataLoader {
     private final UserRepository userRepository;
 
     @Autowired
-    DummyDataLoader(GroupRepository groupRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
+    DummyDataLoader(UserGroupRepository userGroupRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
 
-        this.groupRepository = groupRepository;
+        this.userGroupRepository = userGroupRepository;
         this.matchRepository = matchRepository;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
@@ -37,7 +37,7 @@ public class DummyDataLoader {
         adminUsers();
         matches();
         messages();
-        //groups();
+        groups();
     }
 
     private void adminUsers() {
@@ -88,11 +88,10 @@ public class DummyDataLoader {
 
     private void groups() {
 
-        List<Group> defaultGroups = Arrays.asList(
-
-                new Group("Digitaal"),
-                new Group("Voetbalvrouwen")
+        List<UserGroup> defaultUserGroups = Arrays.asList(
+                new UserGroup("Digitaal"),
+                new UserGroup("Voetbalvrouwen")
         );
-        groupRepository.save(defaultGroups);
+        userGroupRepository.save(defaultUserGroups);
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-public class Group {
+public class UserGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,11 +14,10 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
-    public Group() {} // For Hibernate
+    public UserGroup() {} // For Hibernate
 
 
-    public Group(String name) {
-
+    public UserGroup(String name) {
         this.name = name;
     }
 
@@ -37,11 +36,10 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Group group = (Group) o;
+        UserGroup userGroup = (UserGroup) o;
 
-        if (id != null ? !id.equals(group.id) : group.id != null) return false;
-        return name != null ? name.equals(group.name) : group.name == null;
-
+        if (id != null ? !id.equals(userGroup.id) : userGroup.id != null) return false;
+        return name != null ? name.equals(userGroup.name) : userGroup.name == null;
     }
 
     @Override
@@ -53,7 +51,7 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "UserGroup{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

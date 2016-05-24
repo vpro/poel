@@ -1,11 +1,11 @@
 package nl.vpro.poel.repository;
 
-import nl.vpro.poel.domain.Group;
+import nl.vpro.poel.domain.UserGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GroupRepository extends JpaRepository<Group, Long> {
+public interface UserGroupRepository extends JpaRepository<UserGroup, Long>{
 
-    Group findByName(String name);
+    UserGroup findByName(String name);
 }

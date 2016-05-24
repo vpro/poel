@@ -21,13 +21,13 @@
     backGroundColor="bg-darkgreen"
     ]
     <div class="grid-gutter">
-        [#list groups]
+        [#list userGroups]
             <form action="/admin/groups" class="form group-admin" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-                [#items as group]
+                [#items as userGroup]
                 <div class="grid">
-                    ${ group.name }
+                    ${ userGroup.name }
                 </div>
                 [/#items]
 
