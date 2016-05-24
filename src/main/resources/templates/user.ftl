@@ -53,6 +53,17 @@
             </div>
 
             <div class="grid row">
+                <span class="h6 col col-12-2">Afdeling:</span>
+                <span class="col col-12-2">
+                    [#if user.userGroup ? has_content]
+                        ${ user.userGroup.name }
+                    [#else]
+                        Nog niet ingedeeld door de poelleiding.
+                    [/#if]
+                </span>
+            </div>
+
+            <div class="grid row">
                 <form class="form" action="/user" method="post">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
                     <input type="hidden" name="updateUser.username" value="${updateUser.username}"/>

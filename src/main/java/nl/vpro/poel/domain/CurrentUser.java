@@ -32,4 +32,6 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     public String getGameName() {
         return user.getGameName();
     }
+
+    public UserGroup getUserGroup() { return user.getUserGroup(); }
 }

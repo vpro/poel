@@ -7,6 +7,7 @@
     [#assign matchResult = prediction.match.matchResult ! ]
     [#assign predictedResult = prediction.matchResult !]
     [#assign hasPrediction = predictedResult ? has_content]
+    [#assign multiplier = prediction.multiplier]
     [#assign score = prediction.score !]
     [#assign predictionIndex = index !]
 
@@ -38,6 +39,11 @@
         <td class="prediction__predicted">
             <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
             <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+        </td>
+
+        <td>
+            <input id="predictionMultiplier${predictionIndex}" type="checkbox" name="predictions[${predictionIndex}].multiplier" value="true" [#if multiplier]checked[/#if] />
+            <label for="predictionMultiplier${predictionIndex}">Joker</label>
         </td>
 
         <td class="prediction__score">

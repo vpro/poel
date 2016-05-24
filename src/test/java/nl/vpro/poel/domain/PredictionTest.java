@@ -12,8 +12,18 @@ public class PredictionTest {
     }
 
     @Test
+    public void scoreForCorrectWinnerAndResultWithMultiplier() {
+        checkScoreWithMultiplier(new MatchResult(1, 3), new MatchResult(1, 3), 6);
+    }
+
+    @Test
     public void scoreForCorrectWinnerWrongResult() {
         checkScore(new MatchResult(1, 0), new MatchResult(2, 0), 2);
+    }
+
+    @Test
+    public void scoreForCorrectWinnerWrongResultWithMultiplier() {
+        checkScoreWithMultiplier(new MatchResult(5, 0), new MatchResult(1, 0), 4);
     }
 
     @Test
@@ -22,7 +32,17 @@ public class PredictionTest {
     }
 
     @Test
+    public void scoreForWrongWinnerWithMultiplier() {
+        checkScoreWithMultiplier(new MatchResult(5, 4), new MatchResult(3, 3), 0);
+    }
+
+    @Test
     public void scoreForNoPredictedResult() {
+        checkScore(null, new MatchResult(1, 0), 0);
+    }
+
+    @Test
+    public void scoreForNoPredictedResultWithMultiplier() {
         checkScore(null, new MatchResult(1, 0), 0);
     }
 
@@ -32,12 +52,30 @@ public class PredictionTest {
     }
 
     @Test
+    public void scoreForNoActualResultWithMultiplier() {
+        checkScoreWithMultiplier(new MatchResult(1, 0), null, 0);
+    }
+
+    @Test
     public void scoreForNoResultsAtAll() {
         checkScore(null, null, 0);
     }
 
+    @Test
+    public void scoreForNoResultsAtAllWithMultiplier() {
+        checkScoreWithMultiplier(null, null, 0);
+    }
+
+    private void checkScoreWithMultiplier(MatchResult predictedResult, MatchResult actualResult, int expectedScore) {
+        checkScore(predictedResult, actualResult, true, expectedScore);
+    }
+
     private void checkScore(MatchResult predictedResult, MatchResult actualResult, int expectedScore) {
-        Prediction prediction = new Prediction(null, new Match("Home", "Away", null, actualResult), predictedResult);
+        checkScore(predictedResult, actualResult, false, expectedScore);
+    }
+
+    private void checkScore(MatchResult predictedResult, MatchResult actualResult, boolean multiplier, int expectedScore) {
+        Prediction prediction = new Prediction(null, new Match("Home", "Away", null, actualResult), predictedResult, multiplier);
         int actualScore = prediction.getScore();
         assertThat(actualScore).isEqualTo(expectedScore);
     }

@@ -15,4 +15,6 @@ public interface PredictionRepository extends JpaRepository<Prediction, Long> {
     List<Prediction> findAllByUser(User user);
 
     Optional<Prediction> findOneByUserAndMatch(User user, Match match);
+
+    int countByUserAndMultiplierIsTrue(User user);
 }

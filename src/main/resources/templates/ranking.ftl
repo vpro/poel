@@ -49,7 +49,11 @@
                                 <a href="/user"><i> vul je voetbalnaam in op je profielpagina</i></a>
                                 [/#if]
                             </span>
-                            <span class="ranking__department">afdeling</span>
+                            <span class="ranking__department">
+                                [#if rankingEntry.user.userGroup ? has_content]
+                                    ${ rankingEntry.user.userGroup.name }
+                                [/#if]
+                            </span>
                         </div>
                     </td>
                     <td class="ranking__score">${ rankingEntry.score }</td>
