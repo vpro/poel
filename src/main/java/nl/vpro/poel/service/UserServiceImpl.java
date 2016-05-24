@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllUsersForUserGroup(UserGroup userGroup) {
+        return userRepository.findAllByUserGroup(userGroup);
+    }
+
+    @Override
     public User getOrCreate(String username) {
         Optional<User> existingUser = getUserByUsername(username);
         if (existingUser.isPresent()) {

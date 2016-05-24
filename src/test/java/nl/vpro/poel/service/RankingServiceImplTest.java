@@ -27,6 +27,7 @@ public class RankingServiceImplTest {
         Match B_C = new Match("B", "C", new Date(), new MatchResult(4, 2));
 
         UserService userService = mock(UserService.class);
+        UserGroupService userGroupService = mock(UserGroupService.class);
         when(userService.getAllUsers()).thenReturn(Arrays.asList(jan, piet, klaas, henk));
 
         PredictionService predictionService = mock(PredictionService.class);
@@ -48,7 +49,7 @@ public class RankingServiceImplTest {
                 new Prediction(klaas, B_C, new MatchResult(3, 2))
         ));
 
-        RankingService rankingService = new RankingServiceImpl(userService, predictionService);
+        RankingService rankingService = new RankingServiceImpl(userService, userGroupService, predictionService);
 
         List<RankingEntry> ranking = rankingService.getRanking();
 
