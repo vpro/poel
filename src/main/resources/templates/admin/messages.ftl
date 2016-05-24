@@ -35,7 +35,7 @@
                         </div>
                     [/#items]
 
-                    <div class="admin__form-buttons bg-green">
+                    <div class="form-footer bg-green">
                         <button class="h5 button submit-button" type="submit">Opslaan</button>
                     </div>
                 </form>

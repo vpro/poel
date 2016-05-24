@@ -19,9 +19,15 @@
         [@messageUtil.outputMessage message=message ! /]
     [/#if]
 
+    [#if user.gameName ? has_content]
+        [#assign salutation = user.gameName]
+    [#else]
+        [#assign salutation = user.realName]
+    [/#if]
+
     [@layout.sectionWithLayout
     content={"layout":"100"}
-    title=''
+    title='Gegevens voor: ${ salutation }'
     collapsible=false
     opened=true
     addCss='user-section'
@@ -29,7 +35,12 @@
     backGroundColor='blue' ]
 
         <div class="grid c-white grid-gutter">
-            <h1 class="h5"> Gegevens voor [#if user.gameName ? has_content]${ user.gameName }[#else]${ user.realName }[/#if]: </h1>
+
+            [#if user.role == 'ADMIN']
+            <div class="grid row">
+                <a href="/admin/" class="c-white"> Ga naar het Admin gedeelte </a>
+            </div>
+            [/#if]
 
             <div class="grid row">
                 <span class="h6 col col-12-2">Naam:</span>
@@ -49,13 +60,12 @@
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
 
                     <input class="col col-12-2 " type="text" name="updateUser.gameName" value="${updateUser.gameName}"/>
-                    <button class="col col-12-1" type="submit">sla op</button>
+
+                    <div class="form-footer bg-blue">
+                        <button class="h5 button submit-button" type="submit">Opslaan</button>
+                    </div>
                 </form>
             </div>
-
-            [#if user.role == 'ADMIN']
-                <a href="/admin/" class="c-white"> Ga naar het Admin gedeelte </a>
-            [/#if]
 
         </div>
 
