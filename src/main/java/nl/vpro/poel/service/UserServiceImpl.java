@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
                         userRepository.saveAndFlush(existingUser);
 
                     } else {
-                        logger.warn("Ignoring user update {}, because it is incomplete");
+                        logger.warn("Ignoring user update {}, because no user group exists for this id", userGroupId);
                     }
                 }
 
