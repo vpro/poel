@@ -21,11 +21,13 @@
         [@layout.sectionWithLayout
             content={"layout":"100"}
             title='spelers'
-            collapsible=false
+            collapsible=true
             opened=true
             addCss='ranking-section'
-            addContainerCss='bg-darkgreen'
-            backGroundColor='darkgreen' ]
+            backGroundColor='greybat'
+            closeColorClass='bg-greybat'
+            openColorClass='bg-darkgreen'
+        ]
 
             [#list ranking]
             <table class="ranking">
