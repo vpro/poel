@@ -37,7 +37,7 @@ public class DummyDataLoader {
         adminUsers();
         matches();
         messages();
-        groups();
+        //groups();
     }
 
     private void adminUsers() {

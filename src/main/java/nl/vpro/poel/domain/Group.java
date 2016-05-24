@@ -11,7 +11,7 @@ public class Group {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     public Group() {} // For Hibernate
