@@ -94,7 +94,7 @@
 
                 [#if future ? has_content]
 
-                    <form action="#" class="form" method="post">
+                    <form action="#" method="post">
 
                     [@layout.sectionWithLayout
                         content={'layout': '100'}

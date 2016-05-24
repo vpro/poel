@@ -1,6 +1,6 @@
 [#import "../macros/head.ftl" as headUtil]
 [#import "../macros/footer.ftl" as footerUtil]
-
+[#import "../macros/layout.ftl" as layout]
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
@@ -9,16 +9,17 @@
     [@headUtil.head title='Admin'/]
     <body>
 
-    [@navigationUtil.navigation title='Admin' back='users' /]
-    <div class="grid bg-blue">
-        <div class="grid-gutter">
+    [@navigationUtil.navigation title='Admin' subtitle='deelnemers' back='/admin' /]
+    <div class="grid">
 
-            <h1 class="h4">Form for: ${ user.realName }</h1>
-
-            Alleen admins zoals ${user.realName} (${user.username}/${user.role}) kunnen dit zien!
-
+    [@layout.sectionWithLayout
+    content={'layout': '100'}
+    title='Alle deelnemers'
+    addCss='theme-primary'
+    backGroundColor="bg-darkgreen"
+    ]
+        <div class="grid-gutter theme-text">
             [#list users]
-                <h2>Alle deelnemers</h2>
                 <ul>
                     [#items as u]
                         <li>${u.realName} (${u.username})</li>
@@ -35,7 +36,7 @@
                 Gebruikers in groepen kunnen toevoegen<br />
             </p>
         </div>
-     </div>
+    [/@layout.sectionWithLayout]
 
     [@footerUtil.footer /]
     </body>

@@ -1,3 +1,33 @@
+.form {
+
+  padding-bottom: 50px;
+
+  input[type=text],
+  input[type=number],
+  input[type=datetime-local],
+  textarea {
+    position: relative;
+    border: none;
+    font-family: $title-font;
+    font-size: 16px;
+    line-height: 25px;
+    margin-bottom: 4px;
+  }
+
+  input[type=datetime-local],
+  input[type=text] {
+    padding: 0 0 0 4px;
+  }
+
+  input[type=datetime-local]{
+    line-height: 23px;
+  }
+
+  input[type=number] {
+    text-align: center;
+  }
+}
+
 .prediction-section .section-with-layout-content {
   padding-left: 0;
   padding-right: 0;
@@ -227,34 +257,6 @@
 }
 
 
-.matches,
-.user-form {
-
-    input[type=text],
-    input[type=number],
-    input[type=datetime-local] {
-        position: relative;
-        border: none;
-        font-family: $title-font;
-        font-size: 16px;
-        line-height: 25px;
-        margin-bottom: 4px;
-    }
-
-    input[type=datetime-local],
-    input[type=text] {
-        padding: 0 0 0 4px;
-    }
-
-    input[type=datetime-local]{
-        line-height: 23px;
-    }
-
-    input[type=number] {
-        text-align: center;
-    }
-}
-
 .matches-form-button-container{
 
     padding: 20px 0;
@@ -285,48 +287,13 @@
 
 @include media-med-screen-width () {
 
-    .match {
+  .match {
 
-        .delete-match {
-            position: relative;
-            top: $gu;
+    .delete-match {
+      position: relative;
+      top: $gu;
 
-            display: inline-block;
-        }
+      display: inline-block;
     }
-}
-
-
-
-.user-section {
-    .row{
-        margin-bottom: 8px;
-    }
-}
-
-.user-form {
-
-    button,
-    input[type=submit]{
-        height: 3 * $gu;
-        font-family: $title-font;
-        font-size: 16px;
-        line-height: 25px;
-        border: none;
-        background: #fff;
-        padding: 0 6px;
-        cursor: pointer;
-        margin: 0;
-    }
-
-}
-
-@include media-med-screen-width () {
-
-    .user-form {
-        button,
-        input[type=submit]{
-            margin: 0 $gu 0 $gu;
-        }
-    }
+  }
 }

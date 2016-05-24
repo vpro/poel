@@ -41,15 +41,8 @@
                 <span class="col col-12-2"> ${user.username}</span>
             </div>
 
-            [#if user.role == 'ADMIN']
             <div class="grid row">
-                <span class="h6 col col-12-2">Rol:</span>
-                <span class="col col-12-2"> ${user.role}</span>
-            </div>
-           [/#if]
-
-            <div class="grid row">
-                <form class='user-form' action="/user" method="post">
+                <form class="form" action="/user" method="post">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
                     <input type="hidden" name="updateUser.username" value="${updateUser.username}"/>
 

@@ -11,7 +11,7 @@
     [@headUtil.head title="wedstrijden beheren" /]
     <body>
 
-    [@navigationUtil.navigation title='Admin' subtitle='wedstrijden' back='/' /]
+    [@navigationUtil.navigation title='Admin' subtitle='wedstrijden' back='/admin' /]
 
         <div class="grid">
 
@@ -23,7 +23,7 @@
 
                 [#list matches]
 
-                <form class="matches-form" action="#" class="form" method="post">
+                <form class="form" action="#" method="post">
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
