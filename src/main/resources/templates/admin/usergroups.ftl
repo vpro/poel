@@ -1,48 +1,71 @@
 [#import "../macros/head.ftl" as headUtil]
 [#import "../macros/footer.ftl" as footerUtil]
 [#import "../macros/layout.ftl" as layout]
+
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
+
 <html lang="nl">
 
-[@headUtil.head title="Admin" /]
-
+[@headUtil.head title="groepen beheren" /]
 <body>
 
-    [@navigationUtil.navigation title='Admin' subtitle='groepen' back='/' /]
+[@navigationUtil.navigation title='Admin' subtitle='groepen' back='/admin' /]
 
-    <div class="grid">
+<div class="grid">
 
-    [@layout.sectionWithLayout
-    content={'layout': '100'}
-    title=''
-    addCss='theme-primary'
-    backGroundColor="bg-darkgreen"
-    ]
-    <div class="grid-gutter">
-        [#list userGroups]
-            <form action="/admin/groups" class="form group-admin" method="post">
-                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+[@layout.sectionWithLayout
+content={'layout': '100'}
+title='groepen'
+backGroundColor="bg-darkgreen"
+]
 
-                [#items as userGroup]
-                <div class="grid">
-                    ${ userGroup.name }
-                </div>
-                [/#items]
+[#list userGroups]
 
-            <div class="form-footer bg-green">
-                <button class="h5 button submit-button" type="submit">Opslaan</button>
+<form class="form" action="#" method="post">
+
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+    <div class="grid-gutter user-groups">
+
+        [#items as userGroup]
+            <div class="form-row user-group row">
+
+                <input type="hidden" name="user-groups[${userGroup?index}].id" value="${userGroup.id}" />
+
+                <input type="text" class="col-12-6" name="user-groups[${userGroup?index}].name" value="${userGroup.name}" />
+
+                <span class="delete delete-user-group">
+                    <i class="glyph glyph-close c-gold col-12-1"></i>
+                </span>
+
             </div>
-        </form>
-        [#else]
-            No groups at this time, sorry!
-        [/#list]
+        [/#items]
+
     </div>
 
-    [/@layout.sectionWithLayout]
+    <div class="col-gutter form-button-container user-groups-form-button-container">
+        <input type="button" class="add-user-group" value="Toevoegen"/>
+        <input type="submit" value="Opslaan" />
     </div>
-    [@footerUtil.footer /]
+
+</form>
+[/#list]
+
+[/@layout.sectionWithLayout]
+
+</div>
+
+[@footerUtil.footer /]
+
+<script>
+    System.import( '/js/form/controllers/UserGroupController.js' ).then( function ( userGroupControllerModule ) {
+
+        new userGroupControllerModule.default( document.querySelectorAll( 'form' ) );
+
+    } );
+</script>
 
 </body>
 

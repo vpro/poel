@@ -258,7 +258,7 @@
 }
 
 
-.matches-form-button-container{
+.form-button-container{
 
     padding: 20px 0;
 
@@ -277,9 +277,9 @@
     }
 }
 
-.match {
+.form-row {
 
-    .delete-match {
+    .delete {
         height: 3 * $gu;
         cursor: pointer;
         padding: 0 0 0 4px;
@@ -288,9 +288,9 @@
 
 @include media-med-screen-width () {
 
-  .match {
+  .form-row {
 
-    .delete-match {
+    .delete {
       position: relative;
       top: $gu;
 

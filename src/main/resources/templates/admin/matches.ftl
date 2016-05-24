@@ -30,7 +30,7 @@
                     <div class="matches">
 
                         [#items as match]
-                            <div class="match row">
+                            <div class="form-row match row">
 
                                 <!-- TODO: move this into a macro-->
                                 <!-- or (even better) render this through match.hbs as we do when adding new matches -->
@@ -51,7 +51,7 @@
                                 <input type="number" class="col-12-1" name="matches[${match?index}].homeTeamGoals" [#if hasMatchResult]value="${match.matchResult.homeTeamGoals!}"[#else]placeholder="home"[/#if] />
                                 <input type="number" class="col-12-1" name="matches[${match?index}].awayTeamGoals" [#if hasMatchResult]value="${match.matchResult.awayTeamGoals!}"[#else]placeholder="away"[/#if] />
 
-                                <span class="delete-match">
+                                <span class="delete delete-match">
                                     <i class="glyph glyph-close c-gold col-12-1"></i>
                                 </span>
 
@@ -60,7 +60,7 @@
 
                     </div>
 
-                    <div class="matches-form-button-container">
+                    <div class="form-button-container matches-form-button-container">
 
                         <input type="button" class="sort-matches" value="Sorteren (datum)"/>
 
