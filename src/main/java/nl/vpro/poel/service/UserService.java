@@ -21,5 +21,5 @@ public interface UserService {
 
     Boolean updateUser(User user);
 
-    void updateUserGroupsForUsers(UsersForm usersForm);
+    void updateUserGroupForUsers(UsersForm usersForm);
 }

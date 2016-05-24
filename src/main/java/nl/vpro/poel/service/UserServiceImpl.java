@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserGroupsForUsers(UsersForm usersForm) {
+    public void updateUserGroupForUsers(UsersForm usersForm) {
 
         for (UsersDTO usersDTO : usersForm.getUsers()) {
 
