@@ -10,6 +10,8 @@ public class PredictionDTO {
 
     private Integer awayTeamGoals;
 
+    private boolean multiplier = false;
+
     public Long getPredictionId() {
         return predictionId;
     }
@@ -30,7 +32,7 @@ public class PredictionDTO {
         return homeTeamGoals;
     }
 
-    public void setHomeTeamGoals(int homeTeamGoals) {
+    public void setHomeTeamGoals(Integer homeTeamGoals) {
         this.homeTeamGoals = homeTeamGoals;
     }
 
@@ -38,8 +40,16 @@ public class PredictionDTO {
         return awayTeamGoals;
     }
 
-    public void setAwayTeamGoals(int awayTeamGoals) {
+    public void setAwayTeamGoals(Integer awayTeamGoals) {
         this.awayTeamGoals = awayTeamGoals;
+    }
+
+    public Boolean getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(Boolean multiplier) {
+        this.multiplier = multiplier;
     }
 
     @Override
@@ -49,6 +59,7 @@ public class PredictionDTO {
                 ", matchId=" + matchId +
                 ", homeTeamGoals=" + homeTeamGoals +
                 ", awayTeamGoals=" + awayTeamGoals +
+                ", multiplier=" + multiplier +
                 '}';
     }
 }

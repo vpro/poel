@@ -6,10 +6,12 @@ import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.dto.PredictionDTO;
 import nl.vpro.poel.dto.PredictionForm;
+import nl.vpro.poel.exception.MultiplierException;
 import nl.vpro.poel.repository.PredictionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,9 @@ public class PredictionServiceImpl implements PredictionService {
 
     private final MatchService matchService;
 
+    @Value("${poel.maxMultipliers}")
+    private int maxMultipliers;
+
     @Autowired
     PredictionServiceImpl(PredictionRepository predictionRepository, MatchService matchService) {
         this.predictionRepository = predictionRepository;
@@ -41,8 +46,8 @@ public class PredictionServiceImpl implements PredictionService {
      * @return The number of updated predictions
      */
     @Override
-    @Transactional
-    public int save(User user, PredictionForm predictionForm, Instant submittedAt) {
+    @Transactional(rollbackFor = MultiplierException.class)
+    public int save(User user, PredictionForm predictionForm, Instant submittedAt) throws MultiplierException {
         int updates = 0;
         for (PredictionDTO predictionDTO : predictionForm.getPredictions()) {
 
@@ -79,9 +84,19 @@ public class PredictionServiceImpl implements PredictionService {
 
             MatchResult predictedResult = new MatchResult(homeTeamGoals, awayTeamGoals);
             prediction.setMatchResult(predictedResult);
+
+            prediction.setMultiplier(predictionDTO.getMultiplier());
+
             predictionRepository.save(prediction);
             updates++;
         }
+
+        int multiplierCount = predictionRepository.countByUserAndMultiplierIsTrue(user);
+        if (multiplierCount > maxMultipliers) {
+            logger.warn("Ignoring prediction form for {}, because processing it would mean this user had {} multipliers, but only {} are allowed", user, multiplierCount, maxMultipliers);
+            throw new MultiplierException("De wijzigingen zijn niet opgeslagen, want je mag niet meer dan " + maxMultipliers + " joker" + (maxMultipliers != 1 ? "s" : "") + " gebruiken.");
+        }
+
         return updates;
     }
 

@@ -1,5 +1,7 @@
 package nl.vpro.poel.domain;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -23,12 +25,32 @@ public class Prediction {
     @Embedded
     private MatchResult matchResult;
 
+    private boolean multiplier = false;
+
+    @Value("${poel.pointsForCorrectWinner}")
+    private int pointsForCorrectWinner;
+
+    @Value("${poel.pointsForCorrectMatchResult}")
+    private int pointsForCorrectMatchResult;
+
+    @Value("${poel.scoreMultiplierFactor")
+    private int scoreMultiplierFactor;
+
     private Prediction() {} // For Hibernate
 
+    public Prediction(User user, Match match) {
+        this(user, match, null);
+    }
+
     public Prediction(User user, Match match, MatchResult matchResult) {
+        this(user, match, matchResult, false);
+    }
+
+    public Prediction(User user, Match match, MatchResult matchResult, boolean multiplier) {
         this.user = user;
         this.match = match;
         this.matchResult = matchResult;
+        this.multiplier = multiplier;
     }
 
     public Long getId() {
@@ -45,6 +67,14 @@ public class Prediction {
 
     public void setMatchResult(MatchResult matchResult) {
         this.matchResult = matchResult;
+    }
+
+    public boolean getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(boolean multiplier) {
+        this.multiplier = multiplier;
     }
 
     public int getScore() {
@@ -68,16 +98,31 @@ public class Prediction {
 
         int scoreForWinner = getScoreForWinner(predictedResult, actualResult);
         int scoreForResult = getScoreForResult(predictedResult, actualResult);
-        return scoreForWinner + scoreForResult;
+        int score = scoreForWinner + scoreForResult;
+        if (multiplier) {
+            score *= scoreMultiplierFactor;
+        }
+        return score;
     }
 
     private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
         Winner actualWinner = actualResult.getWinner();
         Winner predictedWinner = predictedResult.getWinner();
-        return Objects.equals(actualWinner, predictedWinner) ? 2 : 0;
+        return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectWinner : 0;
     }
 
     private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
-        return Objects.equals(actualResult, predictedResult) ? 1 : 0;
+        return Objects.equals(actualResult, predictedResult) ? pointsForCorrectMatchResult : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Prediction{" +
+                "id=" + id +
+                ", user=" + user +
+                ", match=" + match +
+                ", matchResult=" + matchResult +
+                ", multiplier=" + multiplier +
+                '}';
     }
 }
