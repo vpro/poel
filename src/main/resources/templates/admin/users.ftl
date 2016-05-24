@@ -15,7 +15,6 @@
 
     [@layout.sectionWithLayout
     content={'layout': '100'}
-    title='Alle deelnemers'
     addCss='theme-primary'
     backGroundColor="bg-darkgreen"
     ]
@@ -24,6 +23,11 @@
             <form class="form" action="/admin/users" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
+                <div class="grid row">
+                    <div class="col col-2-1"><h2 class="h5">Alle deelnemers</h2></div>
+                    <div class="col col-2-1"><h2 class="h5">Afdeling</h2></div>
+                </div>
+                <br />
                 [#items as u]
                 <div class="grid row">
                     <div class="col col-2-1">${u.realName} (${u.username})</div>
