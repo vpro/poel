@@ -1,6 +1,7 @@
 package nl.vpro.poel.configuration;
 
 import nl.vpro.poel.domain.*;
+import nl.vpro.poel.repository.GroupRepository;
 import nl.vpro.poel.repository.MatchRepository;
 import nl.vpro.poel.repository.MessageRepository;
 import nl.vpro.poel.repository.UserRepository;
@@ -17,6 +18,8 @@ import java.util.List;
 @Profile("development")
 public class DummyDataLoader {
 
+    private final GroupRepository groupRepository;
+
     private final MatchRepository matchRepository;
 
     private final MessageRepository messageRepository;
@@ -24,7 +27,9 @@ public class DummyDataLoader {
     private final UserRepository userRepository;
 
     @Autowired
-    DummyDataLoader(MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
+    DummyDataLoader(GroupRepository groupRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
+
+        this.groupRepository = groupRepository;
         this.matchRepository = matchRepository;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
@@ -32,6 +37,7 @@ public class DummyDataLoader {
         adminUsers();
         matches();
         messages();
+        groups();
     }
 
     private void adminUsers() {
@@ -78,5 +84,15 @@ public class DummyDataLoader {
                 new Message("/ranking", "Hier een melding voor de ranking")
         );
         messageRepository.save(defaultMessages);
+    }
+
+    private void groups() {
+
+        List<Group> defaultGroups = Arrays.asList(
+
+                new Group("Digitaal"),
+                new Group("Voetbalvrouwen")
+        );
+        groupRepository.save(defaultGroups);
     }
 }
