@@ -1,29 +1,39 @@
 package nl.vpro.poel.domain;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredictionTest {
 
+    @Value("${poel.pointsForCorrectWinner}")
+    private int pointsForCorrectWinner;
+
+    @Value("${poel.pointsForCorrectMatchResult}")
+    private int pointsForCorrectMatchResult;
+
+    @Value("${poel.scoreMultiplierFactor")
+    private int scoreMultiplierFactor;
+
     @Test
     public void scoreForCorrectWinnerAndResult() {
-        checkScore(new MatchResult(0, 0), new MatchResult(0, 0), 3);
+        checkScore(new MatchResult(0, 0), new MatchResult(0, 0), pointsForCorrectWinner + pointsForCorrectMatchResult);
     }
 
     @Test
     public void scoreForCorrectWinnerAndResultWithMultiplier() {
-        checkScoreWithMultiplier(new MatchResult(1, 3), new MatchResult(1, 3), 6);
+        checkScoreWithMultiplier(new MatchResult(1, 3), new MatchResult(1, 3), scoreMultiplierFactor * (pointsForCorrectWinner + pointsForCorrectMatchResult));
     }
 
     @Test
     public void scoreForCorrectWinnerWrongResult() {
-        checkScore(new MatchResult(1, 0), new MatchResult(2, 0), 2);
+        checkScore(new MatchResult(1, 0), new MatchResult(2, 0), pointsForCorrectWinner);
     }
 
     @Test
     public void scoreForCorrectWinnerWrongResultWithMultiplier() {
-        checkScoreWithMultiplier(new MatchResult(5, 0), new MatchResult(1, 0), 4);
+        checkScoreWithMultiplier(new MatchResult(5, 0), new MatchResult(1, 0), scoreMultiplierFactor * pointsForCorrectWinner);
     }
 
     @Test
