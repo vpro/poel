@@ -2,9 +2,9 @@ import Stapes from 'stapes';
 import $ from 'jquery';
 
 import HandlebarsRuntime from 'handlebars-runtime';
-import matchTemplate from '../views/match.hbs!';
+import userGroupTemplate from '../views/user-group.hbs!';
 
-var MatchController = Stapes.subclass({
+var UserGroupController = Stapes.subclass({
 
     /**
      * @param {HTMLElement} form
@@ -12,17 +12,13 @@ var MatchController = Stapes.subclass({
     constructor : function ( form, overlay ) {
 
         this.$form = $( form );
-        this.$userGroupsContainer = this.$form.find( '.matches' );
+        this.$userGroupsContainer = this.$form.find( '.user-groups' );
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
-        this.$formAdd = this.$form.find( '.add-match' );
-        this.$formSort = this.$form.find( '.sort-matches' );
+        this.$formAdd = this.$form.find( '.add-user-group' );
 
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
-
-
-        this.sortMatches();
 
         this.initialFormState = this.$form.serialize();
 
@@ -34,8 +30,8 @@ var MatchController = Stapes.subclass({
 
         this.$userGroupsContainer.append(
 
-            matchTemplate({
-                index: $( '.match' ).length
+            userGroupTemplate({
+                index: $( '.user-group' ).length
             })
         );
     },
@@ -59,64 +55,25 @@ var MatchController = Stapes.subclass({
         }.bind( this ) );
 
 
-        this.$form.on( 'click', '.delete-match', function ( e ) {
+        this.$form.on( 'click', '.delete-user-group', function ( e ) {
 
-            var c = confirm( 'Wedstrijd verwijderen?' );
+            var c = confirm( 'Groep verwijderen?' );
             if ( c == true ) {
-                var match = $( e.currentTarget ).parent();
-                this.deleteUserGroup( match );
+                var userGroup = $( e.currentTarget ).parent();
+                this.deleteUserGroup( userGroup );
             }
 
         }.bind( this ) );
 
-        this.$formSort.on( 'click', function () {
-            this.sortMatches();
-        }.bind( this ) );
+    },
+
+    deleteUserGroup: function ( userGroup ) {
+
+        userGroup.remove();
 
     },
 
-    deleteUserGroup: function ( match ) {
-
-        match.remove();
-
-    },
-
-    sortMatches: function () {
-
-        // get all matches
-        var matches = this.$userGroupsContainer.find( '.match' );
-
-        // create an array with objects containing match + date
-        var matchObjects = matches.map( function ( index, match, array ) {
-
-            var date = $( match ).find( 'input[type=datetime-local]' ).val();
-
-            return {
-                date: date,
-                match: match
-            };
-        });
-
-        // sort matchObjects by date
-        matchObjects.sort( function ( a, b ) {
-            a = new Date( a.date );
-            b = new Date( b.date );
-
-            return a < b ? -1 : a > b ? 1 : 0;
-        });
-
-        // remove original matches from the DOM
-        this.$userGroupsContainer.empty();
-
-        // inject the ordered matchObjects
-        matchObjects.each( function ( i, match ) {
-            this.$userGroupsContainer.append( match.match );
-        }.bind( this ) );
-
-    }
-
-
-    // TODO: implement this for matches as well
+    // TODO: implement this for userGroups as well
     // disabled submit button if nothing has changed or if the form validation fails
 
     //    /**
@@ -148,4 +105,4 @@ var MatchController = Stapes.subclass({
 
 });
 
-export default MatchController;
+export default UserGroupController;

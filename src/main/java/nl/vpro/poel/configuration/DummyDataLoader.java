@@ -53,7 +53,8 @@ public class DummyDataLoader {
                 new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich", userGroupDigitaal),
                 new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst", userGroupDigitaal),
                 new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator", userGroupDigitaal),
-                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest", userGroupDigitaal)
+                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest", userGroupDigitaal),
+                new User("l.schipperheyn@vpro.nl", Role.ADMIN, "Luuk Schipperheyn", "Luuk de Jonguh", userGroupDigitaal)
         );
         userRepository.save(admins);
     }
