@@ -72,4 +72,10 @@ class AdminController {
         model.addAttribute("users", allUsers);
         return "admin/users";
     }
+
+    @RequestMapping(value = "/groups", method = RequestMethod.GET)
+    String showGroups(Model model) {
+
+        return "admin/groups";
+    }
 }
