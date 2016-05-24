@@ -10,24 +10,19 @@
 
 <body>
 
-    [@navigationUtil.navigation title='Admin' back='/' /]
+    [@navigationUtil.navigation title='Admin' subtitle='groepen' back='/' /]
 
     <div class="grid">
 
     [@layout.sectionWithLayout
     content={'layout': '100'}
-    title='Beheer opties:'
+    title=''
     addCss='theme-primary'
     backGroundColor="bg-darkgreen"
     ]
         <div class="grid-gutter">
 
-            <ul>
-                <li><a href="/admin/matches" class="theme-link">Wedstrijden</a></li>
-                <li><a href="/admin/messages" class="theme-link">Berichten</a></li>
-                <li><a href="/admin/users" class="theme-link">Gebruikers</a></li>
-                <li><a href="/admin/groups" class="theme-link">Groepen</a></li>
-            </ul>
+            Todo groepen toevoegen en wijzigen
 
         </div>
     [/@layout.sectionWithLayout]
