@@ -20,11 +20,26 @@
     addCss='theme-primary'
     backGroundColor="bg-darkgreen"
     ]
-        <div class="grid-gutter">
+    <div class="grid-gutter">
+        [#list groups]
+            <form action="/admin/groups" class="form group-admin" method="post">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-            Todo groepen toevoegen en wijzigen
+                [#items as group]
+                <div class="grid">
+                    ${ group.name }
+                </div>
+                [/#items]
 
-        </div>
+            <div class="form-footer bg-green">
+                <button class="h5 button submit-button" type="submit">Opslaan</button>
+            </div>
+        </form>
+        [#else]
+            No groups at this time, sorry!
+        [/#list]
+    </div>
+
     [/@layout.sectionWithLayout]
     </div>
     [@footerUtil.footer /]
