@@ -29,7 +29,7 @@
                     <div class="col col-2-1">${u.realName} (${u.username})</div>
                     <div class="col col-2-1">
                         [#assign formPath = "users[${ u_index }]" ]
-                        <input type="hidden" name="${ formPath }.username" value="${u.username}"/>
+                        <input type="hidden" name="${ formPath }.userId" value="${u.id}"/>
 
                         [#if u.userGroup ? has_content]
                             [@usergroupUtil.usergroupSelection userGroups=userGroups formPath="${ formPath }.userGroupId" selectedUserGroupId=(u.userGroup.id) /]

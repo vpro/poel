@@ -2,6 +2,9 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Role;
 import nl.vpro.poel.domain.User;
+import nl.vpro.poel.domain.UserGroup;
+import nl.vpro.poel.dto.UsersDTO;
+import nl.vpro.poel.dto.UsersForm;
 import nl.vpro.poel.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +20,12 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
+    private final UserGroupService userGroupService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserGroupService userGroupService) {
         this.userRepository = userRepository;
+        this.userGroupService = userGroupService;
     }
 
     @Override
@@ -69,5 +74,39 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override
+    public void updateUserGroupsForUsers(UsersForm usersForm) {
+
+        for (UsersDTO usersDTO : usersForm.getUsers()) {
+
+            User existingUser = getUserById(usersDTO.getUserId()).orElse(null);
+            Long userGroupId = usersDTO.getUserGroupId();
+
+            if ( existingUser != null ) {
+
+                if ( userGroupId == null ) {
+
+                    existingUser.setUserGroup(null);
+                    userRepository.saveAndFlush(existingUser);
+
+                } else {
+
+                    UserGroup userGroup = userGroupService.findById(userGroupId).orElse(null);
+                    if ( userGroup != null ) {
+
+                        existingUser.setUserGroup(userGroup);
+                        userRepository.saveAndFlush(existingUser);
+
+                    } else {
+                        logger.warn("Ignoring user update {}, because it is incomplete");
+                    }
+                }
+
+            } else {
+                logger.warn("Ignoring user update {}, because no user exists for this id", usersDTO.getUserId() );
+            }
+        }
     }
 }
