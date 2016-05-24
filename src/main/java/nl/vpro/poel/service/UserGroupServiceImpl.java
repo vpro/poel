@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
@@ -38,6 +40,27 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public void setUserGroups(UserGroupForm userGroupForm) {
-       // TODO save posted groups
+
+
+        Set<Long> idsToRemove = findAll().stream().map(UserGroup::getId).collect(Collectors.toSet());
+
+        for (UserGroup postedUserGroup : userGroupForm.getUserGroups()) {
+
+            String name = postedUserGroup.getName();
+
+            UserGroup userGroup = userGroupRepository.findByName( name );
+
+            if ( userGroup == null ) {
+                userGroup = new UserGroup( name );
+            } else {
+                idsToRemove.remove(userGroup.getId());
+            }
+            userGroupRepository.save(userGroup);
+        }
+
+        // UserGroups not included in the form are deleted from the repository
+        // TODO: Delete should be cascading. Usergroups should be decoupled from users before being removed.
+        idsToRemove.stream().forEach(userGroupRepository::delete);
     }
+
 }

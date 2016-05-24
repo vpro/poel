@@ -6,6 +6,7 @@ import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.dto.MatchForm;
 import nl.vpro.poel.dto.MessageForm;
+import nl.vpro.poel.dto.UserGroupForm;
 import nl.vpro.poel.service.UserGroupService;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.MessageService;
@@ -88,5 +89,11 @@ class AdminController {
         List<UserGroup> userGroups = userGroupService.findAll();
         model.addAttribute("userGroups", userGroups);
         return "admin/usergroups";
+    }
+
+    @RequestMapping(value = "/usergroups", method = RequestMethod.POST)
+    String saveUserGroups(@ModelAttribute("userGroups") UserGroupForm userGroupForm, BindingResult bindingResult) {
+        userGroupService.setUserGroups(userGroupForm);
+        return "redirect:/admin/usergroups";
     }
 }

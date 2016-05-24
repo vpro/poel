@@ -61,6 +61,7 @@ var UserGroupController = Stapes.subclass({
             if ( c == true ) {
                 var userGroup = $( e.currentTarget ).parent();
                 this.deleteUserGroup( userGroup );
+                this.resetIds();
             }
 
         }.bind( this ) );
@@ -72,6 +73,15 @@ var UserGroupController = Stapes.subclass({
         userGroup.remove();
 
     },
+
+    resetIds: function () {
+
+        this.$form.find( 'input[name*="userGroups"]').each( function ( i ) {
+            var value = 'userGroups[' + i + '].name';
+            this.name = value;
+        } );
+
+    }
 
     // TODO: implement this for userGroups as well
     // disabled submit button if nothing has changed or if the form validation fails

@@ -32,9 +32,8 @@ backGroundColor="bg-darkgreen"
         [#items as userGroup]
             <div class="form-row user-group row">
 
-                <input type="hidden" name="user-groups[${userGroup?index}].id" value="${userGroup.id}" />
-
-                <input type="text" class="col-12-6" name="user-groups[${userGroup?index}].name" value="${userGroup.name}" />
+                <input type="hidden" class="col-12-6" name="userGroups[${userGroup?index}].name" value="${userGroup.name}" />
+                <input type="text" class="col-12-6" disabled="disabled" value="${userGroup.name}" />
 
                 <span class="delete delete-user-group">
                     <i class="glyph glyph-close c-gold col-12-1"></i>
