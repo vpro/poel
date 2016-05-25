@@ -23,14 +23,18 @@
         <td class="prediction__game">
 
             <span class="prediction__game-home">
+                [#if countryCodes[match.homeTeam] ? has_content]
                 <span class="flag-icon flag-icon-${ countryCodes[match.homeTeam] !}"></span>
+                [/#if]
                 ${ match.homeTeam }
             </span>
             <span class="prediction__game-divider">
                 -
             </span>
             <span class="prediction__game-away">
+                [#if countryCodes[match.awayTeam] ? has_content]
                 <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
+                [/#if]
                 ${ match.awayTeam }
             </span>
             [#if status == STATUS_FUTURE]
