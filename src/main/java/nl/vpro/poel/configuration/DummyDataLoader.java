@@ -1,10 +1,7 @@
 package nl.vpro.poel.configuration;
 
 import nl.vpro.poel.domain.*;
-import nl.vpro.poel.repository.UserGroupRepository;
-import nl.vpro.poel.repository.MatchRepository;
-import nl.vpro.poel.repository.MessageRepository;
-import nl.vpro.poel.repository.UserRepository;
+import nl.vpro.poel.repository.*;
 import nl.vpro.poel.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -21,25 +18,31 @@ public class DummyDataLoader {
 
     private final UserGroupRepository userGroupRepository;
     private final UserGroupService userGroupService;
-
     private final MatchRepository matchRepository;
-
+    private final PredictionRepository predictionRepository;
     private final MessageRepository messageRepository;
-
     private final UserRepository userRepository;
 
     @Autowired
-    DummyDataLoader(UserGroupRepository userGroupRepository, UserGroupService userGroupService, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository) {
-
+    DummyDataLoader(
+            UserGroupRepository userGroupRepository,
+            UserGroupService userGroupService,
+            MatchRepository matchRepository,
+            PredictionRepository predictionRepository,
+            MessageRepository messageRepository,
+            UserRepository userRepository
+    ) {
         this.userGroupRepository = userGroupRepository;
         this.userGroupService = userGroupService;
         this.matchRepository = matchRepository;
+        this.predictionRepository = predictionRepository;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
 
         groups();
         adminUsers();
         matches();
+        predictions();
         messages();
     }
 
@@ -80,6 +83,20 @@ public class DummyDataLoader {
                 new Match("Engeland", "Oostenrijk", nextWeek)
         );
         matchRepository.save(defaultMatches);
+    }
+
+    private void predictions() {
+        User user1 = userRepository.findOne(1L);
+        predictionRepository.save(Arrays.asList(
+                new Prediction(user1, matchRepository.findOne(1L), new MatchResult(1, 0)),
+                new Prediction(user1, matchRepository.findOne(2L), new MatchResult(2, 2), true)
+        ));
+
+        User user2 = userRepository.findOne(2L);
+        predictionRepository.save(Arrays.asList(
+                new Prediction(user2, matchRepository.findOne(2L), new MatchResult(2, 1), true),
+                new Prediction(user2, matchRepository.findOne(3L), new MatchResult(0, 2))
+        ));
     }
 
     private void messages() {
