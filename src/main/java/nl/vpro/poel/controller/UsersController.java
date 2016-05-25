@@ -36,7 +36,7 @@ public class UsersController {
         model.addAttribute("users", allUsers);
 
         List<UserGroup> userGroups = userGroupService.findAll();
-        model.addAttribute("userGroups", userGroups); // TODO: Waarom wordt dat hier getoond? Is ook al op /admin/usergroups te zien
+        model.addAttribute("userGroups", userGroups);
 
         return "admin/users";
     }
