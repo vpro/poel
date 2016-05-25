@@ -14,6 +14,7 @@ var FormController = Stapes.subclass({
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
         this.$predictionInputs = this.$form.find( 'input.prediction' );
+        this.$multiplierInputs = this.$form.find( 'input[name$="multiplier"]' );
 
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
@@ -38,6 +39,14 @@ var FormController = Stapes.subclass({
                 this.validateMatchPredictions();
             }.bind( this ) );
 
+        }.bind( this ) );
+
+        this.$multiplierInputs.on( 'change', function () {
+            setTimeout( function () {
+
+                this.checkFormChanges();
+
+            }.bind( this ), 1 );
         }.bind( this ) );
 
         this.$formReset.on( 'click', function () {
