@@ -23,7 +23,7 @@ public class User {
     @Column(nullable = false)
     private String gameName;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     private UserGroup userGroup;
 
     public User() {} // For Hibernate

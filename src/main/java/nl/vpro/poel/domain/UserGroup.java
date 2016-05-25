@@ -16,7 +16,6 @@ public class UserGroup {
 
     public UserGroup() {} // For Hibernate
 
-
     public UserGroup(String name) {
         this.name = name;
     }
