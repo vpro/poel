@@ -13,6 +13,17 @@
 
     <body>
 
+
+    [#if flash ? has_content]
+    <div class="alert-overlay">
+        <div class="alert-overlay__content">
+            ${flash} <br/> <br/>
+            <button class="h5 button alert-overlay__close-button">Ok!</button>
+        </div>
+    </div>
+    [/#if]
+
+
     [@navigationUtil.navigation title='Profiel' back='/' /]
 
     [#if message ? has_content]
@@ -64,12 +75,12 @@
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Echte naam:</span>
-                    <input class="col col-12-2 " type="text" name="realName" value="${user.realName}"/>
+                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName}"/>
                 </div>
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
-                    <input class="col col-12-2 " type="text" name="gameName" value="${user.gameName}"/>
+                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName}"/>
                 </div>
 
                 <div class="form-footer bg-blue">
@@ -82,5 +93,13 @@
     [/@layout.sectionWithLayout]
 
     [@footerUtil.footer /]
+
+    <script>
+        System.import( '/js/form/controllers/UserFormController.js' ).then( function ( UserFormControllerModule ) {
+                new UserFormController.default( '.alert-overlay' );
+        } );
+    </script>
+
+
     </body>
 </html>

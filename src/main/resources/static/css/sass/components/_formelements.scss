@@ -39,3 +39,40 @@ button[type=reset]:disabled,
 button[type=submit]:disabled {
     background: $greymouse;
 }
+
+.alert-overlay{
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.8);
+
+    z-index: 1001;
+
+    color: white;
+
+    text-align: center;
+
+    &.hidden{
+        display: none;
+    }
+}
+
+.alert-overlay__content{
+
+    width: 300px;
+    height: 60px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin-top: -30px;
+    margin-left: -150px;
+
+}
+
+.alert-overlay__close-button{
+    float: none;
+}

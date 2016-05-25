@@ -14,6 +14,12 @@ var FormController = Stapes.subclass({
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
         this.$predictionInputs = this.$form.find( 'input.prediction' );
+        this.$multiplierInputs = this.$form.find( 'input[name$="multiplier"]' );
+
+        this.$allMultipliers = $( 'input[name$="multiplier"]' );
+        if ( this.$allMultipliers.filter(':checked').length >= 5 ) {
+            this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
+        }
 
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
@@ -40,6 +46,22 @@ var FormController = Stapes.subclass({
 
         }.bind( this ) );
 
+        this.$multiplierInputs.on( 'change', function () {
+
+            if ( this.$allMultipliers.filter(':checked').length >= 5 ) {
+
+                this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
+            } else {
+                this.$multiplierInputs.filter(':disabled').prop('disabled', null);
+            }
+
+            setTimeout( function () {
+
+                this.checkFormChanges();
+
+            }.bind( this ), 1 );
+        }.bind( this ) );
+
         this.$formReset.on( 'click', function () {
 
             setTimeout( function () {
@@ -58,6 +80,19 @@ var FormController = Stapes.subclass({
 
         }.bind( this ) );
 
+        this.$form.on( 'submit', this.handleSubmit.bind( this ));
+
+    },
+
+    handleSubmit: function ( e ) {
+        if ( this.$allMultipliers.filter(':checked').length > 5 ) {
+
+            if ( ! confirm('Je hebt meer dan 5 jokers ingezet. Als je nu opslaat gaan je '+
+                    'zojuist ingevulde voorspellingen verloren. Wil je daarmee doorgaan?') ) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
     },
 
     validateMatchPredictions: function () {

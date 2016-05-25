@@ -81,3 +81,18 @@
     padding-right: 6 * $gu;
   }
 }
+
+#ranking__groupfilter{
+    margin-bottom: 2 * $gu;
+}
+
+@include media-med-screen-width () {
+    #ranking__groupfilter{
+        margin-left: 4*$gu;
+    }
+}
+
+.ranking__rank-tohide.hidden,
+.ranking__row-hidden {
+    display: none;
+}

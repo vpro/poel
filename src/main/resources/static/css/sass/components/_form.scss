@@ -121,20 +121,6 @@
     color: rgba(255, 255, 255, 0.8 );
 }
 
-.prediction__points{
-    width: 3*$gu;
-    height: 3*$gu;
-
-    display: block;
-
-    position: relative;
-    top: -1px;
-
-    font-family: $title-font;
-    text-align: center;
-    font-size: 12px;
-}
-
 .prediction__result{
     input{
         font-family: $title-font;
@@ -165,6 +151,51 @@
     }
 }
 
+.prediction__multiplier .prediction__multiplier__input {
+  margin-top: 4px;
+  width: 24px;
+}
+
+.prediction__multiplier__label {
+  margin-top: 2px;
+  vertical-align: top;
+  display: inline-block;
+
+  .glyph {
+    color: rgba( $white, 0.5 );
+  }
+}
+
+.prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+  color: $greygrizzly;
+}
+
+.prediction__multiplier_editable .prediction__multiplier__input + .prediction__multiplier__label:hover .glyph,
+.prediction__multiplier_editable .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+  color: $white;
+  cursor: pointer;
+}
+
+.prediction__multiplier_points-2 .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+  color: $orange;
+}
+.prediction__multiplier_points-6 .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+  color: $red;
+}
+
+.prediction__points{
+  width: 3*$gu;
+  height: 3*$gu;
+
+  display: block;
+
+  position: relative;
+  top: -1px;
+
+  font-family: $title-font;
+  text-align: center;
+  font-size: 12px;
+}
 
 .prediction__points-0 {
     background-color: $greygrizzly;
@@ -218,44 +249,6 @@
     text-align: center;
 }
 
-
-
-.alert-overlay{
-
-    position: fixed;
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(0, 0, 0, 0.8);
-
-    z-index: 1000;
-
-    color: white;
-
-    text-align: center;
-
-    &.hidden{
-        display: none;
-    }
-}
-
-.alert-overlay__content{
-
-    width: 300px;
-    height: 60px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    margin-top: -30px;
-    margin-left: -150px;
-
-}
-
-.alert-overlay__close-button{
-    float: none;
-}
 
 
 .form-button-container{
