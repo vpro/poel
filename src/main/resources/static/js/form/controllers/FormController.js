@@ -1,6 +1,8 @@
 import Stapes from 'stapes';
 import $ from 'jquery';
 
+const MAX_MULTIPLIERS = 5;
+
 var FormController = Stapes.subclass({
 
     /**
@@ -17,17 +19,17 @@ var FormController = Stapes.subclass({
         this.$multiplierInputs = this.$form.find( 'input[name$="multiplier"]' );
 
         this.$allMultipliers = $( 'input[name$="multiplier"]' );
-        if ( this.$allMultipliers.filter(':checked').length >= 5 ) {
-            this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
-        }
 
         this.$alertOverlay = $( overlay );
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
+        this.$navigationSubTitle = $('.top-navigation-subtitle');
+        this.$navigationSubTitle.data('original-value', this.$navigationSubTitle.html() );
+
         this.initialFormState = this.$form.serialize();
 
         this.bindHandlers();
-
+        this.handleMultiplierState();
     },
 
     bindHandlers: function () {
@@ -48,12 +50,7 @@ var FormController = Stapes.subclass({
 
         this.$multiplierInputs.on( 'change', function () {
 
-            if ( this.$allMultipliers.filter(':checked').length >= 5 ) {
-
-                this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
-            } else {
-                this.$multiplierInputs.filter(':disabled').prop('disabled', null);
-            }
+            this.handleMultiplierState();
 
             setTimeout( function () {
 
@@ -84,8 +81,23 @@ var FormController = Stapes.subclass({
 
     },
 
+    handleMultiplierState: function () {
+
+        var multipliersChecked = this.$allMultipliers.filter(':checked').length;
+        var multipliersLeft = Math.max( 0, MAX_MULTIPLIERS - multipliersChecked );
+
+        if ( multipliersChecked >= MAX_MULTIPLIERS ) {
+            this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
+        } else {
+            this.$multiplierInputs.filter(':disabled').prop('disabled', null);
+        }
+
+        this.$navigationSubTitle.html( this.$navigationSubTitle.data('original-value') +
+            ' ( '+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '': 's' ) +' over )' );
+    },
+
     handleSubmit: function ( e ) {
-        if ( this.$allMultipliers.filter(':checked').length > 5 ) {
+        if ( this.$allMultipliers.filter(':checked').length > MAX_MULTIPLIERS ) {
 
             if ( ! confirm('Je hebt meer dan 5 jokers ingezet. Als je nu opslaat gaan je '+
                     'zojuist ingevulde voorspellingen verloren. Wil je daarmee doorgaan?') ) {
