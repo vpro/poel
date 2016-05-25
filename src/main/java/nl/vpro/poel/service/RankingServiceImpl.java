@@ -1,25 +1,23 @@
 package nl.vpro.poel.service;
 
-import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.dto.RankingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class RankingServiceImpl implements RankingService {
 
     private final UserService userService;
 
-    private final PredictionService predictionService;
+    private final ScoreService scoreService;
 
     @Autowired
-    RankingServiceImpl(UserService userService, PredictionService predictionService) {
+    RankingServiceImpl(UserService userService, ScoreService scoreService) {
         this.userService = userService;
-        this.predictionService = predictionService;
+        this.scoreService = scoreService;
     }
 
     @Override
@@ -50,16 +48,11 @@ public class RankingServiceImpl implements RankingService {
     private NavigableMap<Integer, List<User>> getUsersByScore() {
         NavigableMap<Integer, List<User>> usersByScore = new TreeMap<>();
         for (User user : userService.getAllUsers()) {
-            Integer score = getScore(user);
+            Integer score = scoreService.getScore(user);
             List<User> users = usersByScore.getOrDefault(score, new ArrayList<>());
             users.add(user);
             usersByScore.put(score, users);
         }
         return usersByScore;
-    }
-
-    private Integer getScore(User user) {
-        return predictionService.getPredictions(user).stream()
-                .collect(Collectors.summingInt(Prediction::getScore));
     }
 }

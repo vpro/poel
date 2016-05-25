@@ -48,9 +48,9 @@
                         [#list finished]
 
                             <div class="collapsible-section-content">
-                                [#items as prediction]
+                                [#items as scoredPrediction]
 
-                                    [@formUtil.showMatch status='finished' prediction=prediction parity=prediction?item_parity index=prediction?index /]
+                                    [@formUtil.showMatch status='finished' scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -78,9 +78,9 @@
 
                         [#list unfinished]
                             <div class="collapsible-section-content">
-                                [#items as prediction]
+                                [#items as scoredPrediction]
 
-                                       [@formUtil.showMatch status='unfinished' prediction=prediction parity=prediction?item_parity index=prediction?index /]
+                                       [@formUtil.showMatch status='unfinished' scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -114,9 +114,9 @@
                                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                                 <div class="collapsible-section-content">
-                                    [#items as prediction]
+                                    [#items as scoredPrediction]
 
-                                        [@formUtil.showMatch prediction=prediction status='future' parity=prediction?item_parity index=prediction?index /]
+                                        [@formUtil.showMatch scoredPrediction=scoredPrediction status='future' parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                     [/#items]
                                 </div>

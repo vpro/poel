@@ -1,39 +1,34 @@
-package nl.vpro.poel.domain;
+package nl.vpro.poel.service;
 
+import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.domain.MatchResult;
+import nl.vpro.poel.domain.Prediction;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PredictionTest {
+public class ScoreServiceImplTest {
 
-    @Value("${poel.pointsForCorrectWinner}")
-    private int pointsForCorrectWinner;
-
-    @Value("${poel.pointsForCorrectMatchResult}")
-    private int pointsForCorrectMatchResult;
-
-    @Value("${poel.scoreMultiplierFactor")
-    private int scoreMultiplierFactor;
+    private ScoreService scoreService = new ScoreServiceImpl(null, 2, 1, 2);
 
     @Test
     public void scoreForCorrectWinnerAndResult() {
-        checkScore(new MatchResult(0, 0), new MatchResult(0, 0), pointsForCorrectWinner + pointsForCorrectMatchResult);
+        checkScore(new MatchResult(0, 0), new MatchResult(0, 0), 3);
     }
 
     @Test
     public void scoreForCorrectWinnerAndResultWithMultiplier() {
-        checkScoreWithMultiplier(new MatchResult(1, 3), new MatchResult(1, 3), scoreMultiplierFactor * (pointsForCorrectWinner + pointsForCorrectMatchResult));
+        checkScoreWithMultiplier(new MatchResult(1, 3), new MatchResult(1, 3), 6);
     }
 
     @Test
     public void scoreForCorrectWinnerWrongResult() {
-        checkScore(new MatchResult(1, 0), new MatchResult(2, 0), pointsForCorrectWinner);
+        checkScore(new MatchResult(1, 0), new MatchResult(2, 0), 2);
     }
 
     @Test
     public void scoreForCorrectWinnerWrongResultWithMultiplier() {
-        checkScoreWithMultiplier(new MatchResult(5, 0), new MatchResult(1, 0), scoreMultiplierFactor * pointsForCorrectWinner);
+        checkScoreWithMultiplier(new MatchResult(5, 0), new MatchResult(1, 0), 4);
     }
 
     @Test
@@ -86,7 +81,7 @@ public class PredictionTest {
 
     private void checkScore(MatchResult predictedResult, MatchResult actualResult, boolean multiplier, int expectedScore) {
         Prediction prediction = new Prediction(null, new Match("Home", "Away", null, actualResult), predictedResult, multiplier);
-        int actualScore = prediction.getScore();
+        int actualScore = scoreService.getScore(prediction);
         assertThat(actualScore).isEqualTo(expectedScore);
     }
 }

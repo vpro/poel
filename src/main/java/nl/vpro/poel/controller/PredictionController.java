@@ -3,9 +3,11 @@ package nl.vpro.poel.controller;
 import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.*;
 import nl.vpro.poel.dto.PredictionForm;
+import nl.vpro.poel.dto.ScoredPrediction;
 import nl.vpro.poel.exception.MultiplierException;
 import nl.vpro.poel.service.MatchService;
 import nl.vpro.poel.service.PredictionService;
+import nl.vpro.poel.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +30,13 @@ class PredictionController {
 
     private final PredictionService predictionService;
 
+    private final ScoreService scoreService;
+
     @Autowired
-    public PredictionController(MatchService matchService, PredictionService predictionService) {
+    public PredictionController(MatchService matchService, PredictionService predictionService, ScoreService scoreService) {
         this.matchService = matchService;
         this.predictionService = predictionService;
+        this.scoreService = scoreService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -44,9 +49,9 @@ class PredictionController {
 
         Instant now = Instant.now();
 
-        List<Prediction> finished = toPredictions(matchService.findAllCompleted(), user);
-        List<Prediction> unfinished = toPredictions(matchService.findAllUnfinished(now), user);
-        List<Prediction> future = toPredictions(matchService.findMatchesToPredict(now), user);
+        List<ScoredPrediction> finished = toScoredPredictions(matchService.findAllCompleted(), user);
+        List<ScoredPrediction> unfinished = toScoredPredictions(matchService.findAllUnfinished(now), user);
+        List<ScoredPrediction> future = toScoredPredictions(matchService.findMatchesToPredict(now), user);
 
         model.addAttribute("finished", finished);
         model.addAttribute("unfinished", unfinished);
@@ -58,9 +63,8 @@ class PredictionController {
     String savePredictions(Principal principal, @ModelAttribute("predictions") PredictionForm predictions, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Instant submittedAt = Instant.now();
         User user = UserUtil.getCurrentUser(principal).orElseThrow(() -> new RuntimeException("No user?!")).getUser();
-        int updates = 0;
         try {
-            updates = predictionService.save(user, predictions, submittedAt);
+            int updates = predictionService.save(user, predictions, submittedAt);
             redirectAttributes.addFlashAttribute("flash", updates + " voorspelling" + (updates != 1 ? "en" : "") + " opgeslagen");
         } catch (MultiplierException e) {
             redirectAttributes.addFlashAttribute("flash", e.getMessage());
@@ -70,9 +74,10 @@ class PredictionController {
     }
 
     // TODO: Move this logic out to a service?
-    private List<Prediction> toPredictions(List<Match> matches, User user) {
+    private List<ScoredPrediction> toScoredPredictions(List<Match> matches, User user) {
         return matches.stream()
                 .map(match -> predictionService.getPredictionForMatch(user, match).orElseGet(() -> new Prediction(user, match)))
+                .map(prediction -> new ScoredPrediction(prediction, scoreService.getScore(prediction)))
                 .collect(Collectors.toList());
     }
 }

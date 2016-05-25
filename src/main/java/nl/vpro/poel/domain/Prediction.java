@@ -27,15 +27,6 @@ public class Prediction {
 
     private boolean multiplier = false;
 
-    @Value("${poel.pointsForCorrectWinner}")
-    private int pointsForCorrectWinner;
-
-    @Value("${poel.pointsForCorrectMatchResult}")
-    private int pointsForCorrectMatchResult;
-
-    @Value("${poel.scoreMultiplierFactor")
-    private int scoreMultiplierFactor;
-
     private Prediction() {} // For Hibernate
 
     public Prediction(User user, Match match) {
@@ -75,44 +66,6 @@ public class Prediction {
 
     public void setMultiplier(boolean multiplier) {
         this.multiplier = multiplier;
-    }
-
-    public int getScore() {
-        MatchResult predictedResult = getMatchResult();
-
-        if (predictedResult == null) {
-            return 0;
-        }
-
-        Match match = getMatch();
-
-        if (match == null) {
-            return 0;
-        }
-
-        MatchResult actualResult = match.getMatchResult();
-
-        if (actualResult == null) {
-            return 0;
-        }
-
-        int scoreForWinner = getScoreForWinner(predictedResult, actualResult);
-        int scoreForResult = getScoreForResult(predictedResult, actualResult);
-        int score = scoreForWinner + scoreForResult;
-        if (multiplier) {
-            score *= scoreMultiplierFactor;
-        }
-        return score;
-    }
-
-    private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
-        Winner actualWinner = actualResult.getWinner();
-        Winner predictedWinner = predictedResult.getWinner();
-        return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectWinner : 0;
-    }
-
-    private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
-        return Objects.equals(actualResult, predictedResult) ? pointsForCorrectMatchResult : 0;
     }
 
     @Override

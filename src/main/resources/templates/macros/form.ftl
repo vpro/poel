@@ -1,15 +1,16 @@
 [#include "countries.ftl"]
 
-[#macro showMatch status prediction parity index]
+[#macro showMatch status scoredPrediction parity index]
 
+    [#assign prediction = scoredPrediction.prediction]
     [#assign predictionId = prediction.id !]
     [#assign match = prediction.match]
-    [#assign matchResult = prediction.match.matchResult ! ]
+    [#assign actualResult = prediction.match.matchResult !]
     [#assign predictedResult = prediction.matchResult !]
-    [#assign hasPrediction = predictedResult ? has_content]
+    [#assign hasPredictedResult = predictedResult ? has_content]
     [#assign multiplier = prediction.multiplier]
-    [#assign score = prediction.score !]
-    [#assign predictionIndex = index !]
+    [#assign score = scoredPrediction.score]
+    [#assign predictionIndex = index]
 
 <table class="predictions match-prediction">
     <tbody>
@@ -37,8 +38,8 @@
         </td>
 
         <td class="prediction__predicted">
-            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPrediction]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
-            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPrediction]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPredictedResult]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
         </td>
 
         <td>
@@ -61,7 +62,7 @@
             [#if status == 'future']
                 Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
 
-                [#if match.start?long - .now?long < 10800000 && !hasPrediction ]
+                [#if match.start?long - .now?long < 10800000 && !hasPredictedResult ]
                 <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
                 [/#if]
             [#elseif status == 'finished']
@@ -74,9 +75,9 @@
 
         </td>
         <td class="prediction__result" >
-            [#if matchResult ? has_content]
-                <input type="number" value="${matchResult.homeTeamGoals}" disabled />
-                <input type="number" value="${matchResult.awayTeamGoals}" disabled />
+            [#if actualResult ? has_content]
+                <input type="number" value="${actualResult.homeTeamGoals}" disabled />
+                <input type="number" value="${actualResult.awayTeamGoals}" disabled />
             [/#if]
         </td>
         <td class="prediction__score">
