@@ -67,7 +67,7 @@ public class MatchServiceImpl implements MatchService {
             Date start = matchDTO.getStart();
 
             if (homeTeam == null || awayTeam == null || start == null) {
-                logger.warn("Ignoring match update {}, because it is incomplete");
+                logger.warn("Ignoring match update {}, because it is incomplete", matchDTO);
                 continue;
             }
 
