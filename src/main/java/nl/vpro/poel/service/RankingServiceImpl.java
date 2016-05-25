@@ -76,10 +76,7 @@ public class RankingServiceImpl implements RankingService {
     private NavigableMap<Integer, List<UserGroup>> getUserGroupsByScore() {
         NavigableMap<Integer, List<UserGroup>> userGroupsByScore = new TreeMap<>();
         for (UserGroup userGroup : userGroupService.findAll()) {
-
-            Integer groupScore = userService.getAllUsersForUserGroup(userGroup).stream()
-                    .collect(Collectors.summingInt(scoreService::getScore));
-
+            Integer groupScore = scoreService.getScore(userGroup);
             List<UserGroup> userGroups = userGroupsByScore.getOrDefault(groupScore, new ArrayList<>());
             userGroups.add(userGroup);
             userGroupsByScore.put( groupScore, userGroups );
