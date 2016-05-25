@@ -78,16 +78,16 @@
                             ${ rankedUser.gameName }
                             [#elseif rankedUser.realName ? has_content]
                             ${ rankedUser.realName }
-                            [#else]
-                            ${ rankedUser.username }
+                            [#elseif rankedUser.getId() == user.getId() ]
+                                <a href="/user"><i> vul je voetbalnaam in op je profielpagina</i></a>
                             [/#if]
                         </h2>
                         <div class="ranking__meta">
                             <span class="ranking__full-name">
-                                [#if rankedUser.gameName ? has_content]
-                                ${ rankedUser.gameName }
+                                [#if rankedUser.realName ? has_content ]
+                                ${ rankedUser.realName }
                                 [#elseif rankedUser.getId() == user.getId() ]
-                                <a href="/user"><i> vul je voetbalnaam in op je profielpagina</i></a>
+                                <a href="/user"><i> vul je naam in op je profielpagina</i></a>
                                 [/#if]
                             </span>
                             <span class="ranking__department">
