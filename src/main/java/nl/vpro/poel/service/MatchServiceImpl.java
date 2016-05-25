@@ -91,7 +91,14 @@ public class MatchServiceImpl implements MatchService {
             Integer homeTeamGoals = matchDTO.getHomeTeamGoals();
             Integer awayTeamGoals = matchDTO.getAwayTeamGoals();
             if (homeTeamGoals != null && awayTeamGoals != null) {
+                // Valid match result
                 match.setMatchResult(new MatchResult(homeTeamGoals, awayTeamGoals));
+            } else if (homeTeamGoals == null && awayTeamGoals == null) {
+                // No match result
+                match.setMatchResult(null);
+            } else {
+                // Invalid match result, ignore so any previously saved match result is preserved
+                logger.warn("Ignoring incomplete match result from match update {}", matchDTO);
             }
 
             matchRepository.save(match);
