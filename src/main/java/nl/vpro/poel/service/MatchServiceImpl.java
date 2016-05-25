@@ -87,9 +87,9 @@ public class MatchServiceImpl implements MatchService {
             match.setAwayTeam(awayTeam);
             match.setStart(start);
 
-            // Set match result if present
             Integer homeTeamGoals = matchDTO.getHomeTeamGoals();
             Integer awayTeamGoals = matchDTO.getAwayTeamGoals();
+
             if (homeTeamGoals != null && awayTeamGoals != null) {
                 // Valid match result
                 match.setMatchResult(new MatchResult(homeTeamGoals, awayTeamGoals));
