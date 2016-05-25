@@ -75,12 +75,12 @@
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Echte naam:</span>
-                    <input class="col col-12-2 " type="text" name="realName" value="${user.realName}"/>
+                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName}"/>
                 </div>
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
-                    <input class="col col-12-2 " type="text" name="gameName" value="${user.gameName}"/>
+                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName}"/>
                 </div>
 
                 <div class="form-footer bg-blue">
