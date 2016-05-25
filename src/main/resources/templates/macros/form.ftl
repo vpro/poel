@@ -46,14 +46,21 @@
             <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
         </td>
 
-        <td class="prediction__multiplier">
-            <input id="prediction__multiplier${predictionIndex}" type="checkbox" name="predictions[${predictionIndex}].multiplier" value="true" [#if multiplier]checked[/#if] />
-            <label for="prediction__multiplier${predictionIndex}">Joker</label>
+        <td class="prediction__multiplier
+                [#if status == STATUS_FUTURE]prediction__multiplier_editable[/#if]
+                [#if score ? has_content]prediction__multiplier_points-${ score }[/#if]
+                ">
+            <input class="prediction__multiplier__input" id="prediction__multiplier${predictionIndex}_${status}" type="checkbox"
+                   name="predictions[${predictionIndex}].multiplier" value="true"
+                   [#if multiplier]checked="checked"[/#if] [#if status != STATUS_FUTURE]disabled="disable"[/#if] />
+
+            <label class="prediction__multiplier__label" title="Joker inzetten"
+                   for="prediction__multiplier${predictionIndex}_${status}"><i class="glyph glyph-heart"></i></label>
         </td>
 
         <td class="prediction__score">
             [#if score ? has_content]
-                <span class='prediction__points prediction__points-${score} '>${score}</span>
+                <span class="prediction__points prediction__points-${score}">${score}</span>
             [/#if]
         </td>
 
