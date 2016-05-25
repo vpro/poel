@@ -76,9 +76,16 @@ var UserGroupController = Stapes.subclass({
 
     resetIds: function () {
 
-        this.$form.find( 'input[name*="userGroups"]').each( function ( i ) {
-            var value = 'userGroups[' + i + '].name';
-            this.name = value;
+        this.$form.find( '.user-group').each( function ( i ) {
+
+            $( this ).find( 'input[name*="userGroups"]' ).each( function ( j ) {
+
+                var idx = /\[([\d]+)\]/ig.exec( this.name );
+                if ( idx && idx.length > 1 ) {
+
+                    this.name = this.name.replace( idx[1], i );
+                }
+            });
         } );
 
     }
