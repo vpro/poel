@@ -50,7 +50,7 @@
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
-                                    [@formUtil.showMatch status='finished' scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                    [@formUtil.showMatch status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -80,7 +80,7 @@
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
-                                       [@formUtil.showMatch status='unfinished' scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                       [@formUtil.showMatch status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -116,7 +116,7 @@
                                 <div class="collapsible-section-content">
                                     [#items as scoredPrediction]
 
-                                        [@formUtil.showMatch scoredPrediction=scoredPrediction status='future' parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                        [@formUtil.showMatch scoredPrediction=scoredPrediction status=formUtil.STATUS_FUTURE parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                     [/#items]
                                 </div>

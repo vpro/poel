@@ -1,4 +1,8 @@
-[#include "countries.ftl"]
+[#include 'countries.ftl']
+
+[#assign STATUS_FINISHED = 'finished']
+[#assign STATUS_UNFINISHED = 'unfinished']
+[#assign STATUS_FUTURE = 'future']
 
 [#macro showMatch status scoredPrediction parity index]
 
@@ -29,7 +33,7 @@
                 <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
                 ${ match.awayTeam }
             </span>
-            [#if status == 'future']
+            [#if status == STATUS_FUTURE]
                 <input type="hidden" name="predictions[${predictionIndex}].matchId" value="${match.id}"/>
                 [#if predictionId?has_content]
                 <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId}"/>
@@ -38,13 +42,13 @@
         </td>
 
         <td class="prediction__predicted">
-            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPredictedResult]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
-            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != 'future' ]disabled [/#if] />
+            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPredictedResult]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
+            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
         </td>
 
-        <td>
-            <input id="predictionMultiplier${predictionIndex}" type="checkbox" name="predictions[${predictionIndex}].multiplier" value="true" [#if multiplier]checked[/#if] />
-            <label for="predictionMultiplier${predictionIndex}">Joker</label>
+        <td class="prediction__multiplier">
+            <input id="prediction__multiplier${predictionIndex}" type="checkbox" name="predictions[${predictionIndex}].multiplier" value="true" [#if multiplier]checked[/#if] />
+            <label for="prediction__multiplier${predictionIndex}">Joker</label>
         </td>
 
         <td class="prediction__score">
@@ -59,13 +63,13 @@
     <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
         <td class="prediction__result-title" >
 
-            [#if status == 'future']
+            [#if status == STATUS_FUTURE]
                 Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
 
                 [#if match.start?long - .now?long < 10800000 && !hasPredictedResult ]
                 <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
                 [/#if]
-            [#elseif status == 'finished']
+            [#elseif status == STATUS_FINISHED]
                 Uitslag:
             [#else]
                 Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
@@ -79,6 +83,8 @@
                 <input type="number" value="${actualResult.homeTeamGoals}" disabled />
                 <input type="number" value="${actualResult.awayTeamGoals}" disabled />
             [/#if]
+        </td>
+        <td class="">
         </td>
         <td class="prediction__score">
         </td>
