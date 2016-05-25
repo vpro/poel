@@ -2,7 +2,6 @@ package nl.vpro.poel.configuration;
 
 import nl.vpro.poel.domain.*;
 import nl.vpro.poel.repository.*;
-import nl.vpro.poel.service.UserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -10,112 +9,91 @@ import org.springframework.stereotype.Component;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 @Component
 @Profile("development")
 public class DummyDataLoader {
 
-    private final UserGroupRepository userGroupRepository;
-    private final UserGroupService userGroupService;
-    private final MatchRepository matchRepository;
-    private final PredictionRepository predictionRepository;
-    private final MessageRepository messageRepository;
-    private final UserRepository userRepository;
-
     @Autowired
     DummyDataLoader(
             UserGroupRepository userGroupRepository,
-            UserGroupService userGroupService,
+            UserRepository userRepository,
             MatchRepository matchRepository,
             PredictionRepository predictionRepository,
-            MessageRepository messageRepository,
-            UserRepository userRepository
+            MessageRepository messageRepository
     ) {
-        this.userGroupRepository = userGroupRepository;
-        this.userGroupService = userGroupService;
-        this.matchRepository = matchRepository;
-        this.predictionRepository = predictionRepository;
-        this.messageRepository = messageRepository;
-        this.userRepository = userRepository;
+        // User groups
 
-        groups();
-        adminUsers();
-        matches();
-        predictions();
-        messages();
-    }
+        UserGroup userGroupDigitaal = new UserGroup("Digitaal");
+        UserGroup userGroupGids = new UserGroup("Gids");
+        UserGroup userGroupVoetbalvrouwen = new UserGroup("Voetbalvrouwen");
 
-    private void adminUsers() {
+        userGroupRepository.save(Arrays.asList(
+                userGroupDigitaal,
+                userGroupGids,
+                userGroupVoetbalvrouwen
+        ));
 
-        UserGroup userGroupDigitaal = userGroupService.findByName("Digitaal").orElse(null);
+        // Users
 
-        List<User> admins = Arrays.asList(
-                new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst", userGroupDigitaal),
-                new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic", userGroupDigitaal),
-                new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich", userGroupDigitaal),
-                new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst", userGroupDigitaal),
-                new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator", userGroupDigitaal),
-                new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest", userGroupDigitaal),
-                new User("l.schipperheyn@vpro.nl", Role.ADMIN, "Luuk Schipperheyn", "Luuk de Jonguh", userGroupDigitaal)
-        );
-        userRepository.save(admins);
-    }
+        User userNils = new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst", userGroupDigitaal);
+        User userFrank = new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic", userGroupDigitaal);
+        User userTimo = new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich", userGroupDigitaal);
+        User userDavid = new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst", userGroupDigitaal);
+        User userFred = new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator", userGroupGids);
+        User userLaurens = new User("l.de.knijff@gmail.com", Role.ADMIN, "Laurens de Knijff", "Databeest", userGroupVoetbalvrouwen);
+        User userLuuk = new User("l.schipperheyn@vpro.nl", Role.ADMIN, "Luuk Schipperheyn", "Luuk de Jonguh", userGroupDigitaal);
 
-    private void matches() {
+        userRepository.save(Arrays.asList(
+                userNils,
+                userFrank,
+                userTimo,
+                userDavid,
+                userFred,
+                userLaurens,
+                userLuuk
+        ));
+
+        // Matches
+
         Date now = new Date();
         Date lastWeek = Date.from(now.toInstant().minus(7, ChronoUnit.DAYS));
         Date nextWeek = Date.from(now.toInstant().plus(7, ChronoUnit.DAYS));
         Date almost = Date.from(now.toInstant().plus(2, ChronoUnit.HOURS));
 
-        List<Match> defaultMatches = Arrays.asList(
+        Match matchFinished1 = new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1));
+        Match matchFinished2 = new Match("België", "Engeland", lastWeek, new MatchResult(5, 4));
 
-                // Finished
-                new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1)),
-                new Match("België", "Engeland", lastWeek, new MatchResult(5, 4)),
+        Match matchUnfinished1 = new Match("Frankrijk", "Duitsland", now);
+        Match matchUnfinished2 = new Match("Spanje", "Engeland", now);
 
-                // Unfinished
-                new Match("Frankrijk", "Duitsland", now),
-                new Match("Spanje", "Engeland", now),
+        Match matchFuture1 = new Match("Portugal", "België", almost);
+        Match matchFuture2 = new Match("Engeland", "Oostenrijk", nextWeek);
 
-                // Future
-                new Match("Portugal", "België", almost),
-                new Match("Engeland", "Oostenrijk", nextWeek)
-        );
-        matchRepository.save(defaultMatches);
-    }
-
-    private void predictions() {
-        User user1 = userRepository.findOne(1L);
-        predictionRepository.save(Arrays.asList(
-                new Prediction(user1, matchRepository.findOne(1L), new MatchResult(1, 0)),
-                new Prediction(user1, matchRepository.findOne(2L), new MatchResult(2, 2), true)
+        matchRepository.save(Arrays.asList(
+                matchFinished1,
+                matchFinished2,
+                matchUnfinished1,
+                matchUnfinished2,
+                matchFuture1,
+                matchFuture2
         ));
 
-        User user2 = userRepository.findOne(2L);
+        // Predictions
+
         predictionRepository.save(Arrays.asList(
-                new Prediction(user2, matchRepository.findOne(2L), new MatchResult(2, 1), true),
-                new Prediction(user2, matchRepository.findOne(3L), new MatchResult(0, 2))
+                new Prediction(userNils, matchFinished1, new MatchResult(1, 0)),
+                new Prediction(userNils, matchFinished2, new MatchResult(2, 2), true),
+                new Prediction(userFrank, matchUnfinished1, new MatchResult(2, 1), true),
+                new Prediction(userTimo, matchFinished2, new MatchResult(0, 2))
         ));
-    }
 
-    private void messages() {
+        // Messages
 
-        List<Message> defaultMessages = Arrays.asList(
-
+        messageRepository.save(Arrays.asList(
                 new Message("/predictions", "Hier een melding voor invullers"),
                 new Message("/user", "Hier een melding voor je profiel"),
                 new Message("/ranking", "Hier een melding voor de ranking")
-        );
-        messageRepository.save(defaultMessages);
-    }
-
-    private void groups() {
-
-        List<UserGroup> defaultUserGroups = Arrays.asList(
-                new UserGroup("Digitaal"),
-                new UserGroup("Voetbalvrouwen")
-        );
-        userGroupRepository.save(defaultUserGroups);
+        ));
     }
 }
