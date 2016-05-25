@@ -1,17 +1,16 @@
 package nl.vpro.poel.dto;
 
-
 import java.util.List;
 
 public class UsersForm {
 
-    private List<UsersDTO> users;
+    private List<UserAndUserGroupDTO> users;
 
-    public List<UsersDTO> getUsers() {
+    public List<UserAndUserGroupDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UsersDTO> users) {
+    public void setUsers(List<UserAndUserGroupDTO> users) {
         this.users = users;
     }
 

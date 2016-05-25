@@ -4,7 +4,7 @@ import nl.vpro.poel.domain.Role;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.UserForm;
-import nl.vpro.poel.dto.UsersDTO;
+import nl.vpro.poel.dto.UserAndUserGroupDTO;
 import nl.vpro.poel.dto.UsersForm;
 import nl.vpro.poel.repository.UserRepository;
 import org.slf4j.Logger;
@@ -68,34 +68,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserGroupForUsers(UsersForm usersForm) {
-
-        for (UsersDTO usersDTO : usersForm.getUsers()) {
-
-            User existingUser = getUserById(usersDTO.getUserId()).orElse(null);
-            Long userGroupId = usersDTO.getUserGroupId();
-
-            if ( existingUser != null ) {
-
-                if ( userGroupId == null ) {
-
-                    existingUser.setUserGroup(null);
-                    userRepository.saveAndFlush(existingUser);
-
+        for (UserAndUserGroupDTO userDTO : usersForm.getUsers()) {
+            Optional<User> existingUser = getUserById(userDTO.getUserId());
+            if (existingUser.isPresent()) {
+                User user = existingUser.get();
+                Long userGroupId = userDTO.getUserGroupId();
+                if (userGroupId == null) {
+                    user.setUserGroup(null);
+                    userRepository.save(user);
                 } else {
-
-                    UserGroup userGroup = userGroupService.findById(userGroupId).orElse(null);
-                    if ( userGroup != null ) {
-
-                        existingUser.setUserGroup(userGroup);
-                        userRepository.saveAndFlush(existingUser);
-
+                    Optional<UserGroup> existingUserGroup = userGroupService.findById(userGroupId);
+                    if (existingUserGroup.isPresent()) {
+                        UserGroup userGroup = existingUserGroup.get();
+                        user.setUserGroup(userGroup);
+                        userRepository.save(user);
                     } else {
-                        logger.warn("Ignoring user update {}, because no user group exists for this id", userGroupId);
+                        logger.warn("Ignoring user update {}, because no user group exists for this id", userDTO);
                     }
                 }
-
             } else {
-                logger.warn("Ignoring user update {}, because no user exists for this id", usersDTO.getUserId() );
+                logger.warn("Ignoring user update {}, because no user exists for this id", userDTO);
             }
         }
     }
