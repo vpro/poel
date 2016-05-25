@@ -10,7 +10,7 @@ public class User {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, updatable = false, unique = true)
     private String username;
 
     @Enumerated(EnumType.STRING)
