@@ -50,6 +50,11 @@
         Er zijn geen afdelingen. :o(
     [/#list]
 
+
+
+
+    [#assign previousRanking = 0]
+
     [/@layout.sectionWithLayout]
     </div>
 
@@ -65,13 +70,25 @@
             openColorClass='bg-darkgreen'
         ]
 
-            [#list userRanking]
-            <table class="ranking">
+        [#if user.userGroup ? has_content]
+            <div class="grid grid-gutter c-white h6">
+                <input id="ranking__groupfilter" type="checkbox" name="groupfilter" value="false"  />
+                <label for="ranking__groupfilter">Filter op jouw afdeling: ${user.userGroup.name}</label>
+            </div>
+        [/#if]
+
+        [#list userRanking]
+
+        <table class="ranking">
             <tbody>
                 [#items as rankingEntry]
                 [#assign rankedUser = rankingEntry.subject]
-                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]">
-                    <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
+
+                <tr [#if rankedUser.userGroup ? has_content]data-group="${rankedUser.userGroup.id}"[/#if]
+                        class="ranking__row [#if rankingEntry ? item_parity == 'odd']ranking__row-odd [/#if][#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]" >
+                    <td class="ranking__rank">
+                        <span class="[#if previousRanking == rankingEntry.rank] ranking__rank-tohide hidden[/#if]">${ rankingEntry.rank }</span>
+                    </td>
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">
                             [#if rankedUser.gameName ? has_content]
@@ -99,6 +116,8 @@
                     </td>
                     <td class="ranking__score">${ rankingEntry.score }</td>
                 </tr>
+
+                [#assign previousRanking =  rankingEntry.rank ]
                 [/#items]
             </tbody>
             </table>
@@ -110,6 +129,16 @@
     </div>
 
     [@footerUtil.footer /]
+
+    [#if user.userGroup ? has_content]
+    <script>
+        System.import( '/js/form/controllers/RankingController.js' ).then( function ( RankingControllerModule ) {
+                new RankingControllerModule.default( '#ranking__groupfilter' , '${ rankedUser.userGroup.id }' );
+        } );
+    </script>
+    [/#if]
+
+
     </body>
 
 </html>
