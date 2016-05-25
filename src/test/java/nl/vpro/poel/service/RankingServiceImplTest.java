@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 public class RankingServiceImplTest {
 
     @Test
-    public void ranking() throws Exception {
+    public void ranking() {
 
         User jan = new User("Jan", Role.USER, "Jan", "voetbalJan");
         User piet = new User("Piet", Role.ADMIN, "Piet", "voetbalPiet");
@@ -30,7 +30,7 @@ public class RankingServiceImplTest {
         when(scoreService.getScore(klaas)).thenReturn(5);
         when(scoreService.getScore(henk)).thenReturn(0);
 
-        RankingService rankingService = new RankingServiceImpl(userService, scoreService);
+        RankingService rankingService = new RankingServiceImpl(userService, userGroupService, scoreService);
 
         List<RankingEntry> ranking = rankingService.getRanking();
 

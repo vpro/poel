@@ -82,7 +82,7 @@ public class RankingServiceImpl implements RankingService {
             Integer groupScore = 0;
 
             for (User user : userService.getAllUsersForUserGroup(userGroup)) {
-                groupScore += getScore(user);
+                groupScore += scoreService.getScore(user);
             }
 
             List<UserGroup> userGroups = userGroupsByScore.getOrDefault(groupScore, new ArrayList<>());
