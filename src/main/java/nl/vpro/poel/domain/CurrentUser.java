@@ -15,7 +15,9 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user;
     }
 
-    public void setUser( User user ) { this.user = user; }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return user.getId();
@@ -33,5 +35,33 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user.getGameName();
     }
 
-    public UserGroup getUserGroup() { return user.getUserGroup(); }
+    public UserGroup getUserGroup() {
+        return user.getUserGroup();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        CurrentUser that = (CurrentUser) o;
+
+        return user != null ? user.equals(that.user) : that.user == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentUser{" +
+                "user=" + user +
+                '}';
+    }
 }
