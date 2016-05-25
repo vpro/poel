@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 @Service
 public class ScoreServiceImpl implements ScoreService {
 
+    private final UserService userService;
+
     private final PredictionService predictionService;
 
     private final int pointsForCorrectWinner;
@@ -19,15 +21,23 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Autowired
     ScoreServiceImpl(
+            UserService userService,
             PredictionService predictionService,
             @Value("${poel.pointsForCorrectWinner}") int pointsForCorrectWinner,
             @Value("${poel.pointsForCorrectMatchResult}") int pointsForCorrectMatchResult,
             @Value("${poel.scoreMultiplierFactor}") int scoreMultiplierFactor
     ) {
+        this.userService = userService;
         this.predictionService = predictionService;
         this.pointsForCorrectWinner = pointsForCorrectWinner;
         this.pointsForCorrectMatchResult = pointsForCorrectMatchResult;
         this.scoreMultiplierFactor = scoreMultiplierFactor;
+    }
+
+    @Override
+    public int getScore(UserGroup userGroup) {
+        return userService.getAllUsersForUserGroup(userGroup).stream()
+                .collect(Collectors.summingInt(this::getScore));
     }
 
     @Override
@@ -64,12 +74,25 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
-        Winner actualWinner = actualResult.getWinner();
-        Winner predictedWinner = predictedResult.getWinner();
+        Winner actualWinner = getWinner(actualResult);
+        Winner predictedWinner = getWinner(predictedResult);
         return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectWinner : 0;
     }
 
     private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
         return Objects.equals(actualResult, predictedResult) ? pointsForCorrectMatchResult : 0;
+    }
+
+    private Winner getWinner(MatchResult matchResult) {
+        int homeTeamGoals = matchResult.getHomeTeamGoals();
+        int awayTeamGoals = matchResult.getAwayTeamGoals();
+
+        if (homeTeamGoals > awayTeamGoals) {
+            return Winner.HOME;
+        }
+        if (homeTeamGoals < awayTeamGoals) {
+            return Winner.AWAY;
+        }
+        return Winner.NEITHER;
     }
 }

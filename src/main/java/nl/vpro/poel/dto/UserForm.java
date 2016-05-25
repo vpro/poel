@@ -1,20 +1,32 @@
 package nl.vpro.poel.dto;
 
-
-import nl.vpro.poel.domain.User;
-
 public class UserForm {
 
-    private User updateUser;
+    private String realName;
 
-    public User getUpdateUser() { return updateUser; }
+    private String gameName;
 
-    public void setUpdateUser( User updateUser ) { this.updateUser = updateUser; }
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
 
     @Override
     public String toString() {
         return "UserForm{" +
-                "updateUser=" + updateUser +
+                "realName='" + realName + '\'' +
+                ", gameName='" + gameName + '\'' +
                 '}';
     }
 }

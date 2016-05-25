@@ -1,18 +1,16 @@
 package nl.vpro.poel.dto;
 
-import nl.vpro.poel.domain.User;
-
-public class RankingEntry {
+public class RankingEntry<T> {
 
     private final int rank;
 
-    private final User user;
+    private final T subject;
 
     private final int score;
 
-    public RankingEntry(int rank, User user, int score) {
+    public RankingEntry(int rank, T subject, int score) {
         this.rank = rank;
-        this.user = user;
+        this.subject = subject;
         this.score = score;
     }
 
@@ -20,8 +18,8 @@ public class RankingEntry {
         return rank;
     }
 
-    public User getUser() {
-        return user;
+    public T getSubject() {
+        return subject;
     }
 
     public int getScore() {
@@ -33,18 +31,18 @@ public class RankingEntry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RankingEntry that = (RankingEntry) o;
+        RankingEntry<?> that = (RankingEntry<?>) o;
 
         if (rank != that.rank) return false;
         if (score != that.score) return false;
-        return user != null ? user.equals(that.user) : that.user == null;
+        return subject != null ? subject.equals(that.subject) : that.subject == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = rank;
-        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (subject != null ? subject.hashCode() : 0);
         result = 31 * result + score;
         return result;
     }
@@ -53,7 +51,7 @@ public class RankingEntry {
     public String toString() {
         return "RankingEntry{" +
                 "rank=" + rank +
-                ", user=" + user +
+                ", subject=" + subject +
                 ", score=" + score +
                 '}';
     }

@@ -2,6 +2,7 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
+import nl.vpro.poel.dto.UserForm;
 import nl.vpro.poel.dto.UsersForm;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UserService {
 
     User getOrCreate(String username);
 
-    Boolean updateUser(User user);
+    void updateUser(User user, UserForm userForm);
 
     void updateUserGroupForUsers(UsersForm usersForm);
 }

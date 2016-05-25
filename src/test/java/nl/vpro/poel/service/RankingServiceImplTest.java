@@ -32,13 +32,13 @@ public class RankingServiceImplTest {
 
         RankingService rankingService = new RankingServiceImpl(userService, userGroupService, scoreService);
 
-        List<RankingEntry> ranking = rankingService.getRanking();
+        List<RankingEntry<User>> ranking = rankingService.getUserRanking();
 
         assertThat(ranking).containsExactly(
-                new RankingEntry(1, jan, 7),
-                new RankingEntry(2, piet, 5),
-                new RankingEntry(2, klaas, 5),
-                new RankingEntry(4, henk, 0)
+                new RankingEntry<>(1, jan, 7),
+                new RankingEntry<>(2, piet, 5),
+                new RankingEntry<>(2, klaas, 5),
+                new RankingEntry<>(4, henk, 0)
         );
     }
 }

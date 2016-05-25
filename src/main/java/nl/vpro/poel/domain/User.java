@@ -48,14 +48,16 @@ public class User {
         return username;
     }
 
-    public void setUsername( String username ) { this.username = username; }
-
     public Role getRole() {
         return role;
     }
 
     public String getRealName() {
         return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getGameName() {
@@ -78,9 +80,9 @@ public class User {
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (role != user.role) return false;
-        if ( userGroup != null ? !userGroup.equals(user.userGroup) : user.userGroup != null) return false;
-        return realName != null ? realName.equals(user.realName) : user.realName == null;
-
+        if (realName != null ? !realName.equals(user.realName) : user.realName != null) return false;
+        if (gameName != null ? !gameName.equals(user.gameName) : user.gameName != null) return false;
+        return userGroup != null ? userGroup.equals(user.userGroup) : user.userGroup == null;
     }
 
     @Override
@@ -89,6 +91,7 @@ public class User {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (realName != null ? realName.hashCode() : 0);
+        result = 31 * result + (gameName != null ? gameName.hashCode() : 0);
         result = 31 * result + (userGroup != null ? userGroup.hashCode() : 0);
         return result;
     }
@@ -101,7 +104,7 @@ public class User {
                 ", role=" + role +
                 ", realName='" + realName + '\'' +
                 ", gameName='" + gameName + '\'' +
-                ", userGroup='" + userGroup + '\'' +
+                ", userGroup=" + userGroup +
                 '}';
     }
 }

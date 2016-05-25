@@ -1,7 +1,7 @@
 package nl.vpro.poel.service;
 
-
 import nl.vpro.poel.domain.UserGroup;
+import nl.vpro.poel.dto.UserGroupDTO;
 import nl.vpro.poel.dto.UserGroupForm;
 import nl.vpro.poel.repository.UserGroupRepository;
 import org.slf4j.Logger;
@@ -17,13 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserGroupServiceImpl.class);
 
     private final UserGroupRepository userGroupRepository;
 
     @Autowired
-    public UserGroupServiceImpl(UserGroupRepository userGroupRepository) { this.userGroupRepository = userGroupRepository; }
-
+    public UserGroupServiceImpl(UserGroupRepository userGroupRepository) {
+        this.userGroupRepository = userGroupRepository;
+    }
 
     @Override
     public Optional<UserGroup> findById(Long id) {
@@ -36,25 +37,40 @@ public class UserGroupServiceImpl implements UserGroupService {
     }
 
     @Override
-    public List<UserGroup> findAll() { return userGroupRepository.findAll(); }
+    public List<UserGroup> findAll() {
+        return userGroupRepository.findAll();
+    }
 
     @Override
     public void setUserGroups(UserGroupForm userGroupForm) {
-
-
         Set<Long> idsToRemove = findAll().stream().map(UserGroup::getId).collect(Collectors.toSet());
 
-        for (UserGroup postedUserGroup : userGroupForm.getUserGroups()) {
+        for (UserGroupDTO userGroupDTO : userGroupForm.getUserGroups()) {
+            Long id = userGroupDTO.getId();
 
-            String name = postedUserGroup.getName();
+            idsToRemove.remove(id);
 
-            UserGroup userGroup = userGroupRepository.findByName( name );
+            String name = userGroupDTO.getName();
 
-            if ( userGroup == null ) {
-                userGroup = new UserGroup( name );
-            } else {
-                idsToRemove.remove(userGroup.getId());
+            if (name == null) {
+                logger.warn("Ignoring user group update {}, because it has no name", userGroupDTO);
+                continue;
             }
+
+            UserGroup userGroup;
+            if (id == null) {
+                userGroup = new UserGroup();
+            } else {
+                userGroup = userGroupRepository.findOne(id);
+
+                if (userGroup == null) {
+                    logger.warn("Ignoring user group update {}, because no user group exists for this id", userGroupDTO);
+                    continue;
+                }
+            }
+
+            userGroup.setName(name);
+
             userGroupRepository.save(userGroup);
         }
 
@@ -62,5 +78,4 @@ public class UserGroupServiceImpl implements UserGroupService {
         // TODO: Delete should be cascading. Usergroups should be decoupled from users before being removed.
         idsToRemove.stream().forEach(userGroupRepository::delete);
     }
-
 }

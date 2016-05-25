@@ -1,10 +1,8 @@
 package nl.vpro.poel.service;
 
-import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.RankingEntry;
-import nl.vpro.poel.dto.UserGroupRankingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +24,9 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Optional<RankingEntry> getRankingEntry(User user) {
-        for (RankingEntry rankingEntry : getRanking()) {
-            if (rankingEntry.getUser().equals(user)) {
+    public Optional<RankingEntry<User>> getRankingEntry(User user) {
+        for (RankingEntry<User> rankingEntry : getUserRanking()) {
+            if (rankingEntry.getSubject().equals(user)) {
                 return Optional.of(rankingEntry);
             }
         }
@@ -36,14 +34,14 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public List<RankingEntry> getRanking() {
-        List<RankingEntry> ranking = new ArrayList<>();
+    public List<RankingEntry<User>> getUserRanking() {
+        List<RankingEntry<User>> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Integer, List<User>> entry : getUsersByScore().descendingMap().entrySet()) {
             List<User> users = entry.getValue();
             for (User user : users) {
                 Integer score = entry.getKey();
-                ranking.add(new RankingEntry(rank, user, score));
+                ranking.add(new RankingEntry<>(rank, user, score));
             }
             rank += users.size(); // Make sure if two users share rank 1, the next user has rank 3
         }
@@ -51,24 +49,24 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Optional<UserGroupRankingEntry> getUserGroupRankingEntry(UserGroup userGroup) {
-        for (UserGroupRankingEntry userGroupRankingEntry : getUserGroupRanking()) {
-            if (userGroupRankingEntry.getUserGroup().equals(userGroup)) {
-                return Optional.of(userGroupRankingEntry);
+    public Optional<RankingEntry<UserGroup>> getRankingEntry(UserGroup userGroup) {
+        for (RankingEntry<UserGroup> rankingEntry : getUserGroupRanking()) {
+            if (rankingEntry.getSubject().equals(userGroup)) {
+                return Optional.of(rankingEntry);
             }
         }
         return Optional.empty();
     }
 
     @Override
-    public List<UserGroupRankingEntry> getUserGroupRanking() {
-        List<UserGroupRankingEntry> ranking = new ArrayList<>();
+    public List<RankingEntry<UserGroup>> getUserGroupRanking() {
+        List<RankingEntry<UserGroup>> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Integer, List<UserGroup>> entry : getUserGroupsByScore().descendingMap().entrySet()) {
             List<UserGroup> userGroups = entry.getValue();
             for (UserGroup userGroup : userGroups) {
                 Integer score = entry.getKey();
-                ranking.add(new UserGroupRankingEntry(rank, userGroup, score));
+                ranking.add(new RankingEntry<>(rank, userGroup, score));
             }
             rank += userGroups.size(); // Make sure if two groups share rank 1, the next group has rank 3
         }
@@ -79,11 +77,8 @@ public class RankingServiceImpl implements RankingService {
         NavigableMap<Integer, List<UserGroup>> userGroupsByScore = new TreeMap<>();
         for (UserGroup userGroup : userGroupService.findAll()) {
 
-            Integer groupScore = 0;
-
-            for (User user : userService.getAllUsersForUserGroup(userGroup)) {
-                groupScore += scoreService.getScore(user);
-            }
+            Integer groupScore = userService.getAllUsersForUserGroup(userGroup).stream()
+                    .collect(Collectors.summingInt(scoreService::getScore));
 
             List<UserGroup> userGroups = userGroupsByScore.getOrDefault(groupScore, new ArrayList<>());
             userGroups.add(userGroup);

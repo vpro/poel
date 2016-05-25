@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScoreServiceImplTest {
 
-    private ScoreService scoreService = new ScoreServiceImpl(null, 2, 1, 2);
+    private ScoreService scoreService = new ScoreServiceImpl(null, null, 2, 1, 2);
 
     @Test
     public void scoreForCorrectWinnerAndResult() {

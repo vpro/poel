@@ -1,7 +1,8 @@
 package nl.vpro.poel.controller;
 
+import nl.vpro.poel.domain.User;
+import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.RankingEntry;
-import nl.vpro.poel.dto.UserGroupRankingEntry;
 import nl.vpro.poel.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+@RequestMapping("/ranking")
 class RankingController {
 
     private final RankingService rankingService;
@@ -21,12 +23,12 @@ class RankingController {
         this.rankingService = rankingService;
     }
 
-    @RequestMapping(value = "/ranking", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     String showRanking(Model model) {
-        List<RankingEntry> ranking = rankingService.getRanking();
-        model.addAttribute("ranking", ranking);
+        List<RankingEntry<User>> ranking = rankingService.getUserRanking();
+        model.addAttribute("userRanking", ranking);
 
-        List<UserGroupRankingEntry> userGroupRanking = rankingService.getUserGroupRanking();
+        List<RankingEntry<UserGroup>> userGroupRanking = rankingService.getUserGroupRanking();
         model.addAttribute("userGroupRanking", userGroupRanking);
 
         return "ranking";

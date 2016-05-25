@@ -32,15 +32,16 @@
         [#list userGroupRanking]
         <table class="ranking">
         <tbody>
-            [#items as userGroupEntry]
-        <tr class="ranking__row ranking__row-${ userGroupEntry ? item_parity } [#if user.userGroup ? has_content && userGroupEntry.userGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
-            <td class="ranking__rank"><span>${ userGroupEntry.rank }</span></td>
+            [#items as rankingEntry]
+            [#assign rankedUserGroup = rankingEntry.subject]
+        <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if user.userGroup ? has_content && rankedUserGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
+            <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
             <td class="ranking__name">
                 <h2 class="h6 ranking__display-name">
-                ${ userGroupEntry.userGroup.name }
+                ${ rankedUserGroup.name }
                 </h2>
             </td>
-            <td class="ranking__score">${ userGroupEntry.score }</td>
+            <td class="ranking__score">${ rankingEntry.score }</td>
         </tr>
         [/#items]
     </tbody>
@@ -64,31 +65,34 @@
             openColorClass='bg-darkgreen'
         ]
 
-            [#list ranking]
+            [#list userRanking]
             <table class="ranking">
             <tbody>
                 [#items as rankingEntry]
-                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if rankingEntry.user.getId() == user.getId() ]ranking__current-user[/#if]">
+                [#assign rankedUser = rankingEntry.subject]
+                <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]">
                     <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">
-                            [#if rankingEntry.user.gameName ? has_content]
-                            ${ rankingEntry.user.gameName }
+                            [#if rankedUser.gameName ? has_content]
+                            ${ rankedUser.gameName }
+                            [#elseif rankedUser.realName ? has_content]
+                            ${ rankedUser.realName }
                             [#else]
-                            ${ rankingEntry.user.realName }
+                            ${ rankedUser.username }
                             [/#if]
                         </h2>
                         <div class="ranking__meta">
                             <span class="ranking__full-name">
-                                [#if rankingEntry.user.gameName ? has_content]
-                                ${ rankingEntry.user.realName }
-                                [#elseif rankingEntry.user.getId() == user.getId() ]
+                                [#if rankedUser.gameName ? has_content]
+                                ${ rankedUser.gameName }
+                                [#elseif rankedUser.getId() == user.getId() ]
                                 <a href="/user"><i> vul je voetbalnaam in op je profielpagina</i></a>
                                 [/#if]
                             </span>
                             <span class="ranking__department">
-                                [#if rankingEntry.user.userGroup ? has_content]
-                                    ${ rankingEntry.user.userGroup.name }
+                                [#if rankedUser.userGroup ? has_content]
+                                    ${ rankedUser.userGroup.name }
                                 [/#if]
                             </span>
                         </div>

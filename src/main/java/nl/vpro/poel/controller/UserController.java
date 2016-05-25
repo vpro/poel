@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.Optional;
 
 @Controller
+@RequestMapping("/user")
 class UserController {
 
     private final UserService userService;
@@ -28,40 +28,22 @@ class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     String user(Principal principal, Model model) {
-        CurrentUser currentUser = UserUtil.getCurrentUser(principal)
-                .orElseThrow(() -> new RuntimeException("No user?!"));
-        User user = currentUser.getUser();
-
-        model.addAttribute("updateUser", user);
-
         return "user";
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     String updateUser(Principal principal, @ModelAttribute("updateUser") UserForm userForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        User user = getUser(principal);
+        userService.updateUser(user, userForm);
+        redirectAttributes.addFlashAttribute("flash", "Profielgegevens opgeslagen");
+        return "redirect:/user";
+    }
 
-        User updateUser = userForm.getUpdateUser();
-
+    private User getUser(Principal principal) {
         CurrentUser currentUser = UserUtil.getCurrentUser(principal)
                 .orElseThrow(() -> new RuntimeException("No user?!"));
-        User user = currentUser.getUser();
-
-        if ( updateUser.getUsername().equals( user.getUsername() ) ) {
-
-            // TODO, instead of a Boolean return the real updated user?
-            if ( userService.updateUser(updateUser) ){
-
-                Optional<User> freshUser = userService.getUserByUsername( updateUser.getUsername() );
-
-                if ( freshUser.isPresent() ) {
-                    currentUser.setUser( freshUser.get() );
-                }
-                redirectAttributes.addFlashAttribute("flash", "Gebruikersnaam "+ updateUser.getGameName() +" opgeslagen");
-            }
-        }
-
-        return "redirect:/user";
+        return currentUser.getUser();
     }
 }

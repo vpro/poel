@@ -3,6 +3,7 @@ package nl.vpro.poel.service;
 import nl.vpro.poel.domain.Role;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
+import nl.vpro.poel.dto.UserForm;
 import nl.vpro.poel.dto.UsersDTO;
 import nl.vpro.poel.dto.UsersForm;
 import nl.vpro.poel.repository.UserRepository;
@@ -59,26 +60,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateUser ( User updatedUser ) {
-        String username = updatedUser.getUsername();
-        String gameName = updatedUser.getGameName();
-
-        if ( username != null && gameName != null ) {
-            User existingUser = getUserByUsername(username).orElse(null);
-            if ( existingUser != null ) {
-
-                existingUser.setGameName(gameName);
-                userRepository.saveAndFlush(existingUser);
-                return true;
-
-            } else {
-                logger.warn("Ignoring user update {}, because no user exists for this username", updatedUser );
-            }
-        } else {
-            logger.warn("Ignoring user update {}, because it is incomplete");
-        }
-
-        return false;
+    public void updateUser(User user, UserForm userForm) {
+        user.setRealName(userForm.getRealName());
+        user.setGameName(userForm.getGameName());
+        userRepository.save(user);
     }
 
     @Override

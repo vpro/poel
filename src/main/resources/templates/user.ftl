@@ -38,14 +38,9 @@
 
             [#if user.role == 'ADMIN']
             <div class="grid row">
-                <a href="/admin/" class="c-white"> Ga naar het Admin gedeelte </a>
+                <a href="/admin" class="c-white"> Ga naar het Admin gedeelte </a>
             </div>
             [/#if]
-
-            <div class="grid row">
-                <span class="h6 col col-12-2">Naam:</span>
-                <span class="col col-12-2"> ${user.realName}</span>
-            </div>
 
             <div class="grid row">
                 <span class="h6 col col-12-2">Email:</span>
@@ -63,20 +58,24 @@
                 </span>
             </div>
 
-            <div class="grid row">
-                <form class="form" action="/user" method="post">
-                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-                    <input type="hidden" name="updateUser.username" value="${updateUser.username}"/>
 
+            <form class="form" action="#" method="post">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+
+                <div class="grid row">
+                    <span class="h6 col col-12-2">Echte naam:</span>
+                    <input class="col col-12-2 " type="text" name="realName" value="${user.realName}"/>
+                </div>
+
+                <div class="grid row">
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
+                    <input class="col col-12-2 " type="text" name="gameName" value="${user.gameName}"/>
+                </div>
 
-                    <input class="col col-12-2 " type="text" name="updateUser.gameName" value="${updateUser.gameName}"/>
-
-                    <div class="form-footer bg-blue">
-                        <button class="h5 button submit-button" type="submit">Opslaan</button>
-                    </div>
-                </form>
-            </div>
+                <div class="form-footer bg-blue">
+                    <button class="h5 button submit-button" type="submit">Opslaan</button>
+                </div>
+            </form>
 
         </div>
 

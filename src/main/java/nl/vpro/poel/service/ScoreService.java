@@ -2,8 +2,11 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
+import nl.vpro.poel.domain.UserGroup;
 
 public interface ScoreService {
+
+    int getScore(UserGroup userGroup);
 
     int getScore(User user);
 

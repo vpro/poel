@@ -1,16 +1,14 @@
 package nl.vpro.poel.dto;
 
-import nl.vpro.poel.domain.UserGroup;
-
 import java.util.List;
 
 public class UserGroupForm {
 
-    private List<UserGroup> userGroups;
+    private List<UserGroupDTO> userGroups;
 
-    public List<UserGroup> getUserGroups() { return userGroups; }
+    public List<UserGroupDTO> getUserGroups() { return userGroups; }
 
-    public void setUserGroups(List<UserGroup> userGroups) {
+    public void setUserGroups(List<UserGroupDTO> userGroups) {
         this.userGroups = userGroups;
     }
 
