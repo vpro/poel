@@ -18,6 +18,41 @@
     [@messageUtil.outputMessage message=message ! /]
 
     <div class="grid bg-darkgreen">
+    [@layout.sectionWithLayout
+    content={"layout":"100"}
+    title='afdelingen'
+    collapsible=true
+    opened=false
+    addCss='ranking-section'
+    backGroundColor='greybat'
+    closeColorClass='bg-greybat'
+    openColorClass='bg-darkgreen'
+    ]
+
+        [#list userGroupRanking]
+        <table class="ranking">
+        <tbody>
+            [#items as userGroupEntry]
+        <tr class="ranking__row ranking__row-${ userGroupEntry ? item_parity } [#if user.userGroup ? has_content && userGroupEntry.userGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
+            <td class="ranking__rank"><span>${ userGroupEntry.rank }</span></td>
+            <td class="ranking__name">
+                <h2 class="h6 ranking__display-name">
+                ${ userGroupEntry.userGroup.name }
+                </h2>
+            </td>
+            <td class="ranking__score">${ userGroupEntry.score }</td>
+        </tr>
+        [/#items]
+    </tbody>
+    </table>
+    [#else]
+        Er zijn geen afdelingen. :o(
+    [/#list]
+
+    [/@layout.sectionWithLayout]
+    </div>
+
+    <div class="grid bg-darkgreen">
         [@layout.sectionWithLayout
             content={"layout":"100"}
             title='spelers'

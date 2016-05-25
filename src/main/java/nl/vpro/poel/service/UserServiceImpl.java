@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllUsersForUserGroup(UserGroup userGroup) {
+        return userRepository.findAllByUserGroup(userGroup);
+    }
+
+    @Override
     public User getOrCreate(String username) {
         Optional<User> existingUser = getUserByUsername(username);
         if (existingUser.isPresent()) {
@@ -77,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserGroupsForUsers(UsersForm usersForm) {
+    public void updateUserGroupForUsers(UsersForm usersForm) {
 
         for (UsersDTO usersDTO : usersForm.getUsers()) {
 
@@ -100,7 +105,7 @@ public class UserServiceImpl implements UserService {
                         userRepository.saveAndFlush(existingUser);
 
                     } else {
-                        logger.warn("Ignoring user update {}, because it is incomplete");
+                        logger.warn("Ignoring user update {}, because no user group exists for this id", userGroupId);
                     }
                 }
 

@@ -87,7 +87,7 @@ class AdminController {
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     String saveUsers(@ModelAttribute("users") UsersForm usersForm, BindingResult bindingResult) {
-        userService.updateUserGroupsForUsers(usersForm);
+        userService.updateUserGroupForUsers(usersForm);
         return "redirect:/admin/users";
     }
 

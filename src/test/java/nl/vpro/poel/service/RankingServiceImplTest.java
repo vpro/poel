@@ -21,6 +21,7 @@ public class RankingServiceImplTest {
         User henk = new User("Henk", Role.ADMIN, "Henk", "voetbalHenk");
 
         UserService userService = mock(UserService.class);
+        UserGroupService userGroupService = mock(UserGroupService.class);
         when(userService.getAllUsers()).thenReturn(Arrays.asList(jan, piet, klaas, henk));
 
         ScoreService scoreService = mock(ScoreService.class);

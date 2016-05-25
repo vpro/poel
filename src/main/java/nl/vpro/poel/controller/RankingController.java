@@ -1,6 +1,7 @@
 package nl.vpro.poel.controller;
 
 import nl.vpro.poel.dto.RankingEntry;
+import nl.vpro.poel.dto.UserGroupRankingEntry;
 import nl.vpro.poel.service.RankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,10 @@ class RankingController {
     String showRanking(Model model) {
         List<RankingEntry> ranking = rankingService.getRanking();
         model.addAttribute("ranking", ranking);
+
+        List<UserGroupRankingEntry> userGroupRanking = rankingService.getUserGroupRanking();
+        model.addAttribute("userGroupRanking", userGroupRanking);
+
         return "ranking";
     }
 }
