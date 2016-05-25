@@ -13,6 +13,17 @@
 
     <body>
 
+
+    [#if flash ? has_content]
+    <div class="alert-overlay">
+        <div class="alert-overlay__content">
+            ${flash} <br/> <br/>
+            <button class="h5 button alert-overlay__close-button">Ok!</button>
+        </div>
+    </div>
+    [/#if]
+
+
     [@navigationUtil.navigation title='Profiel' back='/' /]
 
     [#if message ? has_content]
@@ -82,5 +93,13 @@
     [/@layout.sectionWithLayout]
 
     [@footerUtil.footer /]
+
+    <script>
+        System.import( '/js/form/controllers/UserFormController.js' ).then( function ( UserFormControllerModule ) {
+                new UserFormController.default( '.alert-overlay' );
+        } );
+    </script>
+
+
     </body>
 </html>
