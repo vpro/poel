@@ -83,7 +83,7 @@ var UserGroupController = Stapes.subclass({
                 var idx = /\[([\d]+)\]/ig.exec( this.name );
                 if ( idx && idx.length > 1 ) {
 
-                    this.name = this.name.replace( idx[1], i );
+                    this.name = this.name.replace( idx[ 1 ], i );
                 }
             });
         } );

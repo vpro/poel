@@ -77,7 +77,7 @@ var FormController = Stapes.subclass({
 
         }.bind( this ) );
 
-        this.$form.on( 'submit', this.handleSubmit.bind( this ));
+        this.$form.on( 'submit', this.handleSubmit.bind( this ) );
 
     },
 
@@ -89,11 +89,11 @@ var FormController = Stapes.subclass({
         if ( multipliersChecked >= MAX_MULTIPLIERS ) {
             this.$multiplierInputs.filter(':not(:checked)').prop('disabled', 'disabled');
         } else {
-            this.$multiplierInputs.filter(':disabled').prop('disabled', null);
+            this.$multiplierInputs.filter(':disabled').prop('disabled', null );
         }
 
         this.$navigationSubTitle.html( this.$navigationSubTitle.data('original-value') +
-            ' ( '+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '': 's' ) +' over )' );
+            ' ( '+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '' : 's' ) +' over )' );
     },
 
     handleSubmit: function ( e ) {
