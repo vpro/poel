@@ -154,6 +154,11 @@
 .prediction__multiplier .prediction__multiplier__input {
   margin-top: 4px;
   width: 24px;
+  display: none;
+}
+
+.prediction__multiplier_editable.prediction__multiplier .prediction__multiplier__input {
+  display: inline-block;
 }
 
 .prediction__multiplier__label {
@@ -166,21 +171,27 @@
   }
 }
 
-.prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
-  color: $greygrizzly;
-}
-
-.prediction__multiplier_editable .prediction__multiplier__input + .prediction__multiplier__label:hover .glyph,
-.prediction__multiplier_editable .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+.prediction__multiplier__input:checked + .prediction__multiplier__label .glyph,
+.prediction__multiplier_editable .prediction__multiplier__label:hover .glyph,
+.prediction__mulitplier_checked .prediction__multiplier__label .glyph {
   color: $white;
   cursor: pointer;
 }
 
-.prediction__multiplier_points-2 .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+.prediction__multiplier_points-0.prediction__mulitplier_checked .prediction__multiplier__label .glyph {
+  color: $greygrizzly;
+}
+
+.prediction__multiplier_points-2.prediction__mulitplier_checked .prediction__multiplier__label .glyph {
   color: $orange;
 }
-.prediction__multiplier_points-6 .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph {
+
+.prediction__multiplier_points-6.prediction__mulitplier_checked .prediction__multiplier__label .glyph {
   color: $red;
+}
+
+.prediction__score {
+  width: 46px;
 }
 
 .prediction__points{

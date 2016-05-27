@@ -52,18 +52,21 @@
 
         <td class="prediction__multiplier
                 [#if status == STATUS_FUTURE]prediction__multiplier_editable[/#if]
-                [#if score ? has_content]prediction__multiplier_points-${ score }[/#if]
+                [#if score ? has_content && status == STATUS_FINISHED]prediction__multiplier_points-${ score }[/#if]
+                [#if multiplier]prediction__mulitplier_checked[/#if]
                 ">
+
+            [#if status == STATUS_FUTURE || ( status != STATUS_FUTURE && multiplier ) ]
             <input class="prediction__multiplier__input" id="prediction__multiplier${predictionIndex}_${status}" type="checkbox"
                    name="predictions[${predictionIndex}].multiplier" value="true"
                    [#if multiplier]checked="checked"[/#if] [#if status != STATUS_FUTURE]disabled="disable"[/#if] />
-
             <label class="prediction__multiplier__label" title="Joker inzetten"
                    for="prediction__multiplier${predictionIndex}_${status}"><i class="glyph glyph-heart"></i></label>
+            [/#if]
         </td>
 
         <td class="prediction__score">
-            [#if score ? has_content]
+            [#if score ? has_content && status == STATUS_FINISHED]
                 <span class="prediction__points prediction__points-${score}">${score}</span>
             [/#if]
         </td>
