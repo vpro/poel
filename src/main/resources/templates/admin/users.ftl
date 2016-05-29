@@ -21,8 +21,7 @@
         <div class="grid-gutter theme-text">
 
             <p>
-                Todo:<br />
-                Een export van emailadressen kunnen doen
+                <a href="/admin/users/csv">Exporteer alle gebruikers (CSV)</a>
             </p>
 
             [#list users]
