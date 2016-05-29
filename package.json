@@ -2,11 +2,13 @@
   "name": "poel-frontend",
   "description": "vpro poel front end scripts",
   "scripts": {
+    "prebuild:js": "npm run lint",
+    "build:js": "node systemjs.build.js",
     "build:css": "node-sass src/main/resources/static/css/sass/style.scss --output target/classes/static/css",
     "build:prod": "npm run build:css",
     "lint": "jscs src/main/resources/static/js --esnext --config=.jscsrc",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
-    "watch:js": "nodemon --ext js --exec npm run lint",
+    "watch:js": "nodemon --ext js --exec npm run build:js --watch src/main/resources/static/js",
     "watch:css": "nodemon --ext scss --exec npm run build:css --watch src/main/resources/static/css/sass"
   },
   "dependencies": {
@@ -20,6 +22,7 @@
     "traceur": "0.0.108"
   },
   "devDependencies": {
+    "babel-core": "^6.9.1",
     "jscs": "3.0.3",
     "node-sass": "3.7.0",
     "nodemon": "1.9.2",
