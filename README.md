@@ -54,10 +54,18 @@ suggests this shouldn't happen).
 For now this means installing them through the `package.json` and NPM and copying everything
 you need to the `src/main/resources/static/vendor` folder.
 
+#### JS
+JavaScript is being optimised by default. There is a `watch:js` task to compile and lint
+the production bundle. In `src/main/resources/templates/macros/footer.ftl` you can
+switch to the development version of JS.
+
 #### CSS
 We're using SASS to generate CSS. The CSS is automatically generated during
 startup of the application.
 
-There is a `npm run watch:css` script to regenerate the CSS on any changes.
+There is a separate `npm run watch:css` script to regenerate the CSS on any changes.
 Be sure to follow the instructions of [DevTools and LiveReload](#DevTools and LiveReload)
 to refresh the CSS for the browser through your IDE.
+
+#### Watch it all
+There is also an NPM `watch` task that watches bot JS and CSS.
