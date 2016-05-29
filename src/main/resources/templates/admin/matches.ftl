@@ -46,7 +46,7 @@
 
                                 <input type="text" class="col-12-3" name="matches[${match?index}].homeTeam" value="${match.homeTeam}" />
                                 <input type="text" class="col-12-3" name="matches[${match?index}].awayTeam" value="${match.awayTeam}" />
-                                <input type="datetime-local" class="col-12-3" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'hh:mm"]}" />
+                                <input type="datetime-local" class="col-12-3" name="matches[${match?index}].start" value="${match.start?string["yyyy-MM-dd'T'HH:mm"]}" />
 
                                 <input type="number" class="col-12-1" name="matches[${match?index}].homeTeamGoals" [#if hasMatchResult]value="${match.matchResult.homeTeamGoals!}"[#else]placeholder="home"[/#if] />
                                 <input type="number" class="col-12-1" name="matches[${match?index}].awayTeamGoals" [#if hasMatchResult]value="${match.matchResult.awayTeamGoals!}"[#else]placeholder="away"[/#if] />
