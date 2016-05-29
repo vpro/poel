@@ -3,9 +3,9 @@ import $ from 'jquery';
 
 var UserFormController = Stapes.subclass({
 
-    constructor : function (  overlay ) {
+    constructor : function (  $overlay ) {
 
-        this.$alertOverlay = $( overlay );
+        this.$alertOverlay = $overlay;
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
         this.bindHandlers();

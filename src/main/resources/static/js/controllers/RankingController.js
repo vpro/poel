@@ -4,9 +4,9 @@ import $ from 'jquery';
 var RankingController = Stapes.subclass({
 
 
-    constructor : function ( groupFilter, currentUserGroupId ) {
+    constructor : function ( $groupFilterCheckbox ) {
 
-        var $groupFilterCheckbox = $( groupFilter );
+        var currentUserGroupId = $groupFilterCheckbox.data('id');
 
         var $allRows = $( '.ranking__row' );
 

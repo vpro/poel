@@ -1,14 +1,15 @@
-[#macro footer ]
-<script src="/vendor/system.js"></script>
-<script src="/systemjs.config.js"></script>
-<script>
+[#macro footer]
+    [#local devMode = true]
 
-    System.import( '/js/util/CollapseController.js' ).then( function ( collapseControllerModule ) {
+    [#if devMode]
+        <script src="/vendor/system.js"></script>
+        <script src="/systemjs.config.js"></script>
+        <script>
 
-        new collapseControllerModule.default( document.querySelectorAll( '.collapsible-section') );
+            if ( typeof System !== 'undefined' ) {
+                System.import('/js/impl.js');
+            }
 
-    } );
-
-</script>
-
+        </script>
+    [/#if]
 [/#macro]

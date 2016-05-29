@@ -5,12 +5,9 @@ const MAX_MULTIPLIERS = 5;
 
 var FormController = Stapes.subclass({
 
-    /**
-     * @param {HTMLElement} form
-     */
-    constructor : function ( form, overlay ) {
+    constructor : function ( $form, $overlay ) {
 
-        this.$form = $( form );
+        this.$form = $form;
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
 
@@ -20,7 +17,7 @@ var FormController = Stapes.subclass({
 
         this.$allMultipliers = $( 'input[name$="multiplier"]' );
 
-        this.$alertOverlay = $( overlay );
+        this.$alertOverlay = $overlay;
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
         this.$navigationSubTitle = $('.top-navigation-subtitle');

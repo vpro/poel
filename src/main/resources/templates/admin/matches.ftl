@@ -23,7 +23,7 @@
 
                 [#list matches]
 
-                <form class="form" action="#" method="post">
+                <form class="matches-form form" action="#" method="post">
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -82,14 +82,6 @@
         </div>
 
     [@footerUtil.footer /]
-
-    <script>
-        System.import( '/js/controllers/MatchController.js' ).then( function ( matchControllerModule ) {
-
-            new matchControllerModule.default( document.querySelectorAll( 'form' ) );
-
-        } );
-    </script>
 
     </body>
 

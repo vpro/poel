@@ -6,19 +6,16 @@ import matchTemplate from '../views/match.hbs!';
 
 var MatchController = Stapes.subclass({
 
-    /**
-     * @param {HTMLElement} form
-     */
-    constructor : function ( form, overlay ) {
+    constructor : function ( $form, $overlay ) {
 
-        this.$form = $( form );
+        this.$form = $form;
         this.$userGroupsContainer = this.$form.find( '.matches' );
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
         this.$formAdd = this.$form.find( '.add-match' );
         this.$formSort = this.$form.find( '.sort-matches' );
 
-        this.$alertOverlay = $( overlay );
+        this.$alertOverlay = $overlay;
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
 

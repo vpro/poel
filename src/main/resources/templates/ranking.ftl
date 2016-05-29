@@ -72,7 +72,7 @@
 
         [#if user.userGroup ? has_content]
             <div class="grid grid-gutter c-white h6">
-                <input id="ranking__groupfilter" type="checkbox" name="groupfilter" value="false"  />
+                <input id="ranking__groupfilter" [#if user.userGroup ? has_content]data-id="${ user.userGroup.id }"[/#if] type="checkbox" name="groupfilter" value="false"  />
                 <label for="ranking__groupfilter">Filter op jouw afdeling: ${user.userGroup.name}</label>
             </div>
         [/#if]
@@ -129,15 +129,6 @@
     </div>
 
     [@footerUtil.footer /]
-
-    [#if user.userGroup ? has_content]
-    <script>
-        System.import( '/js/controllers/RankingController.js' ).then( function ( RankingControllerModule ) {
-                new RankingControllerModule.default( '#ranking__groupfilter' , '${ rankedUser.userGroup.id }' );
-        } );
-    </script>
-    [/#if]
-
 
     </body>
 

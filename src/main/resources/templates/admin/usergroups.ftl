@@ -23,7 +23,7 @@ backGroundColor="bg-darkgreen"
 
 [#list userGroups]
 
-<form class="form" action="#" method="post">
+<form class="form usergroup-form" action="#" method="post">
 
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
@@ -57,14 +57,6 @@ backGroundColor="bg-darkgreen"
 </div>
 
 [@footerUtil.footer /]
-
-<script>
-    System.import( '/js/controllers/UserGroupController.js' ).then( function ( userGroupControllerModule ) {
-
-        new userGroupControllerModule.default( document.querySelectorAll( 'form' ) );
-
-    } );
-</script>
 
 </body>
 

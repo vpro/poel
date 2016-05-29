@@ -94,7 +94,7 @@
 
                 [#if future ? has_content]
 
-                    <form action="#" method="post">
+                    <form class="prediction-form" action="#" method="post">
 
                     [@layout.sectionWithLayout
                         content={'layout': '100'}
@@ -139,14 +139,6 @@
             </div>
 
         [@footerUtil.footer /]
-
-        <script>
-            System.import( '/js/controllers/FormController.js' ).then( function ( formControllerModule ) {
-
-                new formControllerModule.default( document.querySelectorAll( 'form' ), '.alert-overlay' );
-
-            } );
-        </script>
 
     </body>
 </html>

@@ -6,18 +6,15 @@ import userGroupTemplate from '../views/user-group.hbs!';
 
 var UserGroupController = Stapes.subclass({
 
-    /**
-     * @param {HTMLElement} form
-     */
-    constructor : function ( form, overlay ) {
+    constructor : function ( $form, $overlay ) {
 
-        this.$form = $( form );
+        this.$form = $form;
         this.$userGroupsContainer = this.$form.find( '.user-groups' );
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
         this.$formAdd = this.$form.find( '.add-user-group' );
 
-        this.$alertOverlay = $( overlay );
+        this.$alertOverlay = $overlay;
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
 
         this.initialFormState = this.$form.serialize();
