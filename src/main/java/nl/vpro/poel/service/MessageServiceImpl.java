@@ -1,10 +1,9 @@
 package nl.vpro.poel.service;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.dto.MessageForm;
 import nl.vpro.poel.repository.MessageRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +12,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class MessageServiceImpl implements MessageService {
-
-    private static final Logger logger = LoggerFactory.getLogger(MessageServiceImpl.class);
 
     private final MessageRepository messageRepository;
 
@@ -55,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
             String text = postedMessage.getText();
 
             if ( key == null ) {
-                logger.warn("Ignoring message update {}, because it is incomplete");
+                log.warn("Ignoring message update {}, because it is incomplete");
                 continue;
             }
 

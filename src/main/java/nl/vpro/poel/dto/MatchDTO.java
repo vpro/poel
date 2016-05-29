@@ -1,9 +1,11 @@
 package nl.vpro.poel.dto;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
 public class MatchDTO {
 
     private Long id;
@@ -19,64 +21,4 @@ public class MatchDTO {
     private Integer homeTeamGoals;
 
     private Integer awayTeamGoals;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getHomeTeam() {
-        return homeTeam;
-    }
-
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
-    }
-
-    public String getAwayTeam() {
-        return awayTeam;
-    }
-
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Integer getHomeTeamGoals() {
-        return homeTeamGoals;
-    }
-
-    public void setHomeTeamGoals(Integer homeTeamGoals) {
-        this.homeTeamGoals = homeTeamGoals;
-    }
-
-    public Integer getAwayTeamGoals() {
-        return awayTeamGoals;
-    }
-
-    public void setAwayTeamGoals(Integer awayTeamGoals) {
-        this.awayTeamGoals = awayTeamGoals;
-    }
-
-    @Override
-    public String toString() {
-        return "MatchDTO{" +
-                "id=" + id +
-                ", homeTeam='" + homeTeam + '\'' +
-                ", awayTeam='" + awayTeam + '\'' +
-                ", start=" + start +
-                ", homeTeamGoals=" + homeTeamGoals +
-                ", awayTeamGoals=" + awayTeamGoals +
-                '}';
-    }
 }

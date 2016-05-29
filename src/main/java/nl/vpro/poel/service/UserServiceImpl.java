@@ -1,5 +1,6 @@
 package nl.vpro.poel.service;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Role;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
@@ -7,18 +8,15 @@ import nl.vpro.poel.dto.UserForm;
 import nl.vpro.poel.dto.UserAndUserGroupDTO;
 import nl.vpro.poel.dto.UsersForm;
 import nl.vpro.poel.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
     private final UserGroupService userGroupService;
@@ -83,11 +81,11 @@ public class UserServiceImpl implements UserService {
                         user.setUserGroup(userGroup);
                         userRepository.save(user);
                     } else {
-                        logger.warn("Ignoring user update {}, because no user group exists for this id", userDTO);
+                        log.warn("Ignoring user update {}, because no user group exists for this id", userDTO);
                     }
                 }
             } else {
-                logger.warn("Ignoring user update {}, because no user exists for this id", userDTO);
+                log.warn("Ignoring user update {}, because no user exists for this id", userDTO);
             }
         }
     }

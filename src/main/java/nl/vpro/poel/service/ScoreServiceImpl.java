@@ -67,7 +67,7 @@ public class ScoreServiceImpl implements ScoreService {
         int scoreForWinner = getScoreForWinner(predictedResult, actualResult);
         int scoreForResult = getScoreForResult(predictedResult, actualResult);
         int score = scoreForWinner + scoreForResult;
-        if (prediction.getMultiplier()) {
+        if (prediction.isMultiplier()) {
             score *= scoreMultiplierFactor;
         }
         return score;

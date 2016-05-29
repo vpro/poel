@@ -1,12 +1,11 @@
 package nl.vpro.poel.service;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.MatchResult;
 import nl.vpro.poel.dto.MatchDTO;
 import nl.vpro.poel.dto.MatchForm;
 import nl.vpro.poel.repository.MatchRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +14,9 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class MatchServiceImpl implements MatchService {
-
-    private static final Logger logger = LoggerFactory.getLogger(MatchServiceImpl.class);
 
     private final MatchRepository matchRepository;
 
@@ -67,7 +65,7 @@ public class MatchServiceImpl implements MatchService {
             Date start = matchDTO.getStart();
 
             if (homeTeam == null || awayTeam == null || start == null) {
-                logger.warn("Ignoring match update {}, because it is incomplete", matchDTO);
+                log.warn("Ignoring match update {}, because it is incomplete", matchDTO);
                 continue;
             }
 
@@ -78,7 +76,7 @@ public class MatchServiceImpl implements MatchService {
                 match = matchRepository.findOne(id);
 
                 if (match == null) {
-                    logger.warn("Ignoring match update {}, because no match exists for this id", matchDTO);
+                    log.warn("Ignoring match update {}, because no match exists for this id", matchDTO);
                     continue;
                 }
             }
@@ -98,7 +96,7 @@ public class MatchServiceImpl implements MatchService {
                 match.setMatchResult(null);
             } else {
                 // Invalid match result, ignore so any previously saved match result is preserved
-                logger.warn("Ignoring incomplete match result from match update {}", matchDTO);
+                log.warn("Ignoring incomplete match result from match update {}", matchDTO);
             }
 
             matchRepository.save(match);

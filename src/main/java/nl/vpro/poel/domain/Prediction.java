@@ -1,5 +1,8 @@
 package nl.vpro.poel.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
@@ -8,6 +11,9 @@ import java.util.Objects;
 /**
  * A user's predicted match result.
  */
+@Data
+@EqualsAndHashCode(exclude = "id")
+@NoArgsConstructor
 @Entity
 public class Prediction {
 
@@ -27,8 +33,6 @@ public class Prediction {
 
     private boolean multiplier = false;
 
-    private Prediction() {} // For Hibernate
-
     public Prediction(User user, Match match) {
         this(user, match, null);
     }
@@ -42,40 +46,5 @@ public class Prediction {
         this.match = match;
         this.matchResult = matchResult;
         this.multiplier = multiplier;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Match getMatch() {
-        return match;
-    }
-
-    public MatchResult getMatchResult() {
-        return matchResult;
-    }
-
-    public void setMatchResult(MatchResult matchResult) {
-        this.matchResult = matchResult;
-    }
-
-    public boolean getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(boolean multiplier) {
-        this.multiplier = multiplier;
-    }
-
-    @Override
-    public String toString() {
-        return "Prediction{" +
-                "id=" + id +
-                ", user=" + user +
-                ", match=" + match +
-                ", matchResult=" + matchResult +
-                ", multiplier=" + multiplier +
-                '}';
     }
 }

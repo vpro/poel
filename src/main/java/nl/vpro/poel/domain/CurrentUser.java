@@ -1,21 +1,19 @@
 package nl.vpro.poel.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.core.authority.AuthorityUtils;
 
+@Getter
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class CurrentUser extends org.springframework.security.core.userdetails.User {
 
     private User user;
 
     public CurrentUser(User user) {
         super(user.getUsername(), "", AuthorityUtils.createAuthorityList(user.getRole().toString()));
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
         this.user = user;
     }
 
@@ -37,31 +35,5 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
 
     public UserGroup getUserGroup() {
         return user.getUserGroup();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        CurrentUser that = (CurrentUser) o;
-
-        return user != null ? user.equals(that.user) : that.user == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "CurrentUser{" +
-                "user=" + user +
-                '}';
     }
 }

@@ -1,23 +1,11 @@
 package nl.vpro.poel.dto;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class MatchForm {
 
     private List<MatchDTO> matches;
-
-    public List<MatchDTO> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(List<MatchDTO> matches) {
-        this.matches = matches;
-    }
-
-    @Override
-    public String toString() {
-        return "MatchForm{" +
-                "matches=" + matches +
-                '}';
-    }
 }

@@ -1,11 +1,10 @@
 package nl.vpro.poel.service;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.UserGroupDTO;
 import nl.vpro.poel.dto.UserGroupForm;
 import nl.vpro.poel.repository.UserGroupRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +13,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserGroupServiceImpl implements UserGroupService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserGroupServiceImpl.class);
 
     private final UserGroupRepository userGroupRepository;
 
@@ -53,7 +51,7 @@ public class UserGroupServiceImpl implements UserGroupService {
             String name = userGroupDTO.getName();
 
             if (name == null) {
-                logger.warn("Ignoring user group update {}, because it has no name", userGroupDTO);
+                log.warn("Ignoring user group update {}, because it has no name", userGroupDTO);
                 continue;
             }
 
@@ -64,7 +62,7 @@ public class UserGroupServiceImpl implements UserGroupService {
                 userGroup = userGroupRepository.findOne(id);
 
                 if (userGroup == null) {
-                    logger.warn("Ignoring user group update {}, because no user group exists for this id", userGroupDTO);
+                    log.warn("Ignoring user group update {}, because no user group exists for this id", userGroupDTO);
                     continue;
                 }
             }
