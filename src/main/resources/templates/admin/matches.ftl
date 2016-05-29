@@ -84,7 +84,7 @@
     [@footerUtil.footer /]
 
     <script>
-        System.import( '/js/form/controllers/MatchController.js' ).then( function ( matchControllerModule ) {
+        System.import( '/js/controllers/MatchController.js' ).then( function ( matchControllerModule ) {
 
             new matchControllerModule.default( document.querySelectorAll( 'form' ) );
 

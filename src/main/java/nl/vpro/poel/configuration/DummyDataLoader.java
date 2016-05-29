@@ -84,6 +84,7 @@ public class DummyDataLoader {
         predictionRepository.save(Arrays.asList(
                 new Prediction(userNils, matchFinished1, new MatchResult(1, 0)),
                 new Prediction(userNils, matchFinished2, new MatchResult(2, 2), true),
+                new Prediction(userFrank, matchFinished2, new MatchResult(5, 4), true),
                 new Prediction(userFrank, matchUnfinished1, new MatchResult(2, 1), true),
                 new Prediction(userTimo, matchFinished2, new MatchResult(0, 2))
         ));

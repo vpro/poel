@@ -141,7 +141,7 @@
         [@footerUtil.footer /]
 
         <script>
-            System.import( '/js/form/controllers/FormController.js' ).then( function ( formControllerModule ) {
+            System.import( '/js/controllers/FormController.js' ).then( function ( formControllerModule ) {
 
                 new formControllerModule.default( document.querySelectorAll( 'form' ), '.alert-overlay' );
 
