@@ -9,6 +9,7 @@ import nl.vpro.poel.service.UserService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,17 +58,15 @@ public class UsersController {
 
     @RequestMapping(value = "/csv", method = RequestMethod.GET)
     void getUsersCSV(HttpServletResponse response) {
+        String now = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
 
         response.setContentType("text/csv");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=poel-users-" + now + ".csv");
 
-        String now = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now());
-        response.setHeader("Content-Disposition", "attachment; filename=poel-users-" + now + ".csv");
+        CSVFormat format = CSVFormat.DEFAULT.withHeader("id", "username", "role", "realName", "gameName");
 
         try {
-            CSVPrinter csvPrinter = CSVFormat.DEFAULT
-                    .withHeader("id", "username", "role", "realName", "gameName")
-                    .print(response.getWriter());
-
+            CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
             for (User user : userService.getAllUsers()) {
                 csvPrinter.printRecord(
                         user.getId(),
@@ -77,6 +76,7 @@ public class UsersController {
                         user.getGameName()
                 );
             }
+            csvPrinter.close();
         } catch (IOException e) {
             log.error("Error writing CSV export", e);
         }
