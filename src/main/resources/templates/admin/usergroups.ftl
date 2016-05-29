@@ -59,7 +59,7 @@ backGroundColor="bg-darkgreen"
 [@footerUtil.footer /]
 
 <script>
-    System.import( '/js/form/controllers/UserGroupController.js' ).then( function ( userGroupControllerModule ) {
+    System.import( '/js/controllers/UserGroupController.js' ).then( function ( userGroupControllerModule ) {
 
         new userGroupControllerModule.default( document.querySelectorAll( 'form' ) );
 

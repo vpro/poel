@@ -95,7 +95,7 @@
     [@footerUtil.footer /]
 
     <script>
-        System.import( '/js/form/controllers/UserFormController.js' ).then( function ( UserFormControllerModule ) {
+        System.import( '/js/controllers/UserFormController.js' ).then( function ( UserFormControllerModule ) {
                 new UserFormController.default( '.alert-overlay' );
         } );
     </script>

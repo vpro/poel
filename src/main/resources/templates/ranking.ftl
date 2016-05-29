@@ -132,7 +132,7 @@
 
     [#if user.userGroup ? has_content]
     <script>
-        System.import( '/js/form/controllers/RankingController.js' ).then( function ( RankingControllerModule ) {
+        System.import( '/js/controllers/RankingController.js' ).then( function ( RankingControllerModule ) {
                 new RankingControllerModule.default( '#ranking__groupfilter' , '${ rankedUser.userGroup.id }' );
         } );
     </script>
