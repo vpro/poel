@@ -6,10 +6,10 @@ The software for the famous VPRO Poel!
 
 ## Running
 
-Make sure you have Oracle JDK 8 installed.
+Make sure you have [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) installed.
 
 Running `./mvnw spring-boot:run` should do the trick! If you have a local
-installation of Apache Maven 3.x, you can also use `mvn` instead of the
+installation of [Apache Maven](https://maven.apache.org/) 3.x, you can also use `mvn` instead of the
 supplied `mvnw` script.
 
 After starting up the Poel should be live at
@@ -60,8 +60,7 @@ the production bundle. In `src/main/resources/templates/macros/footer.ftl` you c
 switch to the development version of JS.
 
 #### CSS
-We're using SASS to generate CSS. The CSS is automatically generated during
-startup of the application.
+We're using [SASS](http://sass-lang.com/) to generate CSS. The CSS is automatically generated during the Maven build.
 
 There is a separate `npm run watch:css` script to regenerate the CSS on any changes.
 Be sure to follow the instructions of [DevTools and LiveReload](#DevTools and LiveReload)
