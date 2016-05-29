@@ -15,7 +15,7 @@ public class MatchDTO {
     private String awayTeam;
 
     // This doesn't work because posted string does not contain seconds: @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date start;
 
     private Integer homeTeamGoals;
