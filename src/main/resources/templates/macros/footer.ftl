@@ -1,5 +1,5 @@
 [#macro footer]
-    [#local devMode = true]
+    [#local devMode = false]
 
     [#if devMode]
         <script src="/vendor/system.js"></script>
@@ -11,5 +11,7 @@
             }
 
         </script>
+    [#else]
+    <script src="/js/impl.sfx.js"></script>
     [/#if]
 [/#macro]

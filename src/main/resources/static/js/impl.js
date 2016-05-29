@@ -1,12 +1,12 @@
 import $ from 'jquery';
 
-import CollapseController from '/js/util/CollapseController.js';
+import CollapseController from 'js/util/CollapseController.js';
 
-import FormController from '/js/controllers/FormController.js';
-import MatchController from '/js/controllers/MatchController.js';
-import RankingController from '/js/controllers/RankingController.js';
-import UserFormController from '/js/controllers/UserFormController.js';
-import UserGroupController from '/js/controllers/UserGroupController.js';
+import FormController from 'js/controllers/FormController.js';
+import MatchController from 'js/controllers/MatchController.js';
+import RankingController from 'js/controllers/RankingController.js';
+import UserFormController from 'js/controllers/UserFormController.js';
+import UserGroupController from 'js/controllers/UserGroupController.js';
 
 
 
