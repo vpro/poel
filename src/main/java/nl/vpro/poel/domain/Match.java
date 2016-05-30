@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * A match for users to predict the outcome of. Matches can have limited periods in which they can be predicted.
