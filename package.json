@@ -5,7 +5,7 @@
     "prebuild:js": "npm run lint",
     "build:js": "node systemjs.build.js",
     "build:css": "node-sass src/main/resources/static/css/sass/style.scss --output target/classes/static/css",
-    "build:prod": "npm run build:css",
+    "build:prod": "npm run build:css && npm run build:js",
     "lint": "jscs src/main/resources/static/js --esnext --config=.jscsrc",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css'",
     "watch:js": "nodemon --ext js --exec npm run build:js --watch src/main/resources/static/js",
