@@ -137,6 +137,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork><!-- Added for DevTools, see https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-restart -->
+					<executable>true</executable><!-- http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html -->
 				</configuration>
 			</plugin>
             <plugin>
