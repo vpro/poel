@@ -5,25 +5,91 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[@headUtil.head title='about' /]
+[@headUtil.head title='poelregels' /]
 
 <body>
 
-    [@navigationUtil.navigation title='poelspel' back='/' bgColor='bg-greybat' /]
+[@navigationUtil.navigation title='poelregels' back='/' bgColor='bg-greybat' /]
 
-    <div class="grid grid-gutter bg-white about">
-        <div class="component">
-            <h1 class="h4 about__title"><span class="c-greybat">Het spel</span></h1>
+<div class="grid grid-gutter bg-white about">
+    <div class="component">
+        <div class="col col-12-3"></div>
+
+        <div class="col col-12-6">
+            <h1 class="h4 about__title"><span class="c-greybat">Hoe werkt het?</span></h1>
+
             <p class="c-green about__text">
-                Chia whatever lumbersexual, gentrify poutine drinking vinegar banjo gluten-free sustainable yr. Keffiyeh hella chia single-origin coffee, schlitz chambray wolf. Crucifix chillwave microdosing letterpress, deep v man braid asymmetrical cardigan blog. Knausgaard paleo slow-carb organic selfies flexitarian, ramps health goth seitan tacos microdosing truffaut. Bespoke +1 trust fund, butcher dreamcatcher stumptown street art. Godard bushwick street art polaroid microdosing, brooklyn 3 wolf moon cray selfies ramps pour-over. Craft beer mixtape viral green juice disrupt tofu cold-pressed, yuccie XOXO.
+                De <b>inleg</b> voor VPRO's EK-poel bedraagt vijf euro, overmaken naar F. Hermsen, Amsterdam,
+                NL35INGB0004707382
             </p>
 
-            <h1 class="h4 c-greybat about__title"><span class="c-greybat">Je profiel</span></h1>
             <p class="c-green about__text">
-                Franzen artisan deep v four dollar toast gastropub, yuccie sartorial swag squid direct trade tacos YOLO chambray aesthetic narwhal. Tacos twee cray lumbersexual mumblecore. Whatever literally brooklyn beard, YOLO organic pug cronut. Literally migas organic portland typewriter man braid. Try-hard kale chips bitters humblebrag, chia drinking vinegar etsy iPhone. Put a bird on it austin affogato bicycle rights disrupt. Thundercats 3 wolf moon 90's tote bag venmo 8-bit.
+                <b>Voorspel per wedstrijd de uitslag.</b> Je kunt de voorspelling tot aan het eerste fluitsignaal van
+                elke wedstrijd aanpassen. Na aanvang van de wedstrijd mag en kan je niets meer aan die
+                wedstrijdvoorspelling veranderen.
             </p>
+
+            <p class="c-green about__text">
+                Ga je op vakantie tijdens het toernooi? Geen probleem, je kunt je voorspellingen bij alle wedstrijden
+                ook van tevoren invullen.
+            </p>
+
+            <p class="c-green about__text">
+                Per ronde mag je een een vastgesteld aantal <b>'jokers'</b> inzetten, waarmee je score verdubbelt.
+            </p>
+
+            <p class="c-green about__text">
+                Uitslag goed: 3 punten, met joker 6 punten
+            </p>
+
+            <p class="c-green about__text">
+                Winnaar goed: 1 punt, met joker 2 punten
+            </p>
+
+            <p class="c-green about__text">
+                In de <b>knock-outfase</b> (waarin mogelijk een verlenging c.q. strafschoppen een winnaar opleveren)
+                telt voor de poel als uitslag: de stand na het laatste fluitsignaal, d.w.z. tot aan een eventuele
+                strafschoppenreeks. Een gelijke stand – namelijk na 120 minuten – is hier dus ook mogelijk als
+                voorspelling.
+            </p>
+
+            <p class="c-green about__text">
+                De '<b>pot</b>' wordt alsvolgt verdeeld:
+            </p>
+
+            <p class="c-green about__text">
+                nummer 1 – 50%
+            </p>
+
+            <p class="c-green about__text">
+                nummer 2 – 20%
+            </p>
+
+            <p class="c-green about__text">
+                nummer 3 – 15%
+            </p>
+
+            <p class="c-green about__text">
+                nummer 4 – 10%
+            </p>
+
+            <p class="c-green about__text">
+                nummer 5 – 5%
+            </p>
+
+            <p class="c-green about__text">
+                Extra: de <b>Grobprijs</b> wordt uitgereikt aan degene die als laatste eindigt van degenen die tot het
+                eind hebben meegedaan (nietmeerinvullers vallen dus hierbuiten).
+            </p>
+
+            <p class="c-green about__text">
+                Voor het '<b>afdelingsklassement</b>' deelt de poelleiding de poeldeelnemers in naar afdeling. Een
+                afdeling bestaat uit tenminste vier deelnemers. </p>
+
         </div>
+        <div class="col col-12-3"></div>
     </div>
-    [@footerUtil.footer /]
+</div>
+[@footerUtil.footer /]
 </body>
 </html>
