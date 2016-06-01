@@ -11,6 +11,16 @@
     [@headUtil.head title="wedstrijden beheren" /]
     <body>
 
+
+    [#if flash ? has_content]
+    <div class="alert-overlay">
+        <div class="alert-overlay__content">
+        ${flash} <br/> <br/>
+            <button class="h5 button alert-overlay__close-button">Ok!</button>
+        </div>
+    </div>
+    [/#if]
+
     [@navigationUtil.navigation title='Admin' subtitle='wedstrijden' back='/admin' /]
 
         <div class="grid">

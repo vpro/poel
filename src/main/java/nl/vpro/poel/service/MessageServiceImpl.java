@@ -49,6 +49,10 @@ public class MessageServiceImpl implements MessageService {
 
         for (Message postedMessage : messageForm.getMessages()) {
 
+            Long id = postedMessage.getId();
+
+            idsToRemove.remove(id);
+
             String key = postedMessage.getKey();
             String text = postedMessage.getText();
 
@@ -57,12 +61,16 @@ public class MessageServiceImpl implements MessageService {
                 continue;
             }
 
-            Message message = messageRepository.findByKey( key );
-
-            if ( message == null ) {
+            Message message;
+            if ( id == null ) {
                 message = new Message();
             } else {
-                idsToRemove.remove( message.getId() );
+                message = messageRepository.findOne(id);
+
+                if (message == null) {
+                    log.warn("Ignoring message update {}, because no message exists for this id", postedMessage);
+                    continue;
+                }
             }
 
             message.setKey( key );

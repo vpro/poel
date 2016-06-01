@@ -8,6 +8,16 @@
 
     [@headUtil.head title='Berichten beheren' /]
     <body>
+
+        [#if flash ? has_content]
+        <div class="alert-overlay">
+            <div class="alert-overlay__content">
+            ${flash} <br/> <br/>
+                <button class="h5 button alert-overlay__close-button">Ok!</button>
+            </div>
+        </div>
+        [/#if]
+
         [@navigationUtil.navigation title='Admin' subtitle='berichten' back='/admin' /]
 
         <div class="grid">
@@ -17,32 +27,38 @@
         title='berichten'
         backGroundColor="darkgreen"
         ]
-            <div class="grid-gutter">
-                [#list messages]
-                    <form action="/admin/messages" class="form message-admin" method="post">
-                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+            <form action="/admin/messages" class="form messages-form" method="post">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
+                <div class="grid-gutter messages">
+                    [#list messages]
                         [#items as message]
-                        <input type="hidden" name="messages[${ message ? index }].key" value="${message.key}"/>
-                        <div class="grid">
+                        <div class="form-row message-admin row">
+                            <input type="hidden" name="messages[${ message ? index }].id" value="${message.id}"/>
+                            <div class="grid">
 
-                            <div class="col col-3-1">
-                                <h2 class="h6 message-admin__key">${ message.key }</h2>
-                            </div>
-                            <div class="col col-3-2">
-                                <textarea name="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
+                                <div class="col col-12-5">
+                                    <input type="text" name="messages[${ message ? index }].key" class="message-admin__key" value="${message.key}"/>
+                                </div>
+                                <div class="col col-12-6">
+                                    <textarea name="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
+                                </div>
+                                <div class="delete delete-message col-12-1">
+                                    <i class="glyph glyph-close c-gold"></i>
+                                </div>
                             </div>
                         </div>
-                    [/#items]
+                        [/#items]
+                    [/#list]
+                </div>
 
-                    <div class="form-footer bg-green">
-                        <button class="h5 button submit-button" type="submit">Opslaan</button>
-                    </div>
-                </form>
-                [#else]
-                    No messages at this time, sorry!
-                [/#list]
-            </div>
+                <div class="grid-gutter form-button-container messages-form-button-container">
+                    <input type="button" class="add-message" value="Toevoegen"/>
+                    <input type="submit" value="Opslaan" />
+                </div>
+            </form>
+
+
         [/@layout.sectionWithLayout]
 
         </div>

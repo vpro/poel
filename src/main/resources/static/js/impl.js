@@ -7,6 +7,7 @@ import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
 import UserGroupController from 'js/controllers/UserGroupController.js';
+import MessageController from 'js/controllers/MessageController.js';
 
 
 
@@ -30,4 +31,8 @@ if ( $('.matches-form').length ) {
 
 if ( $('.usergroup-form').length ) {
     new UserGroupController( $('.usergroup-form'), $( '.alert-overlay' ) );
+}
+
+if ( $('.messages-form').length ) {
+    new MessageController( $('.messages-form'), $( '.alert-overlay' ) );
 }
