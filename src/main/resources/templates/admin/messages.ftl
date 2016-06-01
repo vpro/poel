@@ -38,7 +38,7 @@
                             <div class="grid">
 
                                 <div class="col col-12-5">
-                                    <input type="text" name="messages[${ message ? index }].key" class="message-admin__key" value="${message.key}"/>
+                                    <input type="text" name="messages[${ message ? index }].key" class="message-admin__key" value="${message.key}" placeholder="message key*"/>
                                 </div>
                                 <div class="col col-12-6">
                                     <textarea name="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
