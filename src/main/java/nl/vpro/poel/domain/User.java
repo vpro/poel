@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(exclude = "id")
 @NoArgsConstructor
-@Entity
+@Entity(name = "app_user") // Use an alternative name, because 'User' is a reserved keyword in PostgreSQL
 public class User {
 
     @Id
