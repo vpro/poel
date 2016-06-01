@@ -56,7 +56,7 @@ var MessageController = Stapes.subclass({
 
             var c = confirm( 'Bericht verwijderen?' );
             if ( c == true ) {
-                var message = $( e.currentTarget ).parent();
+                var message = $( e.currentTarget ).parents('.message-admin');
                 this.deleteMessage( message );
                 this.resetIds();
             }
@@ -75,7 +75,7 @@ var MessageController = Stapes.subclass({
 
         this.$form.find( '.message-admin').each( function ( i ) {
 
-            $( this ).find( 'input[name*="messages"]' ).each( function ( j ) {
+            $( this ).find( '[name*="messages"]' ).each( function ( j ) {
 
                 var idx = /\[([\d]+)\]/ig.exec( this.name );
                 if ( idx && idx.length > 1 ) {
