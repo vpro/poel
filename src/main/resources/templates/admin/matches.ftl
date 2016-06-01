@@ -21,13 +21,12 @@
                 backGroundColor="darkgreen"
             ]
 
-                [#list matches]
-
                 <form class="matches-form form" action="#" method="post">
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                     <div class="matches">
+                    [#list matches]
 
                         [#items as match]
                             <div class="form-row match row">
@@ -58,6 +57,7 @@
                             </div>
                         [/#items]
 
+                    [/#list]
                     </div>
 
                     <div class="form-button-container matches-form-button-container">
@@ -72,10 +72,6 @@
                     </div>
 
                 </form>
-
-                [#else]
-                    Hier is (nog) niets
-                [/#list]
 
             [/@layout.sectionWithLayout]
 
