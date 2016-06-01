@@ -21,27 +21,28 @@ title='groepen'
 backGroundColor="darkgreen"
 ]
 
-[#list userGroups]
+
 
 <form class="form usergroup-form" action="#" method="post">
 
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
     <div class="grid-gutter user-groups">
+        [#list userGroups]
 
-        [#items as userGroup]
-            <div class="form-row user-group row">
+            [#items as userGroup]
+                <div class="form-row user-group row">
 
-                <input type="hidden" name="userGroups[${userGroup?index}].id" value="${userGroup.id}" />
-                <input type="text" class="col-12-6" name="userGroups[${userGroup?index}].name" value="${userGroup.name}" />
+                    <input type="hidden" name="userGroups[${userGroup?index}].id" value="${userGroup.id}" />
+                    <input type="text" class="col-12-6" name="userGroups[${userGroup?index}].name" value="${userGroup.name}" />
 
-                <span class="delete delete-user-group">
-                    <i class="glyph glyph-close c-gold col-12-1"></i>
-                </span>
+                    <span class="delete delete-user-group">
+                        <i class="glyph glyph-close c-gold col-12-1"></i>
+                    </span>
 
-            </div>
-        [/#items]
-
+                </div>
+            [/#items]
+        [/#list]
     </div>
 
     <div class="col-gutter form-button-container user-groups-form-button-container">
@@ -50,7 +51,6 @@ backGroundColor="darkgreen"
     </div>
 
 </form>
-[/#list]
 
 [/@layout.sectionWithLayout]
 
