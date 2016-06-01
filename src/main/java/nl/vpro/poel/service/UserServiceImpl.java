@@ -8,6 +8,7 @@ import nl.vpro.poel.dto.UserForm;
 import nl.vpro.poel.dto.UserAndUserGroupDTO;
 import nl.vpro.poel.dto.UsersForm;
 import nl.vpro.poel.repository.UserRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,8 @@ public class UserServiceImpl implements UserService {
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
-        User newUser = new User(username, Role.USER, username, username);
+        String usernameWithoutDomain = StringUtils.substringBefore(username, "@");
+        User newUser = new User(username, Role.USER, usernameWithoutDomain, usernameWithoutDomain);
         return userRepository.save(newUser);
     }
 
