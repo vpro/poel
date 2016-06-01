@@ -62,23 +62,27 @@
 
     [#if isPreliminary( date ) && ! preliminaryShown ]
         [#assign preliminaryShown = true]
-        [@layout.sectionWithLayout content={ 'layout':'100' } title='Voorrondes' addCss='matchday component-theme' backGroundColor='green' /]
+        [@renderLabel 'Voorrondes' /]
 
     [#elseif isEighthFinals( date ) && ! eighthShown ]
         [#assign eighthShown = true]
-        [@layout.sectionWithLayout content={ 'layout':'100' } title='Achtste finales' addCss='matchday component-theme' backGroundColor='green'   /]
+        [@renderLabel 'Achtste finales' /]
 
     [#elseif isQuarterFinals( date ) && ! quarterShown ]
         [#assign quarterShown = true]
-        [@layout.sectionWithLayout content={ 'layout':'100' } title='Kwartfinales' addCss='matchday component-theme' backGroundColor='green'   /]
+        [@renderLabel 'Kwartfinales' /]
 
     [#elseif isSemiFinals( date ) && ! semiShown ]
         [#assign semiShown = true]
-        [@layout.sectionWithLayout content={ 'layout':'100' } title='Halve finales' addCss='matchday component-theme' backGroundColor='green'   /]
+        [@renderLabel 'Halve finales' /]
 
     [#elseif isFinals( date ) ]
-        [@layout.sectionWithLayout content={ 'layout':'100' } title='Finale' addCss='matchday component-theme' backGroundColor='green'   /]
+        [@renderLabel 'Finale' /]
 
     [/#if]
 
+[/#macro]
+
+[#macro renderLabel label='']
+    [@layout.sectionWithLayout content={ 'layout':'100' } title=label addCss='matchday component-theme' backGroundColor='green' /]
 [/#macro]
