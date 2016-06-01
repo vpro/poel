@@ -37,7 +37,7 @@ public class DummyDataLoader {
         // Users
 
         User userNils = new User("n.breunese@vpro.nl", Role.ADMIN, "Nils Breunese", "Van Breunhorst", userGroupDigitaal);
-        User userFrank = new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosmatic", userGroupDigitaal);
+        User userFrank = new User("f.bosma@vpro.nl", Role.ADMIN, "Frank Bosma", "Bosman", userGroupDigitaal);
         User userTimo = new User("t.klok@vpro.nl", Role.ADMIN, "Timo Klok", " Ibratimovich", userGroupDigitaal);
         User userDavid = new User("d.pronk@vpro.nl", Role.ADMIN, "David Pronk", "van Pronkhorst", userGroupDigitaal);
         User userFred = new User("f.hermsen@vpro.nl", Role.ADMIN, "Fred Hermsen", "The Herminator", userGroupGids);
@@ -58,11 +58,14 @@ public class DummyDataLoader {
 
         Date now = new Date();
         Date lastWeek = Date.from(now.toInstant().minus(7, ChronoUnit.DAYS));
+        Date midLastWeek = Date.from(now.toInstant().minus(4, ChronoUnit.DAYS));
         Date nextWeek = Date.from(now.toInstant().plus(7, ChronoUnit.DAYS));
         Date almost = Date.from(now.toInstant().plus(2, ChronoUnit.HOURS));
 
         Match matchFinished1 = new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1));
         Match matchFinished2 = new Match("België", "Engeland", lastWeek, new MatchResult(5, 4));
+        Match matchFinished3 = new Match("Frankrijk", "Albanië", lastWeek, new MatchResult(2, 0));
+        Match matchFinished4 = new Match("Oostenrijk", "Portugal", midLastWeek, new MatchResult(1, 2));
 
         Match matchUnfinished1 = new Match("Frankrijk", "Duitsland", now);
         Match matchUnfinished2 = new Match("Spanje", "Engeland", now);
@@ -73,6 +76,8 @@ public class DummyDataLoader {
         matchRepository.save(Arrays.asList(
                 matchFinished1,
                 matchFinished2,
+                matchFinished3,
+                matchFinished4,
                 matchUnfinished1,
                 matchUnfinished2,
                 matchFuture1,
@@ -84,9 +89,10 @@ public class DummyDataLoader {
         predictionRepository.save(Arrays.asList(
                 new Prediction(userNils, matchFinished1, new MatchResult(1, 0)),
                 new Prediction(userNils, matchFinished2, new MatchResult(2, 2), true),
-                new Prediction(userFrank, matchFinished2, new MatchResult(5, 4), true),
+                new Prediction(userFrank, matchFinished2, new MatchResult(2, 1), true),
                 new Prediction(userFrank, matchUnfinished1, new MatchResult(2, 1), true),
-                new Prediction(userTimo, matchFinished2, new MatchResult(0, 2))
+                new Prediction(userTimo, matchFinished2, new MatchResult(0, 2)),
+                new Prediction(userTimo, matchFinished4, new MatchResult(0, 2), true)
         ));
 
         // Messages

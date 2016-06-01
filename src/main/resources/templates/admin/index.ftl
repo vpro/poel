@@ -18,7 +18,7 @@
     content={'layout': '100'}
     title='Beheer opties:'
     addCss='theme-primary'
-    backGroundColor="bg-darkgreen"
+    backGroundColor="darkgreen"
     ]
         <div class="grid-gutter">
 

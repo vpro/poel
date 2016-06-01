@@ -15,7 +15,7 @@
         [@layout.sectionWithLayout
         content={'layout': '100'}
         title='berichten'
-        backGroundColor="bg-darkgreen"
+        backGroundColor="darkgreen"
         ]
             <div class="grid-gutter">
                 [#list messages]

@@ -16,5 +16,7 @@
 }
 
 .about__text {
+
   @include title-font();
+  text-transform: initial;
 }
