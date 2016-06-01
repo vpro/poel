@@ -35,7 +35,7 @@
             </p>
 
             <p class="c-green about__text">
-                Per ronde mag je een een vastgesteld aantal <b>'jokers'</b> inzetten, waarmee je score verdubbelt.
+                Per ronde mag je een vastgesteld aantal <b>'jokers'</b> inzetten, waarmee je score verdubbelt.
             </p>
 
             <p class="c-green about__text">
