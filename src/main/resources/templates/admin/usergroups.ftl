@@ -18,7 +18,7 @@
 [@layout.sectionWithLayout
 content={'layout': '100'}
 title='groepen'
-backGroundColor="bg-darkgreen"
+backGroundColor="darkgreen"
 ]
 
 [#list userGroups]

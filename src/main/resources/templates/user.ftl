@@ -42,8 +42,7 @@
     collapsible=false
     opened=true
     addCss='user-section'
-    addContainerCss='bg-blue'
-    backGroundColor='blue' ]
+    addContainerCss='bg-blue' ]
 
         <div class="grid c-white grid-gutter">
 

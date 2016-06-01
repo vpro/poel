@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[#import "macros/head.ftl" as headUtil]
-[#import "macros/footer.ftl" as footerUtil]
+[#import 'macros/head.ftl' as headUtil]
+[#import 'macros/footer.ftl' as footerUtil]
+[#import 'macros/form.ftl' as formUtil]
+[#import 'macros/layout.ftl' as layout]
+[#import "macros/matchdays.ftl" as matchDaysUtil]
+[#import 'macros/message.ftl' as messageUtil]
+[#import 'macros/navigation.ftl' as navigationUtil]
 
-[#import "macros/navigation.ftl" as navigationUtil]
-[#import "macros/message.ftl" as messageUtil]
-
-[#import "macros/form.ftl" as formUtil]
-[#import "macros/layout.ftl" as layout]
-
-[#include "macros/countries.ftl"]
+[#include 'macros/countries.ftl']
 
     [@headUtil.head title='Poel invullen: ${ user.realName }' /]
 
@@ -46,10 +45,13 @@
                     ]
 
                         [#list finished]
+                            [@matchDaysUtil.reset /]
 
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
-
+                                    [#assign match = scoredPrediction.prediction.match ]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
+                        
                                     [@formUtil.showMatch status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
@@ -77,10 +79,14 @@
                     ]
 
                         [#list unfinished]
+                            [@matchDaysUtil.reset /]
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
-                                       [@formUtil.showMatch status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                    [#assign match = scoredPrediction.prediction.match ]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
+
+                                    [@formUtil.showMatch status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -110,17 +116,20 @@
 
                         [#list future]
 
+                            [@matchDaysUtil.reset /]
 
-                                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-                                <div class="collapsible-section-content">
-                                    [#items as scoredPrediction]
+                            <div class="collapsible-section-content">
+                                [#items as scoredPrediction]
 
-                                        [@formUtil.showMatch scoredPrediction=scoredPrediction status=formUtil.STATUS_FUTURE parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                    [#assign match = scoredPrediction.prediction.match ]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
 
-                                    [/#items]
-                                </div>
+                                    [@formUtil.showMatch scoredPrediction=scoredPrediction status=formUtil.STATUS_FUTURE parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
+                                [/#items]
+                            </div>
 
                         [#else]
                             <div>Geen wedstrijden beschikbaar</div>

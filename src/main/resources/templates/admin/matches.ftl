@@ -18,7 +18,7 @@
             [@layout.sectionWithLayout
                 content={'layout': '100'}
                 title='wedstrijden'
-                backGroundColor="bg-darkgreen"
+                backGroundColor="darkgreen"
             ]
 
                 [#list matches]

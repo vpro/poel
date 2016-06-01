@@ -16,12 +16,12 @@
     [@layout.sectionWithLayout
     content={'layout': '100'}
     addCss='theme-primary'
-    backGroundColor="bg-darkgreen"
+    backGroundColor="darkgreen"
     ]
         <div class="grid-gutter theme-text">
 
             <p>
-                <a href="/admin/users/csv">Exporteer alle gebruikers (CSV)</a>
+                <a href="/admin/users/csv" class="theme-link">Exporteer alle gebruikers (CSV)</a>
             </p>
 
             [#list users]
