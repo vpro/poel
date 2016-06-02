@@ -63,7 +63,7 @@
                     [#if user.userGroup ? has_content]
                         ${ user.userGroup.name }
                     [#else]
-                        Nog niet ingedeeld door de poelleiding.
+                        Nog niet ingedeeld door de poelleiding
                     [/#if]
                 </span>
             </div>
@@ -73,7 +73,7 @@
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                 <div class="grid row">
-                    <span class="h6 col col-12-2">Echte naam:</span>
+                    <span class="h6 col col-12-2">Naam (voor- en achternaam):</span>
                     <input class="col col-12-4 " type="text" name="realName" value="${user.realName}"/>
                 </div>
 
