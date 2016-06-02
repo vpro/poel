@@ -55,6 +55,14 @@ public class DummyDataLoader {
                 userLuuk
         ));
 
+        MatchDay preliminary = new MatchDay("Voorrondes");
+        MatchDay eights = new MatchDay("Achtste Finales");
+
+        matchDayRepository.save(Arrays.asList(
+                preliminary,
+                eights
+        ));
+
         // Matches
 
         Date now = new Date();
@@ -63,10 +71,10 @@ public class DummyDataLoader {
         Date nextWeek = Date.from(now.toInstant().plus(7, ChronoUnit.DAYS));
         Date almost = Date.from(now.toInstant().plus(2, ChronoUnit.HOURS));
 
-        Match matchFinished1 = new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1));
-        Match matchFinished2 = new Match("België", "Engeland", lastWeek, new MatchResult(5, 4));
-        Match matchFinished3 = new Match("Frankrijk", "Albanië", lastWeek, new MatchResult(2, 0));
-        Match matchFinished4 = new Match("Oostenrijk", "Portugal", midLastWeek, new MatchResult(1, 2));
+        Match matchFinished1 = new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1), preliminary );
+        Match matchFinished2 = new Match("België", "Engeland", lastWeek, new MatchResult(5, 4), preliminary);
+        Match matchFinished3 = new Match("Frankrijk", "Albanië", lastWeek, new MatchResult(2, 0), eights);
+        Match matchFinished4 = new Match("Oostenrijk", "Portugal", midLastWeek, new MatchResult(1, 2), eights);
 
         Match matchUnfinished1 = new Match("Frankrijk", "Duitsland", now);
         Match matchUnfinished2 = new Match("Spanje", "Engeland", now);
@@ -83,14 +91,6 @@ public class DummyDataLoader {
                 matchUnfinished2,
                 matchFuture1,
                 matchFuture2
-        ));
-
-        MatchDay preliminary = new MatchDay("Voorrondes");
-        MatchDay eights = new MatchDay("Achtste Finales");
-
-        matchDayRepository.save(Arrays.asList(
-                preliminary,
-                eights
         ));
 
         // Predictions
