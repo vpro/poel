@@ -30,10 +30,10 @@
             <form action="/admin/messages" class="form messages-form" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-                <div class="grid-gutter messages">
+                <div class="grid-gutter messages entities">
                     [#list messages]
                         [#items as message]
-                        <div class="form-row message-admin row">
+                        <div class="form-row message-admin entity-admin row">
                             <input type="hidden" name="messages[${ message ? index }].id" value="${message.id}"/>
                             <div class="grid">
 
@@ -43,7 +43,7 @@
                                 <div class="col col-12-6">
                                     <textarea name="messages[${ message ? index}].text" class="message-admin__text">${ message.text }</textarea>
                                 </div>
-                                <div class="delete delete-message col-12-1">
+                                <div class="delete delete-entity col-12-1">
                                     <i class="glyph glyph-close c-gold"></i>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="grid-gutter form-button-container messages-form-button-container">
-                    <input type="button" class="add-message" value="Toevoegen"/>
+                    <input type="button" class="add-entity" value="Toevoegen"/>
                     <input type="submit" value="Opslaan" />
                 </div>
             </form>

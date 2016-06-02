@@ -24,6 +24,7 @@
 
             <ul>
                 <li><a href="/admin/matches" class="theme-link">Wedstrijden</a></li>
+                <li><a href="/admin/matchdays" class="theme-link">Speelrondes</a></li>
                 <li><a href="/admin/messages" class="theme-link">Berichten</a></li>
                 <li><a href="/admin/users" class="theme-link">Gebruikers</a></li>
                 <li><a href="/admin/usergroups" class="theme-link">Groepen</a></li>

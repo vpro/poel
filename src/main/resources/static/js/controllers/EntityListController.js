@@ -1,18 +1,28 @@
+/**
+ * Controller for editing a list of simple entities
+ */
+
 import Stapes from 'stapes';
 import $ from 'jquery';
 
-import HandlebarsRuntime from 'handlebars-runtime';
-import messageTemplate from '../views/message.hbs!';
+var EntityListController = Stapes.subclass({
 
-var MessageController = Stapes.subclass({
-
-    constructor : function ( $form, $overlay ) {
+    /**
+     *
+     * @param $form
+     * @param $overlay
+     * @param template
+     * @param modelAttribute - the entity list variable name parsed by the back end controller
+     */
+    constructor : function ( $form, $overlay, template, modelAttribute ) {
 
         this.$form = $form;
-        this.$messageContainer = this.$form.find( '.messages' );
+        this.template = template;
+        this.modelAttribute = modelAttribute;
+        this.$entityContainer = this.$form.find( '.entities' );
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
-        this.$formAdd = this.$form.find( '.add-message' );
+        this.$formAdd = this.$form.find( '.add-entity' );
 
         this.$alertOverlay = $overlay;
         this.$alertOverlayButton = this.$alertOverlay.find( '.alert-overlay__close-button' );
@@ -23,12 +33,12 @@ var MessageController = Stapes.subclass({
 
     },
 
-    addMessage: function () {
+    addEntity: function () {
 
-        this.$messageContainer.append(
+        this.$entityContainer.append(
 
-            messageTemplate({
-                index: $( '.message-admin' ).length
+            this.template({
+                index: $( '.entity-admin' ).length
             })
         );
     },
@@ -43,7 +53,7 @@ var MessageController = Stapes.subclass({
 
 
         this.$formAdd.on( 'click', function () {
-            this.addMessage();
+            this.addEntity();
         }.bind( this ) );
 
 
@@ -52,12 +62,12 @@ var MessageController = Stapes.subclass({
         }.bind( this ) );
 
 
-        this.$form.on( 'click', '.delete-message', function ( e ) {
+        this.$form.on( 'click', '.delete-entity', function ( e ) {
 
-            var c = confirm( 'Bericht verwijderen?' );
+            var c = confirm( 'Object verwijderen?' );
             if ( c == true ) {
-                var message = $( e.currentTarget ).parents('.message-admin');
-                this.deleteMessage( message );
+                var entity = $( e.currentTarget ).parents('.entity-admin');
+                this.deleteEntity( entity );
                 this.resetIds();
             }
 
@@ -65,17 +75,19 @@ var MessageController = Stapes.subclass({
 
     },
 
-    deleteMessage: function ( message ) {
+    deleteEntity: function ( entity ) {
 
-        message.remove();
+        entity.remove();
 
     },
 
     resetIds: function () {
 
-        this.$form.find( '.message-admin').each( function ( i ) {
+        var modelAttribute = this.modelAttribute;
 
-            $( this ).find( '[name*="messages"]' ).each( function ( j ) {
+        this.$form.find( '.entity-admin').each( function ( i ) {
+
+            $( this ).find( '[name*="'+ modelAttribute +'"]' ).each( function ( j ) {
 
                 var idx = /\[([\d]+)\]/ig.exec( this.name );
                 if ( idx && idx.length > 1 ) {
@@ -89,4 +101,4 @@ var MessageController = Stapes.subclass({
 
 });
 
-export default MessageController;
+export default EntityListController;
