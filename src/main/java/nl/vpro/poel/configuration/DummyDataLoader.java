@@ -20,7 +20,8 @@ public class DummyDataLoader {
             UserRepository userRepository,
             MatchRepository matchRepository,
             PredictionRepository predictionRepository,
-            MessageRepository messageRepository
+            MessageRepository messageRepository,
+            MatchDayRepository matchDayRepository
     ) {
         // User groups
 
@@ -82,6 +83,14 @@ public class DummyDataLoader {
                 matchUnfinished2,
                 matchFuture1,
                 matchFuture2
+        ));
+
+        MatchDay preliminary = new MatchDay("Voorrondes");
+        MatchDay eights = new MatchDay("Achtste Finales");
+
+        matchDayRepository.save(Arrays.asList(
+                preliminary,
+                eights
         ));
 
         // Predictions

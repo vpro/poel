@@ -21,4 +21,6 @@ public class MatchDTO {
     private Integer homeTeamGoals;
 
     private Integer awayTeamGoals;
+
+    private Long matchDayId;
 }

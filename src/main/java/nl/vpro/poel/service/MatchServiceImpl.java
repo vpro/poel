@@ -2,6 +2,7 @@ package nl.vpro.poel.service;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.domain.MatchDay;
 import nl.vpro.poel.domain.MatchResult;
 import nl.vpro.poel.dto.MatchDTO;
 import nl.vpro.poel.dto.MatchForm;
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 public class MatchServiceImpl implements MatchService {
 
     private final MatchRepository matchRepository;
+    private final MatchDayService matchDayService;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository) {
+    public MatchServiceImpl(MatchRepository matchRepository, MatchDayService matchDayService) {
         this.matchRepository = matchRepository;
+        this.matchDayService = matchDayService;
     }
 
     @Override
@@ -97,6 +100,19 @@ public class MatchServiceImpl implements MatchService {
             } else {
                 // Invalid match result, ignore so any previously saved match result is preserved
                 log.warn("Ignoring incomplete match result from match update {}", matchDTO);
+            }
+
+            Long matchDayId = matchDTO.getMatchDayId();
+            if (matchDayId == null) {
+                match.setMatchDay(null);
+            } else {
+                Optional<MatchDay> matchDay = matchDayService.findById(matchDayId);
+                if (matchDay.isPresent()) {
+                    match.setMatchDay(matchDay.get());
+                } else {
+                    log.warn("Ignoring match update {}, because no match day exists for this id", matchDTO);
+                    continue;
+                }
             }
 
             matchRepository.save(match);

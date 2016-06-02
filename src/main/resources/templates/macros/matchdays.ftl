@@ -1,88 +1,32 @@
 [#import 'layout.ftl' as layout]
 
-[#assign preliminaryShown = false]
-[#assign eighthShown = false]
-[#assign quarterShown = false]
-[#assign semiShown = false]
-
-[#assign eighthsStart = 20160602]
-[#assign quartersStart = 20160612]
-[#assign semisStart = 20160616]
-[#assign finalsStart = 20160620]
-
-[#function isPreliminary date ]
-    [#local dateNr = date ? string( 'yyyyMMdd' ) ? number ]
-    [#if dateNr lte eighthsStart ]
-        [#return true]
-    [/#if]
-    [#return false]
-[/#function]
-
-[#function isEighthFinals date ]
-    [#local dateNr = date ? string( 'yyyyMMdd' ) ? number ]
-    [#if dateNr gte eighthsStart && dateNr lt quartersStart ]
-        [#return true]
-    [/#if]
-    [#return false]
-[/#function]
-
-[#function isQuarterFinals date ]
-    [#local dateNr = date ? string( 'yyyyMMdd' ) ? number ]
-    [#if dateNr gte quartersStart && dateNr lt semisStart ]
-        [#return true]
-    [/#if]
-    [#return false]
-[/#function]
-
-[#function isSemiFinals date ]
-    [#local dateNr = date ? string( 'yyyyMMdd' ) ? number ]
-    [#if dateNr gte semisStart && dateNr lt finalsStart ]
-        [#return true]
-    [/#if]
-    [#return false]
-[/#function]
-
-[#function isFinals date ]
-    [#local dateNr = date ? string( 'yyyyMMdd' ) ? number ]
-    [#if dateNr gte finalsStart ]
-        [#return true]
-    [/#if]
-    [#return false]
-[/#function]
+[#assign currentLabel = ""]
 
 [#macro reset]
-    [#assign preliminaryShown = false]
-    [#assign eighthShown = false]
-    [#assign quarterShown = false]
-    [#assign semiShown = false]
+    [#assign currentLabel = ""]
 [/#macro]
 
 [#-- only show a matchday label if it hasn't been shown --]
-[#macro showOptionalMatchDayLabel date]
+[#macro showOptionalMatchDayLabel match]
 
-    [#if isPreliminary( date ) && ! preliminaryShown ]
-        [#assign preliminaryShown = true]
-        [@renderLabel 'Voorrondes' /]
-
-    [#elseif isEighthFinals( date ) && ! eighthShown ]
-        [#assign eighthShown = true]
-        [@renderLabel 'Achtste finales' /]
-
-    [#elseif isQuarterFinals( date ) && ! quarterShown ]
-        [#assign quarterShown = true]
-        [@renderLabel 'Kwartfinales' /]
-
-    [#elseif isSemiFinals( date ) && ! semiShown ]
-        [#assign semiShown = true]
-        [@renderLabel 'Halve finales' /]
-
-    [#elseif isFinals( date ) ]
-        [@renderLabel 'Finale' /]
-
+    [#if match.matchDay ? has_content]
+        [#if match.matchDay.name != currentLabel]
+            [#assign currentLabel = match.matchDay.name]
+            [@renderLabel label=currentLabel /]
+        [/#if]
     [/#if]
 
 [/#macro]
 
 [#macro renderLabel label='']
     [@layout.sectionWithLayout content={ 'layout':'100' } title=label addCss='matchday component-theme' backGroundColor='green' /]
+[/#macro]
+
+[#macro matchDaySelection matchDays formPath="" selectedMatchDayId=-1 addCss='']
+<select class="match-admin__matchday-selection ${ addCss }" name="${ formPath }">
+    <option valuu="">Kies...</option>
+    [#list matchDays as matchDay]
+        <option value="${ matchDay.id }" [#if matchDay.id == selectedMatchDayId]selected="selected"[/#if]>${ matchDay.name }</option>
+    [/#list]
+</select>
 [/#macro]

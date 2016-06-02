@@ -1,7 +1,9 @@
 package nl.vpro.poel.controller;
 
 import nl.vpro.poel.domain.Match;
+import nl.vpro.poel.domain.MatchDay;
 import nl.vpro.poel.dto.MatchForm;
+import nl.vpro.poel.service.MatchDayService;
 import nl.vpro.poel.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +21,22 @@ public class MatchesController {
 
     private final MatchService matchService;
 
+    private final MatchDayService matchDayService;
+
     @Autowired
-    public MatchesController(MatchService matchService) {
+    public MatchesController(MatchService matchService, MatchDayService matchDayService) {
         this.matchService = matchService;
+        this.matchDayService = matchDayService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     String showMatches(Model model) {
         List<Match> matches = matchService.findAll();
+        List<MatchDay> matchDays = matchDayService.findAll();
+
         model.addAttribute("matches", matches);
+        model.addAttribute("matchDays", matchDays);
+
         return "admin/matches";
     }
 

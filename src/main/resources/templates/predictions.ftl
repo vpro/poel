@@ -50,7 +50,7 @@
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
                                     [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match /]
                         
                                     [@formUtil.showMatch status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
@@ -84,7 +84,7 @@
                                 [#items as scoredPrediction]
 
                                     [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match /]
 
                                     [@formUtil.showMatch status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
@@ -124,7 +124,7 @@
                                 [#items as scoredPrediction]
 
                                     [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel match /]
 
                                     [@formUtil.showMatch scoredPrediction=scoredPrediction status=formUtil.STATUS_FUTURE parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
