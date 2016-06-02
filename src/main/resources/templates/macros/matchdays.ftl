@@ -24,7 +24,7 @@
 
 [#macro matchDaySelection matchDays formPath="" selectedMatchDayId=-1 addCss='']
 <select class="match-admin__matchday-selection ${ addCss }" name="${ formPath }">
-    <option valuu="">Kies...</option>
+    <option valuu="">Kies een speelronde...</option>
     [#list matchDays as matchDay]
         <option value="${ matchDay.id }" [#if matchDay.id == selectedMatchDayId]selected="selected"[/#if]>${ matchDay.name }</option>
     [/#list]
