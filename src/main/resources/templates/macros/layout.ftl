@@ -24,7 +24,6 @@
     opened=false ]
 
     [#local layout = content.layout ! TWO_COLUMNS]
-
 <section class="section-with-layout ${ addCss } [#if collapsible]collapsible-section [#if opened]collapsible-section-opened ${ openColorClass} [#else] ${ closeColorClass} [/#if][#elseif backGroundColor ? has_content ]bg-${backGroundColor}[/#if]"
          [#if collapsible]data-opencolor="${openColorClass}" data-closedcolor="${closeColorClass}"[/#if]>
 

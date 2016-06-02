@@ -6,15 +6,15 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-    [@headUtil.head title='VPRO Poel' /]
+    [@headUtil.head title='VPRO EK-poel 2016' /]
 
     <body class="home">
 
         <div class="home-navigation">
             <a href="/about" class="home-navigation-link bg-greybat">
                 <span class='h2 c-white home-navigation-link-title'>
-                    VPRO poel<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">van voetballers en dingen die voorbij gaan</span>
+                    VPRO EK-poel 2016<br/>
+                    <span class="h6 c-white home-navigation-link-subtitle">hoe werkt het?</span>
                 </span>
             </a>
             <a href="/predictions" class="home-navigation-link bg-green">
@@ -35,7 +35,7 @@
             </a>
             <a href="/user" class="home-navigation-link bg-blue">
                 <span class='h2 c-white home-navigation-link-title' >
-                    jouw profiel<br/>
+                    mijn poelprofiel<br/>
                     <span class="h6 c-white home-navigation-link-subtitle">voetbalnaam en email</span>
                 </span>
             </a>

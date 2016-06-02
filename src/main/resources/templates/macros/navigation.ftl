@@ -7,7 +7,7 @@
             [/#if]
         </span>
 
-        <a class="top-navigation-back" href="${ back }"> <i class="glyph glyph-navigation c-white"></i></a>
+        <a class="top-navigation-back" href="${ back }"> <i class="glyph glyph-arrowleft c-white"></i></a>
     </nav>
 </div>
 [/#macro]
