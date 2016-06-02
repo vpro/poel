@@ -7,10 +7,10 @@ import FormController from 'js/controllers/FormController.js';
 import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
-import UserGroupController from 'js/controllers/UserGroupController.js';
 
 import messageTemplate from 'js/views/message.hbs!';
 import matchDayTemplate from 'js/views/matchday.hbs!';
+import userGroupTemplate from 'js/views/user-group.hbs!';
 
 
 new CollapseController( document.querySelectorAll( '.collapsible-section') );
@@ -32,7 +32,7 @@ if ( $('.matches-form').length ) {
 }
 
 if ( $('.usergroup-form').length ) {
-    new UserGroupController( $('.usergroup-form'), $( '.alert-overlay' ) );
+    new EntityListController( $('.usergroup-form'), $( '.alert-overlay' ), userGroupTemplate, 'userGroups' );
 }
 
 if ( $('.messages-form').length ) {

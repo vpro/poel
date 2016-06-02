@@ -37,16 +37,16 @@ backGroundColor="darkgreen"
 
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    <div class="grid-gutter user-groups">
+    <div class="grid-gutter user-groups entities">
         [#list userGroups]
 
             [#items as userGroup]
-                <div class="form-row user-group row">
+                <div class="form-row user-group-admin entity-admin row">
 
                     <input type="hidden" name="userGroups[${userGroup?index}].id" value="${userGroup.id}" />
                     <input type="text" class="col-12-6" name="userGroups[${userGroup?index}].name" value="${userGroup.name}" />
 
-                    <span class="delete delete-user-group">
+                    <span class="delete delete-entity">
                         <i class="glyph glyph-close c-gold col-12-1"></i>
                     </span>
 
@@ -56,7 +56,7 @@ backGroundColor="darkgreen"
     </div>
 
     <div class="col-gutter form-button-container user-groups-form-button-container">
-        <input type="button" class="add-user-group" value="Toevoegen"/>
+        <input type="button" class="add-entity" value="Toevoegen"/>
         <input type="submit" value="Opslaan" />
     </div>
 
