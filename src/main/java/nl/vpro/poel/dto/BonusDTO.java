@@ -20,7 +20,7 @@ public class BonusDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date start;
 
-    private BonusChoice answer;
+    private Long answerId;
 
     private int score;
 }

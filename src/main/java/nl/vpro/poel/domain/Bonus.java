@@ -22,13 +22,13 @@ public class Bonus {
     @Column(nullable = false)
     private String question;
 
-    @Column(nullable = false)
-    private BonusCategory category;
-
     // Both Hibernate 4.x and Freemarker 2.3.x are not ready for use with java.time.* yet, so let's use this old skool type
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date start = null;
+
+    @Column
+    private BonusCategory category;
 
     @ManyToOne
     private BonusChoice answer;

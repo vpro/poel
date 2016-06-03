@@ -82,7 +82,7 @@ public class BonusChoiceServiceImpl implements BonusChoiceService  {
         }
 
         // Bonus choices not included in the form will be deleted
-        // TODO: delte should be cascading...yaadieyadieyah
+        // TODO: delete should be cascading...yaadieyadieyah
         idsToRemove.stream().forEach(bonusChoiceRepository::delete);
     }
 }
