@@ -21,7 +21,7 @@
     </div>
     [/#if]
 
-    [@navigationUtil.navigation title='Admin' subtitle='wedstrijden' back='/admin' /]
+    [@navigationUtil.navigation title='Admin' subtitle='wedstrijden'  bgColor='bg-darkred' back='/admin' /]
 
         <div class="grid">
 

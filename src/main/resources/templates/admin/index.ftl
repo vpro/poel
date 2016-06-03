@@ -10,29 +10,45 @@
 
 <body>
 
-    [@navigationUtil.navigation title='Admin' back='/' /]
+<div class="home-navigation home-navigation-admin">
+    <a href="/admin/matches" class="home-navigation-link bg-greybat">
+        <span class='h2 c-white home-navigation-link-title'>
+            wedstrijden<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">aanmaken en uitslagen invoeren</span>
+        </span>
+    </a>
 
-    <div class="grid">
+    <a href="/admin/messages" class="home-navigation-link bg-green">
+        <span class='h2 c-white home-navigation-link-title'>
+            berichten<br/>
+           <span class="h6 c-white home-navigation-link-subtitle">bovenaan alle pagina's</span>
+        </span>
+    </a>
 
-    [@layout.sectionWithLayout
-    content={'layout': '100'}
-    title='Beheer opties:'
-    addCss='theme-primary'
-    backGroundColor="darkgreen"
-    ]
-        <div class="grid-gutter">
+    <a href="/admin/users" class="home-navigation-link bg-darkgreen">
+        <span class='h2 c-white home-navigation-link-title'>
+            Gebruikers<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">wie is wie</span>
+        </span>
+    </a>
 
-            <ul>
-                <li><a href="/admin/matches" class="theme-link">Wedstrijden</a></li>
-                <li><a href="/admin/messages" class="theme-link">Berichten</a></li>
-                <li><a href="/admin/users" class="theme-link">Gebruikers</a></li>
-                <li><a href="/admin/usergroups" class="theme-link">Groepen</a></li>
-                <li><a href="/admin/bulletins" class="theme-link">Bulletins</a></li>
-            </ul>
+    <a href="/admin/usergroups" class="home-navigation-link bg-blue">
+        <span class='h2 c-white home-navigation-link-title'>
+            groepen<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">aanmaken en hernoemen</span>
+        </span>
+    </a>
 
-        </div>
-    [/@layout.sectionWithLayout]
-    </div>
+    <a href="/admin/bulletins" class="home-navigation-link bg-darkred">
+        <span class='h2 c-white home-navigation-link-title'>
+            bulletins<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">mailings invoeren</span>
+        </span>
+    </a>
+ </div>
+
+<a class="top-navigation-back" href="/"> <i class="glyph glyph-arrowleft c-white"></i></a>
+
     [@footerUtil.footer /]
 
 </body>
