@@ -33,6 +33,7 @@ class IndexController {
         if (currentUser != null) {
             Optional<RankingEntry<User>> ranking = rankingService.getRankingEntry( currentUser.getUser());
             model.addAttribute("ranking", ranking.orElse(null));
+            model.addAttribute("user", currentUser.getUser() );
         }
 
         return "index";

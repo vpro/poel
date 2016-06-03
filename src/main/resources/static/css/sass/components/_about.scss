@@ -1,15 +1,3 @@
-.about {
-  padding-top: 2*$gu;
-  padding-bottom: 2*$gu;
-}
-
-@include media-med-screen-width () {
-
-  .about {
-    padding-top: 3*$gu;
-    padding-bottom: 3*$gu;
-  }
-}
 
 .about__title {
   margin-bottom: 2*$gu;
@@ -21,10 +9,51 @@
   text-transform: initial;
 }
 
-.about .collapsible-section-with-layout-title{
-    color: $green;
+.about .collapsible-section.collapsible-section-opened .section-with-layout-title{
+    color: $greybat;
+}
+.about .collapsible-section .collapsible-section-footer-lip{
+    border-bottom: 1px solid $greybat;
+    border-right: 1px solid $greybat;
+}
+
+.about .collapsible-section .collapsible-section-body {
+    border-bottom: 1px solid $greybat;
 }
 
 .about .collapsible-section-footer .glyph-down{
     color: $greybat;
+}
+
+
+.bulletin-date{
+    color: $greybat;
+    @include title-font();
+    text-transform: uppercase;
+}
+
+
+.bulletin-title{
+    color: $greybat;
+    @include title-font();
+    text-transform: initial;
+
+}
+
+
+.bulletin-description{
+    color: $greybat;
+}
+
+
+.bulletin-link{
+    display: block;
+    background-color: $green;
+    color: white;
+    width: 100%;
+    padding: 6px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+
+    text-align: center;
 }

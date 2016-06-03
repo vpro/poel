@@ -8,6 +8,7 @@ import FormController from 'js/controllers/FormController.js';
 import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
+import BulletinController from 'js/controllers/BulletinController.js';
 
 import messageTemplate from 'js/views/message.hbs!';
 import matchDayTemplate from 'js/views/matchday.hbs!';
@@ -34,7 +35,6 @@ if ( $('#bonusAnswerSelectionPLAYER').length ) {
     window.bonusAnswerSelectionPLAYER = Handlebars.compile( $('#bonusAnswerSelectionPLAYER').html() );
 }
 
-
 new CollapseController( document.querySelectorAll( '.collapsible-section') );
 
 if ( $('.prediction-form').length ) {
@@ -58,7 +58,11 @@ if ( $('.usergroup-form').length ) {
 }
 
 if ( $('.messages-form').length ) {
-    new EntityListController( $('.messages-form'), $( '.alert-overlay' ), messageTemplate, 'messages' );
+    new MessageController( $('.messages-form'), $( '.alert-overlay' ) );
+}
+
+if ( $('.bulletins-form').length ) {
+    new BulletinController( $('.bulletins-form' ), $( '.alert-overlay' ) );
 }
 
 if ( $('.matchdays-form').length ) {

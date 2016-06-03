@@ -101,7 +101,7 @@
 
 .prediction__game,
 .prediction__question {
-    width: 76%;
+    width: 260px;
 }
 
 @include media-med-screen-width () {
@@ -162,16 +162,24 @@
 }
 
 .prediction__multiplier_editable.prediction__multiplier .prediction__multiplier__input {
-  display: inline-block;
+
 }
 
 .prediction__multiplier__label {
-  margin-top: 2px;
+  padding-top: 5px;
+  height: 10px;
   vertical-align: top;
   display: inline-block;
 
   .glyph {
+    font-size: 14px;
+    height:10px;
     color: rgba( $white, 0.5 );
+  }
+
+  .prediction__multiplier__label-count{
+    font-size: 10px;
+    padding-left: 4px;
   }
 }
 

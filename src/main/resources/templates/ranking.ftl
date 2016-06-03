@@ -30,7 +30,7 @@
     ]
 
         [#list userGroupRanking]
-        <table class="ranking">
+        <table class="ranking group-ranking">
         <tbody>
             [#items as rankingEntry]
             [#assign rankedUserGroup = rankingEntry.subject]
@@ -79,7 +79,7 @@
 
         [#list userRanking]
 
-        <table class="ranking">
+        <table class="ranking user-ranking">
             <tbody>
                 [#items as rankingEntry]
                 [#assign rankedUser = rankingEntry.subject]
