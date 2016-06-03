@@ -13,5 +13,9 @@ public class PredictionDTO {
 
     private Integer awayTeamGoals;
 
+    private Long bonusId;
+
+    private Long answerId;
+
     private boolean multiplier = false;
 }

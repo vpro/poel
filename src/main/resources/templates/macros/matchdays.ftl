@@ -7,11 +7,11 @@
 [/#macro]
 
 [#-- only show a matchday label if it hasn't been shown --]
-[#macro showOptionalMatchDayLabel match]
+[#macro showOptionalMatchDayLabel object]
 
-    [#if match.matchDay ? has_content]
-        [#if match.matchDay.name != currentLabel]
-            [#assign currentLabel = match.matchDay.name]
+    [#if object.matchDay ? has_content]
+        [#if object.matchDay.name != currentLabel]
+            [#assign currentLabel = object.matchDay.name]
             [@renderLabel label=currentLabel /]
         [/#if]
     [/#if]

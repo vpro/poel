@@ -8,8 +8,8 @@
 [/#macro]
 
 
-[#macro bonusAnswerSelection answers formPath='' selectedAnswer='' addCss='']
-<select class="bonus-admin__answer-selection ${ addCss }" name="${ formPath }">
+[#macro bonusAnswerSelection answers formPath='' selectedAnswer='' addCss='' disabled=false]
+<select class="bonus-admin__answer-selection ${ addCss }" name="${ formPath }" [#if disabled]disabled="disabled"[/#if]>
     <option value="""">Kies een antwoord...</option>
     [#list answers as answer]
         <option value="${ answer.id }" [#if selectedAnswer ? has_content && answer.id == selectedAnswer.id]selected="selected"[/#if]>${ answer.value }</option>

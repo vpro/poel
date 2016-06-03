@@ -59,10 +59,12 @@ public class DummyDataLoader {
 
         MatchDay preliminary = new MatchDay("Voorrondes");
         MatchDay eights = new MatchDay("Achtste Finales");
+        MatchDay quarter = new MatchDay("Kwartfinales");
 
         matchDayRepository.save(Arrays.asList(
                 preliminary,
-                eights
+                eights,
+                quarter
         ));
 
         // Matches
@@ -75,14 +77,14 @@ public class DummyDataLoader {
 
         Match matchFinished1 = new Match("Zwitserland", "Noord-Ierland", lastWeek, new MatchResult(3, 1), preliminary );
         Match matchFinished2 = new Match("België", "Engeland", lastWeek, new MatchResult(5, 4), preliminary);
-        Match matchFinished3 = new Match("Frankrijk", "Albanië", lastWeek, new MatchResult(2, 0), eights);
+        Match matchFinished3 = new Match("Frankrijk", "Albanië", lastWeek, new MatchResult(2, 0), preliminary);
         Match matchFinished4 = new Match("Oostenrijk", "Portugal", midLastWeek, new MatchResult(1, 2), eights);
 
-        Match matchUnfinished1 = new Match("Frankrijk", "Duitsland", now);
-        Match matchUnfinished2 = new Match("Spanje", "Engeland", now);
+        Match matchUnfinished1 = new Match("Frankrijk", "Duitsland", now, null, eights);
+        Match matchUnfinished2 = new Match("Spanje", "Engeland", now, null, eights);
 
-        Match matchFuture1 = new Match("Portugal", "België", almost);
-        Match matchFuture2 = new Match("Engeland", "Oostenrijk", nextWeek);
+        Match matchFuture1 = new Match("Portugal", "België", almost, null, quarter);
+        Match matchFuture2 = new Match("Engeland", "Oostenrijk", nextWeek, null, quarter);
 
         matchRepository.save(Arrays.asList(
                 matchFinished1,
@@ -93,25 +95,6 @@ public class DummyDataLoader {
                 matchUnfinished2,
                 matchFuture1,
                 matchFuture2
-        ));
-
-        // Predictions
-
-        predictionRepository.save(Arrays.asList(
-                new Prediction(userNils, matchFinished1, new MatchResult(1, 0)),
-                new Prediction(userNils, matchFinished2, new MatchResult(2, 2), true),
-                new Prediction(userFrank, matchFinished2, new MatchResult(2, 1), true),
-                new Prediction(userFrank, matchUnfinished1, new MatchResult(2, 1), true),
-                new Prediction(userTimo, matchFinished2, new MatchResult(0, 2)),
-                new Prediction(userTimo, matchFinished4, new MatchResult(0, 2), true)
-        ));
-
-        // Messages
-
-        messageRepository.save(Arrays.asList(
-                new Message("/predictions", "Hier een melding voor invullers"),
-                new Message("/user", "Hier een melding voor je profiel"),
-                new Message("/ranking", "Hier een melding voor de ranking")
         ));
 
         // Bonus stuff
@@ -128,8 +111,37 @@ public class DummyDataLoader {
                 ibra
         ));
 
-        Bonus topScorert = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, now, 3, null, eights );
+        Bonus topScorert = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, lastWeek, 3, ronaldo, preliminary );
+        Bonus topScorert2 = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, now, 3, null, eights );
+        Bonus topScorert3 = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, nextWeek, 3, null, quarter );
 
-        bonusRepository.save(topScorert);
+        bonusRepository.save(Arrays.asList(
+                topScorert,
+                topScorert2,
+                topScorert3
+        ));
+
+        // Predictions
+
+        predictionRepository.save(Arrays.asList(
+                new Prediction(userNils, matchFinished1, new MatchResult(1, 0)),
+                new Prediction(userNils, matchFinished2, new MatchResult(2, 2), true),
+                new Prediction(userNils, topScorert, ronaldo, true),
+                new Prediction(userFrank, matchFinished2, new MatchResult(2, 1), true),
+                new Prediction(userFrank, matchUnfinished1, new MatchResult(2, 1), true),
+                new Prediction(userFrank, topScorert, ronaldo, false),
+                new Prediction(userFrank, topScorert2, ibra),
+                new Prediction(userTimo, matchFinished2, new MatchResult(0, 2)),
+                new Prediction(userTimo, matchFinished4, new MatchResult(0, 2), true),
+                new Prediction(userTimo, topScorert, ronaldo, true)
+        ));
+
+        // Messages
+
+        messageRepository.save(Arrays.asList(
+                new Message("/predictions", "Hier een melding voor invullers"),
+                new Message("/user", "Hier een melding voor je profiel"),
+                new Message("/ranking", "Hier een melding voor de ranking")
+        ));
     }
 }
