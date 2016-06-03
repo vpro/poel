@@ -21,7 +21,8 @@ public class DummyDataLoader {
             MatchRepository matchRepository,
             PredictionRepository predictionRepository,
             MessageRepository messageRepository,
-            MatchDayRepository matchDayRepository
+            MatchDayRepository matchDayRepository,
+            BonusChoiceRepository bonusChoiceRepository
     ) {
         // User groups
 
@@ -110,6 +111,20 @@ public class DummyDataLoader {
                 new Message("/predictions", "Hier een melding voor invullers"),
                 new Message("/user", "Hier een melding voor je profiel"),
                 new Message("/ranking", "Hier een melding voor de ranking")
+        ));
+
+        // Bonus stuff
+
+        BonusChoice france = new BonusChoice("Frankrijk", BonusCategory.COUNTRY);
+        BonusChoice portugal = new BonusChoice("Portugal", BonusCategory.COUNTRY);
+        BonusChoice ronaldo = new BonusChoice("Ronaldo", BonusCategory.PLAYER);
+        BonusChoice ibra = new BonusChoice("Ibrahimovic", BonusCategory.PLAYER);
+
+        bonusChoiceRepository.save(Arrays.asList(
+                france,
+                portugal,
+                ronaldo,
+                ibra
         ));
     }
 }
