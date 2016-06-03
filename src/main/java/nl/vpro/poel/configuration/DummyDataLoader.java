@@ -22,7 +22,8 @@ public class DummyDataLoader {
             PredictionRepository predictionRepository,
             MessageRepository messageRepository,
             MatchDayRepository matchDayRepository,
-            BonusChoiceRepository bonusChoiceRepository
+            BonusChoiceRepository bonusChoiceRepository,
+            BonusRepository bonusRepository
     ) {
         // User groups
 
@@ -126,5 +127,9 @@ public class DummyDataLoader {
                 ronaldo,
                 ibra
         ));
+
+        Bonus topScorert = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, now, 3, null, eights );
+
+        bonusRepository.save(topScorert);
     }
 }

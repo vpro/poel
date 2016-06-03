@@ -1,8 +1,11 @@
 <div class="form-row bonus-admin entity-admin row">
 
     <input type="text" class="col-12-3" name="bonuses[{{index}}].question" placeholder="Vraag" />
-    <input type="datetime-local" class="col-12-2" name="bonuses[{{index}}].start" />
-    <input type="text" class="col-12-2" name="bonuses[{{index}}].score" value="3" placeholder="Te behalen punten" />
+    <input type="datetime-local" class="col-12-3" name="bonuses[{{index}}].start" />
+    <input type="text" class="col-12-1" name="bonuses[{{index}}].score" value="3" placeholder="Te behalen punten" />
+
+    {{> bonusCategorySelection}}
+    {{> matchDaySelection}}
 
     <span class="delete delete-entity">
         <i class="glyph glyph-close c-gold col-12-1"></i>

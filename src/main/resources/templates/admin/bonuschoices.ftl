@@ -58,6 +58,10 @@ backGroundColor="darkgreen"
 [/#list]
 </div>
 
+    <script id="bonusCategorySelection" type="text/template">
+        [@bonusUtil.bonusCategorySelection categories=categories formPath='choices[{{@root.index}}].category' addCss='col-12-5' /]
+    </script>
+
     <div class="col-gutter form-button-container choices-form-button-container">
         <input type="button" class="add-entity" value="Toevoegen"/>
         <input type="submit" value="Opslaan" />

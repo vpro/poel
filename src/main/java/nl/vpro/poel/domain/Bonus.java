@@ -36,15 +36,23 @@ public class Bonus {
     @Column
     private int score;
 
+    @ManyToOne
+    private MatchDay matchDay;
+
     public Bonus(String question, BonusCategory category, Date start, Integer score) {
         this(question, category, start, score, null);
     }
 
     public Bonus(String question, BonusCategory category, Date start, Integer score, BonusChoice answer) {
+        this(question, category, start, score, answer, null);
+    }
+
+    public Bonus(String question, BonusCategory category, Date start, Integer score, BonusChoice answer, MatchDay matchDay) {
         this.question = question;
         this.category = category;
         this.start = start;
         this.score = score;
         this.answer = answer;
+        this.matchDay = matchDay;
     }
 }

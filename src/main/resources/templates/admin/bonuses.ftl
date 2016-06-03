@@ -2,7 +2,7 @@
 [#import "../macros/footer.ftl" as footerUtil]
 [#import "../macros/layout.ftl" as layout]
 [#import "../macros/bonuses.ftl" as bonusUtil]
-
+[#import "../macros/matchdays.ftl" as matchDaysUtil]
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ backGroundColor="darkgreen"
             <input type="text" class="col-12-3" name="bonuses[${bonus?index}].question" value="${bonus.question}" placeholder="Vraag" />
             <input type="datetime-local" class="col-12-3" name="bonuses[${bonus?index}].start" value="${bonus.start?string["yyyy-MM-dd'T'HH:mm"]}" />
             <input type="text" class="col-12-1" name="bonuses[${bonus?index}].score" value="${bonus.score}" placeholder="Te behalen punten" />
-            [@bonusUtil.bonusCategorySelection categories=categories formPath='bonuses[${bonus_index}].category' selectedCategory=(bonus.category!) addCss='col-12-2' /]
+            [@bonusUtil.bonusCategorySelection categories=categories formPath='bonuses[${bonus_index}].category' selectedCategory=(bonus.category!) addCss='col-12-1' /]
 
             [#if bonus.category ? has_content]
                 [#if bonus.category == 'COUNTRY']
@@ -58,6 +58,13 @@ backGroundColor="darkgreen"
                 [/#if]
             [/#if]
 
+
+            [#assign matchDayId = -1]
+            [#if bonus.matchDay ? has_content]
+                [#assign matchDayId = bonus.matchDay.id]
+            [/#if]
+            [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='bonuses[${bonus_index}].matchDayId' selectedMatchDayId=matchDayId addCss='col-12-1' /]
+
             <span class="delete delete-entity">
                 <i class="glyph glyph-close c-gold col-12-1"></i>
             </span>
@@ -66,6 +73,21 @@ backGroundColor="darkgreen"
     [/#items]
 [/#list]
 </div>
+
+    <script id="matchDaySelection" type="text/template">
+        [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='bonuses[{{@root.index}}].matchDayId' addCss='col-12-2' /]
+    </script>
+
+    <script id="bonusCategorySelection" type="text/template">
+        [@bonusUtil.bonusCategorySelection categories=categories formPath='bonuses[{{@root.index}}].category' addCss='col-12-1' /]
+    </script>
+
+    <script id="bonusAnswerSelectionCOUNTRY" type="text/template">
+        [@bonusUtil.bonusAnswerSelection answers=countries formPath='bogus-only-its-options-are-used' addCss='col-12-2' /]
+    </script>
+    <script id="bonusAnswerSelectionPLAYER" type="text/template">
+        [@bonusUtil.bonusAnswerSelection answers=players formPath='bogus-only-its-options-are-used' addCss='col-12-2' /]
+    </script>
 
     <div class="col-gutter form-button-container choices-form-button-container">
         <input type="button" class="add-entity" value="Toevoegen"/>

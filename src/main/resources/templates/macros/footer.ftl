@@ -1,5 +1,5 @@
 [#macro footer]
-    [#local devMode = false]
+    [#local devMode = true]
 
     [#if devMode]
         <script src="/vendor/system.js"></script>

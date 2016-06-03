@@ -77,6 +77,10 @@
                     [/#list]
                     </div>
 
+                    <script id="matchDaySelection" type="text/template">
+                        [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='matches[{{@root.index}}].matchDayId' addCss='col-12-2' /]
+                    </script>
+
                     <div class="form-button-container matches-form-button-container">
 
                         <input type="button" class="sort-matches" value="Sorteren (datum)"/>

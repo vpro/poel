@@ -22,5 +22,7 @@ public class BonusDTO {
 
     private Long answerId;
 
+    private Long matchDayId;
+
     private int score;
 }

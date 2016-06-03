@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Bonus;
 import nl.vpro.poel.domain.BonusCategory;
 import nl.vpro.poel.domain.BonusChoice;
+import nl.vpro.poel.domain.MatchDay;
 import nl.vpro.poel.dto.BonusDTO;
 import nl.vpro.poel.dto.BonusForm;
 import nl.vpro.poel.repository.BonusRepository;
@@ -22,13 +23,15 @@ import java.util.stream.Collectors;
 @Service
 public class BonusServiceImpl implements BonusService{
 
-    private BonusRepository bonusRepository;
-    private BonusChoiceService bonusChoiceService;
+    private final BonusRepository bonusRepository;
+    private final BonusChoiceService bonusChoiceService;
+    private final MatchDayService matchDayService;
 
     @Autowired
-    public BonusServiceImpl(BonusRepository bonusRepository, BonusChoiceService bonusChoiceService) {
+    public BonusServiceImpl(BonusRepository bonusRepository, BonusChoiceService bonusChoiceService, MatchDayService matchDayService) {
         this.bonusRepository = bonusRepository;
         this.bonusChoiceService = bonusChoiceService;
+        this.matchDayService = matchDayService;
     }
 
     @Override
@@ -109,6 +112,19 @@ public class BonusServiceImpl implements BonusService{
                     bonus.setAnswer(answer.get());
                 } else {
                     log.warn("Ignoring bonus update {}, because no choice exists for this id", bonusDTO);
+                    continue;
+                }
+            }
+
+            Long matchDayId = bonusDTO.getMatchDayId();
+            if (matchDayId == null) {
+                bonus.setMatchDay(null);
+            } else {
+                Optional<MatchDay> matchDay = matchDayService.findById(matchDayId);
+                if (matchDay.isPresent()) {
+                    bonus.setMatchDay(matchDay.get());
+                } else {
+                    log.warn("Ignoring bonus update {}, because no match day exists for this id", bonusDTO);
                     continue;
                 }
             }
