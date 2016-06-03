@@ -91,6 +91,7 @@ backGroundColor="darkgreen"
 
     <div class="col-gutter form-button-container choices-form-button-container">
         <input type="button" class="add-entity" value="Toevoegen"/>
+        <input type="button" class="sort-entities" value="Sorteren (datum)"/>
         <input type="submit" value="Opslaan" />
     </div>
 

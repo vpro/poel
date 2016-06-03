@@ -3,6 +3,7 @@ import $ from 'jquery';
 import CollapseController from 'js/util/CollapseController.js';
 
 import EntityListController from 'js/controllers/EntityListController.js';
+import SortableController from 'js/controllers/SortableController.js';
 import FormController from 'js/controllers/FormController.js';
 import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
@@ -70,6 +71,7 @@ if ( $('.bonus-choices-form').length ) {
 
 if ( $('.bonuses-form').length ) {
     new EntityListController( $('.bonuses-form'), $( '.alert-overlay' ), bonusTemplate, 'bonuses' );
+    new SortableController( $('.bonuses-form .sort-entities'), $('.bonuses-form .entities'), '.bonus-admin' );
 
     // switch answer selection pulldowns for existing bonuses when categories change
     $('.bonus-choice-admin__category-selection').on( 'change', function ( e ) {
