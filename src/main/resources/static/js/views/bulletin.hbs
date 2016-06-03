@@ -1,23 +1,25 @@
 <div class="form-row bulletin-admin row">
+
+     <div class="grid">
+
+        <div class="col col-12-6  col-gutter">
+            <textarea name="bulletins[{{index}}].key" class="bulletin-admin__text"  placeholder="bulletin link*"></textarea>
+        </div>
+
+        <div class="col col-12-6  col-gutter">
+            <textarea name="bulletins[{{index}}].text" class="bulletin-admin__text" placeholder="bulletin titel"></textarea>
+        </div>
+     </div>
     <div class="grid">
-
-        <div class="col col-12-5">
-            <input type="text" name="bulletins[{{index}}].key" class="bulletin-admin__key" value="" placeholder="bulletin key*"/>
+        <div class="col col-12-6  col-gutter">
+            <textarea name="bulletins[{{index}}].description" class="bulletin-admin__text"  placeholder="bulletin omschrijving"></textarea>
         </div>
-        <div class="col col-12-6">
-            <textarea name="bulletins[{{index}}].text" class="bulletin-admin__text"></textarea>
+        <div class="col col-12-5 col-gutter">
+            <textarea name="bulletins[{{index}}].date" class="bulletin-admin__text" placeholder="bulletin datum"></textarea>
         </div>
-
-        <div class="col col-12-6">
-            <textarea name="bulletins[{{index}}].description" class="bulletin-admin__text"></textarea>
-        </div>
-
-        <div class="col col-12-6">
-            <textarea name="bulletins[{{index}}].date" class="bulletin-admin__text"></textarea>
-        </div>
-
         <div class="delete delete-bulletin col-12-1">
             <i class="glyph glyph-close c-gold"></i>
         </div>
+
     </div>
 </div>

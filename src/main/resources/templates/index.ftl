@@ -10,7 +10,7 @@
 
     <body class="home">
 
-        <div class="home-navigation [#if user.role == 'ADMIN']home-navigation-admin[/#if]">
+        <div class="home-navigation [#if user?has_content && user.role == 'ADMIN']home-navigation-admin[/#if]">
             <a href="/about" class="home-navigation-link bg-greybat">
                 <span class='h2 c-white home-navigation-link-title'>
                     VPRO EK-poel 2016<br/>

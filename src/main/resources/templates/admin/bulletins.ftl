@@ -24,7 +24,7 @@
 
     [@layout.sectionWithLayout
     content={'layout': '100'}
-    title='berichten'
+    title='Bulletins invoeren'
     backGroundColor="darkgreen"
     ]
     <form action="/admin/bulletins" class="form bulletins-form" method="post">
@@ -37,16 +37,19 @@
                 <input type="hidden" name="bulletins[${ bulletin ? index }].id" value="${bulletin.id}"/>
                 <div class="grid">
 
-                    <div class="col col-12-5">
-                        <input type="text" name="bulletins[${ bulletin ? index }].key" class="bulletin-admin__key" value="${bulletin.key}" placeholder="bulletin link*"/>
+                    <div class="col col-12-6 col-gutter">
+                        <textarea name="bulletins[${ bulletin ? index }].key" class="bulletin-admin__text"  placeholder="bulletin link*">${bulletin.key}</textarea>
                     </div>
-                    <div class="col col-12-6">
+
+                    <div class="col col-12-6 col-gutter">
                         <textarea name="bulletins[${ bulletin ? index}].text" class="bulletin-admin__text" placeholder="bulletin titel">${ bulletin.text }</textarea>
                     </div>
-                    <div class="col col-12-5">
-                        <input type="text" name="bulletins[${ bulletin ? index }].description" class="bulletin-admin__key" value="${bulletin.description}" placeholder="bulletin omschrijving"/>
+                 </div>
+                <div class="grid">
+                    <div class="col col-12-6 col-gutter">
+                        <textarea name="bulletins[${ bulletin ? index }].description" class="bulletin-admin__text"  placeholder="bulletin omschrijving">${bulletin.description}</textarea>
                     </div>
-                    <div class="col col-12-6">
+                    <div class="col col-12-5 col-gutter">
                         <textarea name="bulletins[${ bulletin ? index}].date" class="bulletin-admin__text" placeholder="bulletin datum">${ bulletin.date }</textarea>
                     </div>
                     <div class="delete delete-bulletin col-12-1">
