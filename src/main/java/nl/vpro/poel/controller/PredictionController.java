@@ -118,7 +118,7 @@ class PredictionController {
             }
         }
 
-        for (Map.Entry<Date, List<ScoredPrediction>> entry : predictionsByStart.descendingMap().entrySet()) {
+        for (Map.Entry<Date, List<ScoredPrediction>> entry : predictionsByStart.entrySet()) {
             List<ScoredPrediction> scored = entry.getValue();
             for (ScoredPrediction sp : scored) {
                 ordered.add( sp);

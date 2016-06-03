@@ -18,6 +18,27 @@
         </span>
     </a>
 
+    <a href="/admin/bonuses" class="home-navigation-link bg-greybat">
+        <span class='h2 c-white home-navigation-link-title'>
+            bonusvragen<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">aanmaken en antwoorden invoeren</span>
+        </span>
+    </a>
+
+    <a href="/admin/bonuschoices" class="home-navigation-link bg-greybat">
+        <span class='h2 c-white home-navigation-link-title'>
+            bonusvraag antwoorden<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">aanmaken</span>
+        </span>
+    </a>
+
+    <a href="/admin/matchdays" class="home-navigation-link bg-greybat">
+        <span class='h2 c-white home-navigation-link-title'>
+            speelrondes<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">aanmaken</span>
+        </span>
+    </a>
+
     <a href="/admin/messages" class="home-navigation-link bg-green">
         <span class='h2 c-white home-navigation-link-title'>
             berichten<br/>
