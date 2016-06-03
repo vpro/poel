@@ -17,8 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -101,6 +100,31 @@ class PredictionController {
                         .collect(Collectors.toList())
         );
 
-        return combined;
+        return orderScoredPredictionsByStart(combined);
+    }
+
+    // TODO: jajaja
+    private List<ScoredPrediction> orderScoredPredictionsByStart( List<ScoredPrediction> scoredPredictions ) {
+
+        List<ScoredPrediction> ordered = new ArrayList<>();
+
+        NavigableMap<Date, List<ScoredPrediction>> predictionsByStart = new TreeMap<>();
+        for (ScoredPrediction scoredPrediction : scoredPredictions) {
+            Date startDate = scoredPrediction.getPrediction().getStart();
+            if ( startDate != null ) {
+                List<ScoredPrediction> predictions = predictionsByStart.getOrDefault(startDate, new ArrayList<>());
+                predictions.add(scoredPrediction);
+                predictionsByStart.put( startDate, predictions );
+            }
+        }
+
+        for (Map.Entry<Date, List<ScoredPrediction>> entry : predictionsByStart.descendingMap().entrySet()) {
+            List<ScoredPrediction> scored = entry.getValue();
+            for (ScoredPrediction sp : scored) {
+                ordered.add( sp);
+            }
+        }
+
+        return ordered;
     }
 }

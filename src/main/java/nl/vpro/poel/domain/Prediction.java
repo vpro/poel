@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -67,5 +68,15 @@ public class Prediction {
         this.bonus = bonus;
         this.answer = answer;
         this.multiplier = multiplier;
+    }
+
+    public Date getStart() {
+        Date startDate = null;
+        if ( match != null ) {
+            startDate = match.getStart();
+        } else if ( bonus != null ) {
+            startDate = bonus.getStart();
+        }
+        return startDate;
     }
 }
