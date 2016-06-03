@@ -8,13 +8,13 @@ var RankingController = Stapes.subclass({
 
         var currentUserGroupId = $groupFilterCheckbox.data('id');
 
-        var $allRows = $( '.ranking__row' );
+        var $allRows = $( '.user-ranking .ranking__row' );
 
         var $rowsToHide = $allRows.filter( function () {
             return $( this ).data('group') != currentUserGroupId;
         });
 
-        var $ranksToHide = $( '.ranking__rank-tohide' );
+        var $ranksToHide = $( '.user-ranking .ranking__rank-tohide' );
 
         $groupFilterCheckbox.change( function () {
             if ( $groupFilterCheckbox.is( ':checked' ) ) {
@@ -26,7 +26,7 @@ var RankingController = Stapes.subclass({
                 $ranksToHide.addClass( 'hidden' );
             }
 
-            var $visibleRows = $('.ranking__row:not(.ranking__row-hidden)');
+            var $visibleRows = $('.user-ranking .ranking__row:not(.ranking__row-hidden)');
             $allRows.removeClass( 'ranking__row-odd' );
 
             $visibleRows.each( function ( index, row ) {
