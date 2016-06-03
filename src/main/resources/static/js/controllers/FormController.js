@@ -80,7 +80,9 @@ var FormController = Stapes.subclass({
 
     handleMultiplierState: function () {
 
-        var multipliersChecked = this.$allMultipliers.filter(':checked').length;
+        var multipliersCheckedList = this.$allMultipliers.filter(':checked');
+        var multipliersChecked = multipliersCheckedList.length;
+        console.log( multipliersCheckedList );
         var multipliersLeft = Math.max( 0, MAX_MULTIPLIERS - multipliersChecked );
 
         if ( multipliersChecked >= MAX_MULTIPLIERS ) {
@@ -91,6 +93,18 @@ var FormController = Stapes.subclass({
 
         this.$navigationSubTitle.html( this.$navigationSubTitle.data('original-value') +
             ' ( '+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '' : 's' ) +' over )' );
+
+        this.$allMultipliers.each( function ( ) {
+            var multiplierParent = $( this ).parent( );
+
+            $( multiplierParent ).find( '.prediction__multiplier__label-count' ).html( '' ) ;
+        } );
+
+        multipliersCheckedList.each( function ( i ) {
+            var multiplierParent = $( this ).parent( );
+
+            $( multiplierParent ).find( '.prediction__multiplier__label-count' ).html( ( i + 1 ) + '/' + MAX_MULTIPLIERS ) ;
+        } );
     },
 
     handleSubmit: function ( e ) {

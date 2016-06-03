@@ -28,9 +28,7 @@
                 [/#if]
                 ${ match.homeTeam }
             </span>
-            <span class="prediction__game-divider">
-                -
-            </span>
+
             <span class="prediction__game-away">
                 [#if countryCodes[match.awayTeam] ? has_content]
                 <span class="flag-icon flag-icon-${ countryCodes[match.awayTeam] !}"></span>
@@ -61,7 +59,10 @@
                    name="predictions[${predictionIndex}].multiplier" value="true"
                    [#if multiplier]checked="checked"[/#if] [#if status != STATUS_FUTURE]disabled="disable"[/#if] />
             <label class="prediction__multiplier__label" title="Joker inzetten"
-                   for="prediction__multiplier${predictionIndex}_${status}"><i class="glyph glyph-heart"></i></label>
+                   for="prediction__multiplier${predictionIndex}_${status}">
+                    <i class="glyph glyph-heart"></i>
+                    <span class="prediction__multiplier__label-count"></span>
+            </label>
             [/#if]
         </td>
 
