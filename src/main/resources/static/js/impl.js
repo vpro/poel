@@ -11,6 +11,7 @@ import UserFormController from 'js/controllers/UserFormController.js';
 import messageTemplate from 'js/views/message.hbs!';
 import matchDayTemplate from 'js/views/matchday.hbs!';
 import userGroupTemplate from 'js/views/user-group.hbs!';
+import bonusChoiceTemplate from 'js/views/bonuschoice.hbs!';
 
 
 new CollapseController( document.querySelectorAll( '.collapsible-section') );
@@ -41,4 +42,8 @@ if ( $('.messages-form').length ) {
 
 if ( $('.matchdays-form').length ) {
     new EntityListController( $('.matchdays-form'), $( '.alert-overlay' ), matchDayTemplate, 'matchDays' );
+}
+
+if ( $('.bonus-choices-form').length ) {
+    new EntityListController( $('.bonus-choices-form'), $( '.alert-overlay' ), bonusChoiceTemplate, 'choices' );
 }

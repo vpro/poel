@@ -28,6 +28,8 @@
                 <li><a href="/admin/messages" class="theme-link">Berichten</a></li>
                 <li><a href="/admin/users" class="theme-link">Gebruikers</a></li>
                 <li><a href="/admin/usergroups" class="theme-link">Groepen</a></li>
+                <li><a href="/admin/bonuschoices" class="theme-link">Bonus mogelijkheden</a></li>
+                <li><a href="/admin/bonuses" class="theme-link">Bonus vragen</a></li>
             </ul>
 
         </div>
