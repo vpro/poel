@@ -8,8 +8,7 @@ import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
 import UserGroupController from 'js/controllers/UserGroupController.js';
 import MessageController from 'js/controllers/MessageController.js';
-
-
+import BulletinController from 'js/controllers/BulletinController.js';
 
 new CollapseController( document.querySelectorAll( '.collapsible-section') );
 
@@ -35,4 +34,8 @@ if ( $('.usergroup-form').length ) {
 
 if ( $('.messages-form').length ) {
     new MessageController( $('.messages-form'), $( '.alert-overlay' ) );
+}
+
+if ( $('.bulletins-form').length ) {
+    new BulletinController( $('.bulletins-form' ), $( '.alert-overlay' ) );
 }

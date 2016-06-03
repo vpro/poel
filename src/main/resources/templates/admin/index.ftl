@@ -27,6 +27,7 @@
                 <li><a href="/admin/messages" class="theme-link">Berichten</a></li>
                 <li><a href="/admin/users" class="theme-link">Gebruikers</a></li>
                 <li><a href="/admin/usergroups" class="theme-link">Groepen</a></li>
+                <li><a href="/admin/bulletins" class="theme-link">Bulletins</a></li>
             </ul>
 
         </div>

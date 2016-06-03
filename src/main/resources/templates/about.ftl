@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[@headUtil.head title='poelregels' /]
+[@headUtil.head title='VPRO EK-poel 2016' /]
 
 <body>
 
-[@navigationUtil.navigation title='poelregels' back='/' bgColor='bg-greybat' /]
+[@navigationUtil.navigation title='VPRO EK-poel 2016' back='/' bgColor='bg-greybat' /]
 
 <div class="grid theme-white bg-white about">
     <div class="component">
@@ -87,7 +87,6 @@
 <div class="grid theme-white bg-white about">
     <div class="component">
 
-
             [@layout.sectionWithLayout
             content={"layout":"83"}
             title='Poelbulletins'
@@ -97,7 +96,12 @@
             addContainerCss='bg-white'
             backGroundColor="white"]
 
-            jkdsajkdsa
+            [#list bulletins]
+                [#items as bulletin]
+                    <!--TODO link styling-->
+                    ${bulletin}
+                [/#items]
+            [/#list]
 
             [/@layout.sectionWithLayout]
 
