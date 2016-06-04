@@ -30,15 +30,11 @@
         [@messageUtil.outputMessage message=message ! /]
     [/#if]
 
-    [#if user.gameName ? has_content]
-        [#assign salutation = user.gameName]
-    [#else]
-        [#assign salutation = user.realName]
-    [/#if]
+    [#assign salutation = user.gameName!user.realName!]
 
     [@layout.sectionWithLayout
     content={"layout":"100"}
-    title='Gegevens voor: ${ salutation }'
+    title='Profielgegevens'
     collapsible=false
     opened=true
     addCss='user-section'
@@ -46,15 +42,9 @@
 
         <div class="grid c-white grid-gutter">
 
-            [#if user.role == 'ADMIN']
-            <div class="grid row">
-                <a href="/admin" class="c-white"> Ga naar het Admin gedeelte </a>
-            </div>
-            [/#if]
-
             <div class="grid row">
                 <span class="h6 col col-12-2">Email:</span>
-                <span class="col col-12-2"> ${user.username}</span>
+                <span class="col col-12-2">${user.username}</span>
             </div>
 
             <div class="grid row">
@@ -73,13 +63,13 @@
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                 <div class="grid row">
-                    <span class="h6 col col-12-2">Naam (voor- en achternaam):</span>
-                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName}"/>
+                    <span class="h6 col col-12-2">Echte naam:</span>
+                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName!}"/>
                 </div>
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
-                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName}"/>
+                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName!}"/>
                 </div>
 
                 <div class="form-footer bg-blue">

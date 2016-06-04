@@ -25,7 +25,7 @@
         [/#if]
 
 
-        [@navigationUtil.navigation title='Poel invullen' subtitle=user.realName back='/' /]
+        [@navigationUtil.navigation title='Poel invullen' subtitle=user.gameName!user.realName!user.username back='/' /]
 
             [@messageUtil.outputMessage message=message ! /]
 

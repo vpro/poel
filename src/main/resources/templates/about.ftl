@@ -6,11 +6,11 @@
 <!DOCTYPE html>
 <html lang="nl">
 
-[@headUtil.head title='VPRO EK-poel 2016' /]
+[@headUtil.head title=title!"Poel" /]
 
 <body>
 
-[@navigationUtil.navigation title='VPRO EK-poel 2016' back='/' bgColor='bg-greybat' /]
+[@navigationUtil.navigation title=title!'Poel' back='/' bgColor='bg-greybat' /]
 
 <div class="grid about">
 

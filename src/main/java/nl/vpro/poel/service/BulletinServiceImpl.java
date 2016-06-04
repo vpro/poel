@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,47 +18,14 @@ public class BulletinServiceImpl implements BulletinService {
     private final BulletinRepository bulletinRepository;
 
     @Autowired
-    public BulletinServiceImpl(BulletinRepository bulletinRepository) { this.bulletinRepository = bulletinRepository; }
-
-    @Override
-    public Optional<Bulletin> findById(Long id) {
-        return Optional.ofNullable(bulletinRepository.findOne(id));
+    public BulletinServiceImpl(BulletinRepository bulletinRepository) {
+        this.bulletinRepository = bulletinRepository;
     }
 
     @Override
-    public Optional<Bulletin> findByKey(String key) {
-        return Optional.ofNullable(bulletinRepository.findByKey(key));
+    public List<Bulletin> findAll() {
+        return bulletinRepository.findAll();
     }
-
-    @Override
-    public Optional<String> getText(String key) {
-        Bulletin bulletin = bulletinRepository.findByKey(key);
-        if (bulletin == null) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(bulletin.getText());
-    }
-
-    @Override
-    public Optional<String> getDescription(String key) {
-        Bulletin bulletin = bulletinRepository.findByKey(key);
-        if (bulletin == null) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(bulletin.getDescription());
-    }
-
-    @Override
-    public Optional<String> getDate(String key) {
-        Bulletin bulletin = bulletinRepository.findByKey(key);
-        if (bulletin == null) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(bulletin.getDate());
-    }
-
-    @Override
-    public List<Bulletin> findAll() { return bulletinRepository.findAll(); }
 
     @Override
     public void setBulletins(BulletinForm bulletinForm) {
@@ -77,13 +43,13 @@ public class BulletinServiceImpl implements BulletinService {
             String date = postedBulletin.getDate();
             String description = postedBulletin.getDescription();
 
-            if ( key == null ) {
-                log.warn("Ignoring bulletin update {}, because it is incomplete");
+            if (key == null || text == null || date == null || description == null) {
+                log.warn("Ignoring bulletin update {}, because it is incomplete", postedBulletin);
                 continue;
             }
 
             Bulletin bulletin;
-            if ( id == null ) {
+            if (id == null) {
                 bulletin = new Bulletin();
             } else {
                 bulletin = bulletinRepository.findOne(id);
@@ -94,11 +60,11 @@ public class BulletinServiceImpl implements BulletinService {
                 }
             }
 
-            bulletin.setKey( key );
-            bulletin.setText( text );
+            bulletin.setKey(key);
+            bulletin.setText(text);
 
-            bulletin.setDescription( description );
-            bulletin.setDate( date );
+            bulletin.setDescription(description);
+            bulletin.setDate(date);
 
             bulletinRepository.save(bulletin);
         }
