@@ -2,7 +2,7 @@ import Stapes from 'stapes';
 import $ from 'jquery';
 
 import HandlebarsRuntime from 'handlebars-runtime';
-import matchTemplate from '../views/match.hbs!';
+import matchTemplate from '../views/match.html!hbs';
 
 var MatchController = Stapes.subclass({
 
