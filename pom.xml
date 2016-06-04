@@ -78,7 +78,6 @@
 		</dependency>
 
 		<!-- HAL / HATEOAS API -->
-		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-hateoas</artifactId>
@@ -87,7 +86,6 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>hal-browser</artifactId>
 		</dependency>
-		-->
 
 		<!-- Ops -->
 		<dependency>
@@ -191,6 +189,16 @@
                     </execution>
                 </executions>
             </plugin>
+			<plugin>
+				<!--
+				This plugin automatically generates git.properties in the JAR.
+
+				The info endpoint reads git.branch and git.commit properties from this file:
+				https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-git-commit-information
+				-->
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 </project>
