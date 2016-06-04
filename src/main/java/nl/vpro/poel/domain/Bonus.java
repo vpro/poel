@@ -27,6 +27,7 @@ public class Bonus {
     @Temporal(TemporalType.TIMESTAMP)
     private Date start = null;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private BonusCategory category;
 
