@@ -5,16 +5,16 @@ import CollapseController from 'js/util/CollapseController.js';
 import EntityListController from 'js/controllers/EntityListController.js';
 import SortableController from 'js/controllers/SortableController.js';
 import FormController from 'js/controllers/FormController.js';
-import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
 
-import messageTemplate from 'js/views/message.html!hbs';
-import roundTemplate from 'js/views/round.html!hbs';
-import userGroupTemplate from 'js/views/user-group.html!hbs';
 import bonusChoiceTemplate from 'js/views/bonuschoice.html!hbs';
 import bonusTemplate from 'js/views/bonus.html!hbs';
 import bulletinTemplate from 'js/views/bulletin.html!hbs';
+import matchTemplate from 'js/views/match.html!hbs';
+import messageTemplate from 'js/views/message.html!hbs';
+import roundTemplate from 'js/views/round.html!hbs';
+import userGroupTemplate from 'js/views/user-group.html!hbs';
 
 import Handlebars from 'handlebars';
 import HandlebarsRuntime from 'handlebars-runtime';
@@ -50,7 +50,9 @@ if ( $( '.alert-overlay' ).length ) {
 }
 
 if ( $('.matches-form').length ) {
-    new MatchController( $('.matches-form'), $( '.alert-overlay' ) );
+
+    new EntityListController( $('.matches-form'), $( '.alert-overlay' ), matchTemplate, 'matches' );
+    new SortableController( $('.matches-form .sort-entities'), $('.matches-form .entities'), '.entity-admin' );
 }
 
 if ( $('.usergroup-form').length ) {

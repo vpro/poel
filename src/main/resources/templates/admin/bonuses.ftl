@@ -63,7 +63,7 @@ backGroundColor="darkgreen"
             [#if bonus.round ? has_content]
                 [#assign roundId = bonus.round.id]
             [/#if]
-            [@roundUtil.roundSelection rounds=rounds formPath='bonuses[${bonus_index}].roundId' selectedRoundId=RoundId addCss='col-12-1' /]
+            [@roundUtil.roundSelection rounds=rounds formPath='bonuses[${bonus_index}].roundId' selectedRoundId=roundId addCss='col-12-1' /]
 
             <span class="delete delete-entity">
                 <i class="glyph glyph-close c-gold col-12-1"></i>

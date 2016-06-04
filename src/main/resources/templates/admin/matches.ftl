@@ -35,11 +35,11 @@
 
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                    <div class="matches">
+                    <div class="matches entities">
                     [#list matches]
 
                         [#items as match]
-                            <div class="form-row match row">
+                            <div class="form-row match entity-admin row">
 
                                 <!-- TODO: move this into a macro-->
                                 <!-- or (even better) render this through match.hbs as we do when adding new matches -->
@@ -83,9 +83,9 @@
 
                     <div class="form-button-container matches-form-button-container">
 
-                        <input type="button" class="sort-matches" value="Sorteren (datum)"/>
+                        <input type="button" class="sort-matches sort-entities" value="Sorteren (datum)"/>
 
-                        <input type="button" class="add-match" value="Toevoegen"/>
+                        <input type="button" class="add-match add-entity" value="Toevoegen"/>
 
                         <input type="submit" value="Opslaan" />
                         <input type="reset" value="Annuleren (-achtig)" />
