@@ -1,7 +1,7 @@
 import Stapes from 'stapes';
 import $ from 'jquery';
 
-const MAX_MULTIPLIERS = 5;
+const MAX_MULTIPLIERS = 5; // TODO: This value is configurable in the application, so this shouldn't be a constant
 
 var FormController = Stapes.subclass({
 
@@ -92,7 +92,7 @@ var FormController = Stapes.subclass({
         }
 
         this.$navigationSubTitle.html( this.$navigationSubTitle.data('original-value') +
-            ' ( '+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '' : 's' ) +' over )' );
+            ' ('+ multipliersLeft +' joker'+ ( ( multipliersLeft == 1 ) ? '' : 's' ) +' over)' );
 
         this.$allMultipliers.each( function ( ) {
             var multiplierParent = $( this ).parent( );
@@ -110,7 +110,7 @@ var FormController = Stapes.subclass({
     handleSubmit: function ( e ) {
         if ( this.$allMultipliers.filter(':checked').length > MAX_MULTIPLIERS ) {
 
-            if ( ! confirm('Je hebt meer dan 5 jokers ingezet. Als je nu opslaat gaan je '+
+            if ( ! confirm('Je hebt meer dan ' + MAX_MULTIPLIERS + ' jokers ingezet. Als je nu opslaat gaan je '+
                     'zojuist ingevulde voorspellingen verloren. Wil je daarmee doorgaan?') ) {
                 e.preventDefault();
                 e.stopPropagation();
