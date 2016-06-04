@@ -1,6 +1,5 @@
 package nl.vpro.poel.controller.admin;
 
-import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.RankingEntry;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Slf4j
 @Controller
 @RequestMapping("/admin/export")
 public class ExportCSVController {
@@ -40,54 +38,45 @@ public class ExportCSVController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    void exportUsers(HttpServletResponse response) {
+    void exportUsers(HttpServletResponse response) throws IOException {
         setHeadersForCSVDownload(response, String.format("poel-users-%s.csv", now()));
         CSVFormat format = CSVFormat.DEFAULT.withHeader("id", "username", "role", "realName", "gameName", "userGroupName");
-        try {
-            CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
-            for (User user : userService.getAllUsers()) {
-                UserGroup userGroup = user.getUserGroup();
-                String userGroupName = userGroup != null ? userGroup.getName() : null;
-                csvPrinter.printRecord(
-                        user.getId(),
-                        user.getUsername(),
-                        user.getRole(),
-                        user.getRealName(),
-                        user.getGameName(),
-                        userGroupName
-                );
-            }
-            csvPrinter.close();
-        } catch (IOException e) {
-            log.error("Error writing users CSV export", e);
+        CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
+        for (User user : userService.getAllUsers()) {
+            UserGroup userGroup = user.getUserGroup();
+            String userGroupName = userGroup != null ? userGroup.getName() : null;
+            csvPrinter.printRecord(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getRole(),
+                    user.getRealName(),
+                    user.getGameName(),
+                    userGroupName
+            );
         }
+        csvPrinter.close();
     }
 
     @RequestMapping(value = "/ranking", method = RequestMethod.GET)
-    void exportRankingCSV(HttpServletResponse response) {
+    void exportRanking(HttpServletResponse response) throws IOException {
         setHeadersForCSVDownload(response, String.format("poel-ranking-%s.csv", now()));
         CSVFormat format = CSVFormat.DEFAULT.withHeader("rank", "score", "user_id", "username", "role", "realName", "gameName", "userGroup");
-
-        try {
-            CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
-            for (RankingEntry<User> rankingEntry : rankingService.getUserRanking()) {
-                User user = rankingEntry.getSubject();
-                UserGroup userGroup = user.getUserGroup();
-                String userGroupName = userGroup != null ? userGroup.getName() : null;
-                csvPrinter.printRecord(
-                        rankingEntry.getRank(),
-                        rankingEntry.getScore(),
-                        user.getId(),
-                        user.getUsername(),
-                        user.getRealName(),
-                        user.getGameName(),
-                        userGroupName
-                );
-            }
-            csvPrinter.close();
-        } catch (IOException e) {
-            log.error("Error writing ranking CSV export", e);
+        CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
+        for (RankingEntry<User> rankingEntry : rankingService.getUserRanking()) {
+            User user = rankingEntry.getSubject();
+            UserGroup userGroup = user.getUserGroup();
+            String userGroupName = userGroup != null ? userGroup.getName() : null;
+            csvPrinter.printRecord(
+                    rankingEntry.getRank(),
+                    rankingEntry.getScore(),
+                    user.getId(),
+                    user.getUsername(),
+                    user.getRealName(),
+                    user.getGameName(),
+                    userGroupName
+            );
         }
+        csvPrinter.close();
     }
 
     private String now() {
