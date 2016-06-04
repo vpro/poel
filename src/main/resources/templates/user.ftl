@@ -34,7 +34,7 @@
 
     [@layout.sectionWithLayout
     content={"layout":"100"}
-    title='Gegevens voor: ${ salutation }'
+    title='Profielgegevens'
     collapsible=false
     opened=true
     addCss='user-section'
@@ -42,15 +42,9 @@
 
         <div class="grid c-white grid-gutter">
 
-            [#if user.role == 'ADMIN']
-            <div class="grid row">
-                <a href="/admin" class="c-white"> Ga naar het Admin gedeelte </a>
-            </div>
-            [/#if]
-
             <div class="grid row">
                 <span class="h6 col col-12-2">Email:</span>
-                <span class="col col-12-2"> ${user.username}</span>
+                <span class="col col-12-2">${user.username}</span>
             </div>
 
             <div class="grid row">
