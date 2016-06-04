@@ -24,7 +24,7 @@
 
 [#macro roundSelection rounds formPath="" selectedRoundId=-1 addCss='']
 <select class="match-admin__round-selection ${ addCss }" name="${ formPath }">
-    <option valuu="">Kies een speelronde...</option>
+    <option value="">Kies een speelronde...</option>
     [#list rounds as round]
         <option value="${ round.id }" [#if round.id == selectedRoundId]selected="selected"[/#if]>${ round.name }</option>
     [/#list]
