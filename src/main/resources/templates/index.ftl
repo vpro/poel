@@ -43,7 +43,7 @@
             <a href="/admin" class="home-navigation-link bg-darkred">
                 <span class='h2 c-white home-navigation-link-title' >
                     Admin<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">Zaken zaken voor speciale mensen</span>
+                    <span class="h6 c-white home-navigation-link-subtitle">Speciale zaken voor speciale mensen</span>
                 </span>
             </a>
             [/#if]
