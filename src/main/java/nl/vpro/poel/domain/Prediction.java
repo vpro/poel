@@ -3,14 +3,14 @@ package nl.vpro.poel.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * A user's predicted result.
+ *
+ * TODO: This class is currently (ab)used for predictions about either a Match or a Bonus question. There should be separate classes for these things.
  */
 @Data
 @EqualsAndHashCode(exclude = "id")
@@ -26,16 +26,16 @@ public class Prediction {
     @ManyToOne(optional = false)
     private User user;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     private Match match;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     private Bonus bonus;
 
     @Embedded
     private MatchResult matchResult;
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     private BonusChoice answer;
 
     private boolean multiplier = false;
@@ -72,9 +72,9 @@ public class Prediction {
 
     public Date getStart() {
         Date startDate = null;
-        if ( match != null ) {
+        if (match != null) {
             startDate = match.getStart();
-        } else if ( bonus != null ) {
+        } else if (bonus != null) {
             startDate = bonus.getStart();
         }
         return startDate;
