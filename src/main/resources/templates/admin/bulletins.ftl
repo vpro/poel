@@ -30,10 +30,10 @@
     <form action="/admin/bulletins" class="form bulletins-form" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
-        <div class="grid-gutter bulletins">
+        <div class="grid-gutter bulletins entities">
             [#list bulletins]
             [#items as bulletin]
-            <div class="form-row bulletin-admin row">
+            <div class="form-row bulletin-admin entity-admin row">
                 <input type="hidden" name="bulletins[${ bulletin ? index }].id" value="${bulletin.id}"/>
                 <div class="grid">
 
@@ -62,7 +62,7 @@
         </div>
 
         <div class="grid-gutter form-button-container bulletins-form-button-container">
-            <input type="button" class="add-bulletin" value="Toevoegen"/>
+            <input type="button" class="add-entity" value="Toevoegen"/>
             <input type="submit" value="Opslaan" />
         </div>
     </form>

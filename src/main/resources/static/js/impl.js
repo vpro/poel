@@ -8,13 +8,13 @@ import FormController from 'js/controllers/FormController.js';
 import MatchController from 'js/controllers/MatchController.js';
 import RankingController from 'js/controllers/RankingController.js';
 import UserFormController from 'js/controllers/UserFormController.js';
-import BulletinController from 'js/controllers/BulletinController.js';
 
-import messageTemplate from 'js/views/message.hbs!';
-import matchDayTemplate from 'js/views/matchday.hbs!';
-import userGroupTemplate from 'js/views/user-group.hbs!';
-import bonusChoiceTemplate from 'js/views/bonuschoice.hbs!';
-import bonusTemplate from 'js/views/bonus.hbs!';
+import messageTemplate from 'js/views/message.html!hbs';
+import matchDayTemplate from 'js/views/matchday.html!hbs';
+import userGroupTemplate from 'js/views/user-group.html!hbs';
+import bonusChoiceTemplate from 'js/views/bonuschoice.html!hbs';
+import bonusTemplate from 'js/views/bonus.html!hbs';
+import bulletinTemplate from 'js/views/bulletin.html!hbs';
 
 import Handlebars from 'handlebars';
 import HandlebarsRuntime from 'handlebars-runtime';
@@ -62,7 +62,7 @@ if ( $('.messages-form').length ) {
 }
 
 if ( $('.bulletins-form').length ) {
-    new BulletinController( $('.bulletins-form' ), $( '.alert-overlay' ) );
+    new EntityListController( $('.bulletins-form'), $( '.alert-overlay' ), bulletinTemplate, 'bulletins' );
 }
 
 if ( $('.matchdays-form').length ) {
