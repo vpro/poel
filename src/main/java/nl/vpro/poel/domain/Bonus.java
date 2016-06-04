@@ -22,7 +22,7 @@ public class Bonus {
     @Column(nullable = false)
     private String question;
 
-    // Both Hibernate 4.x and Freemarker 2.3.x are not ready for use with java.time.* yet, so let's use this old skool type
+    // Freemarker 2.3.x is not ready for use with java.time.* yet, so let's use this old skool type
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date start = null;
@@ -37,7 +37,7 @@ public class Bonus {
     private int score;
 
     @ManyToOne
-    private MatchDay matchDay;
+    private Round round;
 
     public Bonus(String question, BonusCategory category, Date start, Integer score) {
         this(question, category, start, score, null);
@@ -47,12 +47,12 @@ public class Bonus {
         this(question, category, start, score, answer, null);
     }
 
-    public Bonus(String question, BonusCategory category, Date start, Integer score, BonusChoice answer, MatchDay matchDay) {
+    public Bonus(String question, BonusCategory category, Date start, Integer score, BonusChoice answer, Round round) {
         this.question = question;
         this.category = category;
         this.start = start;
         this.score = score;
         this.answer = answer;
-        this.matchDay = matchDay;
+        this.round = round;
     }
 }

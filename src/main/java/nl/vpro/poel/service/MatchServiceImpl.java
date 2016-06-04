@@ -2,7 +2,7 @@ package nl.vpro.poel.service;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Match;
-import nl.vpro.poel.domain.MatchDay;
+import nl.vpro.poel.domain.Round;
 import nl.vpro.poel.domain.MatchResult;
 import nl.vpro.poel.dto.MatchDTO;
 import nl.vpro.poel.dto.MatchForm;
@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 public class MatchServiceImpl implements MatchService {
 
     private final MatchRepository matchRepository;
-    private final MatchDayService matchDayService;
+    private final RoundService roundService;
 
     @Autowired
-    public MatchServiceImpl(MatchRepository matchRepository, MatchDayService matchDayService) {
+    public MatchServiceImpl(MatchRepository matchRepository, RoundService roundService) {
         this.matchRepository = matchRepository;
-        this.matchDayService = matchDayService;
+        this.roundService = roundService;
     }
 
     @Override
@@ -102,15 +102,15 @@ public class MatchServiceImpl implements MatchService {
                 log.warn("Ignoring incomplete match result from match update {}", matchDTO);
             }
 
-            Long matchDayId = matchDTO.getMatchDayId();
-            if (matchDayId == null) {
-                match.setMatchDay(null);
+            Long roundId = matchDTO.getRoundId();
+            if (roundId == null) {
+                match.setRound(null);
             } else {
-                Optional<MatchDay> matchDay = matchDayService.findById(matchDayId);
-                if (matchDay.isPresent()) {
-                    match.setMatchDay(matchDay.get());
+                Optional<Round> round = roundService.findById(roundId);
+                if (round.isPresent()) {
+                    match.setRound(round.get());
                 } else {
-                    log.warn("Ignoring match update {}, because no match day exists for this id", matchDTO);
+                    log.warn("Ignoring match update {}, because no round exists for this id", matchDTO);
                     continue;
                 }
             }

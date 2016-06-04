@@ -21,7 +21,7 @@ public class DummyDataLoader {
             MatchRepository matchRepository,
             PredictionRepository predictionRepository,
             MessageRepository messageRepository,
-            MatchDayRepository matchDayRepository,
+            RoundRepository roundRepository,
             BonusChoiceRepository bonusChoiceRepository,
             BonusRepository bonusRepository
     ) {
@@ -57,11 +57,11 @@ public class DummyDataLoader {
                 userLuuk
         ));
 
-        MatchDay preliminary = new MatchDay("Voorrondes");
-        MatchDay eights = new MatchDay("Achtste Finales");
-        MatchDay quarter = new MatchDay("Kwartfinales");
+        Round preliminary = new Round("Voorrondes");
+        Round eights = new Round("Achtste Finales");
+        Round quarter = new Round("Kwartfinales");
 
-        matchDayRepository.save(Arrays.asList(
+        roundRepository.save(Arrays.asList(
                 preliminary,
                 eights,
                 quarter

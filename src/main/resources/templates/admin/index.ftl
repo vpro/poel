@@ -32,7 +32,7 @@
         </span>
     </a>
 
-    <a href="/admin/matchdays" class="home-navigation-link bg-greybat">
+    <a href="/admin/rounds" class="home-navigation-link bg-greybat">
         <span class='h2 c-white home-navigation-link-title'>
             speelrondes<br/>
             <span class="h6 c-white home-navigation-link-subtitle">aanmaken</span>

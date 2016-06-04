@@ -3,11 +3,11 @@ package nl.vpro.poel.controller;
 import nl.vpro.poel.domain.Bonus;
 import nl.vpro.poel.domain.BonusCategory;
 import nl.vpro.poel.domain.BonusChoice;
-import nl.vpro.poel.domain.MatchDay;
+import nl.vpro.poel.domain.Round;
 import nl.vpro.poel.dto.BonusForm;
 import nl.vpro.poel.service.BonusChoiceService;
 import nl.vpro.poel.service.BonusService;
-import nl.vpro.poel.service.MatchDayService;
+import nl.vpro.poel.service.RoundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +24,13 @@ public class BonusController {
 
     private final BonusService bonusService;
     private final BonusChoiceService bonusChoiceService;
-    private final MatchDayService matchDayService;
+    private final RoundService roundService;
 
     @Autowired
-    public BonusController(BonusService bonusService, BonusChoiceService bonusChoiceService, MatchDayService matchDayService) {
+    public BonusController(BonusService bonusService, BonusChoiceService bonusChoiceService, RoundService roundService) {
         this.bonusService = bonusService;
         this.bonusChoiceService = bonusChoiceService;
-        this.matchDayService = matchDayService;
+        this.roundService = roundService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -38,19 +38,19 @@ public class BonusController {
         List<Bonus> bonuses = bonusService.findAll();
         List<BonusChoice> countryChoices = bonusChoiceService.findByCategory(BonusCategory.COUNTRY);
         List<BonusChoice> playerChoices = bonusChoiceService.findByCategory(BonusCategory.PLAYER);
-        List<MatchDay> matchDays = matchDayService.findAll();
+        List<Round> rounds = roundService.findAll();
 
         model.addAttribute("bonuses", bonuses);
         model.addAttribute("categories", BonusCategory.values());
         model.addAttribute("countries", countryChoices);
         model.addAttribute("players", playerChoices);
-        model.addAttribute("matchDays", matchDays);
+        model.addAttribute("rounds", rounds);
 
         return "admin/bonuses";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String saveBonuses(@ModelAttribute("bonuses")BonusForm bonusForm, BindingResult bindingResult){
+    String saveBonuses(@ModelAttribute("bonuses") BonusForm bonusForm, BindingResult bindingResult){
         bonusService.save(bonusForm);
         return "redirect:/admin/bonuses";
     }

@@ -32,7 +32,7 @@ public class BonusChoiceServiceImpl implements BonusChoiceService  {
 
     @Override
     public Optional<BonusChoice> findByValue(String value) {
-        return Optional.ofNullable(bonusChoiceRepository.findByValue(value));
+        return bonusChoiceRepository.findByValue(value);
     }
 
     @Override

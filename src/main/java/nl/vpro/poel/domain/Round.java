@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(exclude = "id")
 @NoArgsConstructor
-public class MatchDay {
+public class Round {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +24,5 @@ public class MatchDay {
     @Column(nullable = false, unique = true)
     private String name;
 
-    public MatchDay(String name) { this.name = name; }
+    public Round(String name) { this.name = name; }
 }

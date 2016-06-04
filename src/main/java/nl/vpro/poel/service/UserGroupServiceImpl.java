@@ -31,7 +31,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public Optional<UserGroup> findByName(String name) {
-        return Optional.ofNullable(userGroupRepository.findByName(name));
+        return userGroupRepository.findByName(name);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class UserGroupServiceImpl implements UserGroupService {
         }
 
         // UserGroups not included in the form are deleted from the repository
-        // TODO: Delete should be cascading. Usergroups should be decoupled from users before being removed.
+        // TODO: User groups should be removed from users before being removed.
         idsToRemove.stream().forEach(userGroupRepository::delete);
     }
 }

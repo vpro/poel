@@ -28,16 +28,16 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Optional<Message> findByKey(String key) {
-        return Optional.ofNullable(messageRepository.findByKey(key));
+        return messageRepository.findByKey(key);
     }
 
     @Override
     public Optional<String> getText(String key) {
-        Message message = messageRepository.findByKey(key);
-        if (message == null) {
-            return Optional.empty();
+        Optional<Message> message = messageRepository.findByKey(key);
+        if (message.isPresent()) {
+            return Optional.of(message.get().getText());
         }
-        return Optional.ofNullable(message.getText());
+        return Optional.empty();
     }
 
     @Override

@@ -5,7 +5,7 @@
 [#import 'macros/footer.ftl' as footerUtil]
 [#import 'macros/form.ftl' as formUtil]
 [#import 'macros/layout.ftl' as layout]
-[#import "macros/matchdays.ftl" as matchDaysUtil]
+[#import "macros/rounds.ftl" as roundUtil]
 [#import 'macros/message.ftl' as messageUtil]
 [#import 'macros/navigation.ftl' as navigationUtil]
 
@@ -45,7 +45,7 @@
                     ]
 
                         [#list finished]
-                            [@matchDaysUtil.reset /]
+                            [@roundUtil.reset /]
 
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
@@ -54,7 +54,7 @@
                                     [#elseif scoredPrediction.prediction.bonus ? has_content]
                                         [#assign object = scoredPrediction.prediction.bonus ]
                                     [/#if]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@roundUtil.showOptionalRoundLabel object /]
                                     [@formUtil.showPrediction status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
@@ -82,7 +82,7 @@
                     ]
 
                         [#list unfinished]
-                            [@matchDaysUtil.reset /]
+                            [@roundUtil.reset /]
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
@@ -91,7 +91,7 @@
                                     [#elseif scoredPrediction.prediction.bonus ? has_content]
                                         [#assign object = scoredPrediction.prediction.bonus ]
                                     [/#if]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@roundUtil.showOptionalRoundLabel object /]
                                     [@formUtil.showPrediction status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
                                 [/#items]
                             </div>
@@ -121,7 +121,7 @@
 
                         [#list future]
 
-                            [@matchDaysUtil.reset /]
+                            [@roundUtil.reset /]
 
                             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
@@ -133,7 +133,7 @@
                                     [#elseif scoredPrediction.prediction.bonus ? has_content]
                                         [#assign object = scoredPrediction.prediction.bonus ]
                                     [/#if]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@roundUtil.showOptionalRoundLabel object /]
                                     [@formUtil.showPrediction status=formUtil.STATUS_FUTURE scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
                                 [/#items]
                             </div>

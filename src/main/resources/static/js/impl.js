@@ -11,7 +11,7 @@ import UserFormController from 'js/controllers/UserFormController.js';
 import BulletinController from 'js/controllers/BulletinController.js';
 
 import messageTemplate from 'js/views/message.hbs!';
-import matchDayTemplate from 'js/views/matchday.hbs!';
+import roundTemplate from 'js/views/round.hbs!';
 import userGroupTemplate from 'js/views/user-group.hbs!';
 import bonusChoiceTemplate from 'js/views/bonuschoice.hbs!';
 import bonusTemplate from 'js/views/bonus.hbs!';
@@ -19,8 +19,8 @@ import bonusTemplate from 'js/views/bonus.hbs!';
 import Handlebars from 'handlebars';
 import HandlebarsRuntime from 'handlebars-runtime';
 
-if ( $('#matchDaySelection').length ) {
-    HandlebarsRuntime.registerPartial( 'matchDaySelection', Handlebars.compile( $('#matchDaySelection').html() ) );
+if ( $('#roundSelection').length ) {
+    HandlebarsRuntime.registerPartial( 'roundSelection', Handlebars.compile( $('#roundSelection').html() ) );
 }
 
 if ( $('#bonusCategorySelection').length ) {
@@ -65,8 +65,8 @@ if ( $('.bulletins-form').length ) {
     new BulletinController( $('.bulletins-form' ), $( '.alert-overlay' ) );
 }
 
-if ( $('.matchdays-form').length ) {
-    new EntityListController( $('.matchdays-form'), $( '.alert-overlay' ), matchDayTemplate, 'matchDays' );
+if ( $('.rounds-form').length ) {
+    new EntityListController( $('.rounds-form'), $( '.alert-overlay' ), roundTemplate, 'rounds' );
 }
 
 if ( $('.bonus-choices-form').length ) {

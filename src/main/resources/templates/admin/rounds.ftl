@@ -8,7 +8,7 @@
 
 <html lang="nl">
 
-[@headUtil.head title="speelrondes beheren" /]
+[@headUtil.head title="Speelrondes beheren" /]
 <body>
 
 
@@ -33,28 +33,25 @@ backGroundColor="darkgreen"
 
 
 
-<form class="form matchdays-form" action="#" method="post">
+<form class="form rounds-form" action="#" method="post">
 
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-<div class="grid-gutter matchdays entities">
-    [#list matchDays]
+<div class="grid-gutter rounds entities">
+    [#list rounds as round]
+        <div class="form-row round-admin entity-admin row">
 
-        [#items as matchDay]
-        <div class="form-row matchday-admin entity-admin row">
-
-            <input type="hidden" name="matchDays[${matchDay?index}].id" value="${matchDay.id}" />
-            <input type="text" class="col-12-6" name="matchDays[${matchDay?index}].name" value="${matchDay.name}" />
+            <input type="hidden" name="rounds[${round?index}].id" value="${round.id}" />
+            <input type="text" class="col-12-6" name="rounds[${round?index}].name" value="${round.name}" />
 
             <span class="delete delete-entity">
                 <i class="glyph glyph-close c-gold col-12-1"></i>
             </span>
         </div>
-    [/#items]
 [/#list]
 </div>
 
-    <div class="col-gutter form-button-container matchdays-form-button-container">
+    <div class="col-gutter form-button-container rounds-form-button-container">
         <input type="button" class="add-entity" value="Toevoegen"/>
         <input type="submit" value="Opslaan" />
     </div>

@@ -1,14 +1,14 @@
 [#import "../macros/head.ftl" as headUtil]
 [#import "../macros/footer.ftl" as footerUtil]
 [#import "../macros/layout.ftl" as layout]
-[#import "../macros/matchdays.ftl" as matchDaysUtil]
+[#import "../macros/rounds.ftl" as roundUtil]
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
 
 <html lang="nl">
 
-    [@headUtil.head title="wedstrijden beheren" /]
+    [@headUtil.head title="Wedstrijden beheren" /]
     <body>
 
 
@@ -51,9 +51,9 @@
                                     [#assign hasMatchResult = false/]
                                 [/#if]
 
-                                [#assign matchDayId = -1]
-                                [#if match.matchDay ? has_content]
-                                    [#assign matchDayId = match.matchDay.id]
+                                [#assign roundId = -1]
+                                [#if match.round ? has_content]
+                                    [#assign roundId = match.round.id]
                                 [/#if]
 
                                 <input type="hidden" name="matches[${match?index}].id" value="${match.id}" />
@@ -65,7 +65,7 @@
                                 <input type="number" class="col-12-1" name="matches[${match?index}].homeTeamGoals" [#if hasMatchResult]value="${match.matchResult.homeTeamGoals!}"[#else]placeholder="home"[/#if] />
                                 <input type="number" class="col-12-1" name="matches[${match?index}].awayTeamGoals" [#if hasMatchResult]value="${match.matchResult.awayTeamGoals!}"[#else]placeholder="away"[/#if] />
 
-                                [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='matches[${match_index}].matchDayId' selectedMatchDayId=matchDayId addCss='col-12-2' /]
+                                [@roundUtil.roundSelection rounds=rounds formPath='matches[${match_index}].roundId' selectedRoundId=roundId addCss='col-12-2' /]
 
                                 <span class="delete delete-match">
                                     <i class="glyph glyph-close c-gold col-12-1"></i>
@@ -77,8 +77,8 @@
                     [/#list]
                     </div>
 
-                    <script id="matchDaySelection" type="text/template">
-                        [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='matches[{{@root.index}}].matchDayId' addCss='col-12-2' /]
+                    <script id="roundSelection" type="text/template">
+                        [@roundUtil.roundSelection rounds=rounds formPath='matches[{{@root.index}}].roundId' addCss='col-12-2' /]
                     </script>
 
                     <div class="form-button-container matches-form-button-container">

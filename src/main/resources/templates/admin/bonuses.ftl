@@ -2,7 +2,7 @@
 [#import "../macros/footer.ftl" as footerUtil]
 [#import "../macros/layout.ftl" as layout]
 [#import "../macros/bonuses.ftl" as bonusUtil]
-[#import "../macros/matchdays.ftl" as matchDaysUtil]
+[#import "../macros/rounds.ftl" as roundUtil]
 [#import "../macros/navigation.ftl" as navigationUtil]
 
 <!DOCTYPE html>
@@ -59,11 +59,11 @@ backGroundColor="darkgreen"
             [/#if]
 
 
-            [#assign matchDayId = -1]
-            [#if bonus.matchDay ? has_content]
-                [#assign matchDayId = bonus.matchDay.id]
+            [#assign roundId = -1]
+            [#if bonus.round ? has_content]
+                [#assign roundId = bonus.round.id]
             [/#if]
-            [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='bonuses[${bonus_index}].matchDayId' selectedMatchDayId=matchDayId addCss='col-12-1' /]
+            [@roundUtil.roundSelection rounds=rounds formPath='bonuses[${bonus_index}].roundId' selectedRoundId=RoundId addCss='col-12-1' /]
 
             <span class="delete delete-entity">
                 <i class="glyph glyph-close c-gold col-12-1"></i>
@@ -74,8 +74,8 @@ backGroundColor="darkgreen"
 [/#list]
 </div>
 
-    <script id="matchDaySelection" type="text/template">
-        [@matchDaysUtil.matchDaySelection matchDays=matchDays formPath='bonuses[{{@root.index}}].matchDayId' addCss='col-12-2' /]
+    <script id="roundSelection" type="text/template">
+        [@roundUtil.roundSelection rounds=rounds formPath='bonuses[{{@root.index}}].roundId' addCss='col-12-2' /]
     </script>
 
     <script id="bonusCategorySelection" type="text/template">

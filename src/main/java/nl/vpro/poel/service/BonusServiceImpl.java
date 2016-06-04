@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.Bonus;
 import nl.vpro.poel.domain.BonusCategory;
 import nl.vpro.poel.domain.BonusChoice;
-import nl.vpro.poel.domain.MatchDay;
+import nl.vpro.poel.domain.Round;
 import nl.vpro.poel.dto.BonusDTO;
 import nl.vpro.poel.dto.BonusForm;
 import nl.vpro.poel.repository.BonusRepository;
@@ -25,13 +25,13 @@ public class BonusServiceImpl implements BonusService{
 
     private final BonusRepository bonusRepository;
     private final BonusChoiceService bonusChoiceService;
-    private final MatchDayService matchDayService;
+    private final RoundService roundService;
 
     @Autowired
-    public BonusServiceImpl(BonusRepository bonusRepository, BonusChoiceService bonusChoiceService, MatchDayService matchDayService) {
+    public BonusServiceImpl(BonusRepository bonusRepository, BonusChoiceService bonusChoiceService, RoundService roundService) {
         this.bonusRepository = bonusRepository;
         this.bonusChoiceService = bonusChoiceService;
-        this.matchDayService = matchDayService;
+        this.roundService = roundService;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class BonusServiceImpl implements BonusService{
 
             Integer score = bonusDTO.getScore();
 
-            if ( score != null ) {
+            if (score != null) {
                 bonus.setScore(score);
             } else {
                 bonus.setScore(3);
@@ -104,7 +104,7 @@ public class BonusServiceImpl implements BonusService{
             bonus.setCategory(category);
 
             Long answerId = bonusDTO.getAnswerId();
-            if ( answerId == null ) {
+            if (answerId == null) {
                 bonus.setAnswer(null);
             } else {
                 Optional<BonusChoice> answer = bonusChoiceService.findById(answerId);
@@ -116,15 +116,15 @@ public class BonusServiceImpl implements BonusService{
                 }
             }
 
-            Long matchDayId = bonusDTO.getMatchDayId();
-            if (matchDayId == null) {
-                bonus.setMatchDay(null);
+            Long roundId = bonusDTO.getRoundId();
+            if (roundId == null) {
+                bonus.setRound(null);
             } else {
-                Optional<MatchDay> matchDay = matchDayService.findById(matchDayId);
-                if (matchDay.isPresent()) {
-                    bonus.setMatchDay(matchDay.get());
+                Optional<Round> round = roundService.findById(roundId);
+                if (round.isPresent()) {
+                    bonus.setRound(round.get());
                 } else {
-                    log.warn("Ignoring bonus update {}, because no match day exists for this id", bonusDTO);
+                    log.warn("Ignoring bonus update {}, because no round exists for this id", bonusDTO);
                     continue;
                 }
             }

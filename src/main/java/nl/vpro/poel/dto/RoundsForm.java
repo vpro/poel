@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class MatchDayForm {
+public class RoundsForm {
 
-    private List<MatchDayDTO> matchDays;
+    private List<RoundDTO> rounds;
 }
