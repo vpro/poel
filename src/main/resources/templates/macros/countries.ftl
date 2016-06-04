@@ -118,7 +118,7 @@
     "Kenia" : "ke",
     "Kirgizië" : "kg",
     "Kiribati" : "ki",
-    "kleine afgelegen eilanden van de Verenigde Staten" : "um",
+    "Kleine afgelegen eilanden van de Verenigde Staten" : "um",
     "Koeweit" : "kw",
     "Kroatië" : "hr",
     "Laos" : "la",
