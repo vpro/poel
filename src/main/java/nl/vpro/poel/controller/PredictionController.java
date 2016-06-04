@@ -19,6 +19,7 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping(value = "/predictions")
@@ -85,46 +86,16 @@ class PredictionController {
 
     // TODO: Move this logic out to a service?
     private List<ScoredPrediction> toScoredPredictions(List<Match> matches, List<Bonus> bonuses, User user) {
-
-        List<ScoredPrediction> combined = new ArrayList<>();
-
-        combined.addAll(matches.stream()
-                .map(match -> predictionService.getPredictionForMatch(user, match).orElseGet(() -> new Prediction(user, match)))
+        return Stream.concat(
+                matches.stream()
+                        .map(match -> predictionService.getPredictionForMatch(user, match)
+                                .orElseGet(() -> new Prediction(user, match))),
+                bonuses.stream()
+                        .map(bonus -> predictionService.getPredictionForBonus(user, bonus)
+                                .orElseGet(() -> new Prediction(user, bonus)))
+                )
                 .map(prediction -> new ScoredPrediction(prediction, scoreService.getScore(prediction)))
-                .collect(Collectors.toList())
-        );
-
-        combined.addAll(bonuses.stream()
-                        .map(bonus -> predictionService.getPredictionForBonus(user, bonus).orElseGet(() -> new Prediction(user, bonus)))
-                        .map(prediction -> new ScoredPrediction(prediction, scoreService.getScore(prediction)))
-                        .collect(Collectors.toList())
-        );
-
-        return orderScoredPredictionsByStart(combined);
-    }
-
-    // TODO: jajaja
-    private List<ScoredPrediction> orderScoredPredictionsByStart( List<ScoredPrediction> scoredPredictions ) {
-
-        List<ScoredPrediction> ordered = new ArrayList<>();
-
-        NavigableMap<Date, List<ScoredPrediction>> predictionsByStart = new TreeMap<>();
-        for (ScoredPrediction scoredPrediction : scoredPredictions) {
-            Date startDate = scoredPrediction.getPrediction().getStart();
-            if ( startDate != null ) {
-                List<ScoredPrediction> predictions = predictionsByStart.getOrDefault(startDate, new ArrayList<>());
-                predictions.add(scoredPrediction);
-                predictionsByStart.put( startDate, predictions );
-            }
-        }
-
-        for (Map.Entry<Date, List<ScoredPrediction>> entry : predictionsByStart.entrySet()) {
-            List<ScoredPrediction> scored = entry.getValue();
-            for (ScoredPrediction sp : scored) {
-                ordered.add( sp);
-            }
-        }
-
-        return ordered;
+                .sorted((sp1, sp2) -> sp1.getPrediction().getStart().compareTo(sp2.getPrediction().getStart()))
+                .collect(Collectors.toList());
     }
 }
