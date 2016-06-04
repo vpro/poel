@@ -30,11 +30,7 @@
         [@messageUtil.outputMessage message=message ! /]
     [/#if]
 
-    [#if user.gameName ? has_content]
-        [#assign salutation = user.gameName]
-    [#else]
-        [#assign salutation = user.realName]
-    [/#if]
+    [#assign salutation = user.gameName!user.realName!]
 
     [@layout.sectionWithLayout
     content={"layout":"100"}
@@ -73,13 +69,13 @@
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 
                 <div class="grid row">
-                    <span class="h6 col col-12-2">Naam (voor- en achternaam):</span>
-                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName}"/>
+                    <span class="h6 col col-12-2">Echte naam:</span>
+                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName!}"/>
                 </div>
 
                 <div class="grid row">
                     <span class="h6 col col-12-2">Voetbalnaam:</span>
-                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName}"/>
+                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName!}"/>
                 </div>
 
                 <div class="form-footer bg-blue">
