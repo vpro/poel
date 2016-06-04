@@ -4,6 +4,7 @@ import nl.vpro.poel.UserUtil;
 import nl.vpro.poel.domain.CurrentUser;
 import nl.vpro.poel.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -18,9 +19,12 @@ public class PoelControllerAdvice {
 
     private final MessageService messageService;
 
+    private final String title;
+
     @Autowired
-    public PoelControllerAdvice(MessageService messageService) {
+    public PoelControllerAdvice(MessageService messageService, @Value("${poel.title}") String title) {
         this.messageService = messageService;
+        this.title = title;
     }
 
     @ModelAttribute("user")
@@ -32,5 +36,10 @@ public class PoelControllerAdvice {
     public String message(HttpServletRequest request) {
         String key = request.getRequestURI();
         return messageService.getText(key).orElse("");
+    }
+
+    @ModelAttribute("title")
+    public String title() {
+        return title;
     }
 }
