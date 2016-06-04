@@ -84,7 +84,6 @@ class PredictionController {
         return "redirect:/predictions";
     }
 
-    // TODO: Move this logic out to a service?
     private List<ScoredPrediction> toScoredPredictions(List<Match> matches, List<Bonus> bonuses, User user) {
         return Stream.concat(
                 matches.stream()

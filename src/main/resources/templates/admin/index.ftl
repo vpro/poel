@@ -66,6 +66,13 @@
             <span class="h6 c-white home-navigation-link-subtitle">mailings invoeren</span>
         </span>
     </a>
+
+    <a href="/admin/export" class="home-navigation-link bg-greybat">
+        <span class='h2 c-white home-navigation-link-title'>
+            Exporteren<br/>
+            <span class="h6 c-white home-navigation-link-subtitle">Fijne CSV-bestandjes</span>
+        </span>
+    </a>
  </div>
 
 <a class="top-navigation-back" href="/"> <i class="glyph glyph-arrowleft c-white"></i></a>

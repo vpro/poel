@@ -29,10 +29,6 @@
     ]
         <div class="grid-gutter theme-text">
 
-            <p>
-                <a href="/admin/users/csv" class="theme-link">Exporteer alle gebruikers (CSV)</a>
-            </p>
-
             [#list users]
             <form class="form" action="/admin/users" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>

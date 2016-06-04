@@ -40,9 +40,4 @@ class IndexController {
 
         return "index";
     }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    String showAdminIndex() {
-        return "admin/index";
-    }
 }
