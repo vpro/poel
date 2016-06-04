@@ -15,7 +15,7 @@ public class ScoreServiceImpl implements ScoreService {
 
     private final PredictionService predictionService;
 
-    private final int pointsForCorrectWinner;
+    private final int pointsForCorrectMatchWinner;
     private final int pointsForCorrectMatchResult;
     private final int scoreMultiplierFactor;
 
@@ -23,13 +23,13 @@ public class ScoreServiceImpl implements ScoreService {
     ScoreServiceImpl(
             UserService userService,
             PredictionService predictionService,
-            @Value("${poel.pointsForCorrectWinner}") int pointsForCorrectWinner,
+            @Value("${poel.pointsForCorrectMatchWinner}") int pointsForCorrectMatchWinner,
             @Value("${poel.pointsForCorrectMatchResult}") int pointsForCorrectMatchResult,
             @Value("${poel.scoreMultiplierFactor}") int scoreMultiplierFactor
     ) {
         this.userService = userService;
         this.predictionService = predictionService;
-        this.pointsForCorrectWinner = pointsForCorrectWinner;
+        this.pointsForCorrectMatchWinner = pointsForCorrectMatchWinner;
         this.pointsForCorrectMatchResult = pointsForCorrectMatchResult;
         this.scoreMultiplierFactor = scoreMultiplierFactor;
     }
@@ -62,8 +62,8 @@ public class ScoreServiceImpl implements ScoreService {
 
     private int getScoreForMatchPrediction(Prediction prediction) {
 
-        MatchResult predictedResult = prediction.getMatchResult();
-        if (predictedResult == null) {
+        MatchResult predictedMatchResult = prediction.getMatchResult();
+        if (predictedMatchResult == null) {
             return 0;
         }
 
@@ -72,13 +72,13 @@ public class ScoreServiceImpl implements ScoreService {
             return 0;
         }
 
-        MatchResult actualResult = match.getMatchResult();
-        if (actualResult == null) {
+        MatchResult actualMatchResult = match.getMatchResult();
+        if (actualMatchResult == null) {
             return 0;
         }
 
-        int scoreForWinner = getScoreForWinner(predictedResult, actualResult);
-        int scoreForResult = getScoreForResult(predictedResult, actualResult);
+        int scoreForWinner = getScoreForWinner(predictedMatchResult, actualMatchResult);
+        int scoreForResult = getScoreForResult(predictedMatchResult, actualMatchResult);
         int score = scoreForWinner + scoreForResult;
         if (prediction.isMultiplier()) {
             score *= scoreMultiplierFactor;
@@ -111,9 +111,9 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
-        Winner actualWinner = getWinner(actualResult);
-        Winner predictedWinner = getWinner(predictedResult);
-        return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectWinner : 0;
+        MatchWinner actualWinner = getMatchWinner(actualResult);
+        MatchWinner predictedWinner = getMatchWinner(predictedResult);
+        return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectMatchWinner : 0;
     }
 
     private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
@@ -130,16 +130,16 @@ public class ScoreServiceImpl implements ScoreService {
         return Objects.equals(actualResult, predictedResult) ? bonusScore : 0;
     }
 
-    private Winner getWinner(MatchResult matchResult) {
+    private MatchWinner getMatchWinner(MatchResult matchResult) {
         int homeTeamGoals = matchResult.getHomeTeamGoals();
         int awayTeamGoals = matchResult.getAwayTeamGoals();
 
         if (homeTeamGoals > awayTeamGoals) {
-            return Winner.HOME;
+            return MatchWinner.HOME;
         }
         if (homeTeamGoals < awayTeamGoals) {
-            return Winner.AWAY;
+            return MatchWinner.AWAY;
         }
-        return Winner.NEITHER;
+        return MatchWinner.NEITHER;
     }
 }

@@ -1,6 +1,6 @@
 package nl.vpro.poel.domain;
 
-public enum Winner {
+public enum MatchWinner {
 
     HOME,
     AWAY,
