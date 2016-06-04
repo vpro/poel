@@ -49,10 +49,13 @@
 
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
-                                    [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
-                        
-                                    [@formUtil.showMatch status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
+                                    [#if scoredPrediction.prediction.match ? has_content]
+                                        [#assign object = scoredPrediction.prediction.match ]
+                                    [#elseif scoredPrediction.prediction.bonus ? has_content]
+                                        [#assign object = scoredPrediction.prediction.bonus ]
+                                    [/#if]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@formUtil.showPrediction status=formUtil.STATUS_FINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
 
                                 [/#items]
                             </div>
@@ -83,11 +86,13 @@
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
-                                    [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
-
-                                    [@formUtil.showMatch status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
-
+                                    [#if scoredPrediction.prediction.match ? has_content]
+                                        [#assign object = scoredPrediction.prediction.match ]
+                                    [#elseif scoredPrediction.prediction.bonus ? has_content]
+                                        [#assign object = scoredPrediction.prediction.bonus ]
+                                    [/#if]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@formUtil.showPrediction status=formUtil.STATUS_UNFINISHED scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
                                 [/#items]
                             </div>
                         [#else]
@@ -123,11 +128,13 @@
                             <div class="collapsible-section-content">
                                 [#items as scoredPrediction]
 
-                                    [#assign match = scoredPrediction.prediction.match ]
-                                    [@matchDaysUtil.showOptionalMatchDayLabel match.start /]
-
-                                    [@formUtil.showMatch scoredPrediction=scoredPrediction status=formUtil.STATUS_FUTURE parity=scoredPrediction?item_parity index=scoredPrediction?index /]
-
+                                    [#if scoredPrediction.prediction.match ? has_content]
+                                        [#assign object = scoredPrediction.prediction.match ]
+                                    [#elseif scoredPrediction.prediction.bonus ? has_content]
+                                        [#assign object = scoredPrediction.prediction.bonus ]
+                                    [/#if]
+                                    [@matchDaysUtil.showOptionalMatchDayLabel object /]
+                                    [@formUtil.showPrediction status=formUtil.STATUS_FUTURE scoredPrediction=scoredPrediction parity=scoredPrediction?item_parity index=scoredPrediction?index /]
                                 [/#items]
                             </div>
 

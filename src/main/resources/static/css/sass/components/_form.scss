@@ -99,12 +99,14 @@
 }
 
 
-.prediction__game{
+.prediction__game,
+.prediction__question {
     width: 260px;
 }
 
 @include media-med-screen-width () {
-    .prediction__game{
+    .prediction__game,
+    .prediction__question {
         width: 69%;
     }
 }
@@ -130,7 +132,8 @@
 }
 
 .prediction__result-title,
-.prediction__game {
+.prediction__game,
+.prediction__question{
   padding-left: 1*$gu;
 
   @include title-font();
@@ -139,7 +142,8 @@
 @include media-med-screen-width () {
 
   .prediction__result-title,
-  .prediction__game {
+  .prediction__game,
+  .prediction__question {
     padding-left: 6 * $gu;
   }
 }

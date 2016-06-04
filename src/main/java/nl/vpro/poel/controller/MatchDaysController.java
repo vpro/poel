@@ -1,10 +1,8 @@
 package nl.vpro.poel.controller;
 
-import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.MatchDay;
-import nl.vpro.poel.dto.MatchForm;
+import nl.vpro.poel.dto.MatchDayForm;
 import nl.vpro.poel.service.MatchDayService;
-import nl.vpro.poel.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,33 +14,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/matches")
-public class MatchesController {
-
-    private final MatchService matchService;
+@RequestMapping("/admin/matchdays")
+public class MatchDaysController {
 
     private final MatchDayService matchDayService;
 
     @Autowired
-    public MatchesController(MatchService matchService, MatchDayService matchDayService) {
-        this.matchService = matchService;
+    public MatchDaysController(MatchDayService matchDayService) {
         this.matchDayService = matchDayService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    String showMatches(Model model) {
-        List<Match> matches = matchService.findAll();
+    String showMatchDays(Model model) {
         List<MatchDay> matchDays = matchDayService.findAll();
-
-        model.addAttribute("matches", matches);
         model.addAttribute("matchDays", matchDays);
-
-        return "admin/matches";
+        return "admin/matchdays";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String saveMatches(@ModelAttribute("matches") MatchForm matchForm, BindingResult bindingResult) {
-        matchService.save(matchForm);
-        return "redirect:/admin/matches";
+    String saveMatchDays(@ModelAttribute("matchDays") MatchDayForm matchDayForm, BindingResult bindingResult) {
+        matchDayService.setMatchDays(matchDayForm);
+        return "redirect:/admin/matchdays";
     }
 }

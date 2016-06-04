@@ -49,6 +49,19 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public int getScore(Prediction prediction) {
 
+        if ( prediction.getMatch() != null ) {
+            return getScoreForMatchPrediction(prediction);
+
+        } else if ( prediction.getBonus() != null ) {
+            return getScoreForBonusPrediction(prediction);
+
+        } else {
+            return 0;
+        }
+    }
+
+    private int getScoreForMatchPrediction(Prediction prediction) {
+
         MatchResult predictedResult = prediction.getMatchResult();
         if (predictedResult == null) {
             return 0;
@@ -73,6 +86,30 @@ public class ScoreServiceImpl implements ScoreService {
         return score;
     }
 
+    private int getScoreForBonusPrediction(Prediction prediction) {
+
+        BonusChoice predictedAnswer = prediction.getAnswer();
+        if (predictedAnswer == null) {
+            return 0;
+        }
+
+        Bonus bonus = prediction.getBonus();
+        if (bonus == null) {
+            return 0;
+        }
+
+        BonusChoice actualAnswer = bonus.getAnswer();
+        if (actualAnswer == null) {
+            return 0;
+        }
+
+        int score = getScoreForResult(predictedAnswer, actualAnswer, bonus.getScore());
+        if (prediction.isMultiplier()) {
+            score *= scoreMultiplierFactor;
+        }
+        return score;
+    }
+
     private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
         Winner actualWinner = getWinner(actualResult);
         Winner predictedWinner = getWinner(predictedResult);
@@ -81,6 +118,16 @@ public class ScoreServiceImpl implements ScoreService {
 
     private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
         return Objects.equals(actualResult, predictedResult) ? pointsForCorrectMatchResult : 0;
+    }
+
+    /**
+     * @param predictedResult
+     * @param actualResult
+     * @param bonusScore - Admins can define a specific score for bonus questions
+     * @return
+     */
+    private int getScoreForResult(BonusChoice predictedResult, BonusChoice actualResult, int bonusScore) {
+        return Objects.equals(actualResult, predictedResult) ? bonusScore : 0;
     }
 
     private Winner getWinner(MatchResult matchResult) {

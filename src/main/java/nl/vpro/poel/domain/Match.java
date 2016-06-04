@@ -35,14 +35,22 @@ public class Match {
     @Embedded
     private MatchResult matchResult;
 
+    @ManyToOne
+    private MatchDay matchDay;
+
     public Match(String homeTeam, String awayTeam, Date start) {
-        this(homeTeam, awayTeam, start, null);
+        this(homeTeam, awayTeam, start, null, null);
     }
 
     public Match(String homeTeam, String awayTeam, Date start, MatchResult matchResult) {
+        this(homeTeam, awayTeam, start, matchResult, null);
+    }
+
+    public Match(String homeTeam, String awayTeam, Date start, MatchResult matchResult, MatchDay matchDay) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.start = start;
         this.matchResult = matchResult;
+        this.matchDay = matchDay;
     }
 }

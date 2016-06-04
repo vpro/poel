@@ -1,5 +1,6 @@
 package nl.vpro.poel.service;
 
+import nl.vpro.poel.domain.Bonus;
 import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.Prediction;
 import nl.vpro.poel.domain.User;
@@ -17,4 +18,10 @@ public interface PredictionService {
     List<Prediction> getPredictions(User user);
 
     Optional<Prediction> getPredictionForMatch(User user, Match match);
+
+    Optional<Prediction> getPredictionForBonus(User user, Bonus bonus);
+
+    Optional<Prediction> getPredictionForSubject(User user, Match match);
+
+    Optional<Prediction> getPredictionForSubject(User user, Bonus bonus);
 }
