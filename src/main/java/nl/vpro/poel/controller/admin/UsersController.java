@@ -1,4 +1,4 @@
-package nl.vpro.poel.controller;
+package nl.vpro.poel.controller.admin;
 
 import lombok.extern.slf4j.Slf4j;
 import nl.vpro.poel.domain.User;

@@ -1,8 +1,10 @@
-package nl.vpro.poel.controller;
+package nl.vpro.poel.controller.admin;
 
+import nl.vpro.poel.domain.Match;
 import nl.vpro.poel.domain.Round;
-import nl.vpro.poel.dto.RoundsForm;
+import nl.vpro.poel.dto.MatchForm;
 import nl.vpro.poel.service.RoundService;
+import nl.vpro.poel.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,26 +16,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/rounds")
-public class RoundController {
+@RequestMapping("/admin/matches")
+public class MatchController {
+
+    private final MatchService matchService;
 
     private final RoundService roundService;
 
     @Autowired
-    public RoundController(RoundService roundService) {
+    public MatchController(MatchService matchService, RoundService roundService) {
+        this.matchService = matchService;
         this.roundService = roundService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    String showRounds(Model model) {
+    String showMatches(Model model) {
+        List<Match> matches = matchService.findAll();
         List<Round> rounds = roundService.findAll();
+
+        model.addAttribute("matches", matches);
         model.addAttribute("rounds", rounds);
-        return "admin/rounds";
+
+        return "admin/matches";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    String setRounds(@ModelAttribute("rounds") RoundsForm roundsForm, BindingResult bindingResult) {
-        roundService.setRounds(roundsForm);
-        return "redirect:/admin/rounds";
+    String saveMatches(@ModelAttribute("matches") MatchForm matchForm, BindingResult bindingResult) {
+        matchService.save(matchForm);
+        return "redirect:/admin/matches";
     }
 }

@@ -1,4 +1,4 @@
-package nl.vpro.poel.controller;
+package nl.vpro.poel.controller.admin;
 
 import nl.vpro.poel.domain.Message;
 import nl.vpro.poel.dto.MessageForm;
