@@ -9,7 +9,7 @@
 
 <html lang="nl">
 
-[@headUtil.head title="bonus vragen beheren" /]
+[@headUtil.head title="Bonusvragen beheren" /]
 <body>
 
 
@@ -22,7 +22,7 @@
 </div>
 [/#if]
 
-[@navigationUtil.navigation title='Admin' subtitle='bonus vragen' back='/admin' /]
+[@navigationUtil.navigation title='Admin' subtitle='Bonusvragen' back='/admin' /]
 
 <div class="grid">
 

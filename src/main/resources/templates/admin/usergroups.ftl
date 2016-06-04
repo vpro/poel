@@ -8,7 +8,7 @@
 
 <html lang="nl">
 
-[@headUtil.head title="groepen beheren" /]
+[@headUtil.head title="Afdelingen beheren" /]
 <body>
 
 
@@ -21,13 +21,13 @@
 </div>
 [/#if]
 
-[@navigationUtil.navigation title='Admin' subtitle='groepen' bgColor='bg-darkred' back='/admin' /]
+[@navigationUtil.navigation title='Admin' subtitle='Afdelingen' bgColor='bg-darkred' back='/admin' /]
 
 <div class="grid">
 
 [@layout.sectionWithLayout
 content={'layout': '100'}
-title='groepen'
+title='Afdelingen'
 backGroundColor="darkgreen"
 ]
 

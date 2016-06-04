@@ -21,7 +21,7 @@
     <a href="/admin/export/ranking" class="home-navigation-link bg-greybat">
         <span class='h2 c-white home-navigation-link-title'>
             Klassement<br/>
-            <span class="h6 c-white home-navigation-link-subtitle">Voor historisch besef</span>
+            <span class="h6 c-white home-navigation-link-subtitle">Voor het historisch besef</span>
         </span>
     </a>
 </div>

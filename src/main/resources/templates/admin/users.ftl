@@ -37,7 +37,7 @@
                     <div class="col col-4-1"><h2 class="h5">Gebruikersnaam</h2></div>
                     <div class="col col-4-1"><h2 class="h5">Echte naam</h2></div>
                     <div class="col col-4-1"><h2 class="h5">Voetbalnaam</h2></div>
-                    <div class="col col-4-1"><h2 class="h5">Groep</h2></div>
+                    <div class="col col-4-1"><h2 class="h5">Afdeling</h2></div>
                 </div>
                 <br />
                 [#items as u]

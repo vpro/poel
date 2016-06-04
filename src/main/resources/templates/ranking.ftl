@@ -61,7 +61,7 @@
     <div class="grid bg-darkgreen">
         [@layout.sectionWithLayout
             content={"layout":"100"}
-            title='spelers'
+            title='Deelnemers'
             collapsible=true
             opened=true
             addCss='ranking-section'
