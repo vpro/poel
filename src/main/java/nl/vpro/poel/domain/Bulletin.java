@@ -28,11 +28,4 @@ public class Bulletin {
 
     @Column(nullable = false)
     private String date;
-
-    public Bulletin(String key, String text, String description, String date) {
-        this.key = key;
-        this.text = text;
-        this.description = description;
-        this.date = date;
-    }
 }
