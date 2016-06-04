@@ -94,8 +94,8 @@ class PredictionController {
                         .map(bonus -> predictionService.getPredictionForBonus(user, bonus)
                                 .orElseGet(() -> new Prediction(user, bonus)))
                 )
+                .sorted((p1, p2) -> p1.getStart().compareTo(p2.getStart()))
                 .map(prediction -> new ScoredPrediction(prediction, scoreService.getScore(prediction)))
-                .sorted((sp1, sp2) -> sp1.getPrediction().getStart().compareTo(sp2.getPrediction().getStart()))
                 .collect(Collectors.toList());
     }
 }
