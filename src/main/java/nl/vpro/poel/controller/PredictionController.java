@@ -53,9 +53,11 @@ class PredictionController {
 
         List<BonusChoice> countryChoices = bonusChoiceService.findByCategory(BonusCategory.COUNTRY);
         List<BonusChoice> playerChoices = bonusChoiceService.findByCategory(BonusCategory.PLAYER);
+        List<BonusChoice> scoreChoices = bonusChoiceService.findByCategory(BonusCategory.SCORE);
 
         model.addAttribute("countries", countryChoices);
         model.addAttribute("players", playerChoices);
+        model.addAttribute("scores", scoreChoices);
 
         Instant now = Instant.now();
 
