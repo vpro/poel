@@ -10,7 +10,5 @@ import java.util.List;
 @Repository
 public interface BonusChoiceRepository extends JpaRepository<BonusChoice, Long> {
 
-    List<BonusChoice> findAllOrderByCategoryAscValueAsc();
-
     List<BonusChoice> findByCategoryOrderByValueAsc(BonusCategory category);
 }

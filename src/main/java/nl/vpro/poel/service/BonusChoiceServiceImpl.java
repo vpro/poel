@@ -9,6 +9,7 @@ import nl.vpro.poel.repository.BonusChoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -36,13 +37,18 @@ public class BonusChoiceServiceImpl implements BonusChoiceService  {
     }
 
     @Override
-    public List<BonusChoice> findAll() {
-        return bonusChoiceRepository.findAllOrderByCategoryAscValueAsc();
+    public List<BonusChoice> findAllOrderedByCategoryAndValue() {
+        return bonusChoiceRepository.findAll().stream()
+                .sorted(Comparator.nullsLast(
+                        Comparator.comparing(BonusChoice::getCategory)
+                        .thenComparing(BonusChoice::getValue)
+                ))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void setChoices(BonusChoiceForm bonusChoiceForm) {
-        Set<Long> idsToRemove = findAll().stream().map(BonusChoice::getId).collect(Collectors.toSet());
+        Set<Long> idsToRemove = findAllOrderedByCategoryAndValue().stream().map(BonusChoice::getId).collect(Collectors.toSet());
 
         for (BonusChoiceDTO bonusChoiceDTO : bonusChoiceForm.getChoices()) {
             Long id = bonusChoiceDTO.getId();

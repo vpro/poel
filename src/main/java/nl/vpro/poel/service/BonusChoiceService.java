@@ -15,7 +15,7 @@ public interface BonusChoiceService {
 
     List<BonusChoice> choicesFor(BonusCategory category);
 
-    List<BonusChoice> findAll();
+    List<BonusChoice> findAllOrderedByCategoryAndValue();
 
     void setChoices(BonusChoiceForm bonusChoiceForm);
 }
