@@ -77,6 +77,13 @@
                 </div>
             </form>
 
+            [#if user?has_content]
+                <form action="/logout" method="post" class="logout">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                    <input type="submit" class="h5" value="Log uit"/>
+                </form>
+            [/#if]
+
         </div>
 
     [/@layout.sectionWithLayout]

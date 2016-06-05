@@ -24,6 +24,28 @@
   border-top: 1px solid #000;
 }
 
+.logout {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  z-index: 1000;
+}
+
+.logout [type="submit"] {
+  border: 0px solid black;
+  border-width: 0 0 0 1px;
+  padding: 0 16px;
+  cursor: pointer;
+  text-transform: lowercase;
+  color: #000;
+  height: 46px;
+  line-height: 46px;
+  background: #fff;
+  width: 100%;
+  float: right;
+}
+
 input:disabled{
     background: #666;
     color: #fff;

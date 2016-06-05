@@ -42,6 +42,20 @@
 
 }
 
+.top-navigation-profile{
+  position: absolute;
+  top:0;
+  right:0;
+  padding: 8px;
+
+
+  &:hover{
+    text-decoration: none;
+  }
+
+}
+
+
 .top-navigation-menu{
   position: absolute;
   top:0;

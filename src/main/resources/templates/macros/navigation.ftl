@@ -8,6 +8,8 @@
         </span>
 
         <a class="top-navigation-back" href="${ back }"> <i class="glyph glyph-arrowleft c-white"></i></a>
+
+        <a class="top-navigation-profile" href="/user"> <i class="glyph glyph-person c-white"></i></a>
     </nav>
 </div>
 [/#macro]
