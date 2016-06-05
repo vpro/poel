@@ -82,7 +82,7 @@ var FormController = Stapes.subclass({
 
         var multipliersCheckedList = this.$allMultipliers.filter(':checked');
         var multipliersChecked = multipliersCheckedList.length;
-        console.log( multipliersCheckedList );
+
         var multipliersLeft = Math.max( 0, MAX_MULTIPLIERS - multipliersChecked );
 
         if ( multipliersChecked >= MAX_MULTIPLIERS ) {
