@@ -131,7 +131,7 @@
     <tr class="prediction__row prediction__row-${ parity }">
         <td class="prediction__question">
 
-            ${ bonus.question } (voor ${bonusScore} punt[#if bonusScore != 1]en[/#if])
+            ${ bonus.question } (${bonusScore} punt[#if bonusScore != 1]en[/#if])
 
             [#if status == STATUS_FUTURE]
                 <input type="hidden" name="predictions[${predictionIndex}].bonusId" value="${bonus.id}"/>
