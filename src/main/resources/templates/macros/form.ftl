@@ -24,6 +24,7 @@
     [#assign multiplier = prediction.multiplier]
     [#assign score = scoredPrediction.score]
     [#assign predictionIndex = index]
+    [#assign timeToStart = match.start?long - .now?long]
 
 <table class="predictions match-prediction">
     <tbody>
@@ -88,7 +89,7 @@
         <td class="prediction__result-title" >
             ${match.start?string["dd-MM, HH:mm"]}
 
-            [#if match.start?long - .now?long < 10800000 && !hasPredictedResult ]
+            [#if timeToStart > 0 &&  timeToStart < 10800000 && !hasPredictedResult ]
             <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
             [/#if]
         </td>
@@ -122,6 +123,7 @@
     [#assign multiplier = prediction.multiplier]
     [#assign score = scoredPrediction.score]
     [#assign predictionIndex = index]
+    [#assign timeToStart = bonus.start?long - .now?long]
 
 <table class="predictions bonus-prediction">
     <tbody>
@@ -182,7 +184,7 @@
         <td class="prediction__result-title" >
             ${bonus.start?string["dd-MM, HH:mm"]}
 
-            [#if bonus.start?long - .now?long < 10800000 && !hasPredictedResult ]
+            [#if timeToStart > 0 &&  timeToStart < 10800000 && !hasPredictedResult ]
                 <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: deadline is bijna! </span>
             [/#if]
         </td>
