@@ -86,21 +86,11 @@
 
     <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
         <td class="prediction__result-title" >
+            ${match.start?string["dd-MM, HH:mm"]}
 
-            [#if status == STATUS_FUTURE]
-                Wedstrijd op: ${match.start?string["dd-MM, HH:mm"]}
-
-                [#if match.start?long - .now?long < 10800000 && !hasPredictedResult ]
-                <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
-                [/#if]
-            [#elseif status == STATUS_FINISHED]
-                Uitslag:
-            [#else]
-                Wedstrijd gestart op: ${match.start?string["dd-MM, HH:mm"]}
+            [#if match.start?long - .now?long < 10800000 && !hasPredictedResult ]
+            <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
             [/#if]
-
-
-
         </td>
         <td class="prediction__result" >
             [#if actualResult ? has_content]
@@ -190,21 +180,11 @@
 
     <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
         <td class="prediction__result-title" >
+            ${bonus.start?string["dd-MM, HH:mm"]}
 
-            [#if status == STATUS_FUTURE]
-                Bonusvraag deadline op: ${bonus.start?string["dd-MM, HH:mm"]}
-
-                [#if bonus.start?long - .now?long < 10800000 && !hasPredictedResult ]
-                    <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: deadline is bijna! </span>
-                [/#if]
-            [#elseif status == STATUS_FINISHED]
-                Antwoord:
-            [#else]
-                Wachtend op antwoord sinds: ${bonus.start?string["dd-MM, HH:mm"]}
+            [#if bonus.start?long - .now?long < 10800000 && !hasPredictedResult ]
+                <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: deadline is bijna! </span>
             [/#if]
-
-
-
         </td>
         <td class="prediction__result" >
             [#if actualResult ? has_content]
