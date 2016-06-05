@@ -36,7 +36,11 @@ public class UsersController {
     String showUsers(Model model) {
 
         List<User> allUsers = userService.getAllUsers();
-        allUsers.sort(Comparator.comparing(User::getRealName));
+        allUsers.sort(
+                Comparator.nullsLast(
+                        Comparator.comparing(User::getRealName)
+                )
+        );
         model.addAttribute("users", allUsers);
 
         List<UserGroup> userGroups = userGroupService.findAll();

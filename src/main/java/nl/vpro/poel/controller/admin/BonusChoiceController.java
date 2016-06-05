@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -28,6 +29,12 @@ public class BonusChoiceController {
     @RequestMapping(method = RequestMethod.GET)
     String showChoices(Model model) {
         List<BonusChoice> bonusChoices = bonusChoiceService.findAll();
+        bonusChoices.sort(
+                Comparator.nullsLast(
+                        Comparator.comparing(BonusChoice::getCategory)
+                                .thenComparing(BonusChoice::getValue)
+                )
+        );
         model.addAttribute("choices", bonusChoices);
         model.addAttribute("categories", BonusCategory.values());
         return "admin/bonuschoices";
