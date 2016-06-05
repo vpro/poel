@@ -36,7 +36,7 @@
                     [@layout.sectionWithLayout
                         content={'layout': '100'}
                         collapsible=true
-                        title='wedstrijden: eerder gespeeld'
+                        title='Afgerond'
                         backGroundColor="greybat"
                         addContainerCss=''
                         addCss='prediction-section'
@@ -72,7 +72,7 @@
                     [@layout.sectionWithLayout
                         content={'layout': '100'}
                         collapsible=true
-                        title='wedstrijden: nu'
+                        title='Bezig'
                         backGroundColor="greybat"
                         addContainerCss=''
                         addCss='prediction-section'
@@ -110,7 +110,7 @@
                     [@layout.sectionWithLayout
                         content={'layout': '100'}
                         collapsible=true
-                        title='wedstrijden: later'
+                        title='Nog te voorspellen'
                         backGroundColor="greybat"
                         addContainerCss=''
                         addCss='prediction-section'
