@@ -103,19 +103,35 @@ public class DummyDataLoader {
         BonusChoice portugal = new BonusChoice("Portugal", BonusCategory.COUNTRY);
         BonusChoice ronaldo = new BonusChoice("Ronaldo", BonusCategory.PLAYER);
         BonusChoice ibra = new BonusChoice("Ibrahimovic", BonusCategory.PLAYER);
+        BonusChoice goals0 = new BonusChoice("0", BonusCategory.SCORE);
+        BonusChoice goals1 = new BonusChoice("1", BonusCategory.SCORE);
+        BonusChoice goals2 = new BonusChoice("2", BonusCategory.SCORE);
 
         bonusChoiceRepository.save(Arrays.asList(
                 france,
                 portugal,
+
                 ronaldo,
-                ibra
+                ibra,
+
+                goals0,
+                goals1,
+                goals2
         ));
 
-        Bonus topScorert = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, lastWeek, 3, ronaldo, preliminary );
-        Bonus topScorert2 = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, now, 3, null, eights );
-        Bonus topScorert3 = new Bonus( "Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, nextWeek, 3, null, quarter );
+        Bonus winner = new Bonus("Wie wordt er kampioen?", BonusCategory.COUNTRY, nextWeek, 100, null, preliminary);
+
+        Bonus topScorert = new Bonus("Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, lastWeek, 3, ronaldo, preliminary);
+        Bonus topScorert2 = new Bonus("Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, now, 3, null, eights);
+        Bonus topScorert3 = new Bonus("Wie wordt de topscorer van deze ronde?", BonusCategory.PLAYER, nextWeek, 3, null, quarter);
+
+        Bonus goals = new Bonus("Hoeveel doelpunten?", BonusCategory.SCORE, nextWeek, 1000, null, preliminary);
 
         bonusRepository.save(Arrays.asList(
+                winner,
+
+                goals,
+
                 topScorert,
                 topScorert2,
                 topScorert3
