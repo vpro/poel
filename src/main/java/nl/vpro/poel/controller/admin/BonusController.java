@@ -38,12 +38,14 @@ public class BonusController {
         List<Bonus> bonuses = bonusService.findAll();
         List<BonusChoice> countryChoices = bonusChoiceService.findByCategory(BonusCategory.COUNTRY);
         List<BonusChoice> playerChoices = bonusChoiceService.findByCategory(BonusCategory.PLAYER);
+        List<BonusChoice> scoreChoices = bonusChoiceService.findByCategory(BonusCategory.SCORE);
         List<Round> rounds = roundService.findAll();
 
         model.addAttribute("bonuses", bonuses);
         model.addAttribute("categories", BonusCategory.values());
         model.addAttribute("countries", countryChoices);
         model.addAttribute("players", playerChoices);
+        model.addAttribute("scores", scoreChoices);
         model.addAttribute("rounds", rounds);
 
         return "admin/bonuses";

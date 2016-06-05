@@ -55,6 +55,8 @@ backGroundColor="darkgreen"
                     [@bonusUtil.bonusAnswerSelection answers=countries formPath='bonuses[${bonus_index}].answerId' selectedAnswer=(bonus.answer!) addCss='col-12-2' /]
                 [#elseif bonus.category == 'PLAYER']
                     [@bonusUtil.bonusAnswerSelection answers=players formPath='bonuses[${bonus_index}].answerId' selectedAnswer=(bonus.answer!) addCss='col-12-2' /]
+                [#elseif bonus.category == 'SCORE']
+                    [@bonusUtil.bonusAnswerSelection answers=scores formPath='bonuses[${bonus_index}].answerId' selectedAnswer=(bonus.answer!) addCss='col-12-2' /]
                 [/#if]
             [/#if]
 
@@ -87,6 +89,9 @@ backGroundColor="darkgreen"
     </script>
     <script id="bonusAnswerSelectionPLAYER" type="text/template">
         [@bonusUtil.bonusAnswerSelection answers=players formPath='bogus-only-its-options-are-used' addCss='col-12-2' /]
+    </script>
+    <script id="bonusAnswerSelectionSCORE" type="text/template">
+        [@bonusUtil.bonusAnswerSelection answers=scores formPath='bogus-only-its-options-are-used' addCss='col-12-2' /]
     </script>
 
     <div class="col-gutter form-button-container choices-form-button-container">

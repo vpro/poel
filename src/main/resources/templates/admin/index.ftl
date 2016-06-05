@@ -27,7 +27,7 @@
 
     <a href="/admin/bonuschoices" class="home-navigation-link bg-greybat">
         <span class='h2 c-white home-navigation-link-title'>
-            Spelers en teams<br/>
+            Spelers, teams en scores<br/>
             <span class="h6 c-white home-navigation-link-subtitle">Mogelijke antwoorden op de bonusvragen</span>
         </span>
     </a>

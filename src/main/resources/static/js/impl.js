@@ -35,6 +35,10 @@ if ( $('#bonusAnswerSelectionPLAYER').length ) {
     window.bonusAnswerSelectionPLAYER = Handlebars.compile( $('#bonusAnswerSelectionPLAYER').html() );
 }
 
+if ( $('#bonusAnswerSelectionSCORE').length ) {
+    window.bonusAnswerSelectionSCORE = Handlebars.compile( $('#bonusAnswerSelectionSCORE').html() );
+}
+
 new CollapseController( document.querySelectorAll( '.collapsible-section') );
 
 if ( $('.prediction-form').length ) {

@@ -155,6 +155,8 @@
                     [@bonusUtil.bonusAnswerSelection answers=countries formPath='predictions[${predictionIndex}].answerId' selectedAnswer=(predictedResult!) addCss='prediction' disabled=(status != STATUS_FUTURE) /]
                 [#elseif bonus.category == 'PLAYER']
                     [@bonusUtil.bonusAnswerSelection answers=players formPath='predictions[${predictionIndex}].answerId' selectedAnswer=(predictedResult!) addCss='prediction' disabled=(status != STATUS_FUTURE) /]
+                [#elseif bonus.category == 'SCORE']
+                    [@bonusUtil.bonusAnswerSelection answers=players formPath='predictions[${predictionIndex}].answerId' selectedAnswer=(predictedResult!) addCss='prediction' disabled=(status != STATUS_FUTURE) /]
                 [/#if]
             [/#if]
         </td>
