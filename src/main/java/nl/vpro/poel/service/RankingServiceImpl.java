@@ -4,6 +4,7 @@ import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
 import nl.vpro.poel.dto.RankingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,6 +24,7 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
+    @Cacheable(cacheNames = "userRanking", sync = true)
     public Optional<RankingEntry<User>> getRankingEntry(User user) {
         for (RankingEntry<User> rankingEntry : getUserRanking()) {
             if (rankingEntry.getSubject().equals(user)) {
@@ -33,6 +35,7 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
+    @Cacheable(cacheNames = "userRanking", sync = true)
     public List<RankingEntry<User>> getUserRanking() {
         List<RankingEntry<User>> ranking = new ArrayList<>();
         int rank = 1;
@@ -48,6 +51,7 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
+    @Cacheable(cacheNames = "userGroupRanking", sync = true)
     public Optional<RankingEntry<UserGroup>> getRankingEntry(UserGroup userGroup) {
         for (RankingEntry<UserGroup> rankingEntry : getUserGroupRanking()) {
             if (rankingEntry.getSubject().equals(userGroup)) {
@@ -58,6 +62,7 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
+    @Cacheable(cacheNames = "userGroupRanking", sync = true)
     public List<RankingEntry<UserGroup>> getUserGroupRanking() {
         List<RankingEntry<UserGroup>> ranking = new ArrayList<>();
         int rank = 1;
