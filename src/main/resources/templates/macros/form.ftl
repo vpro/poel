@@ -87,7 +87,7 @@
 
     <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
         <td class="prediction__result-title" >
-            ${match.start?string["dd-MM, HH:mm"]}
+            ${match.start}
 
             [#if timeToStart > 0 &&  timeToStart < 10800000 && !hasPredictedResult ]
             <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: wedstrijd begint bijna! </span>
@@ -182,7 +182,7 @@
 
     <tr class="prediction__row prediction__row-result prediction__row-${ parity }">
         <td class="prediction__result-title" >
-            ${bonus.start?string["dd-MM, HH:mm"]}
+            ${bonus.start}
 
             [#if timeToStart > 0 &&  timeToStart < 10800000 && !hasPredictedResult ]
                 <br><span class="prediction-deadline c-white bg-red"><i class="glyph glyph-alert c-white"></i> Let op: deadline is bijna! </span>
