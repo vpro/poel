@@ -47,6 +47,15 @@ var FormController = Stapes.subclass({
 
         }.bind( this ) );
 
+        this.$bonusInputs.each( function ( i, el ) {
+
+            $( el ).on( 'change', function () {
+                this.checkFormChanges();
+                this.validateMatchPredictions();
+            }.bind( this ) );
+
+        }.bind( this ) );
+
         this.$multiplierInputs.on( 'change', function () {
 
             this.handleMultiplierState();
@@ -84,7 +93,6 @@ var FormController = Stapes.subclass({
 
         var multipliersCheckedList = this.$allMultipliers.filter(':checked');
         var multipliersChecked = multipliersCheckedList.length;
-
         var multipliersLeft = Math.max( 0, MAX_MULTIPLIERS - multipliersChecked );
 
         if ( multipliersChecked >= MAX_MULTIPLIERS ) {
@@ -173,10 +181,16 @@ var FormController = Stapes.subclass({
     },
 
     enableSubmit: function () {
+        if ( this.$formButtons.hasClass( 'hidden' ) ) {
+            this.$formButtons.removeClass( 'hidden' );
+        }
         this.$formSubmit.prop( 'disabled', false );
     },
 
     disableSubmit: function () {
+        if ( ! this.$formButtons.hasClass( 'hidden' ) ) {
+            this.$formButtons.addClass( 'hidden' );
+        }
         this.$formSubmit.prop( 'disabled', true );
     },
 
