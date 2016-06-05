@@ -10,9 +10,11 @@ var FormController = Stapes.subclass({
         this.$form = $form;
         this.$formSubmit = this.$form.find( 'button[type=submit]' );
         this.$formReset = this.$form.find( 'button[type=reset]' );
+        this.$formButtons = this.$form.find( '.prediction-form-button-container' );
 
         this.$matchPredictions = this.$form.find( '.match-prediction' );
         this.$predictionInputs = this.$form.find( 'input.prediction' );
+        this.$bonusInputs = this.$form.find( 'select.prediction' );
         this.$multiplierInputs = this.$form.find( 'input[name$="multiplier"]' );
 
         this.$allMultipliers = $( 'input[name$="multiplier"]' );
@@ -82,7 +84,7 @@ var FormController = Stapes.subclass({
 
         var multipliersCheckedList = this.$allMultipliers.filter(':checked');
         var multipliersChecked = multipliersCheckedList.length;
-        console.log( multipliersCheckedList );
+
         var multipliersLeft = Math.max( 0, MAX_MULTIPLIERS - multipliersChecked );
 
         if ( multipliersChecked >= MAX_MULTIPLIERS ) {

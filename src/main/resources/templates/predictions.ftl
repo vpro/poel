@@ -144,7 +144,7 @@
 
                     [/@layout.sectionWithLayout]
 
-                        <div class="prediction-form-button-container">
+                        <div class="prediction-form-button-container hidden">
                             <button class="h5 button submit-button" type="submit" disabled>Opslaan</button>
                             <button class="h5 button reset-button" type="reset">Annuleren</button>
                         </div>
