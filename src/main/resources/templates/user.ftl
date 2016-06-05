@@ -32,6 +32,20 @@
 
     [#assign salutation = user.gameName!user.realName!]
 
+
+    [#if user?has_content]
+    <form action="/logout" method="post" class="user-logout bg-greybat grid">
+        <div class="col col-12-3"></div>
+        <div class="col col-12-6">
+            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+            <input type="submit" class="user-logout-button bg-blue" value="log uit"/>
+        </div>
+        <div class="col col-12-3"></div>
+
+    </form>
+    [/#if]
+
+
     [@layout.sectionWithLayout
     content={"layout":"100"}
     title='Profielgegevens'
@@ -77,12 +91,7 @@
                 </div>
             </form>
 
-            [#if user?has_content]
-                <form action="/logout" method="post" class="logout">
-                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-                    <input type="submit" class="h5" value="Log uit"/>
-                </form>
-            [/#if]
+
 
         </div>
 
