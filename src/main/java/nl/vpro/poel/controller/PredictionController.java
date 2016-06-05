@@ -51,9 +51,9 @@ class PredictionController {
 
         User user = currentUser.getUser();
 
-        List<BonusChoice> countryChoices = bonusChoiceService.findByCategory(BonusCategory.COUNTRY);
-        List<BonusChoice> playerChoices = bonusChoiceService.findByCategory(BonusCategory.PLAYER);
-        List<BonusChoice> scoreChoices = bonusChoiceService.findByCategory(BonusCategory.SCORE);
+        List<BonusChoice> countryChoices = bonusChoiceService.choicesFor(BonusCategory.COUNTRY);
+        List<BonusChoice> playerChoices = bonusChoiceService.choicesFor(BonusCategory.PLAYER);
+        List<BonusChoice> scoreChoices = bonusChoiceService.choicesFor(BonusCategory.SCORE);
 
         model.addAttribute("countries", countryChoices);
         model.addAttribute("players", playerChoices);

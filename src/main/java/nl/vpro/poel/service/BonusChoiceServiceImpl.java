@@ -31,18 +31,13 @@ public class BonusChoiceServiceImpl implements BonusChoiceService  {
     }
 
     @Override
-    public Optional<BonusChoice> findByValue(String value) {
-        return bonusChoiceRepository.findByValue(value);
-    }
-
-    @Override
-    public List<BonusChoice> findByCategory(BonusCategory category) {
-        return bonusChoiceRepository.findByCategory(category);
+    public List<BonusChoice> choicesFor(BonusCategory category) {
+        return bonusChoiceRepository.findByCategoryOrderByValueAsc(category);
     }
 
     @Override
     public List<BonusChoice> findAll() {
-        return bonusChoiceRepository.findAll();
+        return bonusChoiceRepository.findAllOrderByCategoryAscValueAsc();
     }
 
     @Override

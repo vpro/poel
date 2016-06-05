@@ -13,9 +13,7 @@ public interface BonusChoiceService {
 
     Optional<BonusChoice> findById(Long id);
 
-    Optional<BonusChoice> findByValue(String value);
-
-    List<BonusChoice> findByCategory(BonusCategory category);
+    List<BonusChoice> choicesFor(BonusCategory category);
 
     List<BonusChoice> findAll();
 

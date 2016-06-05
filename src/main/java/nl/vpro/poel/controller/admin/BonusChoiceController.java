@@ -29,12 +29,6 @@ public class BonusChoiceController {
     @RequestMapping(method = RequestMethod.GET)
     String showChoices(Model model) {
         List<BonusChoice> bonusChoices = bonusChoiceService.findAll();
-        bonusChoices.sort(
-                Comparator.nullsLast(
-                        Comparator.comparing(BonusChoice::getCategory)
-                                .thenComparing(BonusChoice::getValue)
-                )
-        );
         model.addAttribute("choices", bonusChoices);
         model.addAttribute("categories", BonusCategory.values());
         return "admin/bonuschoices";
