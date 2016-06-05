@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -35,6 +36,7 @@ public class UsersController {
     String showUsers(Model model) {
 
         List<User> allUsers = userService.getAllUsers();
+        allUsers.sort(Comparator.comparing(User::getRealName));
         model.addAttribute("users", allUsers);
 
         List<UserGroup> userGroups = userGroupService.findAll();
