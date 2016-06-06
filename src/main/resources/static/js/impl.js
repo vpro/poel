@@ -64,7 +64,7 @@ if ( $('.usergroup-form').length ) {
 }
 
 if ( $('.messages-form').length ) {
-    new MessageController( $('.messages-form'), $( '.alert-overlay' ) );
+    new EntityListController( $('.messages-form'), $( '.alert-overlay' ), messageTemplate, 'messages' );
 }
 
 if ( $('.bulletins-form').length ) {
