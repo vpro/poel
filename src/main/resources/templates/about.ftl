@@ -36,6 +36,10 @@
                     INGB000 4707382
                 </p>
 
+                <p class="about__text">
+                    Correspondentieadres: <a href="mailto:poel@vpro.nl">poel@vpro.nl</a>
+                </p>
+
                 <p class=" about__text">
                     <b>Voorspel per wedstrijd de uitslag.</b> Je kunt de voorspelling tot aan het begin van elke wedstrijd
                     aanpassen. Na aanvang van de wedstrijd mag en kan je niets meer aan die wedstrijdvoorspelling

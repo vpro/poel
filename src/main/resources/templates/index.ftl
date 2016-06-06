@@ -20,22 +20,22 @@
             <a href="/predictions" class="home-navigation-link bg-green">
                 <span class='h2 c-white home-navigation-link-title' >
                     Poel invullen<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">Je wil toch winnen?</span>
+                    <span class="h6 c-white home-navigation-link-subtitle">Tot aanvang elke wedstrijd</span>
                 </span>
             </a>
             <a href="/ranking" class="home-navigation-link bg-darkgreen">
                 <span class='h2 c-white home-navigation-link-title' >
-                    Klassement<br/>
+                    Poelstand<br/>
                     [#if ranking ? has_content]
                         [#assign score = ranking.score ! 0]
-                        <span class="h6 c-white home-navigation-link-subtitle">Je staat op positie ${ ranking.rank } met ${ score } punt[#if score != 1]en[/#if]</span>
+                        <span class="h6 c-white home-navigation-link-subtitle">Je staat op plaats ${ ranking.rank } met ${ score } punt[#if score != 1]en[/#if]</span>
                     [/#if]
                 </span>
             </a>
             <a href="/user" class="home-navigation-link bg-blue">
                 <span class='h2 c-white home-navigation-link-title' >
-                    Profiel<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">Echte naam en voetbalnaam</span>
+                    Mijn poelprofiel<br/>
+                    <span class="h6 c-white home-navigation-link-subtitle">Naam en voetbalnaam</span>
                 </span>
             </a>
 
