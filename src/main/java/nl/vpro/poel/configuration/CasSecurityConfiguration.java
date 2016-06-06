@@ -78,17 +78,17 @@ public class CasSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .addFilter(casAuthenticationFilter())
                 .csrf()
-                .and()
+                    .and()
                 .authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .anyRequest().authenticated()
-                .and()
+                    .and()
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/")
                     .permitAll()
-                .and()
+                    .and()
                 .exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint());
     }
 
