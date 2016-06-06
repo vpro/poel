@@ -58,6 +58,7 @@
   td {
     position: relative;
     padding-bottom: 4px;
+    padding-top: 4px;
   }
 
   input {
@@ -155,14 +156,20 @@
     }
 }
 
+.prediction__multiplier{
+    width: 16px;
+}
+
+@include media-med-screen-width () {
+    .prediction__multiplier{
+        width: 57px;
+    }
+}
+
 .prediction__multiplier .prediction__multiplier__input {
   margin-top: 4px;
   width: 24px;
   display: none;
-}
-
-.prediction__multiplier_editable.prediction__multiplier .prediction__multiplier__input {
-
 }
 
 .prediction__multiplier__label {
@@ -203,7 +210,7 @@
 }
 
 .prediction__score {
-  width: 46px;
+  width: 32px;
 }
 
 .prediction__points{
@@ -309,4 +316,30 @@
       display: inline-block;
     }
   }
+}
+
+
+.bonus-prediction .prediction__row{
+    font-family: $title-font;
+    padding: 16px 8px;
+}
+
+@include media-med-screen-width () {
+    .bonus-prediction .prediction__row{
+        padding-left: 48px;
+    }
+}
+
+.bonus-prediction table {
+    width: 100%;
+}
+
+.bonus-prediction .prediction__score{
+    width: 22px;
+}
+
+
+.bonus-prediction .select-container {
+    width: 100%;
+
 }
