@@ -17,7 +17,7 @@
     [@layout.sectionWithLayout
     content={'layout': '100'}
     collapsible=true
-    opened=false
+    opened=true
     title='Poelregels'
     backGroundColor="greyelephant"
     addContainerCss=''
