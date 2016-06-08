@@ -46,16 +46,16 @@
                 ${ match.awayTeam }
             </span>
             [#if status == STATUS_FUTURE]
-                <input type="hidden" name="predictions[${predictionIndex}].matchId" value="${match.id}"/>
+                <input type="hidden" name="predictions[${predictionIndex}].matchId" value="${match.id?c}"/>
                 [#if predictionId?has_content]
-                <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId}"/>
+                <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId?c}"/>
                 [/#if]
             [/#if]
         </td>
 
         <td class="prediction__predicted">
-            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPredictedResult]value="${predictedResult.homeTeamGoals}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
-            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
+            <input class="prediction home-prediction" type="number" min="0" name="predictions[${predictionIndex}].homeTeamGoals" [#if hasPredictedResult]value="${predictedResult.homeTeamGoals?c}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
+            <input class="prediction away-prediction" type="number" min="0" name="predictions[${predictionIndex}].awayTeamGoals" [#if hasPredictedResult]value="${predictedResult.awayTeamGoals?c}" [/#if] [#if status != STATUS_FUTURE ]disabled [/#if] />
         </td>
 
         <td class="prediction__multiplier
@@ -133,9 +133,9 @@
             ${ bonus.question } (${bonusScore} punt[#if bonusScore != 1]en[/#if])
 
             [#if status == STATUS_FUTURE]
-                <input type="hidden" name="predictions[${predictionIndex}].bonusId" value="${bonus.id}"/>
+                <input type="hidden" name="predictions[${predictionIndex}].bonusId" value="${bonus.id?c}"/>
                 [#if predictionId?has_content]
-                    <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId}"/>
+                    <input type="hidden" name="predictions[${predictionIndex}].predictionId" value="${predictionId?c}"/>
                 [/#if]
             [/#if]
 
