@@ -1,7 +1,15 @@
 import Stapes from 'stapes';
 import $ from 'jquery';
 
-const MAX_MULTIPLIERS = 5; // TODO: This value is configurable in the application, so this shouldn't be a constant
+function isNumeric ( n ) {
+    return ! isNaN( parseFloat( n ) ) && isFinite( n );
+}
+
+var MAX_MULTIPLIERS = 5;
+var $metaMax = $('meta[name="maxMultipliersPerUser"]');
+if ( $metaMax.length && isNumeric( $metaMax.attr('content') ) ) {
+    MAX_MULTIPLIERS = parseFloat( $metaMax.attr('content') );
+}
 
 var FormController = Stapes.subclass({
 
@@ -199,9 +207,5 @@ var FormController = Stapes.subclass({
         return this.$form.serialize() !== this.initialFormState;
     }
 });
-
-function isNumeric ( n ) {
-    return ! isNaN( parseFloat( n ) ) && isFinite( n );
-}
 
 export default FormController;
