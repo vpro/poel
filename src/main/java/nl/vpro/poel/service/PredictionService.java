@@ -24,4 +24,6 @@ public interface PredictionService {
     Optional<Prediction> getPredictionForSubject(User user, Match match);
 
     Optional<Prediction> getPredictionForSubject(User user, Bonus bonus);
+
+    int getMaxMultipliersPerUser();
 }

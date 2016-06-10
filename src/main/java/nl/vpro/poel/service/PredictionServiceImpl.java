@@ -25,8 +25,8 @@ public class PredictionServiceImpl implements PredictionService {
     private final BonusService bonusService;
     private final BonusChoiceService bonusChoiceService;
 
-    @Value("${poel.maxMultipliers}")
-    private int maxMultipliers;
+    @Value("${poel.maxMultipliersPerUser}")
+    private int maxMultipliersPerUser;
 
     @Autowired
     PredictionServiceImpl(PredictionRepository predictionRepository, MatchService matchService, BonusService bonusService, BonusChoiceService bonusChoiceService) {
@@ -138,9 +138,9 @@ public class PredictionServiceImpl implements PredictionService {
         }
 
         int multiplierCount = predictionRepository.countByUserAndMultiplierIsTrue(user);
-        if (multiplierCount > maxMultipliers) {
-            log.warn("Ignoring prediction form for {}, because processing it would mean this user had {} multipliers, but only {} are allowed", user, multiplierCount, maxMultipliers);
-            throw new MultiplierException("De wijzigingen zijn niet opgeslagen, want je mag niet meer dan " + maxMultipliers + " joker" + (maxMultipliers != 1 ? "s" : "") + " gebruiken.");
+        if (multiplierCount > maxMultipliersPerUser) {
+            log.warn("Ignoring prediction form for {}, because processing it would mean this user had {} multipliers, but only {} are allowed", user, multiplierCount, maxMultipliersPerUser);
+            throw new MultiplierException("De wijzigingen zijn niet opgeslagen, want je mag niet meer dan " + maxMultipliersPerUser + " joker" + (maxMultipliersPerUser != 1 ? "s" : "") + " gebruiken.");
         }
 
         return updates;
@@ -169,5 +169,10 @@ public class PredictionServiceImpl implements PredictionService {
     @Override
     public Optional<Prediction> getPredictionForSubject(User user, Bonus bonus) {
         return predictionRepository.findOneByUserAndBonus(user, bonus);
+    }
+
+    @Override
+    public int getMaxMultipliersPerUser() {
+        return maxMultipliersPerUser;
     }
 }

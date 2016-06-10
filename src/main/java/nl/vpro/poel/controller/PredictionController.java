@@ -69,6 +69,9 @@ class PredictionController {
         model.addAttribute("unfinished", unfinished);
         model.addAttribute("future", future);
 
+        int maxMultipliersPerUser = predictionService.getMaxMultipliersPerUser();
+        model.addAttribute("maxMultipliersPerUser", maxMultipliersPerUser);
+
         return "predictions";
     }
 
