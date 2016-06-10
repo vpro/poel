@@ -48,20 +48,21 @@
                 </p>
 
                 <p class="about__text">
-                    Verspeid over alle rondes mag je een een vastgesteld maximum aantal <b>jokers</b> inzetten, waarmee je de score voor die voorspelling verdubbelt.
+                    Verspeid over alle rondes mag je maximaal ${maxMultipliersPerUser} <b>jokers</b> inzetten, waarmee
+                    de score voor die voorspelling wordt vermenigvuldigd met een factor ${scoreMultiplierFactor}.
                 </p>
 
                 <p class="about__text">
-                    Uitslag goed: 3 punten, met joker 6 punten<br/>
-                    Winnaar goed: 1 punt, met joker 2 punten<br/>
+                    Uitslag goed: ${pointsForCorrectMatchResult} punten, met joker ${pointsForCorrectMatchResult * scoreMultiplierFactor} punten<br/>
+                    Winnaar goed: ${pointsForCorrectMatchWinner} punt, met joker ${pointsForCorrectMatchWinner * scoreMultiplierFactor} punten<br/>
                     Geen van beide: 0 punten, met joker ook 0 punten
                 </p>
 
 
                 <p class=" about__text">
                     Per ronde beantwoord je ook een aantal <b>bolusvragen</b>, voor een per vraag gespecificeerd aantal punten
-                    (ook te verdubbelen met een joker). Let op: de bolusvragen hebben ook een datum en tijdstip waarvoor je antwoord
-                    gegeven moet hebben.
+                    (ook hier kun je jokers op inzetten). Let op: de bolusvragen hebben ook een datum en tijdstip waarvoor je antwoord
+                    gegeven moet hebben. Het is niet mogelijk om na het vermelde tijdstip nog te antwoorden of je antwoord te wijzigen.
                 </p>
 
                 <p class="about__text">

@@ -77,9 +77,13 @@ public class ScoreServiceImpl implements ScoreService {
             return 0;
         }
 
-        int scoreForWinner = getScoreForWinner(predictedMatchResult, actualMatchResult);
-        int scoreForResult = getScoreForResult(predictedMatchResult, actualMatchResult);
-        int score = scoreForWinner + scoreForResult;
+        int score = 0;
+        if (correctResult(predictedMatchResult, actualMatchResult)) {
+            score = pointsForCorrectMatchResult;
+        } else if (correctWinner(predictedMatchResult, actualMatchResult)) {
+            score = pointsForCorrectMatchWinner;
+        }
+
         if (prediction.isMultiplier()) {
             score *= scoreMultiplierFactor;
         }
@@ -110,14 +114,14 @@ public class ScoreServiceImpl implements ScoreService {
         return score;
     }
 
-    private int getScoreForWinner(MatchResult predictedResult, MatchResult actualResult) {
-        MatchWinner actualWinner = getMatchWinner(actualResult);
-        MatchWinner predictedWinner = getMatchWinner(predictedResult);
-        return Objects.equals(actualWinner, predictedWinner) ? pointsForCorrectMatchWinner : 0;
+    private boolean correctResult(MatchResult predictedResult, MatchResult actualResult) {
+        return Objects.equals(actualResult, predictedResult);
     }
 
-    private int getScoreForResult(MatchResult predictedResult, MatchResult actualResult) {
-        return Objects.equals(actualResult, predictedResult) ? pointsForCorrectMatchResult : 0;
+    private boolean correctWinner(MatchResult predictedResult, MatchResult actualResult) {
+        MatchWinner actualWinner = getMatchWinner(actualResult);
+        MatchWinner predictedWinner = getMatchWinner(predictedResult);
+        return Objects.equals(actualWinner, predictedWinner);
     }
 
     /**

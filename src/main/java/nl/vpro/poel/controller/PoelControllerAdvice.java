@@ -23,10 +23,26 @@ public class PoelControllerAdvice {
 
     private final String title;
 
+    private final int maxMultipliersPerUser;
+    private final int pointsForCorrectMatchResult;
+    private final int pointsForCorrectMatchWinner;
+    private final int scoreMultiplierFactor;
+
     @Autowired
-    public PoelControllerAdvice(MessageService messageService, @Value("${poel.title}") String title) {
+    public PoelControllerAdvice(
+            MessageService messageService,
+            @Value("${poel.title}") String title,
+            @Value("${poel.maxMultipliersPerUser}") int maxMultipliersPerUser,
+            @Value("${poel.pointsForCorrectMatchResult}") int pointsForCorrectMatchResult,
+            @Value("${poel.pointsForCorrectMatchWinner}") int pointsForCorrectMatchWinner,
+            @Value("${poel.scoreMultiplierFactor}") int scoreMultiplierFactor
+    ) {
         this.messageService = messageService;
         this.title = title;
+        this.maxMultipliersPerUser = maxMultipliersPerUser;
+        this.pointsForCorrectMatchResult = pointsForCorrectMatchResult;
+        this.pointsForCorrectMatchWinner = pointsForCorrectMatchWinner;
+        this.scoreMultiplierFactor = scoreMultiplierFactor;
     }
 
     @InitBinder
@@ -48,5 +64,25 @@ public class PoelControllerAdvice {
     @ModelAttribute("title")
     public String title() {
         return title;
+    }
+
+    @ModelAttribute("maxMultipliersPerUser")
+    public int maxMultipliersPerUser() {
+        return maxMultipliersPerUser;
+    }
+
+    @ModelAttribute("pointsForCorrectMatchResult")
+    public int pointsForCorrectMatchResult() {
+        return pointsForCorrectMatchResult;
+    }
+
+    @ModelAttribute("scoreMultiplierFactor")
+    public int scoreMultiplierFactor() {
+        return scoreMultiplierFactor;
+    }
+
+    @ModelAttribute("pointsForCorrectMatchWinner")
+    public int pointsForCorrectMatchWinner() {
+        return pointsForCorrectMatchWinner;
     }
 }
