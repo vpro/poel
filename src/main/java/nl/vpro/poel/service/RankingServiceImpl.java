@@ -2,7 +2,8 @@ package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
-import nl.vpro.poel.dto.RankingEntry;
+import nl.vpro.poel.dto.UserGroupRankingEntry;
+import nl.vpro.poel.dto.UserRankingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,9 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userRanking", sync = true)
-    public Optional<RankingEntry<User, Integer>> getRankingEntry(User user) {
-        for (RankingEntry<User, Integer> rankingEntry : getUserRanking()) {
-            if (rankingEntry.getSubject().equals(user)) {
+    public Optional<UserRankingEntry> getRankingEntry(User user) {
+        for (UserRankingEntry rankingEntry : getUserRanking()) {
+            if (rankingEntry.getUser().equals(user)) {
                 return Optional.of(rankingEntry);
             }
         }
@@ -36,14 +37,14 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userRanking", sync = true)
-    public List<RankingEntry<User, Integer>> getUserRanking() {
-        List<RankingEntry<User, Integer>> ranking = new ArrayList<>();
+    public List<UserRankingEntry> getUserRanking() {
+        List<UserRankingEntry> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Integer, List<User>> entry : getUsersByScore().descendingMap().entrySet()) {
             List<User> users = entry.getValue();
             for (User user : users) {
                 Integer score = entry.getKey();
-                ranking.add(new RankingEntry<>(rank, user, score));
+                ranking.add(new UserRankingEntry(rank, user, score));
             }
             rank += users.size(); // Make sure if two users share rank 1, the next user has rank 3
         }
@@ -52,9 +53,9 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userGroupRanking", sync = true)
-    public Optional<RankingEntry<UserGroup, Double>> getRankingEntry(UserGroup userGroup) {
-        for (RankingEntry<UserGroup, Double> rankingEntry : getUserGroupRanking()) {
-            if (rankingEntry.getSubject().equals(userGroup)) {
+    public Optional<UserGroupRankingEntry> getRankingEntry(UserGroup userGroup) {
+        for (UserGroupRankingEntry rankingEntry : getUserGroupRanking()) {
+            if (rankingEntry.getUserGroup().equals(userGroup)) {
                 return Optional.of(rankingEntry);
             }
         }
@@ -63,14 +64,14 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userGroupRanking", sync = true)
-    public List<RankingEntry<UserGroup, Double>> getUserGroupRanking() {
-        List<RankingEntry<UserGroup, Double>> ranking = new ArrayList<>();
+    public List<UserGroupRankingEntry> getUserGroupRanking() {
+        List<UserGroupRankingEntry> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Double, List<UserGroup>> entry : getUserGroupsByAverageUserScore().descendingMap().entrySet()) {
             List<UserGroup> userGroups = entry.getValue();
             for (UserGroup userGroup : userGroups) {
                 Double score = entry.getKey();
-                ranking.add(new RankingEntry<>(rank, userGroup, score));
+                ranking.add(new UserGroupRankingEntry(rank, userGroup, score));
             }
             rank += userGroups.size(); // Make sure if two groups share rank 1, the next group has rank 3
         }

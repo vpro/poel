@@ -2,7 +2,7 @@ package nl.vpro.poel.controller.admin;
 
 import nl.vpro.poel.domain.User;
 import nl.vpro.poel.domain.UserGroup;
-import nl.vpro.poel.dto.RankingEntry;
+import nl.vpro.poel.dto.UserRankingEntry;
 import nl.vpro.poel.service.RankingService;
 import nl.vpro.poel.service.UserService;
 import org.apache.commons.csv.CSVFormat;
@@ -62,8 +62,8 @@ public class ExportCSVController {
         setHeadersForCSVDownload(response, String.format("poel-ranking-%s.csv", now()));
         CSVFormat format = CSVFormat.DEFAULT.withHeader("rank", "score", "user_id", "username", "role", "realName", "gameName", "userGroup");
         CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
-        for (RankingEntry<User, Integer> rankingEntry : rankingService.getUserRanking()) {
-            User user = rankingEntry.getSubject();
+        for (UserRankingEntry rankingEntry : rankingService.getUserRanking()) {
+            User user = rankingEntry.getUser();
             UserGroup userGroup = user.getUserGroup();
             String userGroupName = userGroup != null ? userGroup.getName() : null;
             csvPrinter.printRecord(

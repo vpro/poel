@@ -1,9 +1,9 @@
 package nl.vpro.poel.controller;
 
 import nl.vpro.poel.domain.User;
+import nl.vpro.poel.dto.UserRankingEntry;
 import nl.vpro.poel.service.RankingService;
 import nl.vpro.poel.domain.CurrentUser;
-import nl.vpro.poel.dto.RankingEntry;
 import nl.vpro.poel.UserUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ class IndexController {
 
         if (currentUser.isPresent()) {
             User user = currentUser.get().getUser();
-            Optional<RankingEntry<User, Integer>> ranking = rankingService.getRankingEntry(user);
+            Optional<UserRankingEntry> ranking = rankingService.getRankingEntry(user);
             if (ranking.isPresent()) {
                 model.addAttribute("ranking", ranking.get());
             }

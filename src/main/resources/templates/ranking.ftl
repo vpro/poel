@@ -32,22 +32,22 @@
         [#list userGroupRanking]
         <table class="ranking group-ranking">
         <tbody>
-            [#items as rankingEntry]
-            [#assign rankedUserGroup = rankingEntry.subject]
-        <tr class="ranking__row ranking__row-${ rankingEntry ? item_parity } [#if user.userGroup ? has_content && rankedUserGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
-            <td class="ranking__rank"><span>${ rankingEntry.rank }</span></td>
+            [#items as userGroupRankingEntry]
+            [#assign rankedUserGroup = userGroupRankingEntry.userGroup]
+        <tr class="ranking__row ranking__row-${ userGroupRankingEntry ? item_parity } [#if user.userGroup ? has_content && rankedUserGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
+            <td class="ranking__rank"><span>${ userGroupRankingEntry.rank }</span></td>
             <td class="ranking__name">
                 <h2 class="h6 ranking__display-name">
                 ${ rankedUserGroup.name }
                 </h2>
             </td>
-            <td class="ranking__score">${ rankingEntry.score?string["0.00"] }</td>
+            <td class="ranking__score">${ userGroupRankingEntry.averageScore?string["0.00"] }</td>
         </tr>
         [/#items]
     </tbody>
     </table>
     [#else]
-        Er zijn geen afdelingen. :o(
+        Er zijn geen afdelingen.
     [/#list]
 
 
@@ -81,13 +81,13 @@
 
         <table class="ranking user-ranking">
             <tbody>
-                [#items as rankingEntry]
-                [#assign rankedUser = rankingEntry.subject]
+                [#items as userRankingEntry]
+                [#assign rankedUser = userRankingEntry.user]
 
                 <tr [#if rankedUser.userGroup ? has_content]data-group="${rankedUser.userGroup.id}"[/#if]
-                        class="ranking__row [#if rankingEntry ? item_parity == 'odd']ranking__row-odd [/#if][#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]" >
+                        class="ranking__row [#if userRankingEntry ? item_parity == 'odd']ranking__row-odd [/#if][#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]" >
                     <td class="ranking__rank">
-                        <span class="[#if previousRanking == rankingEntry.rank] ranking__rank-tohide hidden[/#if]">${ rankingEntry.rank }</span>
+                        <span class="[#if previousRanking == userRankingEntry.rank] ranking__rank-tohide hidden[/#if]">${ userRankingEntry.rank }</span>
                     </td>
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">
@@ -114,15 +114,15 @@
                             </span>
                         </div>
                     </td>
-                    <td class="ranking__score">${ rankingEntry.score }</td>
+                    <td class="ranking__score">${ userRankingEntry.score }</td>
                 </tr>
 
-                [#assign previousRanking =  rankingEntry.rank ]
+                [#assign previousRanking =  userRankingEntry.rank ]
                 [/#items]
             </tbody>
             </table>
             [#else]
-            Er zijn geen deelnemers. :o(
+            Er zijn geen deelnemers.
             [/#list]
 
         [/@layout.sectionWithLayout]

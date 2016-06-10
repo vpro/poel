@@ -1,7 +1,7 @@
 package nl.vpro.poel.service;
 
 import nl.vpro.poel.domain.*;
-import nl.vpro.poel.dto.RankingEntry;
+import nl.vpro.poel.dto.UserRankingEntry;
 import org.junit.Test;
 
 import java.util.*;
@@ -32,13 +32,13 @@ public class RankingServiceImplTest {
 
         RankingService rankingService = new RankingServiceImpl(userService, userGroupService, scoreService);
 
-        List<RankingEntry<User, Integer>> ranking = rankingService.getUserRanking();
+        List<UserRankingEntry> ranking = rankingService.getUserRanking();
 
         assertThat(ranking).containsExactly(
-                new RankingEntry<>(1, jan, 7),
-                new RankingEntry<>(2, piet, 5),
-                new RankingEntry<>(2, klaas, 5),
-                new RankingEntry<>(4, henk, 0)
+                new UserRankingEntry(1, jan, 7),
+                new UserRankingEntry(2, piet, 5),
+                new UserRankingEntry(2, klaas, 5),
+                new UserRankingEntry(4, henk, 0)
         );
     }
 }
