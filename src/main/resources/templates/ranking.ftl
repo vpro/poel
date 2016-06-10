@@ -41,7 +41,7 @@
                 ${ rankedUserGroup.name }
                 </h2>
             </td>
-            <td class="ranking__score">${ rankingEntry.score }</td>
+            <td class="ranking__score">${ rankingEntry.score?string["0.00"] }</td>
         </tr>
         [/#items]
     </tbody>

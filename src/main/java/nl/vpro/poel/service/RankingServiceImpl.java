@@ -66,10 +66,10 @@ public class RankingServiceImpl implements RankingService {
     public List<RankingEntry<UserGroup>> getUserGroupRanking() {
         List<RankingEntry<UserGroup>> ranking = new ArrayList<>();
         int rank = 1;
-        for (Map.Entry<Integer, List<UserGroup>> entry : getUserGroupsByScore().descendingMap().entrySet()) {
+        for (Map.Entry<Double, List<UserGroup>> entry : getUserGroupsByAverageUserScore().descendingMap().entrySet()) {
             List<UserGroup> userGroups = entry.getValue();
             for (UserGroup userGroup : userGroups) {
-                Integer score = entry.getKey();
+                Double score = entry.getKey();
                 ranking.add(new RankingEntry<>(rank, userGroup, score));
             }
             rank += userGroups.size(); // Make sure if two groups share rank 1, the next group has rank 3
@@ -77,13 +77,13 @@ public class RankingServiceImpl implements RankingService {
         return ranking;
     }
 
-    private NavigableMap<Integer, List<UserGroup>> getUserGroupsByScore() {
-        NavigableMap<Integer, List<UserGroup>> userGroupsByScore = new TreeMap<>();
+    private NavigableMap<Double, List<UserGroup>> getUserGroupsByAverageUserScore() {
+        NavigableMap<Double, List<UserGroup>> userGroupsByScore = new TreeMap<>();
         for (UserGroup userGroup : userGroupService.findAll()) {
-            Integer groupScore = scoreService.getScore(userGroup);
+            Double groupScore = scoreService.getAverageScore(userGroup);
             List<UserGroup> userGroups = userGroupsByScore.getOrDefault(groupScore, new ArrayList<>());
             userGroups.add(userGroup);
-            userGroupsByScore.put( groupScore, userGroups );
+            userGroupsByScore.put(groupScore, userGroups);
         }
         return userGroupsByScore;
     }

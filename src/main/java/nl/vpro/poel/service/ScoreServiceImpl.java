@@ -35,9 +35,9 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public int getScore(UserGroup userGroup) {
+    public double getAverageScore(UserGroup userGroup) {
         return userService.getAllUsersForUserGroup(userGroup).stream()
-                .collect(Collectors.summingInt(this::getScore));
+                .collect(Collectors.averagingInt(this::getScore));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public int getScore(Prediction prediction) {
 
-        if ( prediction.getMatch() != null ) {
+        if (prediction.getMatch() != null) {
             return getScoreForMatchPrediction(prediction);
 
         } else if ( prediction.getBonus() != null ) {

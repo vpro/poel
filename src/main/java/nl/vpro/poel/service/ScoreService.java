@@ -6,7 +6,7 @@ import nl.vpro.poel.domain.UserGroup;
 
 public interface ScoreService {
 
-    int getScore(UserGroup userGroup);
+    double getAverageScore(UserGroup userGroup);
 
     int getScore(User user);
 

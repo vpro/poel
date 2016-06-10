@@ -9,5 +9,5 @@ public class RankingEntry<T> {
 
     private final T subject;
 
-    private final int score;
+    private final double score;
 }
