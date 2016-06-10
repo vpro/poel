@@ -18,6 +18,8 @@
     [@messageUtil.outputMessage message=message ! /]
 
     <div class="grid bg-darkgreen">
+
+    [#assign previousRanking = 0]
     [@layout.sectionWithLayout
     content={"layout":"100"}
     title='afdelingen'
@@ -35,7 +37,9 @@
             [#items as userGroupRankingEntry]
             [#assign rankedUserGroup = userGroupRankingEntry.userGroup]
         <tr class="ranking__row ranking__row-${ userGroupRankingEntry ? item_parity } [#if user.userGroup ? has_content && rankedUserGroup.getId() == user.userGroup.getId() ]ranking__current-user[/#if]">
-            <td class="ranking__rank"><span>${ userGroupRankingEntry.rank }</span></td>
+            <td class="ranking__rank">
+                <span[#if previousRanking == userGroupRankingEntry.rank] class="ranking__rank-tohide hidden"[/#if]>${ userGroupRankingEntry.rank }</span>
+            </td>
             <td class="ranking__name">
                 <h2 class="h6 ranking__display-name">
                 ${ rankedUserGroup.name }
@@ -43,6 +47,7 @@
             </td>
             <td class="ranking__score">${ userGroupRankingEntry.averageScore?string["0.00"] }</td>
         </tr>
+        [#assign previousRanking =  userGroupRankingEntry.rank]
         [/#items]
     </tbody>
     </table>
@@ -87,7 +92,7 @@
                 <tr [#if rankedUser.userGroup ? has_content]data-group="${rankedUser.userGroup.id}"[/#if]
                         class="ranking__row [#if userRankingEntry ? item_parity == 'odd']ranking__row-odd [/#if][#if rankedUser.getId() == user.getId() ]ranking__current-user[/#if]" >
                     <td class="ranking__rank">
-                        <span class="[#if previousRanking == userRankingEntry.rank] ranking__rank-tohide hidden[/#if]">${ userRankingEntry.rank }</span>
+                        <span[#if previousRanking == userRankingEntry.rank] class="ranking__rank-tohide hidden"[/#if]>${ userRankingEntry.rank }</span>
                     </td>
                     <td class="ranking__name">
                         <h2 class="h6 ranking__display-name">
