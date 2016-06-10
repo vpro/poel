@@ -41,25 +41,27 @@
                 </p>
 
                 <p class=" about__text">
-                    <b>Voorspel per wedstrijd de uitslag.</b> Je kunt de voorspelling tot aan het begin van elke wedstrijd
+                    <b>Voorspel per wedstrijd de uitslag.</b> Je kunt een voorspelling tot aan het begin van de wedstrijd
                     aanpassen. Na aanvang van de wedstrijd mag en kan je niets meer aan die wedstrijdvoorspelling
                     veranderen. (Je mag natuurlijk ook alle wedstrijden in één keer invullen. Dus ook al je op
                     vakantie/offline gaat, kun je gewoon meedoen.)
                 </p>
 
                 <p class="about__text">
-                    Per ronde mag je een een vastgesteld aantal <b>'jokers'</b> inzetten, waarmee je score verdubbelt.
+                    Verspeid over alle rondes mag je een een vastgesteld maximum aantal <b>jokers</b> inzetten, waarmee je de score voor die voorspelling verdubbelt.
                 </p>
 
                 <p class="about__text">
                     Uitslag goed: 3 punten, met joker 6 punten<br/>
-                    Winnaar goed: 1 punt, met joker 2 punten
+                    Winnaar goed: 1 punt, met joker 2 punten<br/>
+                    Geen van beide: 0 punten, met joker ook 0 punten
                 </p>
 
 
                 <p class=" about__text">
-                    Per ronde beantwoord je ook een aantal <b>'bolusvragen'</b>, voor een wisselend aantal punten per vraag
-                    (te verdubbelen met joker).
+                    Per ronde beantwoord je ook een aantal <b>bolusvragen</b>, voor een per vraag gespecificeerd aantal punten
+                    (ook te verdubbelen met een joker). Let op: de bolusvragen hebben ook een datum en tijdstip waarvoor je antwoord
+                    gegeven moet hebben.
                 </p>
 
                 <p class="about__text">
@@ -84,8 +86,8 @@
                 </p>
 
                 <p class="about__text">
-                    Voor het '<b>afdelingsklassement</b>' deelt de poelleiding de poeldeelnemers in naar afdeling. Een
-                    afdeling bestaat uit tenminste vier deelnemers. </p>
+                    Voor het <b>afdelingsklassement</b> deelt de poelleiding de poeldeelnemers in naar afdeling. Een
+                    afdeling bestaat uit tenminste vier deelnemers.</p>
             </div>
         </div>
     <div class="col col-12-2"></div>
