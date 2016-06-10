@@ -25,10 +25,10 @@ class RankingController {
 
     @RequestMapping(method = RequestMethod.GET)
     String showRanking(Model model) {
-        List<RankingEntry<User>> ranking = rankingService.getUserRanking();
+        List<RankingEntry<User, Integer>> ranking = rankingService.getUserRanking();
         model.addAttribute("userRanking", ranking);
 
-        List<RankingEntry<UserGroup>> userGroupRanking = rankingService.getUserGroupRanking();
+        List<RankingEntry<UserGroup, Double>> userGroupRanking = rankingService.getUserGroupRanking();
         model.addAttribute("userGroupRanking", userGroupRanking);
 
         return "ranking";

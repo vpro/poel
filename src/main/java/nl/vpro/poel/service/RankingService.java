@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public interface RankingService {
 
-    Optional<RankingEntry<User>> getRankingEntry(User user);
+    Optional<RankingEntry<User, Integer>> getRankingEntry(User user);
 
-    Optional<RankingEntry<UserGroup>> getRankingEntry(UserGroup userGroup);
+    Optional<RankingEntry<UserGroup, Double>> getRankingEntry(UserGroup userGroup);
 
-    List<RankingEntry<User>> getUserRanking();
+    List<RankingEntry<User, Integer>> getUserRanking();
 
-    List<RankingEntry<UserGroup>> getUserGroupRanking();
+    List<RankingEntry<UserGroup, Double>> getUserGroupRanking();
 }

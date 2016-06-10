@@ -3,11 +3,11 @@ package nl.vpro.poel.dto;
 import lombok.Data;
 
 @Data
-public class RankingEntry<T> {
+public class RankingEntry<T, S> {
 
     private final int rank;
 
     private final T subject;
 
-    private final double score;
+    private final S score;
 }

@@ -32,7 +32,7 @@ class IndexController {
 
         if (currentUser.isPresent()) {
             User user = currentUser.get().getUser();
-            Optional<RankingEntry<User>> ranking = rankingService.getRankingEntry(user);
+            Optional<RankingEntry<User, Integer>> ranking = rankingService.getRankingEntry(user);
             if (ranking.isPresent()) {
                 model.addAttribute("ranking", ranking.get());
             }

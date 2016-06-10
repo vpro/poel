@@ -25,8 +25,8 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userRanking", sync = true)
-    public Optional<RankingEntry<User>> getRankingEntry(User user) {
-        for (RankingEntry<User> rankingEntry : getUserRanking()) {
+    public Optional<RankingEntry<User, Integer>> getRankingEntry(User user) {
+        for (RankingEntry<User, Integer> rankingEntry : getUserRanking()) {
             if (rankingEntry.getSubject().equals(user)) {
                 return Optional.of(rankingEntry);
             }
@@ -36,8 +36,8 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userRanking", sync = true)
-    public List<RankingEntry<User>> getUserRanking() {
-        List<RankingEntry<User>> ranking = new ArrayList<>();
+    public List<RankingEntry<User, Integer>> getUserRanking() {
+        List<RankingEntry<User, Integer>> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Integer, List<User>> entry : getUsersByScore().descendingMap().entrySet()) {
             List<User> users = entry.getValue();
@@ -52,8 +52,8 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userGroupRanking", sync = true)
-    public Optional<RankingEntry<UserGroup>> getRankingEntry(UserGroup userGroup) {
-        for (RankingEntry<UserGroup> rankingEntry : getUserGroupRanking()) {
+    public Optional<RankingEntry<UserGroup, Double>> getRankingEntry(UserGroup userGroup) {
+        for (RankingEntry<UserGroup, Double> rankingEntry : getUserGroupRanking()) {
             if (rankingEntry.getSubject().equals(userGroup)) {
                 return Optional.of(rankingEntry);
             }
@@ -63,8 +63,8 @@ public class RankingServiceImpl implements RankingService {
 
     @Override
     @Cacheable(cacheNames = "userGroupRanking", sync = true)
-    public List<RankingEntry<UserGroup>> getUserGroupRanking() {
-        List<RankingEntry<UserGroup>> ranking = new ArrayList<>();
+    public List<RankingEntry<UserGroup, Double>> getUserGroupRanking() {
+        List<RankingEntry<UserGroup, Double>> ranking = new ArrayList<>();
         int rank = 1;
         for (Map.Entry<Double, List<UserGroup>> entry : getUserGroupsByAverageUserScore().descendingMap().entrySet()) {
             List<UserGroup> userGroups = entry.getValue();

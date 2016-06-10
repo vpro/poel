@@ -62,7 +62,7 @@ public class ExportCSVController {
         setHeadersForCSVDownload(response, String.format("poel-ranking-%s.csv", now()));
         CSVFormat format = CSVFormat.DEFAULT.withHeader("rank", "score", "user_id", "username", "role", "realName", "gameName", "userGroup");
         CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), format);
-        for (RankingEntry<User> rankingEntry : rankingService.getUserRanking()) {
+        for (RankingEntry<User, Integer> rankingEntry : rankingService.getUserRanking()) {
             User user = rankingEntry.getSubject();
             UserGroup userGroup = user.getUserGroup();
             String userGroupName = userGroup != null ? userGroup.getName() : null;
