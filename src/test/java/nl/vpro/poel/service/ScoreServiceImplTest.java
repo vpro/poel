@@ -17,7 +17,7 @@ public class ScoreServiceImplTest {
         UserService userService = null;
         PredictionService predictionService = null;
         int pointsForCorrectWinner = 1;
-        int pointsForCorrectMatchResult = 2;
+        int pointsForCorrectMatchResult = 3;
         int scoreMultiplierFactor = 2;
         scoreService = new ScoreServiceImpl(userService, predictionService, pointsForCorrectWinner, pointsForCorrectMatchResult, scoreMultiplierFactor);
     }
