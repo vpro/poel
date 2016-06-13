@@ -20,7 +20,7 @@
     [/#if]
 
     [@navigationUtil.navigation title='Admin' subtitle='deelnemers' bgColor='bg-darkred' back='/admin' /]
-    <div class="grid">
+    <div class="grid main">
 
     [@layout.sectionWithLayout
     content={'layout': '100'}

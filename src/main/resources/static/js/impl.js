@@ -97,3 +97,20 @@ if ( $('.bonuses-form').length ) {
         }
     });
 }
+
+function init ( ) {
+    window.addEventListener( 'scroll' , function ( e ) {
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+        var shrinkOn = 65;
+        var $navigation = $( '.top-navigation' );
+        if ( distanceY > shrinkOn ) {
+            $navigation.addClass( 'smaller' );
+        } else {
+            if ( $navigation.hasClass( 'smaller' ) ) {
+                $navigation.removeClass( 'smaller' );
+            }
+        }
+    });
+}
+
+window.onload = init();

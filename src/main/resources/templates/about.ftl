@@ -12,7 +12,7 @@
 
 [@navigationUtil.navigation title=title!'Poel' back='/' bgColor='bg-greybat' /]
 
-<div class="grid about">
+<div class="grid about main">
 
     [@layout.sectionWithLayout
     content={'layout': '100'}

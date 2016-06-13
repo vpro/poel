@@ -15,6 +15,8 @@
 
     [@navigationUtil.navigation title='Poelstand' back='/' /]
 
+    <div class="main">
+
     [@messageUtil.outputMessage message=message ! /]
 
     <div class="grid bg-darkgreen">
@@ -134,7 +136,7 @@
     </div>
 
     [@footerUtil.footer /]
-
+    </div>
     </body>
 
 </html>

@@ -26,78 +26,79 @@
 
     [@navigationUtil.navigation title='Profiel' back='/' /]
 
-    [#if message ? has_content]
-        [@messageUtil.outputMessage message=message ! /]
-    [/#if]
+    <div class="main">
+        [#if message ? has_content]
+            [@messageUtil.outputMessage message=message ! /]
+        [/#if]
 
-    [#assign salutation = user.gameName!user.realName!]
-
-
-    [#if user?has_content]
-    <form action="/logout" method="post" class="user-logout bg-greybat grid">
-        <div class="col col-12-3"></div>
-        <div class="col col-12-6">
-            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-            <input type="submit" class="user-logout-button bg-blue" value="log uit"/>
-        </div>
-        <div class="col col-12-3"></div>
-
-    </form>
-    [/#if]
+        [#assign salutation = user.gameName!user.realName!]
 
 
-    [@layout.sectionWithLayout
-    content={"layout":"100"}
-    title='Profielgegevens'
-    collapsible=false
-    opened=true
-    addCss='user-section'
-    addContainerCss='bg-blue' ]
-
-        <div class="grid c-white grid-gutter">
-
-            <div class="grid row">
-                <span class="h6 col col-12-2">Email:</span>
-                <span class="col col-12-2">${user.username}</span>
-            </div>
-
-            <div class="grid row">
-                <span class="h6 col col-12-2">Afdeling:</span>
-                <span class="col col-12-2">
-                    [#if user.userGroup ? has_content]
-                        ${ user.userGroup.name }
-                    [#else]
-                        Nog niet ingedeeld door de poelleiding
-                    [/#if]
-                </span>
-            </div>
-
-
-            <form class="form" action="#" method="post">
+        [#if user?has_content]
+        <form action="/logout" method="post" class="user-logout bg-greybat grid">
+            <div class="col col-12-3"></div>
+            <div class="col col-12-6">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                <input type="submit" class="user-logout-button bg-blue" value="log uit"/>
+            </div>
+            <div class="col col-12-3"></div>
+
+        </form>
+        [/#if]
+
+
+        [@layout.sectionWithLayout
+        content={"layout":"100"}
+        title='Profielgegevens'
+        collapsible=false
+        opened=true
+        addCss='user-section'
+        addContainerCss='bg-blue' ]
+
+            <div class="grid c-white grid-gutter">
 
                 <div class="grid row">
-                    <span class="h6 col col-12-2">Echte naam:</span>
-                    <input class="col col-12-4 " type="text" name="realName" value="${user.realName!}"/>
+                    <span class="h6 col col-12-2">Email:</span>
+                    <span class="col col-12-2">${user.username}</span>
                 </div>
 
                 <div class="grid row">
-                    <span class="h6 col col-12-2">Voetbalnaam:</span>
-                    <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName!}"/>
+                    <span class="h6 col col-12-2">Afdeling:</span>
+                    <span class="col col-12-2">
+                        [#if user.userGroup ? has_content]
+                            ${ user.userGroup.name }
+                        [#else]
+                            Nog niet ingedeeld door de poelleiding
+                        [/#if]
+                    </span>
                 </div>
 
-                <div class="form-footer bg-blue">
-                    <button class="h5 button submit-button" type="submit">Opslaan</button>
-                </div>
-            </form>
+
+                <form class="form" action="#" method="post">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+
+                    <div class="grid row">
+                        <span class="h6 col col-12-2">Echte naam:</span>
+                        <input class="col col-12-4 " type="text" name="realName" value="${user.realName!}"/>
+                    </div>
+
+                    <div class="grid row">
+                        <span class="h6 col col-12-2">Voetbalnaam:</span>
+                        <input class="col col-12-4 " type="text" name="gameName" value="${user.gameName!}"/>
+                    </div>
+
+                    <div class="form-footer bg-blue">
+                        <button class="h5 button submit-button" type="submit">Opslaan</button>
+                    </div>
+                </form>
 
 
 
-        </div>
+            </div>
 
-    [/@layout.sectionWithLayout]
+        [/@layout.sectionWithLayout]
 
-    [@footerUtil.footer /]
-
+        [@footerUtil.footer /]
+    </div>
     </body>
 </html>

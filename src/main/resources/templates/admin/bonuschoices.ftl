@@ -16,7 +16,7 @@
 [#if flash ? has_content]
 <div class="alert-overlay">
     <div class="alert-overlay__content">
-    ${flash} <br/> <br/>
+        ${flash} <br/> <br/>
         <button class="h5 button alert-overlay__close-button">Ok!</button>
     </div>
 </div>
@@ -24,52 +24,53 @@
 
 [@navigationUtil.navigation title='Admin' subtitle='bonus mogelijkheden' back='/admin' /]
 
-<div class="grid">
+<div class="grid main">
 
-[@layout.sectionWithLayout
-content={'layout': '100'}
-title='bonus mogelijkheden'
-backGroundColor="darkgreen"
-]
+    [@layout.sectionWithLayout
+    content={'layout': '100'}
+    title='bonus mogelijkheden'
+    backGroundColor="darkgreen"
+    ]
 
 
+    <form class="form bonus-choices-form" action="#" method="post">
 
-<form class="form bonus-choices-form" action="#" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="grid-gutter bonus-choices entities">
+            [#list choices]
 
-<div class="grid-gutter bonus-choices entities">
-    [#list choices]
+            [#items as choice]
+            <div class="form-row bonus-choice-admin entity-admin row">
 
-        [#items as choice]
-        <div class="form-row bonus-choice-admin entity-admin row">
+                <input type="hidden" name="choices[${choice?index}].id" value="${choice.id}"/>
+                <input type="text" class="col-12-6" name="choices[${choice?index}].value" value="${choice.value}"
+                       placeholder="Waarde"/>
 
-            <input type="hidden" name="choices[${choice?index}].id" value="${choice.id}" />
-            <input type="text" class="col-12-6" name="choices[${choice?index}].value" value="${choice.value}" placeholder="Waarde" />
-
-            [@bonusUtil.bonusCategorySelection categories=categories formPath='choices[${choice_index}].category' selectedCategory=(choice.category!) addCss='col-12-5' /]
+                [@bonusUtil.bonusCategorySelection categories=categories formPath='choices[${choice_index}].category'
+                selectedCategory=(choice.category!) addCss='col-12-5' /]
 
             <span class="delete delete-entity">
                 <i class="glyph glyph-close c-gold col-12-1"></i>
             </span>
 
+            </div>
+            [/#items]
+            [/#list]
         </div>
-    [/#items]
-[/#list]
-</div>
 
-    <script id="bonusCategorySelection" type="text/template">
-        [@bonusUtil.bonusCategorySelection categories=categories formPath='choices[{{@root.index}}].category' addCss='col-12-5' /]
-    </script>
+        <script id="bonusCategorySelection" type="text/template">
+            [@bonusUtil.bonusCategorySelection categories=categories formPath='choices[{{@root.index}}].category' addCss='col-12-5' /]
+        </script>
 
-    <div class="col-gutter form-button-container choices-form-button-container">
-        <input type="button" class="add-entity" value="Toevoegen"/>
-        <input type="submit" value="Opslaan" />
-    </div>
+        <div class="col-gutter form-button-container choices-form-button-container">
+            <input type="button" class="add-entity" value="Toevoegen"/>
+            <input type="submit" value="Opslaan"/>
+        </div>
 
-</form>
+    </form>
 
-[/@layout.sectionWithLayout]
+    [/@layout.sectionWithLayout]
 
 </div>
 

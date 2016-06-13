@@ -23,7 +23,7 @@
 
 [@navigationUtil.navigation title='Admin' subtitle='speelrondes' back='/admin' /]
 
-<div class="grid">
+<div class="grid main">
 
 [@layout.sectionWithLayout
 content={'layout': '100'}

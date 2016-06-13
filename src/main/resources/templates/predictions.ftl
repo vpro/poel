@@ -27,7 +27,9 @@
 
         [@navigationUtil.navigation title='Poel invullen' subtitle=user.gameName!user.realName!user.username back='/' /]
 
-            [@messageUtil.outputMessage message=message ! /]
+        <div class="main">
+
+        [@messageUtil.outputMessage message=message ! /]
 
             <div class="grid prediction-form-container">
 
@@ -156,5 +158,6 @@
 
         [@footerUtil.footer /]
 
+            </div>
     </body>
 </html>

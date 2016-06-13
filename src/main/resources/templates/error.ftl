@@ -10,14 +10,17 @@
     <body class="bg-orange c-white">
 
     [@navigationUtil.navigation title='Error' back='/' /]
+    <div class="main">
 
-    <div class="grid grid-gutter">
+        <div class="grid grid-gutter">
 
             <h1 class="h4">Er is iets fout gegaan</h1>
 
         </div>
 
     [@footerUtil.footer /]
+    </div>
+
     </body>
 
 </html>
