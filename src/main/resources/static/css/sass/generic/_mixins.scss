@@ -51,6 +51,13 @@
 }
 
 
+@mixin media-mini-screen-width () {
+
+    @media screen and ( max-width: $min-screen-width ) {
+        @content;
+    }
+}
+
 @mixin media-med-screen-width () {
 
     @media screen and ( min-width: $med-screen-width ) {

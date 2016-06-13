@@ -88,6 +88,22 @@
 
 }
 
+@include media-mini-screen-width () {
+    .predictions {
+        font-size: 12px;
+
+
+        input{
+            height: 22px;
+            width: 22px;
+            }
+    }
+
+    td.prediction__predicted {
+        width: 59px;
+    }
+}
+
 @include media-med-screen-width () {
     .predictions {
 
@@ -121,13 +137,13 @@
 }
 
 .prediction__row-result {
-    color: rgba(255, 255, 255, 0.8 );
+    color: rgba(255, 255, 255, 0.7 );
 }
 
 .prediction__result{
     input{
         font-family: $title-font;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.7);
     }
 
 }
@@ -172,6 +188,13 @@
   display: none;
 }
 
+@include media-mini-screen-width () {
+   prediction__multiplier .prediction__multiplier__input {
+        width: 22px;
+        height: 22px;
+   }
+}
+
 .prediction__multiplier__label {
   padding-top: 5px;
   height: 10px;
@@ -188,6 +211,14 @@
     font-size: 10px;
     padding-left: 4px;
   }
+}
+
+@include media-mini-screen-width () {
+    .prediction__multiplier__label {
+         .glyph {
+            font-size: 12px;
+         }
+    }
 }
 
 .prediction__multiplier__input:checked + .prediction__multiplier__label .glyph,
@@ -268,6 +299,19 @@
     }
 }
 
+@include media-mini-screen-width () {
+    .prediction__game-home,
+    .prediction__game-away{
+            width: 100px;
+    }
+}
+
+@include media-med-screen-width () {
+    .prediction__game-home {
+       margin-left: -26px;
+    }
+}
+
 
 .prediction__game-divider{
     width: 20px;
@@ -275,6 +319,17 @@
     text-align: center;
 }
 
+
+.match-prediction .prediction__row td {
+   padding-top: 16px;
+   padding-bottom: 0;
+}
+
+
+.match-prediction .prediction__row.prediction__row-result td {
+   padding-top: 0;
+   padding-bottom: 16px;
+}
 
 
 .form-button-container{
