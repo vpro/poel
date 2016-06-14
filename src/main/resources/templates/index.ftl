@@ -19,8 +19,8 @@
             </a>
             <a href="/predictions" class="home-navigation-link bg-green">
                 <span class='h2 c-white home-navigation-link-title' >
-                    Poel invullen<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">Tot aanvang elke wedstrijd</span>
+                    Poelformulier<br/>
+                    <span class="h6 c-white home-navigation-link-subtitle">Invullen tot aanvang elke wedstrijd</span>
                 </span>
             </a>
             <a href="/ranking" class="home-navigation-link bg-darkgreen">

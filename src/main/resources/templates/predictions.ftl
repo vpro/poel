@@ -11,7 +11,7 @@
 
 [#include 'macros/countries.ftl']
 
-    [@headUtil.head title='Poel invullen: ${ user.realName }' /]
+    [@headUtil.head title='Poelformulier voor ${ user.realName }' /]
 
     <body>
 
@@ -25,7 +25,7 @@
         [/#if]
 
 
-        [@navigationUtil.navigation title='Poel invullen' subtitle=user.gameName!user.realName!user.username back='/' /]
+        [@navigationUtil.navigation title='Poelformulier' subtitle=user.gameName!user.realName!user.username back='/' /]
 
         <div class="main">
 
