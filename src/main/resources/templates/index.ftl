@@ -14,7 +14,7 @@
             <a href="/about" class="home-navigation-link bg-greybat">
                 <span class='h2 c-white home-navigation-link-title'>
                     ${ title ! 'Poel' }<br/>
-                    <span class="h6 c-white home-navigation-link-subtitle">Hoe het werkt</span>
+                    <span class="h6 c-white home-navigation-link-subtitle">Hoe het werkt / poelbulletins</span>
                 </span>
             </a>
             <a href="/predictions" class="home-navigation-link bg-green">
