@@ -14,24 +14,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RC1</version>
+		<version>1.4.0.RELEASE</version>
 	</parent>
-
-	<!-- For Spring Boot milestones and release candidates, remove after upgrading to 1.4.0 final release -->
-	<repositories>
-		<repository>
-			<id>spring-libs-milestone</id>
-			<name>Spring Milestone</name>
-			<url>http://repo.spring.io/libs-milestone/</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-libs-milestone</id>
-			<name>Spring Milestone</name>
-			<url>http://repo.spring.io/libs-milestone</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -143,7 +127,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.8</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
